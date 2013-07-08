@@ -2,6 +2,10 @@ package com.kandinsky.objects;
 
 import java.io.Serializable;
 
+/**
+ * Shortcut-Klasse, repräsentiert einen einzigen Shortcut.
+ * @author schmidtb
+ */
 public class Shortcut implements Serializable {
 
 	private static final long serialVersionUID = 8510478971200260430L;
