@@ -15,14 +15,18 @@ public class KandinskyMenuBar extends JMenuBar {
 
 	public KandinskyMenuBar() {
 		
+		KandinskyMenuBarFunctions functions = new KandinskyMenuBarFunctions(); 
+		
 		JMenu menuFile = new JMenu("Datei");
 		this.add(menuFile);
 				
 		JMenuItem menuItemReload = new JMenuItem("Aktualisieren");
 		menuFile.add(menuItemReload);
+		menuItemReload.addActionListener(functions);
 		
 		JMenuItem menuItemSearch = new JMenuItem("Suchen");
 		menuFile.add(menuItemSearch);
+		menuItemSearch.addActionListener(functions);
 		
 		JMenuItem menuItemSwapFolderViewLeftRight = new JMenuItem("Ordner rechts/links tauschen");
 		menuFile.add(menuItemSwapFolderViewLeftRight);
