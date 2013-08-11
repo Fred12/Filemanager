@@ -33,6 +33,7 @@ public class Main {
 		frame = new JFrame();
 		frame.setLayout(new BorderLayout());
 		frame.setMinimumSize(new Dimension(400,400));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		KandinskyMenuBar menuBar = new KandinskyMenuBar();
 		frame.add(menuBar, BorderLayout.NORTH);
