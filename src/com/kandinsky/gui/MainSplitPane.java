@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 /**
+ * PUNKT 4 - SplitPane.
  * Große Hauptsplitpane, in dem die Hautpdetails liegen. Dabei werden der Splitpane ein linkes und
  * ein rechtes Panel mitübergeben, welche dann 50:50 geteilt angezeigt werden.
  * @author schmidtb
