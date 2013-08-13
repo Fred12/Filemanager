@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.kandinsky.gui.MainSplitPane;
+import com.kandinsky.gui.splitPane.MainSplitPane;
 
 public class SplitPaneFrame extends JFrame {
 	

@@ -1,4 +1,4 @@
-package com.kandinsky.gui;
+package com.kandinsky.gui.splitPane;
 
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
