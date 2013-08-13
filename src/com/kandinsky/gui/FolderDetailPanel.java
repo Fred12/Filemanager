@@ -8,6 +8,6 @@ import javax.swing.JPanel;
  * ACHTUNG: Muss auf beiden Seiten der SplitPane angezeigt werden.
  * @author schmidtb
  */
-public class FolderDetailBar extends JPanel {
+public class FolderDetailPanel extends JPanel {
 
 }

@@ -8,6 +8,6 @@ import javax.swing.JTable;
  * ACHTUNG: muss für beide Seiten der SplitPane funktionieren!
  * @author schmidtb
  */
-public class FileList extends JTable {
+public class FileListTable extends JTable {
 
 }
