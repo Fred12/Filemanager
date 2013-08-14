@@ -38,6 +38,9 @@ public class Main {
 		
 		KandinskyMenuBar menuBar = new KandinskyMenuBar();
 		frame.add(menuBar, BorderLayout.NORTH);
+		
+		ButtonBar buttonBar = new ButtonBar();
+		frame.add(buttonBar);
 				
 		
 	}
