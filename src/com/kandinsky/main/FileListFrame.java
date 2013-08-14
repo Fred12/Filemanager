@@ -22,7 +22,7 @@ public class FileListFrame extends JFrame {
 		FileListTable table = new FileListTable();
 		this.add(table.surroundedWithPane(), BorderLayout.NORTH);
 		try {
-			table.changeFolder("D:\\");
+			table.changeFolder("C:\\Windows");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

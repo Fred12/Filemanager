@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class FileEntry {
 	
-	private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+	private static final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
 	
 	/** gekapselte Datei */
 	private File file;
@@ -56,12 +56,11 @@ public class FileEntry {
 	}
 	
 	public String getSize(){
-		// TODO: ordentliche Repraesentierung
-		return file.length()+" b";
+		return ByteToStringHelper.convertToString(file.length());
 	}
 	
 	public String getDate(){
-		return SDF.format(file.lastModified());
+		return FORMATTER.format(file.lastModified());
 	}
 	
 	public String getType(){
@@ -74,7 +73,10 @@ public class FileEntry {
 	}
 	
 	public String getRights(){
-		// TODO: so geht das ja nicht!
-		return "rwxrwxrwx";
+		String rwx = "";
+		rwx+=file.canRead()?"r":"-";
+		rwx+=file.canWrite()?"w":"-";
+		rwx+=file.canExecute()?"x":"-";
+		return rwx;
 	}
 }
