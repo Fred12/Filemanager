@@ -1,6 +1,5 @@
 package com.kandinsky.gui;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,18 +7,23 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 /**
  * PUNKT 3 - ButtonBar.
  * Zeigt eine Liste mit Buttons. Hier ist zu überlegen, ob die Buttons für beide Seiten angezeigt werden sollen,
  * oder nur für eine Seite.
- * @author schmidtb
+ * @author Marc L.
  */
 
 public class ButtonBar extends JPanel implements ActionListener {		
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7230543120102084314L;
+	
 	JPanel buttonBar;
+	
 	JButton neuesFenster;	
 	JButton zurück;
 	JButton weiter;
@@ -27,15 +31,14 @@ public class ButtonBar extends JPanel implements ActionListener {
 	JButton home;
 	JButton aktualisieren;
 	JButton vertauschen;
-	JButton favoritenHinzufügen;
+	JButton favoritenAnlegen;
 	JButton favoritenAnzeigen;
 	JButton gruppieren;
 	JButton ftpAnlegen;
 	JButton ftpAnzeigen;
 	JButton shellÖffnen;
 	JButton hilfe;
-	JButton einstellungen;	
-	
+	JButton einstellungen;		
 	
 	
 	
@@ -48,8 +51,8 @@ public class ButtonBar extends JPanel implements ActionListener {
 		
 		
 		//Icon Quellen für die Buttons, am besten png
-		//In welchem Ordner ? Im selben src Ordner oder woanders?
-		Icon a = new ImageIcon(getClass().getResource(""));
+		
+		Icon a = new ImageIcon(getClass().getResource("nf.png"));		 
 		Icon b = new ImageIcon(getClass().getResource(""));
 		Icon c = new ImageIcon(getClass().getResource(""));
 		Icon d = new ImageIcon(getClass().getResource(""));
@@ -66,14 +69,14 @@ public class ButtonBar extends JPanel implements ActionListener {
 		Icon o = new ImageIcon(getClass().getResource(""));	
 		
 		//Buttons erstellen mit Icons
-		neuesFenster =			new JButton("Neues Fenster",a);
+		neuesFenster =			new JButton(a);
 		zurück = 				new JButton("Zurück",b);
 		weiter = 				new JButton("Weiter",c);
 		hoch =					new JButton("Hoch",d);
 		home =					new JButton("Home",e);
 		aktualisieren = 		new JButton("Aktualisieren",f);
 		vertauschen = 			new JButton("Vertauschen",g);
-		favoritenHinzufügen = 	new JButton("Favoriten hinzufügen",h);
+		favoritenAnlegen = 		new JButton("Favoriten Anlegen",h);
 		favoritenAnzeigen = 	new JButton("Favoriten anzeigen",i);
 		gruppieren = 			new JButton("Gruppieren",j);
 		ftpAnlegen = 			new JButton("FTP anlegen",k);
@@ -83,7 +86,25 @@ public class ButtonBar extends JPanel implements ActionListener {
 		einstellungen = 		new JButton("Einstellungen",o);
 		
 		
-		//Buttons der buttonBar hinzufügen	
+		//ToolTips für die Buttons
+		neuesFenster.setToolTipText("Öffnet eine neues Hauptfenster");
+		zurück.setToolTipText("Zum Ordner zurück navigieren");
+		weiter.setToolTipText("Zum Ordner vorwärts navigieren");
+		hoch.setToolTipText("Zum übergeordneten Ordner wechseln");
+		home.setToolTipText("Zum Home Ordner wechseln");
+		aktualisieren.setToolTipText("Fenster aktualisieren");
+		vertauschen.setToolTipText("Split-Fenster vertauschen");
+		favoritenAnlegen.setToolTipText("Neue Favoriten anlegen");
+		favoritenAnzeigen.setToolTipText("Favoriten anzeigen");
+		gruppieren.setToolTipText("Gruppieren");
+		ftpAnlegen.setToolTipText("Neuen FTP Server anlegen");
+		ftpAnzeigen.setToolTipText("FTP Verbindungen anzeigen");
+		shellÖffnen.setToolTipText("Shell im aktuellen Ordner öffnen");
+		hilfe.setToolTipText("Hilfe und Infos");
+		einstellungen.setToolTipText("Einstellungen öffnen");
+		
+		
+		//Buttons der buttonBar Anlegen	
 		buttonBar.add(neuesFenster);
 		buttonBar.add(zurück);
 		buttonBar.add(weiter);
@@ -91,7 +112,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		buttonBar.add(home);
 		buttonBar.add(aktualisieren);
 		buttonBar.add(vertauschen);
-		buttonBar.add(favoritenHinzufügen);
+		buttonBar.add(favoritenAnlegen);
 		buttonBar.add(favoritenAnzeigen);
 		buttonBar.add(gruppieren);
 		buttonBar.add(ftpAnlegen);
@@ -109,7 +130,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		home.addActionListener(this);
 		aktualisieren.addActionListener(this);
 		vertauschen.addActionListener(this);
-		favoritenHinzufügen.addActionListener(this);
+		favoritenAnlegen.addActionListener(this);
 		favoritenAnzeigen.addActionListener(this);
 		gruppieren.addActionListener(this);
 		ftpAnlegen.addActionListener(this);
@@ -130,6 +151,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		
 			if (quelle == neuesFenster) {
 				buttonBar.add(new JButton("GEKLICKT!"));
+				
 			}
 		
 			if (quelle == neuesFenster) {
@@ -150,7 +172,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 			if (quelle == aktualisieren) {
 			}
 			
-			if (quelle == favoritenHinzufügen) {
+			if (quelle == favoritenAnlegen) {
 			}
 			
 			if (quelle == favoritenAnzeigen) {
