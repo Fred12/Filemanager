@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 
+import com.kandinsky.gui.ButtonBar;
 import com.kandinsky.gui.KandinskyMenuBar;
 
 public class Main {
@@ -37,6 +38,7 @@ public class Main {
 		
 		KandinskyMenuBar menuBar = new KandinskyMenuBar();
 		frame.add(menuBar, BorderLayout.NORTH);
+				
 		
 	}
 
