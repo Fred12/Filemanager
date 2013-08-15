@@ -8,41 +8,41 @@ import javax.swing.JOptionPane;
 public class KandinskyMenuBarFunctions implements ActionListener {
 	
 	// Menu "File" Items
-	public static final String RELOAD 					= "Aktualisieren";
-	public static final String SEARCH 					= "Suchen";
-	public static final String SWAP_FOLDERS_LEFT_RIGHT	= "Ordner rechts/links tauschen";
-	public static final String IMPORT_FAVORITES			= "Favoriten importieren";
-	public static final String EXPORT_FAVORITES			= "Favoriten exportieren";
-	public static final String CLOSE_PROGRAM			= "Schliessen";
+	public static final String RELOAD 					= "reload";
+	public static final String SEARCH 					= "search";
+	public static final String SWAP_FOLDERS_LEFT_RIGHT	= "swap_folders_left_right";
+	public static final String IMPORT_FAVORITES			= "import_favorites";
+	public static final String EXPORT_FAVORITES			= "export_favorites";
+	public static final String CLOSE_PROGRAM			= "close_program";
 	
 	// Menu "Edit" Items
-	public static final String SELECT_ALL				= "Alles ausw\u00E4hlen";
-	public static final String SELECT_NOTHING			= "Nichts ausw\u00E4hlen";
-	public static final String INVERT_SELECTION			= "Auswahl umkehren";
-	public static final String COPY						= "Kopieren";
-	public static final String PASTE					= "Einf\u00FCgen";
-	public static final String CUT						= "Ausschneiden";
-	public static final String DELETE					= "L\u00F6schen";
-	public static final String CREATE_FOLDER			= "Ordner anlegen";
-	public static final String CREATE_SHORTCUT			= "Verkn\u00FCpfung anlegen";
-	public static final String CREATE_EMPTY_FILE		= "Leere Datei anlegen";
+	public static final String SELECT_ALL				= "select_all_objects";
+	public static final String SELECT_NOTHING			= "select_no_objects";
+	public static final String INVERT_SELECTION			= "invert_selection";
+	public static final String COPY_OBJECTS				= "copy_objects";
+	public static final String PASTE_OBJECTS			= "paste_objects";
+	public static final String CUT_OBJECTS				= "cut_objects";
+	public static final String DELETE_OBJECTS			= "delete_objects";
+	public static final String CREATE_FOLDER			= "create_folder";
+	public static final String CREATE_SHORTCUT			= "create_shortcut";
+	public static final String CREATE_EMPTY_FILE		= "create_empty_file";
 	
 	// Menu "FTP" Items
-	public static final String FTP_EDIT_SERVERS			= "Server verwalten";
-	public static final String FTP_CONNECT				= "Verbinden";
-	public static final String FTP_DISCONNECT			= "Verbindung trennen";
+	public static final String FTP_SHOW_EDIT_SERVERS	= "ftp_show_edit_servers";
+	public static final String FTP_CONNECT_MOST_RECENT	= "ftp_connect_most_recent";
+	public static final String FTP_DISCONNECT			= "ftp_disconnect";
 	
 	
 	// Menu "Settings" Items
-	public static final String OPTIONS					= "Allgemeine Optionen";
-	public static final String OPTIONS_FAVORITES		= "Favoriten verwalten";
-	public static final String OPTIONS_FTP				= "FTP Optionen";
-	public static final String TOGGLE_HIDDEN_FOLDERS	= "Versteckte Dateien anzeigen";
-	public static final String TOGGLE_SHOW_FAVORITES	= "Favoritenliste anzeigen";
+	public static final String OPTIONS					= "options_common";
+	public static final String OPTIONS_FAVORITES		= "options_favorites";
+	public static final String OPTIONS_FTP				= "options_ftp";
+	public static final String TOGGLE_HIDDEN_FOLDERS	= "toggle_show_hidden_files";
+	public static final String TOGGLE_SHOW_FAVORITES	= "toggle_show_favorites";
 		
 	// Menu "Help" Items
-	public static final String HELP						= "Hilfe";
-	public static final String ABOUT					= "Über Kandinsky File Manager";
+	public static final String HELP						= "show_help";
+	public static final String ABOUT					= "show_about";
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -90,19 +90,19 @@ public class KandinskyMenuBarFunctions implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
 			break;
 			
-		case COPY:
+		case COPY_OBJECTS:
 			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
 			break;
 		
-		case PASTE:
+		case PASTE_OBJECTS:
 			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
 			break;
 			
-		case CUT:
+		case CUT_OBJECTS:
 			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
 			break;
 		
-		case DELETE:
+		case DELETE_OBJECTS:
 			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
 			break;
 			
@@ -119,11 +119,11 @@ public class KandinskyMenuBarFunctions implements ActionListener {
 			break;
 			
 		// Menu "FTP" Actions
-		case FTP_EDIT_SERVERS:
+		case FTP_SHOW_EDIT_SERVERS:
 			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
 			break;
 			
-		case FTP_CONNECT:
+		case FTP_CONNECT_MOST_RECENT:
 			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
 			break;
 			
