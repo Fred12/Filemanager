@@ -1,6 +1,6 @@
 package com.kandinsky.gui.splitPane;
 
-import javax.swing.JPanel;
+import com.kandinsky.gui.fileList.FileListTable;
 
 /**
  * Linke Panel-Seite. Bisher noch nicht gefüllt. Unter Umständen könnte man hier noch ein Interface drüber setzen,
@@ -11,6 +11,15 @@ import javax.swing.JPanel;
  * - FolderName
  * @author schmidtb
  */
-public class LeftSidePanel extends JPanel {
+public class LeftSidePanel extends SidePanel {
+
+	public LeftSidePanel() throws Exception {
+		super();
+	}
+
+	@Override
+	protected FileListTable getTable() throws Exception {
+		return new FileListTable();
+	}
 
 }

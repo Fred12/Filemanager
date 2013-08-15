@@ -5,7 +5,9 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-import com.kandinsky.gui.fileList.FileListTable;
+import com.kandinsky.gui.splitPane.LeftSidePanel;
+import com.kandinsky.gui.splitPane.MainSplitPane;
+import com.kandinsky.gui.splitPane.RightSidePanel;
 
 /**
  * Testklasse für die FileListe
@@ -13,23 +15,18 @@ import com.kandinsky.gui.fileList.FileListTable;
  */
 public class FileListFrame extends JFrame {
 	
-	public FileListFrame(){
+	public FileListFrame() throws Exception{
 
 		this.setLayout(new BorderLayout());
 		this.setMinimumSize(new Dimension(400,400));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		FileListTable table = new FileListTable();
-		this.add(table.surroundedWithPane(), BorderLayout.NORTH);
-		try {
-			table.changeFolder("C:\\Windows");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		LeftSidePanel leftPanel = new LeftSidePanel();
+		RightSidePanel rightPanel = new RightSidePanel();
+		this.add(new MainSplitPane(leftPanel, rightPanel));
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		FileListFrame frame = new FileListFrame();
 		frame.setVisible(true);
 	}

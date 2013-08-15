@@ -18,9 +18,10 @@ public class FileListTable extends JTable {
 
 	private FileListTableModel model;
 
-	public FileListTable() {
+	public FileListTable() throws Exception {
 		model = new FileListTableModel();
 		this.setModel(model);
+		changeFolder("..");
 	}
 
 	/**
