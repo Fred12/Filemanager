@@ -20,12 +20,7 @@ public abstract class SidePanel extends JPanel{
 		FileListTable table = getTable();
 		GridBagConstraints gbc = getTableConstraint();
 		this.add(table.surroundedWithPane(), gbc);
-		try {
-			table.changeFolder("C:\\Windows");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		table.changeFolder("C:\\Windows");
 	}
 
 	private GridBagConstraints getTableConstraint() {

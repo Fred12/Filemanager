@@ -20,8 +20,9 @@ public class FileListTable extends JTable {
 
 	public FileListTable() throws Exception {
 		model = new FileListTableModel();
+		this.setAutoCreateRowSorter(true);
 		this.setModel(model);
-		changeFolder("..");
+		changeFolder("C:\\");
 	}
 
 	/**
@@ -40,6 +41,19 @@ public class FileListTable extends JTable {
 			List<FileEntry> newEntries = FileEntry.getFileEntryList(folder);
 			model.setValues(newEntries);
 		}
-			
 	}
+	
+//	private void setColumnWidth(int column, int width) {
+//        TableColumn tableColumn = model.getColumn(column);
+//        if (width<0) {
+//            // use the preferred width of the header..
+//            JLabel label = new JLabel( (String)tableColumn.getHeaderValue() );
+//            Dimension preferred = label.getPreferredSize();
+//            // altered 10->14 as per camickr comment.
+//            width = (int)preferred.getWidth()+14;
+//        }
+//        tableColumn.setPreferredWidth(width);
+//        tableColumn.setMaxWidth(width);
+//        tableColumn.setMinWidth(width);
+//    }
 }
