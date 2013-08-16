@@ -2,9 +2,10 @@ package com.kandinsky.objects;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.swing.ImageIcon;
 
 /**
  * Repraesentiert einen anzuzeigenden Eintrag und kapselt dabei die Funktionalität die später
@@ -14,6 +15,11 @@ import java.util.List;
 public class FileEntry implements Comparable<FileEntry> {
 
 	private static final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
+	/** Wunderhübsch */
+	private static final ImageIcon FOLDER_ICON = new ImageIcon(new ImageIcon("resources\\folder-7-icon.png").getImage().getScaledInstance(16, 16,
+			java.awt.Image.SCALE_SMOOTH));
+	private static final ImageIcon TEXT_FILE_ICON = new ImageIcon(new ImageIcon("resources\\text-file-4-icon.png").getImage().getScaledInstance(16, 16,
+			java.awt.Image.SCALE_SMOOTH));
 
 	/** gekapselte Datei */
 	private File file;
@@ -89,68 +95,18 @@ public class FileEntry implements Comparable<FileEntry> {
 		return rwx;
 	}
 
+	/**
+	 * @return ein passendes Icon
+	 */
+	public ImageIcon getIcon() {
+		if (file.isDirectory())
+			return FOLDER_ICON;
+		else
+			return TEXT_FILE_ICON;
+	}
+
 	@Override
 	public int compareTo(FileEntry o) {
 		return getName().compareTo(o.getName());
-	}
-
-	public Comparator<FileEntry> getFileSizeComparator() {
-		return new FileSizeComparator();
-	}
-
-	public Comparator<FileEntry> getFileDateComparator() {
-		return new FileDateComparator();
-	}
-
-	public Comparator<FileEntry> getFileEndingComparator() {
-		return new FileEndingComparator();
-	}
-
-	public Comparator<FileEntry> getFileTypeComparator() {
-		return new FileTypeComparator();
-	}
-
-	public Comparator<FileEntry> getFileRightsComparator() {
-		return new FileRightsComparator();
-	}
-
-	private class FileSizeComparator implements Comparator<FileEntry> {
-
-		@Override
-		public int compare(FileEntry o1, FileEntry o2) {
-			return o1.getFullSizeAsLong().compareTo(o2.getFullSizeAsLong());
-		}
-	}
-
-	private class FileDateComparator implements Comparator<FileEntry> {
-
-		@Override
-		public int compare(FileEntry o1, FileEntry o2) {
-			return o1.getFullDateAsLong().compareTo(o2.getFullDateAsLong());
-		}
-	}
-
-	private class FileEndingComparator implements Comparator<FileEntry> {
-
-		@Override
-		public int compare(FileEntry o1, FileEntry o2) {
-			return o1.getEnding().compareTo(o2.getEnding());
-		}
-	}
-
-	private class FileTypeComparator implements Comparator<FileEntry> {
-
-		@Override
-		public int compare(FileEntry o1, FileEntry o2) {
-			return o1.getType().compareTo(o2.getType());
-		}
-	}
-
-	private class FileRightsComparator implements Comparator<FileEntry> {
-
-		@Override
-		public int compare(FileEntry o1, FileEntry o2) {
-			return o1.getRights().compareTo(o2.getRights());
-		}
 	}
 }
