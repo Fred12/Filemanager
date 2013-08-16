@@ -7,6 +7,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JToolBar;
 
 /**
  * PUNKT 3 - ButtonBar.
@@ -15,7 +16,7 @@ import javax.swing.JPanel;
  * @author Marc L.
  */
 
-public class ButtonBar extends JPanel implements ActionListener {		
+public class ButtonBar extends JToolBar implements ActionListener {		
 	
 	/**
 	 * 
@@ -53,11 +54,11 @@ public class ButtonBar extends JPanel implements ActionListener {
 		//Icon Quellen für die Buttons, am besten png
 		
 		Icon a = new ImageIcon(getClass().getResource("nf.png"));		 
-		Icon b = new ImageIcon(getClass().getResource(""));
-		Icon c = new ImageIcon(getClass().getResource(""));
-		Icon d = new ImageIcon(getClass().getResource(""));
-		Icon e = new ImageIcon(getClass().getResource(""));
-		Icon f = new ImageIcon(getClass().getResource(""));
+		Icon b = new ImageIcon(getClass().getResource("zurück-icon.png"));
+		Icon c = new ImageIcon(getClass().getResource("weiter-icon.png"));
+		Icon d = new ImageIcon(getClass().getResource("hoch-icon.png"));
+		Icon e = new ImageIcon(getClass().getResource("home-6-icon.png"));
+		Icon f = new ImageIcon(getClass().getResource("refresh-icon.png"));
 		Icon g = new ImageIcon(getClass().getResource(""));
 		Icon h = new ImageIcon(getClass().getResource(""));
 		Icon i = new ImageIcon(getClass().getResource(""));
@@ -70,11 +71,11 @@ public class ButtonBar extends JPanel implements ActionListener {
 		
 		//Buttons erstellen mit Icons
 		neuesFenster =			new JButton(a);
-		zurück = 				new JButton("Zurück",b);
-		weiter = 				new JButton("Weiter",c);
-		hoch =					new JButton("Hoch",d);
-		home =					new JButton("Home",e);
-		aktualisieren = 		new JButton("Aktualisieren",f);
+		zurück = 				new JButton(b);
+		weiter = 				new JButton(c);
+		hoch =					new JButton(d);
+		home =					new JButton(e);
+		aktualisieren = 		new JButton(f);
 		vertauschen = 			new JButton("Vertauschen",g);
 		favoritenAnlegen = 		new JButton("Favoriten Anlegen",h);
 		favoritenAnzeigen = 	new JButton("Favoriten anzeigen",i);
