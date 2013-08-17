@@ -1,5 +1,7 @@
 package com.kandinsky.gui.splitPane;
 
+import com.kandinsky.gui.FavoritesPanel;
+import com.kandinsky.gui.FolderDetailPanel;
 import com.kandinsky.gui.FolderNamePanel;
 import com.kandinsky.gui.fileList.FileListTable;
 
@@ -8,6 +10,11 @@ import com.kandinsky.gui.fileList.FileListTable;
  * @author schmidtb
  */
 public class RightSidePanel extends SidePanel {
+	
+	private FileListTable fileListTable;
+	private FolderNamePanel folderNamePanel;
+	private FolderDetailPanel folderDetailPanel;
+	private FavoritesPanel favoritesPanel;
 
 	public RightSidePanel() throws Exception {
 		super();
@@ -15,11 +22,39 @@ public class RightSidePanel extends SidePanel {
 
 	@Override
 	protected FileListTable getTable() throws Exception {
-		return new FileListTable();
+		if (fileListTable == null)
+			fileListTable = new FileListTable();
+		return fileListTable;
 	}
 
 	@Override
 	protected FolderNamePanel getFolderNamePanel() {
-		return new FolderNamePanel();
+		if (folderNamePanel == null)
+			folderNamePanel = new FolderNamePanel();
+		return folderNamePanel;
+	}
+
+	@Override
+	protected FolderDetailPanel getFolderDetailsPanel() {
+		if (folderDetailPanel == null)
+			folderDetailPanel = new FolderDetailPanel();
+		return folderDetailPanel;
+	}
+
+	@Override
+	protected FavoritesPanel getFavoritesPanel() {
+		if (favoritesPanel == null)
+			favoritesPanel = new FavoritesPanel();
+		return favoritesPanel;
+	}
+
+	@Override
+	protected int getTableXPositon() {
+		return 0;
+	}
+
+	@Override
+	protected int getFavoritesXPositon() {
+		return 1;
 	}
 }

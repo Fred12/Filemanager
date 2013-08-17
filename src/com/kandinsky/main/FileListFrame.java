@@ -16,9 +16,8 @@ import com.kandinsky.gui.splitPane.RightSidePanel;
 public class FileListFrame extends JFrame {
 	
 	public FileListFrame() throws Exception{
-
 		this.setLayout(new BorderLayout());
-		this.setMinimumSize(new Dimension(400,400));
+		this.setMinimumSize(new Dimension(1600,1024));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		LeftSidePanel leftPanel = new LeftSidePanel();

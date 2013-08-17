@@ -1,5 +1,10 @@
 package com.kandinsky.gui;
 
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -10,4 +15,19 @@ import javax.swing.JPanel;
  */
 public class FolderDetailPanel extends JPanel {
 
+	private JLabel infoLabel;
+	
+	public FolderDetailPanel(){
+		// TESTFARBE, kann auch wieder raus, wenn nicht benötigt
+		this.setBackground(Color.RED);
+		infoLabel = new JLabel("INFO");
+		
+		// LAYOUT
+		this.setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.weightx=1.0;
+		gbc.weighty=1.0;
+		gbc.fill=GridBagConstraints.VERTICAL;
+		this.add(infoLabel, gbc);
+	}
 }
