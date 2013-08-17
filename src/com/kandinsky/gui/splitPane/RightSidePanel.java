@@ -10,21 +10,14 @@ import com.kandinsky.gui.fileList.FileListTable;
  * @author schmidtb
  */
 public class RightSidePanel extends SidePanel {
-	
-	private FileListTable fileListTable;
+
 	private FolderNamePanel folderNamePanel;
 	private FolderDetailPanel folderDetailPanel;
-	private FavoritesPanel favoritesPanel;
+
+	private TableAndFavoritesSplitPane splitPane;
 
 	public RightSidePanel() throws Exception {
 		super();
-	}
-
-	@Override
-	protected FileListTable getTable() throws Exception {
-		if (fileListTable == null)
-			fileListTable = new FileListTable();
-		return fileListTable;
 	}
 
 	@Override
@@ -42,19 +35,9 @@ public class RightSidePanel extends SidePanel {
 	}
 
 	@Override
-	protected FavoritesPanel getFavoritesPanel() {
-		if (favoritesPanel == null)
-			favoritesPanel = new FavoritesPanel();
-		return favoritesPanel;
-	}
-
-	@Override
-	protected int getTableXPositon() {
-		return 0;
-	}
-
-	@Override
-	protected int getFavoritesXPositon() {
-		return 1;
+	protected TableAndFavoritesSplitPane getTableAndFavoritesSplitPane() throws Exception {
+		if (splitPane == null)
+			splitPane = TableAndFavoritesSplitPane.onRightSide(new FavoritesPanel(), new FileListTable());
+		return splitPane;
 	}
 }
