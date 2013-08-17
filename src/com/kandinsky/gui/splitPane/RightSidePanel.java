@@ -1,5 +1,6 @@
 package com.kandinsky.gui.splitPane;
 
+import com.kandinsky.gui.FolderNamePanel;
 import com.kandinsky.gui.fileList.FileListTable;
 
 /**
@@ -15,5 +16,10 @@ public class RightSidePanel extends SidePanel {
 	@Override
 	protected FileListTable getTable() throws Exception {
 		return new FileListTable();
+	}
+
+	@Override
+	protected FolderNamePanel getFolderNamePanel() {
+		return new FolderNamePanel();
 	}
 }

@@ -1,5 +1,8 @@
 package com.kandinsky.gui;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -16,6 +19,13 @@ public class FolderNamePanel extends JPanel {
 	
 	public FolderNamePanel(){
 		this.currentFolderTextField = new JTextField();
+		this.setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx=0;
+		gbc.fill=GridBagConstraints.HORIZONTAL;
+		gbc.weightx=1.0;
+		gbc.weighty=0.5;
+		this.add(currentFolderTextField, gbc);
 	}
 	
 	public void setFolderText(String text){
