@@ -11,8 +11,8 @@ import javax.swing.JToolBar;
 
 /**
  * PUNKT 3 - ButtonBar.
- * Zeigt eine Liste mit Buttons. Hier ist zu überlegen, ob die Buttons für beide Seiten angezeigt werden sollen,
- * oder nur für eine Seite.
+ * Zeigt eine Liste mit Buttons. Hier ist zu Ã¼berlegen, ob die Buttons fÃ¼r beide Seiten angezeigt werden sollen,
+ * oder nur fuer eine Seite.
  * @author Marc L.
  */
 
@@ -26,7 +26,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 	JPanel buttonBar;
 	
 	JButton neuesFenster;	
-	JButton zurück;
+	JButton zurueck;
 	JButton weiter;
 	JButton hoch;
 	JButton home;
@@ -37,7 +37,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 	JButton gruppieren;
 	JButton ftpAnlegen;
 	JButton ftpAnzeigen;
-	JButton shellÖffnen;
+	JButton shellOeffnen;
 	JButton hilfe;
 	JButton einstellungen;		
 	
@@ -51,10 +51,10 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		//buttonBar.setPreferredSize(new Dimension(400,300)); 
 		
 		
-		//Icon Quellen für die Buttons, am besten png
+		//Icon Quellen fuer die Buttons, am besten png
 		
 		Icon a = new ImageIcon(getClass().getResource("nf.png"));		 
-		Icon b = new ImageIcon(getClass().getResource("zurück-icon.png"));
+		Icon b = new ImageIcon(getClass().getResource("zurueck-icon.png"));
 		Icon c = new ImageIcon(getClass().getResource("weiter-icon.png"));
 		Icon d = new ImageIcon(getClass().getResource("hoch-icon.png"));
 		Icon e = new ImageIcon(getClass().getResource("home-6-icon.png"));
@@ -71,7 +71,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		
 		//Buttons erstellen mit Icons
 		neuesFenster =			new JButton(a);
-		zurück = 				new JButton(b);
+		zurueck = 				new JButton(b);
 		weiter = 				new JButton(c);
 		hoch =					new JButton(d);
 		home =					new JButton(e);
@@ -82,16 +82,16 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		gruppieren = 			new JButton("Gruppieren",j);
 		ftpAnlegen = 			new JButton("FTP anlegen",k);
 		ftpAnzeigen =			new JButton("FTP anzeigen",l);
-		shellÖffnen = 			new JButton("Shell öffnen",m);
+		shellOeffnen = 			new JButton("Shell Ã–ffnen",m);
 		hilfe =  				new JButton("Hilfe",n);
 		einstellungen = 		new JButton("Einstellungen",o);
 		
 		
-		//ToolTips für die Buttons
-		neuesFenster.setToolTipText("Öffnet eine neues Hauptfenster");
-		zurück.setToolTipText("Zum Ordner zurück navigieren");
-		weiter.setToolTipText("Zum Ordner vorwärts navigieren");
-		hoch.setToolTipText("Zum übergeordneten Ordner wechseln");
+		//ToolTips fuer die Buttons
+		neuesFenster.setToolTipText("Ã–ffnet eine neues Hauptfenster");
+		zurueck.setToolTipText("Zum Ordner zurÃ¼ck navigieren");
+		weiter.setToolTipText("Zum Ordner vorwÃ¤rts navigieren");
+		hoch.setToolTipText("Zum Ãœbergeordneten Ordner wechseln");
 		home.setToolTipText("Zum Home Ordner wechseln");
 		aktualisieren.setToolTipText("Fenster aktualisieren");
 		vertauschen.setToolTipText("Split-Fenster vertauschen");
@@ -100,14 +100,14 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		gruppieren.setToolTipText("Gruppieren");
 		ftpAnlegen.setToolTipText("Neuen FTP Server anlegen");
 		ftpAnzeigen.setToolTipText("FTP Verbindungen anzeigen");
-		shellÖffnen.setToolTipText("Shell im aktuellen Ordner öffnen");
+		shellOeffnen.setToolTipText("Shell im aktuellen Ordner Ã¶ffnen");
 		hilfe.setToolTipText("Hilfe und Infos");
-		einstellungen.setToolTipText("Einstellungen öffnen");
+		einstellungen.setToolTipText("Einstellungen Ã¶ffnen");
 		
 		
 		//Buttons der buttonBar Anlegen	
 		buttonBar.add(neuesFenster);
-		buttonBar.add(zurück);
+		buttonBar.add(zurueck);
 		buttonBar.add(weiter);
 		buttonBar.add(hoch);		
 		buttonBar.add(home);
@@ -118,14 +118,14 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		buttonBar.add(gruppieren);
 		buttonBar.add(ftpAnlegen);
 		buttonBar.add(ftpAnzeigen);
-		buttonBar.add(shellÖffnen);
+		buttonBar.add(shellOeffnen);
 		buttonBar.add(hilfe);
 		buttonBar.add(einstellungen);
 		
 		
-		//ActionListener für die einzelnen Buttons		
+		//ActionListener fuer die einzelnen Buttons		
 		neuesFenster.addActionListener(this);
-		zurück.addActionListener(this);
+		zurueck.addActionListener(this);
 		weiter.addActionListener(this);
 		hoch.addActionListener(this);
 		home.addActionListener(this);
@@ -136,7 +136,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		gruppieren.addActionListener(this);
 		ftpAnlegen.addActionListener(this);
 		ftpAnzeigen.addActionListener(this);
-		shellÖffnen.addActionListener(this);
+		shellOeffnen.addActionListener(this);
 		hilfe.addActionListener(this);
 		einstellungen.addActionListener(this);
 		
@@ -158,7 +158,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 			if (quelle == neuesFenster) {
 			}
 			
-			if (quelle == zurück) {
+			if (quelle == zurueck) {
 			}
 			
 			if (quelle == weiter) {
@@ -188,7 +188,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 			if (quelle == ftpAnzeigen) {
 			}
 			
-			if (quelle == shellÖffnen) {
+			if (quelle == shellOeffnen) {
 			}
 			
 			if (quelle == hilfe) {
