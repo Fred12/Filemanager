@@ -1,9 +1,13 @@
 package com.kandinsky.gui;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JOptionPane;
+
+import com.kandinsky.main.Main;
 
 public class KandinskyMenuBarFunctions implements ActionListener {
 	
@@ -74,7 +78,9 @@ public class KandinskyMenuBarFunctions implements ActionListener {
 			break;
 			
 		case CLOSE_PROGRAM:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
+			// Fire Window Close Event for Main Frame . See Main class
+			WindowEvent closingEvent = new WindowEvent(Main.getJFrame(), WindowEvent.WINDOW_CLOSING);
+			Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
 			break;
 		
 		// Menu "Edit" Actions
