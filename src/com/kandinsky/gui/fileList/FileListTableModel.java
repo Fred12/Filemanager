@@ -10,6 +10,11 @@ import com.kandinsky.objects.FileEntry;
 
 public class FileListTableModel extends AbstractTableModel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3612169454389635317L;
+
 	/** Ueberschriften */
 	private String[] columnNames = {"", "Name", "Größe", "Datum", "Typ", "Endung", "Rechte" };
 

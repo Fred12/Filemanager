@@ -11,4 +11,9 @@ import javax.swing.JPanel;
  */
 public class FavoritesPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5827192149623528389L;
+
 }

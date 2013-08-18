@@ -16,6 +16,12 @@ import com.kandinsky.gui.FolderNamePanel;
 public abstract class SidePanel extends JPanel {
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7091223933460827761L;
+
+
 	protected SidePanel() throws Exception {
 		this.setLayout(new GridBagLayout());
 		this.add(getTableAndFavoritesSplitPane(), getSplitPaneConstraints());

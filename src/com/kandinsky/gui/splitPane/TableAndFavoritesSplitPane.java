@@ -13,6 +13,11 @@ import com.kandinsky.gui.fileList.FileListTable;
  */
 public class TableAndFavoritesSplitPane extends JSplitPane {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2806563759554923249L;
+	
 	private FavoritesPanel favoritesPanel;
 	private FileListTable table;
 

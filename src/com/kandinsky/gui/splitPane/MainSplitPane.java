@@ -11,6 +11,11 @@ import javax.swing.JSplitPane;
  */
 public class MainSplitPane extends JSplitPane {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2515375754619078110L;
+	
 	/** Unterteilung der beiden Panels. Aktuell 50:50 */
 	private static final double DIVIDER_RATIO = 0.5;
 

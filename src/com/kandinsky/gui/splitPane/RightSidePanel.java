@@ -11,6 +11,11 @@ import com.kandinsky.gui.fileList.FileListTable;
  */
 public class RightSidePanel extends SidePanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 744794461134800726L;
+	
 	private FolderNamePanel folderNamePanel;
 	private FolderDetailPanel folderDetailPanel;
 

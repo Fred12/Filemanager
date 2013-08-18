@@ -15,6 +15,11 @@ import javax.swing.JPanel;
  */
 public class FolderDetailPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7815299418185514905L;
+	
 	private JLabel infoLabel;
 	
 	public FolderDetailPanel(){

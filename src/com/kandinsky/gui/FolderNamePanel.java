@@ -15,6 +15,11 @@ import javax.swing.JTextField;
  */
 public class FolderNamePanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3069656768393726552L;
+	
 	private JTextField currentFolderTextField;
 	
 	public FolderNamePanel(){

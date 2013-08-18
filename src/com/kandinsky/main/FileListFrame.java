@@ -15,6 +15,11 @@ import com.kandinsky.gui.splitPane.RightSidePanel;
  */
 public class FileListFrame extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7344100431867938808L;
+
 	public FileListFrame() throws Exception{
 		this.setLayout(new BorderLayout());
 		this.setMinimumSize(new Dimension(1600,1024));

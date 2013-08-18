@@ -16,6 +16,11 @@ import com.kandinsky.objects.FileEntry;
  */
 public class FileListTable extends JTable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8348644017646168541L;
+	
 	private FileListTableModel model;
 
 	public FileListTable() throws Exception {

@@ -11,6 +11,11 @@ import com.kandinsky.gui.splitPane.MainSplitPane;
 
 public class SplitPaneFrame extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5155741862662507039L;
+
 	public SplitPaneFrame(){
 		this.setLayout(new BorderLayout());
 		this.setMinimumSize(new Dimension(400,400));
