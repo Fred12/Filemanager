@@ -34,7 +34,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 	JButton vertauschen;
 	JButton favoritenAnlegen;
 	JButton favoritenAnzeigen;
-	JButton gruppieren;
+	JButton benutzer;
 	JButton ftpAnlegen;
 	JButton ftpAnzeigen;
 	JButton shellOeffnen;
@@ -62,12 +62,12 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		Icon g = new ImageIcon(getClass().getResource("/com/kandinsky/resources/shuffle-icon.png"));
 		Icon h = new ImageIcon(getClass().getResource("/com/kandinsky/resources/favorite-anlegen-icon.png"));
 		Icon i = new ImageIcon(getClass().getResource("/com/kandinsky/resources/favorite-icon.png"));
-		Icon j = new ImageIcon(getClass().getResource(""));
-		Icon k = new ImageIcon(getClass().getResource(""));
+		Icon j = new ImageIcon(getClass().getResource("/com/kandinsky/resources/user-icon.png"));
+		Icon k = new ImageIcon(getClass().getResource("/com/kandinsky/resources/network-icon.png"));
 		Icon l = new ImageIcon(getClass().getResource(""));
 		Icon m = new ImageIcon(getClass().getResource(""));
-		Icon n = new ImageIcon(getClass().getResource(""));
-		Icon o = new ImageIcon(getClass().getResource(""));	
+		Icon n = new ImageIcon(getClass().getResource("/com/kandinsky/resources/help-icon.png"));
+		Icon o = new ImageIcon(getClass().getResource("/com/kandinsky/resources/options-icon.png"));	
 		
 		//Buttons erstellen mit Icons
 		neuesFenster =			new JButton(a);
@@ -79,12 +79,12 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		vertauschen = 			new JButton(g);
 		favoritenAnlegen = 		new JButton(h);
 		favoritenAnzeigen = 	new JButton(i);
-		gruppieren = 			new JButton("Gruppieren",j);
-		ftpAnlegen = 			new JButton("FTP anlegen",k);
+		benutzer = 			    new JButton(j);
+		ftpAnlegen = 			new JButton(k);
 		ftpAnzeigen =			new JButton("FTP anzeigen",l);
 		shellOeffnen = 			new JButton("Shell Öffnen",m);
-		hilfe =  				new JButton("Hilfe",n);
-		einstellungen = 		new JButton("Einstellungen",o);
+		hilfe =  				new JButton(n);
+		einstellungen = 		new JButton(o);
 		
 		
 		//ToolTips fuer die Buttons
@@ -97,7 +97,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		vertauschen.setToolTipText("Split-Fenster vertauschen");
 		favoritenAnlegen.setToolTipText("Neue Favoriten anlegen");
 		favoritenAnzeigen.setToolTipText("Favoriten anzeigen");
-		gruppieren.setToolTipText("Gruppieren");
+		benutzer.setToolTipText("Benutzer");
 		ftpAnlegen.setToolTipText("Neuen FTP Server anlegen");
 		ftpAnzeigen.setToolTipText("FTP Verbindungen anzeigen");
 		shellOeffnen.setToolTipText("Shell im aktuellen Ordner öffnen");
@@ -115,7 +115,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		buttonBar.add(vertauschen);
 		buttonBar.add(favoritenAnlegen);
 		buttonBar.add(favoritenAnzeigen);
-		buttonBar.add(gruppieren);
+		buttonBar.add(benutzer);
 		buttonBar.add(ftpAnlegen);
 		buttonBar.add(ftpAnzeigen);
 		buttonBar.add(shellOeffnen);
@@ -133,7 +133,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		vertauschen.addActionListener(this);
 		favoritenAnlegen.addActionListener(this);
 		favoritenAnzeigen.addActionListener(this);
-		gruppieren.addActionListener(this);
+		benutzer.addActionListener(this);
 		ftpAnlegen.addActionListener(this);
 		ftpAnzeigen.addActionListener(this);
 		shellOeffnen.addActionListener(this);
@@ -179,7 +179,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 			if (quelle == favoritenAnzeigen) {
 			}
 			
-			if (quelle == gruppieren) {
+			if (quelle == benutzer) {
 			}
 			
 			if (quelle == ftpAnlegen) {
