@@ -21,6 +21,7 @@ public class MainSplitPane extends JSplitPane {
 	 */
 	public MainSplitPane(JPanel leftPanel, JPanel rightPanel){
 		super(JSplitPane.HORIZONTAL_SPLIT, leftPanel, rightPanel);
+		this.setOneTouchExpandable(true);
 		this.setResizeWeight(DIVIDER_RATIO); 
 	}
 

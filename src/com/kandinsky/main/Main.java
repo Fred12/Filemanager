@@ -3,7 +3,6 @@ package com.kandinsky.main;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -22,8 +21,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Main window = new Main();
-					window.frame.setVisible(true);
+					new Main();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -74,6 +72,8 @@ public class Main {
 	    frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 	    // don't forget this
 	    frame.addWindowListener(windowAdapter);
+	    
+	    frame.setVisible(true);
 				
 		
 	}

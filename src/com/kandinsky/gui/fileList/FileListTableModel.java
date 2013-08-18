@@ -1,7 +1,5 @@
 package com.kandinsky.gui.fileList;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -42,13 +40,6 @@ public class FileListTableModel extends AbstractTableModel {
 		FileEntry s = data.get(rowIndex);
 		switch (columnIndex) {
 			case 0:
-				try {
-					System.out.println(new File(".").getCanonicalPath());
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println(s.getIcon());
 				return s.getIcon();
 			case 1:
 				return s.getName();
