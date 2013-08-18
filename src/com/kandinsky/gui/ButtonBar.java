@@ -59,9 +59,9 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		Icon d = new ImageIcon(getClass().getResource("/com/kandinsky/resources/hoch-icon.png"));
 		Icon e = new ImageIcon(getClass().getResource("/com/kandinsky/resources/home-6-icon.png"));
 		Icon f = new ImageIcon(getClass().getResource("/com/kandinsky/resources/refresh-icon.png"));
-		Icon g = new ImageIcon(getClass().getResource(""));
-		Icon h = new ImageIcon(getClass().getResource(""));
-		Icon i = new ImageIcon(getClass().getResource(""));
+		Icon g = new ImageIcon(getClass().getResource("/com/kandinsky/resources/shuffle-icon.png"));
+		Icon h = new ImageIcon(getClass().getResource("/com/kandinsky/resources/favorite-anlegen-icon.png"));
+		Icon i = new ImageIcon(getClass().getResource("/com/kandinsky/resources/favorite-icon.png"));
 		Icon j = new ImageIcon(getClass().getResource(""));
 		Icon k = new ImageIcon(getClass().getResource(""));
 		Icon l = new ImageIcon(getClass().getResource(""));
@@ -76,9 +76,9 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		hoch =					new JButton(d);
 		home =					new JButton(e);
 		aktualisieren = 		new JButton(f);
-		vertauschen = 			new JButton("Vertauschen",g);
-		favoritenAnlegen = 		new JButton("Favoriten Anlegen",h);
-		favoritenAnzeigen = 	new JButton("Favoriten anzeigen",i);
+		vertauschen = 			new JButton(g);
+		favoritenAnlegen = 		new JButton(h);
+		favoritenAnzeigen = 	new JButton(i);
 		gruppieren = 			new JButton("Gruppieren",j);
 		ftpAnlegen = 			new JButton("FTP anlegen",k);
 		ftpAnzeigen =			new JButton("FTP anzeigen",l);
