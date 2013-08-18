@@ -53,12 +53,12 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		
 		//Icon Quellen fuer die Buttons, am besten png
 		
-		Icon a = new ImageIcon(getClass().getResource("nf.png"));		 
-		Icon b = new ImageIcon(getClass().getResource("zurueck-icon.png"));
-		Icon c = new ImageIcon(getClass().getResource("weiter-icon.png"));
-		Icon d = new ImageIcon(getClass().getResource("hoch-icon.png"));
-		Icon e = new ImageIcon(getClass().getResource("home-6-icon.png"));
-		Icon f = new ImageIcon(getClass().getResource("refresh-icon.png"));
+		Icon a = new ImageIcon(getClass().getResource("/com/kandinsky/resources/nf.png"));		 
+		Icon b = new ImageIcon(getClass().getResource("/com/kandinsky/resources/zurueck-icon.png"));
+		Icon c = new ImageIcon(getClass().getResource("/com/kandinsky/resources/weiter-icon.png"));
+		Icon d = new ImageIcon(getClass().getResource("/com/kandinsky/resources/hoch-icon.png"));
+		Icon e = new ImageIcon(getClass().getResource("/com/kandinsky/resources/home-6-icon.png"));
+		Icon f = new ImageIcon(getClass().getResource("/com/kandinsky/resources/refresh-icon.png"));
 		Icon g = new ImageIcon(getClass().getResource(""));
 		Icon h = new ImageIcon(getClass().getResource(""));
 		Icon i = new ImageIcon(getClass().getResource(""));

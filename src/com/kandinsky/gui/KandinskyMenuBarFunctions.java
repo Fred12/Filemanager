@@ -7,6 +7,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JOptionPane;
 
+import com.kandinsky.gui.dialogs.AboutDialog;
 import com.kandinsky.main.Main;
 
 public class KandinskyMenuBarFunctions implements ActionListener {
@@ -164,7 +165,8 @@ public class KandinskyMenuBarFunctions implements ActionListener {
 			break;
 			
 		case ABOUT:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
+			AboutDialog about = new AboutDialog();
+			about.setVisible(true);
 			break;
 		}
 		
