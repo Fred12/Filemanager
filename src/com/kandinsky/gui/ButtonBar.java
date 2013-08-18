@@ -1,5 +1,7 @@
 package com.kandinsky.gui;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -88,20 +90,36 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		
 		
 		//ToolTips fuer die Buttons
+		neuesFenster.setBackground(Color.WHITE);
+		//neuesFenster.setFont(new Font("Arial", Font.PLAIN, 12));
 		neuesFenster.setToolTipText("Öffnet eine neues Hauptfenster");
+		zurueck.setBackground(Color.WHITE);
 		zurueck.setToolTipText("Zum Ordner zurück navigieren");
+		weiter.setBackground(Color.WHITE);
 		weiter.setToolTipText("Zum Ordner vorwärts navigieren");
+		hoch.setBackground(Color.WHITE);
 		hoch.setToolTipText("Zum Übergeordneten Ordner wechseln");
+		
+		home.setBackground(Color.WHITE);
+		home.setFont(new Font("Arial", Font.PLAIN, 12));
 		home.setToolTipText("Zum Home Ordner wechseln");
+		aktualisieren.setBackground(Color.WHITE);
 		aktualisieren.setToolTipText("Fenster aktualisieren");
+		vertauschen.setBackground(Color.WHITE);
 		vertauschen.setToolTipText("Split-Fenster vertauschen");
+		favoritenAnlegen.setBackground(Color.WHITE);
 		favoritenAnlegen.setToolTipText("Neue Favoriten anlegen");
+		favoritenAnzeigen.setBackground(Color.WHITE);
 		favoritenAnzeigen.setToolTipText("Favoriten anzeigen");
+		benutzer.setBackground(Color.WHITE);
 		benutzer.setToolTipText("Benutzer");
+		ftpAnlegen.setBackground(Color.WHITE);
 		ftpAnlegen.setToolTipText("Neuen FTP Server anlegen");
 		ftpAnzeigen.setToolTipText("FTP Verbindungen anzeigen");
 		shellOeffnen.setToolTipText("Shell im aktuellen Ordner öffnen");
+		hilfe.setBackground(Color.WHITE);
 		hilfe.setToolTipText("Hilfe und Infos");
+		einstellungen.setBackground(Color.WHITE);
 		einstellungen.setToolTipText("Einstellungen öffnen");
 		
 		
