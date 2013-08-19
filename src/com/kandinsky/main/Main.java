@@ -74,6 +74,8 @@ public class Main {
 	    frame.addWindowListener(windowAdapter);
 	    
 	    frame.setVisible(true);
+	    
+	    frame.pack();
 				
 		
 	}

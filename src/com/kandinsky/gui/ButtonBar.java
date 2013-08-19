@@ -17,7 +17,7 @@ import javax.swing.JToolBar;
  * PUNKT 3 - ButtonBar.
  * Zeigt eine Liste mit Buttons. Hier ist zu überlegen, ob die Buttons für beide Seiten angezeigt werden sollen,
  * oder nur fuer eine Seite.
- * @author Marc L. Mamoudou B.
+ * @author Marc L., Mamoudou B.
  */
 
 public class ButtonBar extends JToolBar implements ActionListener {		
