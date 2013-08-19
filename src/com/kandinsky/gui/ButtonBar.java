@@ -1,6 +1,7 @@
 package com.kandinsky.gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
@@ -15,7 +17,7 @@ import javax.swing.JToolBar;
  * PUNKT 3 - ButtonBar.
  * Zeigt eine Liste mit Buttons. Hier ist zu überlegen, ob die Buttons für beide Seiten angezeigt werden sollen,
  * oder nur fuer eine Seite.
- * @author Marc L.
+ * @author Marc L. Mamoudou B.
  */
 
 public class ButtonBar extends JToolBar implements ActionListener {		
@@ -24,6 +26,8 @@ public class ButtonBar extends JToolBar implements ActionListener {
 	 * 
 	 */
 	private static final long serialVersionUID = -7230543120102084314L;
+
+	private static final String TODO = "Needs to be implemented";
 	
 	JPanel buttonBar;
 	
@@ -50,7 +54,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		//buttonBar = new JToolBar("Werkzeugleiste",0);
 		buttonBar = new JPanel();		
 		this.add(buttonBar);	
-		//buttonBar.setPreferredSize(new Dimension(400,300)); 
+		//buttonBar.setPreferredSize(new Dimension(200,100)); 
 		
 		
 		//Icon Quellen fuer die Buttons, am besten png
@@ -101,7 +105,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		hoch.setToolTipText("Zum Übergeordneten Ordner wechseln");
 		
 		home.setBackground(Color.WHITE);
-		home.setFont(new Font("Arial", Font.PLAIN, 12));
+		//home.setFont(new Font("Arial", Font.PLAIN, 12));
 		home.setToolTipText("Zum Home Ordner wechseln");
 		aktualisieren.setBackground(Color.WHITE);
 		aktualisieren.setToolTipText("Fenster aktualisieren");
@@ -127,7 +131,8 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		buttonBar.add(neuesFenster);
 		buttonBar.add(zurueck);
 		buttonBar.add(weiter);
-		buttonBar.add(hoch);		
+		buttonBar.add(hoch);
+		//add(btnRename, "3, 6, fill, center");
 		buttonBar.add(home);
 		buttonBar.add(aktualisieren);
 		buttonBar.add(vertauschen);
@@ -142,7 +147,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		
 		
 		//ActionListener fuer die einzelnen Buttons		
-		neuesFenster.addActionListener(this);
+		neuesFenster.addActionListener(getNeuesFenster());
 		zurueck.addActionListener(this);
 		weiter.addActionListener(this);
 		hoch.addActionListener(this);
@@ -160,6 +165,21 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		
 		
 	}
+	
+	
+	
+	
+	
+	private ActionListener getNeuesFenster() {
+		return new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, TODO, "Neues Fenster",
+						JOptionPane.OK_OPTION);
+
+				
+			}
+		};
+	}
 
 	//public class ButtonListener implements ActionListener {		
 	
@@ -173,8 +193,8 @@ public class ButtonBar extends JToolBar implements ActionListener {
 				
 			}
 		
-			if (quelle == neuesFenster) {
-			}
+			/**if (quelle == neuesFenster) {
+			}*/
 			
 			if (quelle == zurueck) {
 			}
