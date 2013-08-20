@@ -2,6 +2,7 @@ package com.kandinsky.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,7 +30,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 
 	private static final String TODO = "Needs to be implemented";
 	
-	JPanel buttonBar;
+	JToolBar buttonBar;
 	
 	JButton neuesFenster;	
 	JButton zurueck;
@@ -52,9 +53,10 @@ public class ButtonBar extends JToolBar implements ActionListener {
 	public ButtonBar() {
 		
 		//buttonBar = new JToolBar("Werkzeugleiste",0);
-		buttonBar = new JPanel();		
+		buttonBar = new JToolBar();		
 		this.add(buttonBar);	
 		//buttonBar.setPreferredSize(new Dimension(200,100)); 
+		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 		
 		
 		//Icon Quellen fuer die Buttons, am besten png
