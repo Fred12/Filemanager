@@ -1,6 +1,8 @@
 package com.kandinsky.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -13,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
+import javax.swing.SwingConstants;
 
 /**
  * PUNKT 3 - ButtonBar.
@@ -53,10 +56,16 @@ public class ButtonBar extends JToolBar implements ActionListener {
 	public ButtonBar() {
 		
 		//buttonBar = new JToolBar("Werkzeugleiste",0);
-		buttonBar = new JToolBar();		
-		this.add(buttonBar);	
+		buttonBar = new JToolBar();	
+		this.add(buttonBar, BorderLayout.NORTH);
 		//buttonBar.setPreferredSize(new Dimension(200,100)); 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
+		
+		buttonBar.setBackground(Color.WHITE);
+		buttonBar.setOrientation(SwingConstants.HORIZONTAL);
+		buttonBar.setFloatable(false);
+		buttonBar.setBorderPainted(false);
+		buttonBar.setAlignmentY(Component.CENTER_ALIGNMENT);
 		
 		
 		//Icon Quellen fuer die Buttons, am besten png
