@@ -59,7 +59,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		
 		//Icon Quellen fuer die Buttons, am besten png
 		
-		Icon a = new ImageIcon(getClass().getResource("/com/kandinsky/resources/nf.png"));		 
+		Icon a = new ImageIcon(getClass().getResource("/com/kandinsky/resources/window-icon.png"));		 
 		Icon b = new ImageIcon(getClass().getResource("/com/kandinsky/resources/zurueck-icon.png"));
 		Icon c = new ImageIcon(getClass().getResource("/com/kandinsky/resources/weiter-icon.png"));
 		Icon d = new ImageIcon(getClass().getResource("/com/kandinsky/resources/hoch-icon.png"));
@@ -70,8 +70,8 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		Icon i = new ImageIcon(getClass().getResource("/com/kandinsky/resources/favorite-icon.png"));
 		Icon j = new ImageIcon(getClass().getResource("/com/kandinsky/resources/user-icon.png"));
 		Icon k = new ImageIcon(getClass().getResource("/com/kandinsky/resources/network-icon.png"));
-		Icon l = new ImageIcon(getClass().getResource(""));
-		Icon m = new ImageIcon(getClass().getResource(""));
+		Icon l = new ImageIcon(getClass().getResource("/com/kandinsky/resources/ftp-connection-icon.png"));
+		Icon m = new ImageIcon(getClass().getResource("/com/kandinsky/resources/shell-icon.png"));
 		Icon n = new ImageIcon(getClass().getResource("/com/kandinsky/resources/help-icon.png"));
 		Icon o = new ImageIcon(getClass().getResource("/com/kandinsky/resources/options-icon.png"));	
 		
@@ -87,8 +87,8 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		favoritenAnzeigen = 	new JButton(i);
 		benutzer = 			    new JButton(j);
 		ftpAnlegen = 			new JButton(k);
-		ftpAnzeigen =			new JButton("FTP anzeigen",l);
-		shellOeffnen = 			new JButton("Shell Öffnen",m);
+		ftpAnzeigen =			new JButton(l);
+		shellOeffnen = 			new JButton(m);
 		hilfe =  				new JButton(n);
 		einstellungen = 		new JButton(o);
 		
@@ -119,7 +119,9 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		benutzer.setToolTipText("Benutzer");
 		ftpAnlegen.setBackground(Color.WHITE);
 		ftpAnlegen.setToolTipText("Neuen FTP Server anlegen");
+		ftpAnzeigen.setBackground(Color.WHITE);
 		ftpAnzeigen.setToolTipText("FTP Verbindungen anzeigen");
+		shellOeffnen.setBackground(Color.WHITE);
 		shellOeffnen.setToolTipText("Shell im aktuellen Ordner öffnen");
 		hilfe.setBackground(Color.WHITE);
 		hilfe.setToolTipText("Hilfe und Infos");
