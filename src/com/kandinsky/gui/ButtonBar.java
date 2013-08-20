@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -33,6 +34,8 @@ public class ButtonBar extends JToolBar implements ActionListener {
 
 	private static final String TODO = "Needs to be implemented";
 	
+	private static final Insets margins = new Insets(0,0,0,0);
+	
 	JToolBar buttonBar;
 	
 	JButton neuesFenster;	
@@ -55,7 +58,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 	
 	public ButtonBar() {
 		
-		//buttonBar = new JToolBar("Werkzeugleiste",0);
+		//buttonBar = new JToolBar("Button Bar",0);
 		buttonBar = new JToolBar();	
 		this.add(buttonBar, BorderLayout.NORTH);
 		//buttonBar.setPreferredSize(new Dimension(200,100)); 
@@ -88,6 +91,8 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		
 		//Buttons erstellen mit Icons
 		neuesFenster =			new JButton(a);
+		//neuesFenster.setHorizontalTextPosition(JButton.CENTER);
+		//neuesFenster.setVerticalTextPosition(JButton.CENTER);	       
 		zurueck = 				new JButton(b);
 		weiter = 				new JButton(c);
 		hoch =					new JButton(d);
@@ -103,6 +108,23 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		hilfe =  				new JButton(n);
 		einstellungen = 		new JButton(o);
 		
+		
+		//Größe der Buttons anpassen
+		neuesFenster.setMargin(margins);  
+		zurueck.setMargin(margins);  
+		weiter.setMargin(margins);    
+		hoch.setMargin(margins);    
+		home.setMargin(margins);  
+		aktualisieren.setMargin(margins);  
+		vertauschen.setMargin(margins);  
+		favoritenAnlegen.setMargin(margins);  
+		favoritenAnzeigen.setMargin(margins);  
+		benutzer.setMargin(margins);  
+		ftpAnlegen.setMargin(margins);  
+		ftpAnzeigen.setMargin(margins);  
+		shellOeffnen.setMargin(margins);  
+		hilfe.setMargin(margins);  
+		einstellungen.setMargin(margins);  
 		
 		//ToolTips fuer die Buttons
 		neuesFenster.setBackground(Color.WHITE);
@@ -180,9 +202,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 	}
 	
 	
-	
-	
-	
+		
 	private ActionListener getNeuesFenster() {
 		return new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -73,9 +73,10 @@ public class Main {
 	    // don't forget this
 	    frame.addWindowListener(windowAdapter);
 	    
-	    frame.setVisible(true);
+	    frame.setVisible(true);	
 	    
 	    frame.pack();
+	   
 	    frame.setLocation(30, 20);
 				
 		
