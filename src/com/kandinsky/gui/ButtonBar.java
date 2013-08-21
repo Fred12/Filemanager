@@ -3,9 +3,7 @@ package com.kandinsky.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +12,6 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
@@ -58,7 +55,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 	
 	public ButtonBar() {
 		
-		//buttonBar = new JToolBar("Button Bar",0);
+		//buttonBar = new JToolBar("Button Bar",0);		
 		buttonBar = new JToolBar();	
 		this.add(buttonBar, BorderLayout.NORTH);
 		//buttonBar.setPreferredSize(new Dimension(200,100)); 
@@ -68,10 +65,15 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		buttonBar.setOrientation(SwingConstants.HORIZONTAL);
 		buttonBar.setFloatable(false);
 		buttonBar.setBorderPainted(false);
-		buttonBar.setAlignmentY(Component.CENTER_ALIGNMENT);
+		buttonBar.setAlignmentY(Component.CENTER_ALIGNMENT);	
+		buttonBar.setBorderPainted(true);
+		buttonBar.setRollover(true);
+		//buttonBar.addSeparator(new Dimension(0,0));	
+		//buttonBar.setMargin(margins);		
+		//buttonBar.setAlignmentX(0);	
 		
 		
-		//Icon Quellen fuer die Buttons, am besten png
+		//Icon Quellen fuer die Buttons, am besten png		
 		
 		Icon a = new ImageIcon(getClass().getResource("/com/kandinsky/resources/window-icon.png"));		 
 		Icon b = new ImageIcon(getClass().getResource("/com/kandinsky/resources/zurueck-icon.png"));
