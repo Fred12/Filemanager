@@ -1,7 +1,8 @@
 package com.kandinsky.gui.splitPane;
 
-import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+
+import com.kandinsky.gui.fileList.FileListTable;
 
 /**
  * PUNKT 4 - SplitPane.
@@ -11,10 +12,9 @@ import javax.swing.JSplitPane;
  */
 public class MainSplitPane extends JSplitPane {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2515375754619078110L;
+	
+	private SidePanel leftPanel, rightPanel;
 	
 	/** Unterteilung der beiden Panels. Aktuell 50:50 */
 	private static final double DIVIDER_RATIO = 0.5;
@@ -24,10 +24,12 @@ public class MainSplitPane extends JSplitPane {
 	 * @param leftPanel
 	 * @param rightPanel
 	 */
-	public MainSplitPane(JPanel leftPanel, JPanel rightPanel){
+	public MainSplitPane(SidePanel leftPanel, SidePanel rightPanel){
 		super(JSplitPane.HORIZONTAL_SPLIT, leftPanel, rightPanel);
 		this.setOneTouchExpandable(true);
 		this.setResizeWeight(DIVIDER_RATIO); 
+		this.leftPanel = leftPanel;
+		this.rightPanel = rightPanel;
 	}
 	
 	/**
@@ -37,9 +39,16 @@ public class MainSplitPane extends JSplitPane {
 	 * @throws Exception 
 	 */
 	public MainSplitPane() throws Exception{
-		super(JSplitPane.HORIZONTAL_SPLIT, new LeftSidePanel(), new RightSidePanel());
-		this.setOneTouchExpandable(true);
-		this.setResizeWeight(DIVIDER_RATIO); 
+		this(new LeftSidePanel(), new RightSidePanel());
 	}
+	
+	public FileListTable getLeftTable() throws Exception{
+		return leftPanel.getTableAndFavoritesSplitPane().getTable();
+	}
+	
+	public FileListTable getRightTable() throws Exception{
+		return rightPanel.getTableAndFavoritesSplitPane().getTable();
+	}
+
 
 }
