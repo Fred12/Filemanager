@@ -16,7 +16,9 @@ public class FileListTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 3612169454389635317L;
 
 	/** Ueberschriften */
-	private String[] columnNames = {"", "Name", "Größe", "Datum", "Typ", "Endung", "Rechte" };
+	private static final String[] columnNames = {"", "Name", "Größe", "Datum", "Typ", "Endung", "Rechte" };
+	/** die Spaltenbreiten in Prozent */
+	private static final double[] columnWidths = {0.05, 0.45, 0.15, 0.15, 0.1, 0.1, 0.1 };
 
 	/** Daten */
 	private List<FileEntry> data;
@@ -38,6 +40,10 @@ public class FileListTableModel extends AbstractTableModel {
 	@Override
 	public String getColumnName(int col) {
 		return columnNames[col];
+	}
+	
+	public double getColumnWidthAt(int i){
+		return columnWidths[i];
 	}
 
 	@Override

@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 import com.kandinsky.objects.FileEntry;
 
@@ -28,6 +30,16 @@ public class FileListTable extends JTable {
 		this.setAutoCreateRowSorter(true);
 		this.setModel(model);
 		changeFolder("C:\\");
+		setColumnWidths();
+	}
+	
+	private void setColumnWidths(){
+		final int factor = 10000;
+		TableColumnModel columnModel = this.getColumnModel();
+	    for (int columnIndex = 0; columnIndex < model.getColumnCount(); columnIndex++) {
+	        TableColumn column = columnModel.getColumn(columnIndex);
+	        column.setPreferredWidth((int) (model.getColumnWidthAt(columnIndex) * factor));
+	    }
 	}
 
 	/**
