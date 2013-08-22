@@ -18,9 +18,6 @@ import com.kandinsky.objects.FileEntry;
  */
 public class FileListTable extends JTable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8348644017646168541L;
 	
 	private FileListTableModel model;
@@ -59,18 +56,4 @@ public class FileListTable extends JTable {
 			model.setValues(newEntries);
 		}
 	}
-	
-//	private void setColumnWidth(int column, int width) {
-//        TableColumn tableColumn = model.getColumn(column);
-//        if (width<0) {
-//            // use the preferred width of the header..
-//            JLabel label = new JLabel( (String)tableColumn.getHeaderValue() );
-//            Dimension preferred = label.getPreferredSize();
-//            // altered 10->14 as per camickr comment.
-//            width = (int)preferred.getWidth()+14;
-//        }
-//        tableColumn.setPreferredWidth(width);
-//        tableColumn.setMaxWidth(width);
-//        tableColumn.setMinWidth(width);
-//    }
 }

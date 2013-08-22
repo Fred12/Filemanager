@@ -29,5 +29,17 @@ public class MainSplitPane extends JSplitPane {
 		this.setOneTouchExpandable(true);
 		this.setResizeWeight(DIVIDER_RATIO); 
 	}
+	
+	/**
+	 * Die Splitpane wird in einen linken und rechten Teil unterteil. Hierfür wird ein linkes und ein rechtes Panel komplett neu angelegt.
+	 * @param leftPanel
+	 * @param rightPanel
+	 * @throws Exception 
+	 */
+	public MainSplitPane() throws Exception{
+		super(JSplitPane.HORIZONTAL_SPLIT, new LeftSidePanel(), new RightSidePanel());
+		this.setOneTouchExpandable(true);
+		this.setResizeWeight(DIVIDER_RATIO); 
+	}
 
 }
