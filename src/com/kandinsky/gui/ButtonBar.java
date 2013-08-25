@@ -11,7 +11,9 @@ import java.awt.event.ActionListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
@@ -22,7 +24,7 @@ import javax.swing.SwingConstants;
  * @author Marc L., Mamoudou B.
  */
 
-public class ButtonBar extends JToolBar implements ActionListener {		
+public class ButtonBar extends JPanel implements ActionListener {		
 	
 	/**
 	 * 
@@ -63,7 +65,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		
 		buttonBar.setBackground(Color.WHITE);
 		buttonBar.setOrientation(SwingConstants.HORIZONTAL);
-		buttonBar.setFloatable(false);
+		buttonBar.setFloatable(true);
 		buttonBar.setBorderPainted(false);
 		buttonBar.setAlignmentY(Component.CENTER_ALIGNMENT);	
 		buttonBar.setBorderPainted(true);
