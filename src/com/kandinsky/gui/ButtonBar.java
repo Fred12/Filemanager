@@ -49,7 +49,9 @@ public class ButtonBar extends JToolBar implements ActionListener {
 	JButton ftpAnzeigen;
 	JButton shellOeffnen;
 	JButton hilfe;
-	JButton einstellungen;		
+	JButton einstellungen;
+
+	private Object actionPanel;		
 	
 	
 	
@@ -64,7 +66,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 		buttonBar.setBackground(Color.WHITE);
 		buttonBar.setOrientation(SwingConstants.HORIZONTAL);
 		buttonBar.setFloatable(false);
-		buttonBar.setBorderPainted(false);
+		//buttonBar.setBorderPainted(false);
 		buttonBar.setAlignmentY(Component.CENTER_ALIGNMENT);	
 		buttonBar.setBorderPainted(true);
 		buttonBar.setRollover(true);
@@ -244,6 +246,7 @@ public class ButtonBar extends JToolBar implements ActionListener {
 			}
 			
 			if (quelle == aktualisieren) {
+				refresh();
 			}
 			
 			if (quelle == favoritenAnlegen) {
@@ -273,6 +276,13 @@ public class ButtonBar extends JToolBar implements ActionListener {
 			
 			
 		}
+
+
+
+	private void refresh() {
+		// TODO Auto-generated method stub
+		
+       }
 }
 	
 	
