@@ -4,7 +4,7 @@ import java.io.File;
 
 import javax.swing.JSplitPane;
 
-import com.kandinsky.gui.FavoritesPanel;
+import com.kandinsky.gui.favorites.FavoritesPanel;
 import com.kandinsky.gui.fileList.FileListTable;
 
 /**

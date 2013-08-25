@@ -51,7 +51,12 @@ public class FileEntry implements Comparable<FileEntry> {
 		this.file = file;
 	}
 
+	/**
+	 * @return den Namen, bzw. den Namen der absoluten Datei
+	 */
 	public String getName() {
+		if(file.getName().isEmpty())
+			return file.getAbsoluteFile().getName();
 		return file.getName();
 	}
 
@@ -87,6 +92,14 @@ public class FileEntry implements Comparable<FileEntry> {
 			return "Unbekannt";
 	}
 
+	/**
+	 * Rechte in der Formatierung "rwx" - dreistellig<p>
+	 * für vorhandene Rechte wird der Buchstabe an diese Stelle geschrieben, ansonsten ein Minus. Folgende Rechte sind möglich:<br>
+	 * - r = Lesen (read)<br>
+	 * - w = Schreiben (write)<br>
+	 * - x = Ausführen (execute)
+	 * @return Rechte in "rwx"-Struktur
+	 */
 	public String getRights() {
 		String rwx = "";
 		rwx += file.canRead() ? "r" : "-";

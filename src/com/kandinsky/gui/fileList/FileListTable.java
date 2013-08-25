@@ -26,7 +26,6 @@ public class FileListTable extends JTable {
 		model = new FileListTableModel();
 		this.setAutoCreateRowSorter(true);
 		this.setModel(model);
-		changeFolder("C:\\");
 		setColumnWidths();
 	}
 	
