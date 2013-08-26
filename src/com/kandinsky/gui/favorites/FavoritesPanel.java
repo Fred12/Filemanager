@@ -43,7 +43,7 @@ public class FavoritesPanel extends JPanel {
 
 		// TODO: nur ein Testeintrag
 		addFavoriteForFileEntry(new FileEntry(new File("")));
-		addFavorite(new Favorite(new FileEntry(new File(""))));
+		addFavorite(new FavoriteElement(new FileEntry(new File(""))));
 	}
 
 	/**
@@ -58,13 +58,13 @@ public class FavoritesPanel extends JPanel {
 		headerLabel.setOpaque(true);
 	}
 
-	public FavoritesPanel addFavorite(Favorite favorite) {
+	public FavoritesPanel addFavorite(FavoriteElement favorite) {
 		favoritesList.add(favorite);
 		return this;
 	}
 
 	public FavoritesPanel addFavoriteForFileEntry(FileEntry fileEntry) {
-		addFavorite(new Favorite(fileEntry));
+		addFavorite(new FavoriteElement(fileEntry));
 		return this;
 	}
 

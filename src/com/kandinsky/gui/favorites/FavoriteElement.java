@@ -8,7 +8,7 @@ import com.kandinsky.objects.FileEntry;
  * Repräsentiert genau einen Favorite-Eintrag und stellt ihn als einen Button mit passendem Icon dar.
  * @author Benne
  */
-public class Favorite extends JButton {
+public class FavoriteElement extends JButton {
 
 	/** der FileEntry auf den der Button referenziert */
 	private FileEntry fileEntry;
@@ -17,7 +17,7 @@ public class Favorite extends JButton {
 	 * Erstellt den Button und setzt sowohl Text als auch Item dafür
 	 * @param fileEntry
 	 */
-	public Favorite(FileEntry fileEntry){
+	public FavoriteElement(FileEntry fileEntry){
 		super(fileEntry.getName());
 		this.fileEntry = fileEntry;
 		this.setIcon(fileEntry.getIcon());

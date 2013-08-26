@@ -1,7 +1,6 @@
 package com.kandinsky.objects;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
@@ -58,6 +57,10 @@ public class FileEntry implements Comparable<FileEntry> {
 			fileType = FileType.FILE;
 		else
 			fileType = FileType.UNKNOWN;
+	}
+	
+	public FileEntry(String fileName){
+		this(new File(fileName));
 	}
 
 	/**
@@ -122,12 +125,21 @@ public class FileEntry implements Comparable<FileEntry> {
 			return TEXT_FILE_ICON;
 	}
 	
-	public String getAbsoluteFileName() throws IOException{
+	public String getAbsoluteFileName(){
 		return file.getAbsolutePath();
+	}
+	
+	public boolean exists(){
+		return file.exists();
 	}
 
 	@Override
 	public int compareTo(FileEntry o) {
 		return getName().compareTo(o.getName());
+	}
+	
+	@Override
+	public String toString() {
+		return getAbsoluteFileName();
 	}
 }
