@@ -48,25 +48,29 @@ public class FileListTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		FileEntry s = data.get(rowIndex);
+		FileEntry entry = data.get(rowIndex);
 		switch (columnIndex) {
 			case 0:
-				return s.getIcon();
+				return entry.getIcon();
 			case 1:
-				return s.getName();
+				return entry.getName();
 			case 2:
-				return s.getSize();
+				return entry.getSize();
 			case 3:
-				return s.getDate();
+				return entry.getDate();
 			case 4:
-				return s.getType();
+				return entry.getType();
 			case 5:
-				return s.getEnding();
+				return entry.getEnding();
 			case 6:
-				return s.getRights();
+				return entry.getRights();
 			default:
 				throw new RuntimeException("Spaltenindex existiert nicht!");
 		}
+	}
+	
+	public FileEntry getValueAtRow(int rowIndex){
+		return data.get(rowIndex);
 	}
 
 	/**
