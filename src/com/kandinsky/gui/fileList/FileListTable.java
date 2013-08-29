@@ -23,10 +23,9 @@ import com.kandinsky.objects.SideFunctionsHelper;
 public class FileListTable extends JTable {
 
 	private static final long serialVersionUID = -8348644017646168541L;
-	
 	private FileListTableModel model;
-
 	private SideFunctionsHelper sideFunctionsHelper;
+	private String currentFolderName="";
 
 	public FileListTable(SideFunctionsHelper sideFunctionsHelper) throws Exception {
 		model = new FileListTableModel();
@@ -60,12 +59,19 @@ public class FileListTable extends JTable {
 		if(!folder.isDirectory())
 			throw new Exception("Kein Verzeichnis angegeben");
 		else {
+			currentFolderName = folderName;
 			List<FileEntry> newEntries = FileEntry.getFileEntryList(folder);
 			model.setValues(newEntries);
 			getSelectionModel().clearSelection();
 			sideFunctionsHelper.setFileCountInFolder(newEntries.size());
 			sideFunctionsHelper.setSelectedFiles(getSelectedFiles());
+			repaint();
 		}
+	}
+	
+	public void refresh() throws Exception{
+		changeFolder(currentFolderName);
+		repaint();
 	}
 	
 	/**
@@ -81,7 +87,10 @@ public class FileListTable extends JTable {
 			FileListTable target = (FileListTable) event.getSource();
 			if (getSelectedRow() != NOTHING_SELECTED) {
 				if (event.getClickCount() == DOUBLE_CLICK) {
-					FileEntry valueAtRow = model.getValueAtRow(target.getSelectedRow());
+					int row = target.getSelectedRow();
+					// ummappen, falls sortiert
+					row = convertRowIndexToModel(row);
+					FileEntry valueAtRow = model.getValueAtRow(row);
 					if (valueAtRow.getType() == FileType.DIRECTORY) {
 						sideFunctionsHelper.switchFolder(valueAtRow.getAbsoluteFileName());
 						repaint();
@@ -98,6 +107,8 @@ public class FileListTable extends JTable {
 		File[] files = new File[getSelectedRowCount()];
 		int i = 0;
 		for(int selectedRow : getSelectedRows()){
+			// ummappen, falls sortiert
+			selectedRow = convertRowIndexToModel(selectedRow);
 			FileEntry selectedEntry = model.getValueAtRow(selectedRow);
 			files[i]=selectedEntry.getFile();
 			i++;

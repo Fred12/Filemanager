@@ -16,6 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
+import com.kandinsky.gui.splitPane.SidePanel;
+import com.kandinsky.objects.SideFunctionsHelper;
+
 /**
  * PUNKT 3 - ButtonBar.
  * Zeigt eine Liste mit Buttons. Hier ist zu überlegen, ob die Buttons für beide Seiten angezeigt werden sollen,
@@ -47,11 +50,13 @@ public class ButtonBar extends JPanel implements ActionListener {
 	JButton ftpAnzeigen;
 	JButton shellOeffnen;
 	JButton hilfe;
-	JButton einstellungen;		
+	JButton einstellungen;
 	
+	/** der Funktionshelfer, ueber den verschiedene Funktionen aufgerufen werden koennen */
+	private SideFunctionsHelper sideFunctionsHelper;		
 	
-	
-	public ButtonBar() {
+	public ButtonBar(SideFunctionsHelper sideFunctionsHelper) {
+		this.sideFunctionsHelper = sideFunctionsHelper;
 		
 		//buttonBar = new JToolBar("Button Bar",0);		
 		buttonBar = new JToolBar();	
@@ -242,6 +247,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 			}
 			
 			if (quelle == aktualisieren) {
+				sideFunctionsHelper.refresh();
 			}
 			
 			if (quelle == favoritenAnlegen) {
