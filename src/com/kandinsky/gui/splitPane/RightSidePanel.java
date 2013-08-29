@@ -1,8 +1,8 @@
 package com.kandinsky.gui.splitPane;
 
-import com.kandinsky.gui.FavoritesPanel;
 import com.kandinsky.gui.FolderDetailPanel;
 import com.kandinsky.gui.FolderNamePanel;
+import com.kandinsky.gui.favorites.FavoritesPanel;
 import com.kandinsky.gui.fileList.FileListTable;
 
 /**

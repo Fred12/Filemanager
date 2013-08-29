@@ -13,6 +13,11 @@ import com.kandinsky.gui.splitPane.MainSplitPane;
  */
 public class MainPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3435757831771873393L;
+	
 	/** enthaelt die benoetigten Buttons */
 	private ButtonBar buttonBar;
 	/** Grosse Split-Pane die die Vergleichs-Seiten enthaelt */
