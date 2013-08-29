@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
@@ -26,9 +25,6 @@ import javax.swing.SwingConstants;
 
 public class ButtonBar extends JPanel implements ActionListener {		
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7230543120102084314L;
 
 	private static final String TODO = "Needs to be implemented";

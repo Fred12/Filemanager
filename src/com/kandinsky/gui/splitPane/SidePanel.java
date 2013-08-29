@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 import com.kandinsky.gui.FolderDetailPanel;
 import com.kandinsky.gui.FolderNamePanel;
+import com.kandinsky.objects.SideFunctionsHelper;
 
 /**
  * Handelt den Panel-Aufbau innerhalb der Splitpane. Sollte so dynamisch sein, dass von den abgeleiteten Klassen nur noch versch. Funktionen aufgerufen werden müssen,
@@ -16,8 +17,12 @@ import com.kandinsky.gui.FolderNamePanel;
 public abstract class SidePanel extends JPanel {
 
 	private static final long serialVersionUID = -7091223933460827761L;
+	
+	/** jede Seite erhaelt ihren eigenen Seitenfunktionshelper */
+	protected SideFunctionsHelper sideFunctionsHelper;
 
 	protected SidePanel() throws Exception {
+		this.sideFunctionsHelper = new SideFunctionsHelper(this);
 		this.setLayout(new GridBagLayout());
 		this.add(getTableAndFavoritesSplitPane(), getSplitPaneConstraints());
 		this.add(getFolderNamePanel(), getFolderNameConstraints());
@@ -67,7 +72,7 @@ public abstract class SidePanel extends JPanel {
 		return gbc;
 	}
 	
-	protected abstract TableAndFavoritesSplitPane getTableAndFavoritesSplitPane() throws Exception;
+	public abstract TableAndFavoritesSplitPane getTableAndFavoritesSplitPane() throws Exception;
 
 	/**
 	 * @return FolderNamePanel, welches Oberhalb der Tabelle hin soll

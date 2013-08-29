@@ -16,9 +16,6 @@ import com.kandinsky.gui.fileList.FileListTable;
  */
 public class LeftSidePanel extends SidePanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 7730356958423920630L;
 	
 	private FolderNamePanel folderNamePanel;
@@ -45,9 +42,9 @@ public class LeftSidePanel extends SidePanel {
 	}
 
 	@Override
-	protected TableAndFavoritesSplitPane getTableAndFavoritesSplitPane() throws Exception {
+	public TableAndFavoritesSplitPane getTableAndFavoritesSplitPane() throws Exception {
 		if (splitPane == null)
-			splitPane = TableAndFavoritesSplitPane.onLeftSide(new FavoritesPanel(), new FileListTable());
+			splitPane = TableAndFavoritesSplitPane.onLeftSide(new FavoritesPanel(), new FileListTable(sideFunctionsHelper));
 		return splitPane;
 	}
 

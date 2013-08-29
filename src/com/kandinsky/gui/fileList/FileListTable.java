@@ -1,5 +1,7 @@
 package com.kandinsky.gui.fileList;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.List;
 
@@ -9,6 +11,8 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import com.kandinsky.objects.FileEntry;
+import com.kandinsky.objects.FileType;
+import com.kandinsky.objects.SideFunctionsHelper;
 
 /**
  * PUNKT 6 - Fileliste
@@ -22,11 +26,16 @@ public class FileListTable extends JTable {
 	
 	private FileListTableModel model;
 
-	public FileListTable() throws Exception {
+	private SideFunctionsHelper sideFunctionsHelper;
+
+	public FileListTable(SideFunctionsHelper sideFunctionsHelper) throws Exception {
 		model = new FileListTableModel();
+		this.sideFunctionsHelper = sideFunctionsHelper;
 		this.setAutoCreateRowSorter(true);
 		this.setModel(model);
 		setColumnWidths();
+		this.addMouseListener(new DoubleClickListener());
+		 
 	}
 	
 	private void setColumnWidths(){
@@ -53,6 +62,24 @@ public class FileListTable extends JTable {
 		else {
 			List<FileEntry> newEntries = FileEntry.getFileEntryList(folder);
 			model.setValues(newEntries);
+		}
+	}
+	
+	/**
+	 * Fängt DoubleClicks in der Tabelle ab.
+	 * @author Benne
+	 */
+	private class DoubleClickListener extends MouseAdapter {
+		
+		public void mouseClicked(MouseEvent e) {
+			if (e.getClickCount() == 2) {
+				FileListTable target = (FileListTable) e.getSource();
+				FileEntry valueAtRow = model.getValueAtRow(target.getSelectedRow());
+				if (valueAtRow.getType() == FileType.DIRECTORY) {
+					sideFunctionsHelper.switchFolder(valueAtRow.getAbsoluteFileName());
+					repaint();
+				}
+			}
 		}
 	}
 }

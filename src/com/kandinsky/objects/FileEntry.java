@@ -16,13 +16,15 @@ public class FileEntry implements Comparable<FileEntry> {
 
 	private static final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
 	/** Wunderhübsch */
-	private static final ImageIcon FOLDER_ICON = new ImageIcon(new ImageIcon("resources\\folder-7-icon.png").getImage().getScaledInstance(16, 16,
+	
+	private static final ImageIcon FOLDER_ICON = new ImageIcon(new ImageIcon(FileEntry.class.getResource("/com/kandinsky/resources/folder-7-icon.png")).getImage().getScaledInstance(16, 16,
 			java.awt.Image.SCALE_SMOOTH));
-	private static final ImageIcon TEXT_FILE_ICON = new ImageIcon(new ImageIcon("resources\\text-file-4-icon.png").getImage().getScaledInstance(16, 16,
+	private static final ImageIcon TEXT_FILE_ICON = new ImageIcon(new ImageIcon(FileEntry.class.getResource("/com/kandinsky/resources/text-file-4-icon.png")).getImage().getScaledInstance(16, 16,
 			java.awt.Image.SCALE_SMOOTH));
 
 	/** gekapselte Datei */
 	private File file;
+	private FileType fileType;
 
 	/**
 	 * @param files Dateiliste
@@ -49,6 +51,16 @@ public class FileEntry implements Comparable<FileEntry> {
 
 	public FileEntry(File file) {
 		this.file = file;
+		if(file.isDirectory())
+			fileType = FileType.DIRECTORY;
+		else if(file.isFile())
+			fileType = FileType.FILE;
+		else
+			fileType = FileType.UNKNOWN;
+	}
+	
+	public FileEntry(String fileName){
+		this(new File(fileName));
 	}
 
 	/**
@@ -83,13 +95,8 @@ public class FileEntry implements Comparable<FileEntry> {
 		return file.length();
 	}
 
-	public String getType() {
-		if (file.isDirectory())
-			return "Ordner";
-		else if (file.isFile())
-			return "Datei";
-		else
-			return "Unbekannt";
+	public FileType getType(){
+		return fileType;
 	}
 
 	/**
@@ -117,9 +124,22 @@ public class FileEntry implements Comparable<FileEntry> {
 		else
 			return TEXT_FILE_ICON;
 	}
+	
+	public String getAbsoluteFileName(){
+		return file.getAbsolutePath();
+	}
+	
+	public boolean exists(){
+		return file.exists();
+	}
 
 	@Override
 	public int compareTo(FileEntry o) {
 		return getName().compareTo(o.getName());
+	}
+	
+	@Override
+	public String toString() {
+		return getAbsoluteFileName();
 	}
 }
