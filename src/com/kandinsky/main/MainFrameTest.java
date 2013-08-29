@@ -22,7 +22,7 @@ public class MainFrameTest extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		this.add(new MainPanel());
-		this.setJMenuBar(new KandinskyMenuBar());
+		this.setJMenuBar(KandinskyMenuBar.createInstance());
 	}
 	
 	public static void main(String[] args) throws Exception {

@@ -14,6 +14,9 @@ import com.kandinsky.objects.FunctionsHelper;
 
 public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 
+	// Singleton instance
+	private static KandinskyMenuBar instance = null;
+	
 	/**
 	 * 
 	 */
@@ -100,7 +103,7 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 	/**
 	 * Creates the MenuBar with all entries
 	 */
-	public KandinskyMenuBar() {
+	private KandinskyMenuBar() {
 		
 		JMenu menuFile = new JMenu("Datei");
 		this.add(menuFile);
@@ -277,6 +280,28 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 		
 	
 		
+	}
+	
+	/**
+	 * Create the instance 
+	 * @return 
+	 */
+	public static KandinskyMenuBar createInstance(){
+		
+		KandinskyMenuBar.instance = new KandinskyMenuBar();
+		return KandinskyMenuBar.instance;
+	}
+	
+	/**
+	 * Get the instance
+	 * @return 
+	 */
+	public static KandinskyMenuBar getInstance(){
+		
+		if (KandinskyMenuBar.instance == null) {
+			KandinskyMenuBar.createInstance();
+		}
+		return KandinskyMenuBar.instance;
 	}
 	
 	/**
