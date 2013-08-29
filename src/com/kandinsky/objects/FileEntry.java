@@ -62,6 +62,10 @@ public class FileEntry implements Comparable<FileEntry> {
 	public FileEntry(String fileName){
 		this(new File(fileName));
 	}
+	
+	public File getFile(){
+		return file;
+	}
 
 	/**
 	 * @return den Namen, bzw. den Namen der absoluten Datei

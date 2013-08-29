@@ -1,5 +1,7 @@
 package com.kandinsky.objects;
 
+import java.io.File;
+
 import com.kandinsky.gui.splitPane.SidePanel;
 
 /**
@@ -23,5 +25,13 @@ public class SideFunctionsHelper {
 			// TODO: ordentliches Fehlerhandling, zB Fehlermeldung in der Info setzen
 			e.printStackTrace();
 		}
+	}
+	
+	public void setSelectedFiles(File[] files){
+		sidePanel.setSelectedFiles(files);
+	}
+
+	public void setFileCountInFolder(int size) {
+		sidePanel.setFileCountInFolder(size);
 	}
 }

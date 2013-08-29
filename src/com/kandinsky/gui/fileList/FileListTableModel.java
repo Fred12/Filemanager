@@ -90,5 +90,4 @@ public class FileListTableModel extends AbstractTableModel {
 				return String.class;
 		}
 	}
-
 }

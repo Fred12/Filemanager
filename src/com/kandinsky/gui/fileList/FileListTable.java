@@ -34,7 +34,7 @@ public class FileListTable extends JTable {
 		this.setAutoCreateRowSorter(true);
 		this.setModel(model);
 		setColumnWidths();
-		this.addMouseListener(new DoubleClickListener());
+		this.addMouseListener(new ClickListener());
 		 
 	}
 	
@@ -62,24 +62,47 @@ public class FileListTable extends JTable {
 		else {
 			List<FileEntry> newEntries = FileEntry.getFileEntryList(folder);
 			model.setValues(newEntries);
+			getSelectionModel().clearSelection();
+			sideFunctionsHelper.setFileCountInFolder(newEntries.size());
+			sideFunctionsHelper.setSelectedFiles(getSelectedFiles());
 		}
 	}
 	
 	/**
-	 * Fängt DoubleClicks in der Tabelle ab.
+	 * Fängt Auswahl und DoubleClicks in der Tabelle ab.
 	 * @author Benne
 	 */
-	private class DoubleClickListener extends MouseAdapter {
+	private class ClickListener extends MouseAdapter {
 		
-		public void mouseClicked(MouseEvent e) {
-			if (e.getClickCount() == 2) {
-				FileListTable target = (FileListTable) e.getSource();
-				FileEntry valueAtRow = model.getValueAtRow(target.getSelectedRow());
-				if (valueAtRow.getType() == FileType.DIRECTORY) {
-					sideFunctionsHelper.switchFolder(valueAtRow.getAbsoluteFileName());
-					repaint();
+		private static final int DOUBLE_CLICK = 2;
+		private static final int NOTHING_SELECTED = -1;
+
+		public void mouseClicked(MouseEvent event) {
+			FileListTable target = (FileListTable) event.getSource();
+			if (getSelectedRow() != NOTHING_SELECTED) {
+				if (event.getClickCount() == DOUBLE_CLICK) {
+					FileEntry valueAtRow = model.getValueAtRow(target.getSelectedRow());
+					if (valueAtRow.getType() == FileType.DIRECTORY) {
+						sideFunctionsHelper.switchFolder(valueAtRow.getAbsoluteFileName());
+						repaint();
+					}
+				} else {
+					File[] files = target.getSelectedFiles();
+					sideFunctionsHelper.setSelectedFiles(files);
 				}
 			}
 		}
 	}
+	
+	private File[] getSelectedFiles() {
+		File[] files = new File[getSelectedRowCount()];
+		int i = 0;
+		for(int selectedRow : getSelectedRows()){
+			FileEntry selectedEntry = model.getValueAtRow(selectedRow);
+			files[i]=selectedEntry.getFile();
+			i++;
+		}
+		return files;
+	}
+	
 }
