@@ -16,7 +16,7 @@ public class OptionsPages extends PageCategory {
 	@Override
 	public String[] getTopics() {
 
-		String[] ret = {"Allgemein","Favoriten","Shortcuts","FTP"};
+		String[] ret = {"Allgemein","FTP"};
 		
 		return ret;
 	}

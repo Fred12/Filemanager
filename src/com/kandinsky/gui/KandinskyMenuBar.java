@@ -25,34 +25,15 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 	////////////////////////////////// Menu Item identifier Strings ////////////////////////////
 	
 	// Menu "File" Items
-	public static final String RELOAD 					= "menuItemReload";
-	public static final String SEARCH 					= "menuItemSearch";
-	public static final String SWAP_FOLDERS_LEFT_RIGHT	= "menuItemSwapFolderViewLeftRight";
-	public static final String IMPORT_FAVORITES			= "menuItemImportFavorites";
-	public static final String EXPORT_FAVORITES			= "menuItemExportFavorites";
 	public static final String CLOSE_PROGRAM			= "menuItemCloseProgram";
-	
-	// Menu "Edit" Items
-	public static final String SELECT_ALL				= "menuItemSelectAll";
-	public static final String SELECT_NOTHING			= "menuItemSelectNothing";
-	public static final String INVERT_SELECTION			= "menuItemInvertSelection";
-	public static final String COPY_OBJECTS				= "menuItemCopy";
-	public static final String PASTE_OBJECTS			= "menuItemPaste";
-	public static final String CUT_OBJECTS				= "menuItemCut";
-	public static final String DELETE_OBJECTS			= "menuItemDelete";
-	public static final String CREATE_FOLDER			= "menuItemCreateFolder";
-	public static final String CREATE_SHORTCUT			= "menuItemCreateShortcut";
-	public static final String CREATE_EMPTY_FILE		= "menuItemCreateEmptyFile";
 	
 	// Menu "FTP" Items
 	public static final String FTP_SHOW_EDIT_SERVERS	= "menuItemEditServerList";
 	public static final String FTP_CONNECT_MOST_RECENT	= "ftp_connect_most_recent";
 	public static final String FTP_DISCONNECT			= "ftp_disconnect";
-	
-	
+		
 	// Menu "Settings" Items
 	public static final String OPTIONS					= "menuItemGeneralOptions";
-	public static final String OPTIONS_FAVORITES		= "menuItemEditFavorites";
 	public static final String OPTIONS_FTP				= "menuItemFTPOptions";
 	public static final String TOGGLE_HIDDEN_FOLDERS	= "toggle_show_hidden_files";
 	public static final String TOGGLE_SHOW_FAVORITES	= "toggle_show_favorites";
@@ -65,25 +46,7 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 	
 	// File Menu
 	public JMenu 		menuFile = null;
-	public JMenuItem 	menuItemReload = null;
-	public JMenuItem	menuItemSearch = null;
-	public JMenuItem	menuItemSwapFolderViewLeftRight = null;
-	public JMenuItem	menuItemImportFavorites = null;
-	public JMenuItem	menuItemExportFavorites = null;
 	public JMenuItem	menuItemCloseProgram = null;
-	
-	// Edit Menu
-	public JMenu		menuEdit = null;
-	public JMenuItem	menuItemSelectAll = null;
-	public JMenuItem	menuItemSelectNothing = null;
-	public JMenuItem	menuItemInvertSelection = null;
-	public JMenuItem	menuItemCopy = null;
-	public JMenuItem	menuItemPaste = null;
-	public JMenuItem	menuItemCut = null;
-	public JMenuItem	menuItemDelete = null;
-	public JMenuItem	menuItemCreateFolder = null;
-	public JMenuItem	menuItemCreateShortcut = null;
-	public JMenuItem	menuItemCreateEmptyFile = null;
 	
 	// FTP Menu
 	public JMenu		menuFTP = null;
@@ -92,7 +55,6 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 	// Options Menu
 	public JMenu		menuOptions = null;
 	public JMenuItem	menuItemGeneralOptions = null;
-	public JMenuItem	menuItemEditFavorites = null;
 	public JMenuItem	menuItemFTPOptions = null;
 	
 	// Help Menu
@@ -107,104 +69,12 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 		
 		JMenu menuFile = new JMenu("Datei");
 		this.add(menuFile);
-				
-		menuItemReload = new JMenuItem("Aktualisieren");
-		menuFile.add(menuItemReload);
-		menuItemReload.setActionCommand(KandinskyMenuBar.RELOAD);
-		menuItemReload.addActionListener(this);
-		
-		menuItemSearch = new JMenuItem("Suchen");
-		menuFile.add(menuItemSearch);
-		menuItemSearch.setActionCommand(KandinskyMenuBar.SEARCH);
-		menuItemSearch.addActionListener(this);
-		
-		menuItemSwapFolderViewLeftRight = new JMenuItem("Ordner rechts/links tauschen");
-		menuFile.add(menuItemSwapFolderViewLeftRight);
-		menuItemSwapFolderViewLeftRight.setActionCommand(KandinskyMenuBar.SWAP_FOLDERS_LEFT_RIGHT);
-		menuItemSwapFolderViewLeftRight.addActionListener(this);		
-		
-		JSeparator separator_5 = new JSeparator();
-		menuFile.add(separator_5);
-		
-		menuItemImportFavorites = new JMenuItem("Favoriten importieren");
-		menuFile.add(menuItemImportFavorites);
-		menuItemImportFavorites.setActionCommand(KandinskyMenuBar.IMPORT_FAVORITES);
-		menuItemImportFavorites.addActionListener(this);
-		
-		menuItemExportFavorites = new JMenuItem("Favoriten exportieren");
-		menuFile.add(menuItemExportFavorites);
-		menuItemExportFavorites.setActionCommand(KandinskyMenuBar.EXPORT_FAVORITES);
-		menuItemExportFavorites.addActionListener(this);
-		
-		JSeparator separator = new JSeparator();
-		menuFile.add(separator);
 		
 		menuItemCloseProgram = new JMenuItem("Schliessen");
 		menuFile.add(menuItemCloseProgram);
 		menuItemCloseProgram.setActionCommand(KandinskyMenuBar.CLOSE_PROGRAM);
 		menuItemCloseProgram.addActionListener(this);
-		
-		// Edit menu section
-		
-		JMenu menuEdit = new JMenu("Bearbeiten");
-		this.add(menuEdit);
-		
-		menuItemSelectAll = new JMenuItem("Alles ausw\u00E4hlen");
-		menuEdit.add(menuItemSelectAll);
-		menuItemSelectAll.setActionCommand(KandinskyMenuBar.SELECT_ALL);
-		menuItemSelectAll.addActionListener(this);
-		
-		menuItemSelectNothing = new JMenuItem("Nichts ausw\u00E4hlen");
-		menuEdit.add(menuItemSelectNothing);
-		menuItemSelectNothing.setActionCommand(KandinskyMenuBar.SELECT_NOTHING);
-		menuItemSelectNothing.addActionListener(this);
-		
-		menuItemInvertSelection = new JMenuItem("Auswahl umkehren");
-		menuEdit.add(menuItemInvertSelection);
-		menuItemInvertSelection.setActionCommand(KandinskyMenuBar.INVERT_SELECTION);
-		menuItemInvertSelection.addActionListener(this);
-		
-		JSeparator separator_6 = new JSeparator();
-		menuEdit.add(separator_6);
-		
-		menuItemCopy = new JMenuItem("Kopieren");
-		menuEdit.add(menuItemCopy);
-		menuItemCopy.setActionCommand(KandinskyMenuBar.COPY_OBJECTS);
-		menuItemCopy.addActionListener(this);
-		
-		menuItemPaste = new JMenuItem("Einf\u00FCgen");
-		menuEdit.add(menuItemPaste);
-		menuItemPaste.setActionCommand(KandinskyMenuBar.PASTE_OBJECTS);
-		menuItemPaste.addActionListener(this);
-		
-		menuItemCut = new JMenuItem("Ausschneiden");
-		menuEdit.add(menuItemCut);
-		menuItemCut.setActionCommand(KandinskyMenuBar.CUT_OBJECTS);
-		menuItemCut.addActionListener(this);
-		
-		menuItemDelete = new JMenuItem("L\u00F6schen");
-		menuEdit.add(menuItemDelete);
-		menuItemDelete.setActionCommand(KandinskyMenuBar.DELETE_OBJECTS);
-		menuItemDelete.addActionListener(this);
-		
-		JSeparator separator_1 = new JSeparator();
-		menuEdit.add(separator_1);
-		
-		menuItemCreateFolder = new JMenuItem("Ordner anlegen");
-		menuEdit.add(menuItemCreateFolder);
-		menuItemCreateFolder.setActionCommand(KandinskyMenuBar.CREATE_FOLDER);
-		menuItemCreateFolder.addActionListener(this);
-		
-		menuItemCreateShortcut = new JMenuItem("Verkn\u00FCpfung anlegen");
-		menuEdit.add(menuItemCreateShortcut);
-		menuItemCreateShortcut.setActionCommand(KandinskyMenuBar.CREATE_SHORTCUT);
-		menuItemCreateShortcut.addActionListener(this);
-		
-		menuItemCreateEmptyFile = new JMenuItem("Leere Datei anlegen");
-		menuEdit.add(menuItemCreateEmptyFile);
-		menuItemCreateEmptyFile.setActionCommand(KandinskyMenuBar.CREATE_EMPTY_FILE);
-		menuItemCreateEmptyFile.addActionListener(this);
-		
+			
 		// FTP Menu Section
 		
 		JMenu menuFTP = new JMenu("FTP");
@@ -239,11 +109,6 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 		menuSettings.add(menuItemGeneralOptions);
 		menuItemGeneralOptions.setActionCommand(KandinskyMenuBar.OPTIONS);
 		menuItemGeneralOptions.addActionListener(this);
-		
-		menuItemEditFavorites = new JMenuItem("Favoriten verwalten");
-		menuSettings.add(menuItemEditFavorites);
-		menuItemEditFavorites.setActionCommand(KandinskyMenuBar.OPTIONS_FAVORITES);
-		menuItemEditFavorites.addActionListener(this);
 		
 		menuItemFTPOptions = new JMenuItem("FTP Optionen");
 		menuSettings.add(menuItemFTPOptions);
@@ -317,72 +182,11 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 		switch(source) {
 		
 		// Menu "File" Actions
-		
-		case RELOAD:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
-			break;
-		
-		case SEARCH:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
-			break;
-		
-		case SWAP_FOLDERS_LEFT_RIGHT:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
-			break;
 
-		case IMPORT_FAVORITES:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
-			break;
-			
-		case EXPORT_FAVORITES:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
-			break;
-			
 		case CLOSE_PROGRAM:
 			FunctionsHelper.closeProgram();
 			break;
-		
-		// Menu "Edit" Actions
-		case SELECT_ALL:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
-			break;
-			
-		case SELECT_NOTHING:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
-			break;
-			
-		case INVERT_SELECTION:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
-			break;
-			
-		case COPY_OBJECTS:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
-			break;
-		
-		case PASTE_OBJECTS:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
-			break;
-			
-		case CUT_OBJECTS:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
-			break;
-		
-		case DELETE_OBJECTS:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
-			break;
-			
-		case CREATE_FOLDER:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
-			break;
-			
-		case CREATE_SHORTCUT:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
-			break;
-		
-		case CREATE_EMPTY_FILE:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
-			break;
-			
+					
 		// Menu "FTP" Actions
 		case FTP_SHOW_EDIT_SERVERS:
 			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
@@ -400,13 +204,9 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 		case OPTIONS:
 			FunctionsHelper.showOptions(0);
 			break;
-			
-		case OPTIONS_FAVORITES:
-			FunctionsHelper.showOptions(1);
-			break;
-			
+		
 		case OPTIONS_FTP:
-			FunctionsHelper.showOptions(3);
+			FunctionsHelper.showOptions(1);
 			break;
 			
 		case TOGGLE_SHOW_FAVORITES:
