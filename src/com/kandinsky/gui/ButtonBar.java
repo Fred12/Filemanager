@@ -17,6 +17,7 @@ import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
 import com.kandinsky.gui.splitPane.SidePanel;
+import com.kandinsky.objects.FunctionsHelper;
 import com.kandinsky.objects.SideFunctionsHelper;
 
 /**
@@ -46,14 +47,15 @@ public class ButtonBar extends JPanel implements ActionListener {
 	JButton favoritenAnlegen;
 	JButton favoritenAnzeigen;
 	JButton benutzer;
-	JButton ftpAnlegen;
+	JButton ftpVerwalten;
 	JButton ftpAnzeigen;
 	JButton shellOeffnen;
 	JButton hilfe;
 	JButton einstellungen;
 	
 	/** der Funktionshelfer, ueber den verschiedene Funktionen aufgerufen werden koennen */
-	private SideFunctionsHelper sideFunctionsHelper;		
+	private SideFunctionsHelper sideFunctionsHelper;	
+	
 	
 	public ButtonBar(SideFunctionsHelper sideFunctionsHelper) {
 		this.sideFunctionsHelper = sideFunctionsHelper;
@@ -107,7 +109,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		favoritenAnlegen = 		new JButton(h);
 		favoritenAnzeigen = 	new JButton(i);
 		benutzer = 			    new JButton(j);
-		ftpAnlegen = 			new JButton(k);
+		ftpVerwalten = 			new JButton(k);
 		ftpAnzeigen =			new JButton(l);
 		shellOeffnen = 			new JButton(m);
 		hilfe =  				new JButton(n);
@@ -125,7 +127,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		favoritenAnlegen.setMargin(margins);  
 		favoritenAnzeigen.setMargin(margins);  
 		benutzer.setMargin(margins);  
-		ftpAnlegen.setMargin(margins);  
+		ftpVerwalten.setMargin(margins);  
 		ftpAnzeigen.setMargin(margins);  
 		shellOeffnen.setMargin(margins);  
 		hilfe.setMargin(margins);  
@@ -155,8 +157,8 @@ public class ButtonBar extends JPanel implements ActionListener {
 		favoritenAnzeigen.setToolTipText("Favoriten anzeigen");
 		benutzer.setBackground(Color.WHITE);
 		benutzer.setToolTipText("Benutzer");
-		ftpAnlegen.setBackground(Color.WHITE);
-		ftpAnlegen.setToolTipText("Neuen FTP Server anlegen");
+		ftpVerwalten.setBackground(Color.WHITE);
+		ftpVerwalten.setToolTipText("Neuen FTP Server anlegen");
 		ftpAnzeigen.setBackground(Color.WHITE);
 		ftpAnzeigen.setToolTipText("FTP Verbindungen anzeigen");
 		shellOeffnen.setBackground(Color.WHITE);
@@ -168,7 +170,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		
 		
 		//Buttons der buttonBar Anlegen	
-		buttonBar.add(neuesFenster);
+		//buttonBar.add(neuesFenster);
 		buttonBar.add(zurueck);
 		buttonBar.add(weiter);
 		buttonBar.add(hoch);
@@ -178,9 +180,9 @@ public class ButtonBar extends JPanel implements ActionListener {
 		buttonBar.add(vertauschen);
 		buttonBar.add(favoritenAnlegen);
 		buttonBar.add(favoritenAnzeigen);
-		buttonBar.add(benutzer);
-		buttonBar.add(ftpAnlegen);
-		buttonBar.add(ftpAnzeigen);
+		//buttonBar.add(benutzer);
+		buttonBar.add(ftpVerwalten);
+		//buttonBar.add(ftpAnzeigen);
 		buttonBar.add(shellOeffnen);
 		buttonBar.add(hilfe);
 		buttonBar.add(einstellungen);
@@ -197,7 +199,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		favoritenAnlegen.addActionListener(this);
 		favoritenAnzeigen.addActionListener(this);
 		benutzer.addActionListener(this);
-		ftpAnlegen.addActionListener(this);
+		ftpVerwalten.addActionListener(this);
 		ftpAnzeigen.addActionListener(this);
 		shellOeffnen.addActionListener(this);
 		hilfe.addActionListener(this);
@@ -259,7 +261,8 @@ public class ButtonBar extends JPanel implements ActionListener {
 			if (quelle == benutzer) {
 			}
 			
-			if (quelle == ftpAnlegen) {
+			if (quelle == ftpVerwalten) {
+				FunctionsHelper.showOptions(1);				
 			}
 			
 			if (quelle == ftpAnzeigen) {
