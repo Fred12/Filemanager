@@ -1,5 +1,7 @@
 package com.kandinsky.gui.splitPane;
 
+import com.kandinsky.gui.ButtonBar;
+import com.kandinsky.gui.FolderAnalyser;
 import com.kandinsky.gui.FolderDetailPanel;
 import com.kandinsky.gui.FolderNamePanel;
 import com.kandinsky.gui.favorites.FavoritesPanel;
@@ -20,8 +22,9 @@ public class LeftSidePanel extends SidePanel {
 	
 	private FolderNamePanel folderNamePanel;
 	private FolderDetailPanel folderDetailPanel;
-
 	private TableAndFavoritesSplitPane splitPane;
+	private FolderAnalyser folderAnalyserPanel;
+	private ButtonBar buttonBar;
 
 	public LeftSidePanel() throws Exception {
 		super();
@@ -46,6 +49,20 @@ public class LeftSidePanel extends SidePanel {
 		if (splitPane == null)
 			splitPane = TableAndFavoritesSplitPane.onLeftSide(new FavoritesPanel(), new FileListTable(sideFunctionsHelper));
 		return splitPane;
+	}
+
+	@Override
+	protected FolderAnalyser getFolderAnalyserPanel() {
+		if(folderAnalyserPanel == null)
+			folderAnalyserPanel = FolderAnalyser.onLeftSide();
+		return folderAnalyserPanel;
+	}
+
+	@Override
+	protected ButtonBar getButtonBar() {
+		if(buttonBar == null)
+			buttonBar = new ButtonBar(sideFunctionsHelper);
+		return buttonBar;
 	}
 
 }

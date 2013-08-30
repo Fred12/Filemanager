@@ -13,13 +13,8 @@ import com.kandinsky.gui.splitPane.MainSplitPane;
  */
 public class MainPanel extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3435757831771873393L;
 	
-	/** enthaelt die benoetigten Buttons */
-	private ButtonBar buttonBar;
 	/** Grosse Split-Pane die die Vergleichs-Seiten enthaelt */
 	MainSplitPane splitPane;
 
@@ -30,20 +25,8 @@ public class MainPanel extends JPanel {
 	public MainPanel() throws Exception {
 		this.setLayout(new GridBagLayout());
 		
-		buttonBar = new ButtonBar();
 		splitPane = new MainSplitPane();
-		this.add(buttonBar, getButtonBarConstraints());
 		this.add(splitPane, getSplitPaneConstraints());
-	}
-
-	private GridBagConstraints getButtonBarConstraints() {
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.fill = GridBagConstraints.BOTH;
-		gbc.weightx = 1.0;
-		gbc.weighty = 0.1;
-		return gbc;
 	}
 
 	private GridBagConstraints getSplitPaneConstraints() {
@@ -52,7 +35,7 @@ public class MainPanel extends JPanel {
 		gbc.gridy = 1;
 		gbc.fill = GridBagConstraints.BOTH;
 		gbc.weightx = 1.0;
-		gbc.weighty = 0.9;
+		gbc.weighty = 1.0;
 		return gbc;
 	}
 

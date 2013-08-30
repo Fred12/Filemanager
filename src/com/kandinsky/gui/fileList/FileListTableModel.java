@@ -10,9 +10,6 @@ import com.kandinsky.objects.FileEntry;
 
 public class FileListTableModel extends AbstractTableModel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3612169454389635317L;
 
 	/** Ueberschriften */
@@ -48,25 +45,29 @@ public class FileListTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		FileEntry entry = data.get(rowIndex);
-		switch (columnIndex) {
-			case 0:
-				return entry.getIcon();
-			case 1:
-				return entry.getName();
-			case 2:
-				return entry.getSize();
-			case 3:
-				return entry.getDate();
-			case 4:
-				return entry.getType();
-			case 5:
-				return entry.getEnding();
-			case 6:
-				return entry.getRights();
-			default:
-				throw new RuntimeException("Spaltenindex existiert nicht!");
+		if (rowIndex < data.size()) {
+			FileEntry entry = data.get(rowIndex);
+			switch (columnIndex) {
+				case 0:
+					return entry.getIcon();
+				case 1:
+					return entry.getName();
+				case 2:
+					return entry.getSize();
+				case 3:
+					return entry.getDate();
+				case 4:
+					return entry.getType();
+				case 5:
+					return entry.getEnding();
+				case 6:
+					return entry.getRights();
+				default:
+					throw new RuntimeException("Spaltenindex existiert nicht!");
+			}
 		}
+		
+		return null;
 	}
 	
 	public FileEntry getValueAtRow(int rowIndex){
@@ -90,5 +91,4 @@ public class FileListTableModel extends AbstractTableModel {
 				return String.class;
 		}
 	}
-
 }

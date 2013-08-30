@@ -2,9 +2,12 @@ package com.kandinsky.gui.splitPane;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.io.File;
 
 import javax.swing.JPanel;
 
+import com.kandinsky.gui.ButtonBar;
+import com.kandinsky.gui.FolderAnalyser;
 import com.kandinsky.gui.FolderDetailPanel;
 import com.kandinsky.gui.FolderNamePanel;
 import com.kandinsky.objects.SideFunctionsHelper;
@@ -27,8 +30,12 @@ public abstract class SidePanel extends JPanel {
 		this.add(getTableAndFavoritesSplitPane(), getSplitPaneConstraints());
 		this.add(getFolderNamePanel(), getFolderNameConstraints());
 		this.add(getFolderDetailsPanel(), getFolderDetailsConstraints());
+		this.add(getFolderAnalyserPanel(), getFolderAnalyserPanelConstraints());
+		this.add(getButtonBar(), getButtonBarConstraints());
 	}
 	
+	
+
 	/**
 	 * Versucht einen neuen Ordner zu setzen
 	 * @param folderName
@@ -41,8 +48,9 @@ public abstract class SidePanel extends JPanel {
 			e.printStackTrace();
 		}
 	}
+	
 
-	private GridBagConstraints getFolderNameConstraints() {
+	private Object getButtonBarConstraints() {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -52,25 +60,46 @@ public abstract class SidePanel extends JPanel {
 		return gbc;
 	}
 
-	private GridBagConstraints getSplitPaneConstraints() {
+	private GridBagConstraints getFolderNameConstraints() {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		gbc.fill = GridBagConstraints.BOTH;
 		gbc.weightx = 1.0;
-		gbc.weighty = 0.8;
+		gbc.weighty = 0.1;
+		return gbc;
+	}
+
+	private GridBagConstraints getSplitPaneConstraints() {
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.weightx = 1.0;
+		gbc.weighty = 0.6;
+		return gbc;
+	}
+	
+	private GridBagConstraints getFolderAnalyserPanelConstraints() {
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.weightx = 1.0;
+		gbc.weighty = 0.1;
 		return gbc;
 	}
 
 	private GridBagConstraints getFolderDetailsConstraints() {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
-		gbc.gridy = 2;
+		gbc.gridy = 4;
 		gbc.fill = GridBagConstraints.BOTH;
 		gbc.weightx = 1.0;
 		gbc.weighty = 0.1;
 		return gbc;
 	}
+	
 	
 	public abstract TableAndFavoritesSplitPane getTableAndFavoritesSplitPane() throws Exception;
 
@@ -78,11 +107,28 @@ public abstract class SidePanel extends JPanel {
 	 * @return FolderNamePanel, welches Oberhalb der Tabelle hin soll
 	 */
 	protected abstract FolderNamePanel getFolderNamePanel();
-	
 
 	/**
 	 * @return das Ordner-Detail-Panel
 	 */
 	protected abstract FolderDetailPanel getFolderDetailsPanel();
+	
+	/**
+	 * @return das FolderAnalyser-Panel
+	 */
+	protected abstract FolderAnalyser getFolderAnalyserPanel();
+	
+	/**
+	 * @return die ButtonBar
+	 */
+	protected abstract ButtonBar getButtonBar();
+
+	public void setSelectedFiles(File[] files) {
+		getFolderAnalyserPanel().setSelectedFiles(files);
+	}
+
+	public void setFileCountInFolder(int fileCount) {
+		getFolderAnalyserPanel().setAllListedFilesCount(fileCount);
+	}
 
 }

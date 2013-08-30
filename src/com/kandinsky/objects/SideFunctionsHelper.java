@@ -1,5 +1,7 @@
 package com.kandinsky.objects;
 
+import java.io.File;
+
 import com.kandinsky.gui.splitPane.SidePanel;
 
 /**
@@ -10,6 +12,7 @@ import com.kandinsky.gui.splitPane.SidePanel;
  */
 public class SideFunctionsHelper {
 
+	/** Uebergebenes SidePanel, auf welches sich die Funktionen bezieht */
 	private SidePanel sidePanel;
 
 	public SideFunctionsHelper(SidePanel sidePanel){
@@ -19,9 +22,28 @@ public class SideFunctionsHelper {
 	public void switchFolder(String folderName){
 		try {
 			sidePanel.getTableAndFavoritesSplitPane().getTable().changeFolder(folderName);
+			sidePanel.getTableAndFavoritesSplitPane().repaint();
 		} catch (Exception e) {
 			// TODO: ordentliches Fehlerhandling, zB Fehlermeldung in der Info setzen
 			e.printStackTrace();
 		}
+	}
+	
+	public void refresh(){
+		try {
+			 sidePanel.getTableAndFavoritesSplitPane().getTable().refresh();
+				sidePanel.getTableAndFavoritesSplitPane().repaint();
+		} catch (Exception e) {
+			// TODO: ordentliches Fehlerhandling, zB Fehlermeldung in der Info setzen
+			e.printStackTrace();
+		}
+	}
+	
+	public void setSelectedFiles(File[] files){
+		sidePanel.setSelectedFiles(files);
+	}
+
+	public void setFileCountInFolder(int size) {
+		sidePanel.setFileCountInFolder(size);
 	}
 }
