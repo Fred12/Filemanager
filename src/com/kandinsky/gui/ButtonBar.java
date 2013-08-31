@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
-import com.kandinsky.gui.splitPane.SidePanel;
 import com.kandinsky.objects.FunctionsHelper;
 import com.kandinsky.objects.SideFunctionsHelper;
 

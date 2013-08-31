@@ -17,6 +17,11 @@ import java.util.List;
  */
 public class Favorites implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4667828043063811476L;
+	
 	private static final String SERIALISING_FILE_NAME = "Favorites.dat";
 	private static Favorites instance;
 	private List<String> fileNames;
