@@ -93,4 +93,9 @@ public final class FunctionsHelper {
 		}
 	}
 	
+	public static void addFavorite(FileEntry fileEntry){
+		Favorites.getInstance().addToFavorites(fileEntry);
+		FunctionsHelper.refreshFavorites();
+	}
+	
 }

@@ -81,6 +81,7 @@ public class FavoritesPanel extends JPanel {
 		favoritesList.removeAll();
 		loadFavoritesIntoList();
 		favoritesList.repaint();
+		this.repaint();
 	}
 	
 	/**

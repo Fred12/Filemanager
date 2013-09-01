@@ -1,5 +1,6 @@
 package com.kandinsky.gui.fileList;
 
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -26,15 +27,18 @@ public class FileListTable extends JTable {
 	private FileListTableModel model;
 	private SideFunctionsHelper sideFunctionsHelper;
 	private String currentFolderName="";
+	private FileListPopUpMenu popup;
+	private FileEntry entryOfCurrentPopup;
 
 	public FileListTable(SideFunctionsHelper sideFunctionsHelper) throws Exception {
 		model = new FileListTableModel();
+		popup = new FileListPopUpMenu(this);
 		this.sideFunctionsHelper = sideFunctionsHelper;
 		this.setAutoCreateRowSorter(true);
 		this.setModel(model);
 		setColumnWidths();
 		this.addMouseListener(new ClickListener());
-		 
+		this.addMouseListener(popup.getMouseListener());
 	}
 	
 	private void setColumnWidths(){
@@ -115,5 +119,13 @@ public class FileListTable extends JTable {
 		}
 		return files;
 	}
+
+	public void showPopup(Point point) {
+		popup.show(this, (int)point.getX(), (int)point.getY());
+		entryOfCurrentPopup = model.getValueAtRow(rowAtPoint(point));
+	}
 	
+	public FileEntry getEntryOfCurrentPopup(){
+		return entryOfCurrentPopup;
+	}
 }
