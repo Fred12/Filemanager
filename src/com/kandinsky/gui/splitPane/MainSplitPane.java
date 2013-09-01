@@ -1,5 +1,8 @@
 package com.kandinsky.gui.splitPane;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.swing.JSplitPane;
 
 import com.kandinsky.gui.fileList.FileListTable;
@@ -13,9 +16,9 @@ import com.kandinsky.gui.fileList.FileListTable;
 public class MainSplitPane extends JSplitPane {
 
 	private static final long serialVersionUID = -2515375754619078110L;
-	
+
 	private SidePanel leftPanel, rightPanel;
-	
+
 	/** Unterteilung der beiden Panels. Aktuell 50:50 */
 	private static final double DIVIDER_RATIO = 0.5;
 
@@ -24,31 +27,37 @@ public class MainSplitPane extends JSplitPane {
 	 * @param leftPanel
 	 * @param rightPanel
 	 */
-	public MainSplitPane(SidePanel leftPanel, SidePanel rightPanel){
+	public MainSplitPane(SidePanel leftPanel, SidePanel rightPanel) {
 		super(JSplitPane.HORIZONTAL_SPLIT, leftPanel, rightPanel);
 		this.setOneTouchExpandable(true);
-		this.setResizeWeight(DIVIDER_RATIO); 
+		this.setResizeWeight(DIVIDER_RATIO);
 		this.leftPanel = leftPanel;
 		this.rightPanel = rightPanel;
 	}
-	
+
 	/**
 	 * Die Splitpane wird in einen linken und rechten Teil unterteil. Hierfür wird ein linkes und ein rechtes Panel komplett neu angelegt.
 	 * @param leftPanel
 	 * @param rightPanel
 	 * @throws Exception 
 	 */
-	public MainSplitPane() throws Exception{
+	public MainSplitPane() throws Exception {
 		this(new LeftSidePanel(), new RightSidePanel());
 	}
-	
-	public FileListTable getLeftTable() throws Exception{
+
+	public FileListTable getLeftTable() throws Exception {
 		return leftPanel.getTableAndFavoritesSplitPane().getTable();
 	}
-	
-	public FileListTable getRightTable() throws Exception{
+
+	public FileListTable getRightTable() throws Exception {
 		return rightPanel.getTableAndFavoritesSplitPane().getTable();
 	}
 
+	public List<SidePanel> getSidePanels() {
+		List<SidePanel> sidePanels = new LinkedList<>();
+		sidePanels.add(leftPanel);
+		sidePanels.add(rightPanel);
+		return sidePanels;
+	}
 
 }

@@ -42,7 +42,7 @@ public class RightSidePanel extends SidePanel {
 	@Override
 	public TableAndFavoritesSplitPane getTableAndFavoritesSplitPane() throws Exception {
 		if (splitPane == null)
-			splitPane = TableAndFavoritesSplitPane.onRightSide(new FavoritesPanel(), new FileListTable(sideFunctionsHelper));
+			splitPane = TableAndFavoritesSplitPane.onRightSide(new FavoritesPanel(sideFunctionsHelper), new FileListTable(sideFunctionsHelper));
 		return splitPane;
 	}
 

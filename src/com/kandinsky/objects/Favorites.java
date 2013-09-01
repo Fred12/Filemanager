@@ -17,9 +17,6 @@ import java.util.List;
  */
 public class Favorites implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4667828043063811476L;
 	
 	private static final String SERIALISING_FILE_NAME = "Favorites.dat";
@@ -60,6 +57,15 @@ public class Favorites implements Serializable {
 	 */
 	public void addToFavorites(FileEntry entry) {
 		fileNames.add(entry.getAbsoluteFileName());
+		save();
+	}
+	
+	/**
+	 * Loescht einen Favorite aus der Liste und speichert diese wieder weg
+	 * @param entry
+	 */
+	public void removeFavorite(FileEntry entry){
+		fileNames.remove(entry.getAbsoluteFileName());
 		save();
 	}
 

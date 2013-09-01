@@ -40,7 +40,7 @@ public class Main {
 		KandinskyMenuBar menuBar = KandinskyMenuBar.getInstance();
 		frame.add(menuBar, BorderLayout.NORTH);
 		
-		MainPanel main = new MainPanel();
+		MainPanel main = MainPanel.createInstance();
 		frame.add(main, BorderLayout.CENTER);
 		
 		WindowAdapter windowAdapter = new WindowAdapter() {

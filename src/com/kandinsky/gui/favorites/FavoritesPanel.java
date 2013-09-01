@@ -3,14 +3,17 @@ package com.kandinsky.gui.favorites;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 
+import com.kandinsky.objects.Favorites;
 import com.kandinsky.objects.FileEntry;
+import com.kandinsky.objects.SideFunctionsHelper;
 
 /**
  * PUNKT 7 - Favoriten
@@ -27,10 +30,13 @@ public class FavoritesPanel extends JPanel {
 
 	private JLabel headerLabel;
 	private JToolBar favoritesList;
+	private SideFunctionsHelper sideFunctionsHelper;
 
-	public FavoritesPanel() {
-		
+	public FavoritesPanel(SideFunctionsHelper sideFunctionsHelper) {
+		this.sideFunctionsHelper = sideFunctionsHelper;
+
 		favoritesList = new JToolBar(JToolBar.VERTICAL);
+		favoritesList.setFloatable(false);
 		JScrollPane listScroller = new JScrollPane(favoritesList);
 		createHeaderLabel();
 
@@ -40,10 +46,10 @@ public class FavoritesPanel extends JPanel {
 		this.setLayout(new BorderLayout());
 		this.add(headerLabel, BorderLayout.NORTH);
 		this.add(listScroller, BorderLayout.CENTER);
+		
+		testFunction();
 
-		// TODO: nur ein Testeintrag
-		addFavoriteForFileEntry(new FileEntry(new File("")));
-		addFavorite(new FavoriteElement(new FileEntry(new File(""))));
+		loadFavoritesIntoList();
 	}
 
 	/**
@@ -64,8 +70,37 @@ public class FavoritesPanel extends JPanel {
 	}
 
 	public FavoritesPanel addFavoriteForFileEntry(FileEntry fileEntry) {
-		addFavorite(new FavoriteElement(fileEntry));
+		addFavorite(new FavoriteElement(fileEntry, sideFunctionsHelper));
 		return this;
+	}
+	
+	/**
+	 * Aktualisierung der Favorites und der dazugehoerigen Liste
+	 */
+	public void refresh(){
+		favoritesList.removeAll();
+		loadFavoritesIntoList();
+		favoritesList.repaint();
+	}
+	
+	/**
+	 * Laedt die aktuellen Favorites in die Liste
+	 */
+	private void loadFavoritesIntoList() {
+		List<FileEntry> favorites = Favorites.getInstance().getFavoritesAsFileEntries();
+		for (FileEntry entry : favorites) {
+			addFavoriteForFileEntry(entry);
+		}
+	}
+	
+	private void testFunction(){
+		try {
+			Favorites.loadAllFavorites();
+			if(Favorites.getInstance().getFavoritesAsFileEntries().size()==0)
+				Favorites.getInstance().addToFavorites(new FileEntry(""));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -2,11 +2,14 @@ package com.kandinsky.objects;
 
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.util.List;
 
+import com.kandinsky.gui.MainPanel;
 import com.kandinsky.gui.dialogs.AboutDialog;
 import com.kandinsky.gui.dialogs.HelpPages;
 import com.kandinsky.gui.dialogs.OptionsDialog;
 import com.kandinsky.gui.dialogs.OptionsPages;
+import com.kandinsky.gui.splitPane.SidePanel;
 import com.kandinsky.main.Main;
 
 /**
@@ -72,6 +75,22 @@ public final class FunctionsHelper {
 		AboutDialog about = new AboutDialog();
 		about.setVisible(true);
 		
+	}
+	
+	/**
+	 * Refresht auf beiden Seiten die Favorites und gleicht sie mit dem aktuellen Stand ab, nachdem diese komplett neu geladen wurden
+	 */
+	public static void refreshFavorites(){
+		try {
+			Favorites.loadAllFavorites();
+			List<SidePanel> sidePanels = MainPanel.getInstance().getMainSplitPane().getSidePanels();
+			for (SidePanel sidePanel : sidePanels) {
+				sidePanel.getTableAndFavoritesSplitPane().getFavoritesPanel().refresh();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }
