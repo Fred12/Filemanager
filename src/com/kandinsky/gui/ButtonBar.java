@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
-import com.kandinsky.gui.splitPane.SidePanel;
 import com.kandinsky.objects.FunctionsHelper;
 import com.kandinsky.objects.SideFunctionsHelper;
 
@@ -66,6 +65,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		
 		//buttonBar = new JToolBar("Button Bar",0);		
 		buttonBar = new JToolBar();	
+		buttonBar.setFloatable(false);
 		this.add(buttonBar, BorderLayout.NORTH);
 		//buttonBar.setPreferredSize(new Dimension(200,100)); 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
