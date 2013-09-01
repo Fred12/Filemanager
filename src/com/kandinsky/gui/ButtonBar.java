@@ -16,8 +16,13 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
+import com.kandinsky.gui.splitPane.SidePanel;
 import com.kandinsky.objects.FunctionsHelper;
 import com.kandinsky.objects.SideFunctionsHelper;
+
+
+//import com.kandinsky.objects.FunctionsHelper;
+//import com.kandinsky.objects.SideFunctionsHelper;
 
 /**
  * PUNKT 3 - ButtonBar.
@@ -279,6 +284,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 			
 			
 		}
+
 }
 	
 	
