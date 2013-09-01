@@ -1,16 +1,40 @@
 package com.kandinsky.gui.dialogs;
 
-import javax.swing.JLabel;
-
-
 public class OptionsPages extends PageCategory {
 
 	@Override
 	public void changePage(int _topicIndex) {
 
 		page.removeAll();
-		page.add(new JLabel(Integer.toString(_topicIndex)));
+		page.setLayout(null);
+				
+		switch(_topicIndex) {
 		
+			case 0:
+				OptionsFTP optionsFTP = new OptionsFTP();
+				optionsFTP.buildPage(this.page);
+				break;
+			case 1:
+				
+				
+				OptionsFTP optionsFTP2 = new OptionsFTP();
+				optionsFTP2.buildPage(this.page);
+				
+	
+				
+				
+				
+				break;
+				
+			default:
+				this.changePage(0);
+				break;
+		
+		}
+		
+		
+		//page.setLayout(null);
+		//page.setBounds(148, 11, 500, 400);
 	}
 
 	@Override

@@ -84,6 +84,8 @@ public class OptionsDialog extends JDialog {
 				OptionsDialog.this.validate();
 				OptionsDialog.this.repaint();
 				
+				
+				
 			}
 		});
 		
