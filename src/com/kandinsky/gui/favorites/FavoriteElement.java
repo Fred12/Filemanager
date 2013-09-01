@@ -10,6 +10,11 @@ import com.kandinsky.objects.FileEntry;
  */
 public class FavoriteElement extends JButton {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7975201576957189105L;
+	
 	/** der FileEntry auf den der Button referenziert */
 	private FileEntry fileEntry;
 	
