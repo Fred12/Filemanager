@@ -87,7 +87,8 @@ public class FileListTable extends JTable {
 		private static final int DOUBLE_CLICK = 2;
 		private static final int NOTHING_SELECTED = -1;
 
-		public void mouseClicked(MouseEvent event) {
+		@Override
+		public void mouseReleased(MouseEvent event) {
 			FileListTable target = (FileListTable) event.getSource();
 			if (getSelectedRow() != NOTHING_SELECTED) {
 				if (event.getClickCount() == DOUBLE_CLICK) {

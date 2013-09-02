@@ -93,9 +93,21 @@ public final class FunctionsHelper {
 		}
 	}
 	
+	/**
+	 * added einen Favoriten auf beiden Seiten
+	 * @param fileEntry
+	 */
 	public static void addFavorite(FileEntry fileEntry){
 		Favorites.getInstance().addToFavorites(fileEntry);
-		FunctionsHelper.refreshFavorites();
+		try {
+			List<SidePanel> sidePanels = MainPanel.getInstance().getMainSplitPane().getSidePanels();
+			for (SidePanel sidePanel : sidePanels) {
+				sidePanel.getTableAndFavoritesSplitPane().getFavoritesPanel().addFavoriteForFileEntry(fileEntry);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }
