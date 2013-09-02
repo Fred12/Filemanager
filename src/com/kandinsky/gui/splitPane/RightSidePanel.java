@@ -24,9 +24,9 @@ public class RightSidePanel extends SidePanel {
 	}
 
 	@Override
-	protected FolderNamePanel getFolderNamePanel() {
+	public FolderNamePanel getFolderNamePanel() {
 		if (folderNamePanel == null)
-			folderNamePanel = new FolderNamePanel();
+			folderNamePanel = FolderNamePanel.onRightSide(sideFunctionsHelper);
 		return folderNamePanel;
 	}
 

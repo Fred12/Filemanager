@@ -1,7 +1,5 @@
 package com.kandinsky.gui.splitPane;
 
-import java.io.File;
-
 import javax.swing.JSplitPane;
 
 import com.kandinsky.gui.favorites.FavoritesPanel;
@@ -47,7 +45,6 @@ public class TableAndFavoritesSplitPane extends JSplitPane {
 		this.setOneTouchExpandable(true);
 		this.favoritesPanel = favoritesPanel;
 		this.table = table;
-		table.changeFolder(new File("").getAbsolutePath());
 	}
 
 	public static TableAndFavoritesSplitPane onLeftSide(FavoritesPanel favoritesPanel, FileListTable table) throws Exception {

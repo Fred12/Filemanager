@@ -2,6 +2,8 @@ package com.kandinsky.objects;
 
 import java.io.File;
 
+import org.pmw.tinylog.Logger;
+
 import com.kandinsky.gui.favorites.FavoriteListener;
 import com.kandinsky.gui.splitPane.SidePanel;
 
@@ -23,10 +25,12 @@ public class SideFunctionsHelper implements FavoriteListener{
 	public void switchFolder(String folderName){
 		try {
 			sidePanel.getTableAndFavoritesSplitPane().getTable().changeFolder(folderName);
+			sidePanel.getFolderNamePanel().setFolderText(folderName);
 			sidePanel.getTableAndFavoritesSplitPane().repaint();
+			FunctionsHelper.clearMessage();
 		} catch (Exception e) {
-			// TODO: ordentliches Fehlerhandling, zB Fehlermeldung in der Info setzen
-			e.printStackTrace();
+			Logger.warn(e, "Der angegebene Ordner konnte nicht gefunden werden: "+folderName);
+			FunctionsHelper.setMessage(Message.FOLDER_NOT_FOUND);
 		}
 	}
 	

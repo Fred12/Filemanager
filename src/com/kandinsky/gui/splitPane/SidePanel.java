@@ -30,6 +30,7 @@ public abstract class SidePanel extends JPanel {
 		this.add(getFolderNamePanel(), getFolderNameConstraints());
 		this.add(getFolderAnalyserPanel(), getFolderAnalyserPanelConstraints());
 		this.add(getButtonBar(), getButtonBarConstraints());
+		sideFunctionsHelper.switchFolder(new File("").getAbsolutePath());
 	}
 	
 	
@@ -94,7 +95,7 @@ public abstract class SidePanel extends JPanel {
 	/**
 	 * @return FolderNamePanel, welches Oberhalb der Tabelle hin soll
 	 */
-	protected abstract FolderNamePanel getFolderNamePanel();
+	public abstract FolderNamePanel getFolderNamePanel();
 	
 	/**
 	 * @return das FolderAnalyser-Panel

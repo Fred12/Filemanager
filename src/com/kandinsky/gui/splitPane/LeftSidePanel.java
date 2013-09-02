@@ -29,16 +29,17 @@ public class LeftSidePanel extends SidePanel {
 	}
 
 	@Override
-	protected FolderNamePanel getFolderNamePanel() {
+	public FolderNamePanel getFolderNamePanel() {
 		if (folderNamePanel == null)
-			folderNamePanel = new FolderNamePanel();
+			folderNamePanel = FolderNamePanel.onLeftSide(sideFunctionsHelper);
 		return folderNamePanel;
 	}
 
 	@Override
 	public TableAndFavoritesSplitPane getTableAndFavoritesSplitPane() throws Exception {
-		if (splitPane == null)
+		if (splitPane == null){
 			splitPane = TableAndFavoritesSplitPane.onLeftSide(new FavoritesPanel(sideFunctionsHelper), new FileListTable(sideFunctionsHelper));
+		}
 		return splitPane;
 	}
 

@@ -4,6 +4,8 @@ import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.util.List;
 
+import org.pmw.tinylog.Logger;
+
 import com.kandinsky.gui.MainPanel;
 import com.kandinsky.gui.dialogs.AboutDialog;
 import com.kandinsky.gui.dialogs.HelpPages;
@@ -74,7 +76,6 @@ public final class FunctionsHelper {
 		
 		AboutDialog about = new AboutDialog();
 		about.setVisible(true);
-		
 	}
 	
 	/**
@@ -88,8 +89,8 @@ public final class FunctionsHelper {
 				sidePanel.getTableAndFavoritesSplitPane().getFavoritesPanel().refresh();
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.error(e, "Favoriten konnten nicht aktualisiert werden!");
+			FunctionsHelper.setMessage(Message.FAVORITES_NOT_LOADED);
 		}
 	}
 	
@@ -104,11 +105,28 @@ public final class FunctionsHelper {
 			for (SidePanel sidePanel : sidePanels) {
 				sidePanel.getTableAndFavoritesSplitPane().getFavoritesPanel().addFavoriteForFileEntry(fileEntry);
 			}
-			MainPanel.getInstance().setMessage(Message.ADDED_FAVORITE);
+			FunctionsHelper.setMessage(Message.ADDED_FAVORITE);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.error(e, "Favorit {0} konnte nicht hinzugefuegt werden!", fileEntry.getName());
+			FunctionsHelper.setMessage(Message.FAVORITE_NOT_ADDED);
 		}
 	}
 	
+	/**
+	 * @param message zu setzende Nachricht
+	 */
+	public static void setMessage(Message message){
+		try {
+			MainPanel.getInstance().setMessage(message);
+		} catch(Exception e){
+			// gotta catch 'em all? nah!
+		}
+	}
+	
+	/**
+	 * Leert die Nachricht
+	 */
+	public static void clearMessage(){
+		FunctionsHelper.setMessage(Message.EMPTY);
+	}
 }

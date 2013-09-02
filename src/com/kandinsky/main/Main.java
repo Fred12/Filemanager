@@ -67,6 +67,7 @@ public class Main {
 	        @Override
 	        public void windowClosed(WindowEvent e) {
 	            super.windowClosed(e);
+	            Logger.info("Anwendung wird beendet...");
 	            // Close application if you want to with System.exit(0)
 	            // but don't forget to dispose of all resources 
 	            // like child frames, threads, ...
