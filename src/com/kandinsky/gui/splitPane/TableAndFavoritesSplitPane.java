@@ -13,9 +13,6 @@ import com.kandinsky.gui.fileList.FileListTable;
  */
 public class TableAndFavoritesSplitPane extends JSplitPane {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2806563759554923249L;
 	
 	private FavoritesPanel favoritesPanel;
@@ -42,6 +39,7 @@ public class TableAndFavoritesSplitPane extends JSplitPane {
 	private TableAndFavoritesSplitPane(FileListTable table, FavoritesPanel favoritesPanel) throws Exception {
 		super(JSplitPane.HORIZONTAL_SPLIT, table.surroundedWithPane(), favoritesPanel);
 		this.setResizeWeight(0.8); 
+		this.setContinuousLayout(true);
 		initSplitPane(favoritesPanel, table);
 	}
 

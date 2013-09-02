@@ -2,7 +2,6 @@ package com.kandinsky.gui.splitPane;
 
 import com.kandinsky.gui.ButtonBar;
 import com.kandinsky.gui.FolderAnalyser;
-import com.kandinsky.gui.FolderDetailPanel;
 import com.kandinsky.gui.FolderNamePanel;
 import com.kandinsky.gui.favorites.FavoritesPanel;
 import com.kandinsky.gui.fileList.FileListTable;
@@ -21,7 +20,6 @@ public class LeftSidePanel extends SidePanel {
 	private static final long serialVersionUID = 7730356958423920630L;
 	
 	private FolderNamePanel folderNamePanel;
-	private FolderDetailPanel folderDetailPanel;
 	private TableAndFavoritesSplitPane splitPane;
 	private FolderAnalyser folderAnalyserPanel;
 	private ButtonBar buttonBar;
@@ -35,13 +33,6 @@ public class LeftSidePanel extends SidePanel {
 		if (folderNamePanel == null)
 			folderNamePanel = new FolderNamePanel();
 		return folderNamePanel;
-	}
-
-	@Override
-	protected FolderDetailPanel getFolderDetailsPanel() {
-		if (folderDetailPanel == null)
-			folderDetailPanel = new FolderDetailPanel();
-		return folderDetailPanel;
 	}
 
 	@Override

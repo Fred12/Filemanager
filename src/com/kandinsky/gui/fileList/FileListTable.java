@@ -36,6 +36,7 @@ public class FileListTable extends JTable {
 		this.sideFunctionsHelper = sideFunctionsHelper;
 		this.setAutoCreateRowSorter(true);
 		this.setModel(model);
+		this.setFillsViewportHeight(true);
 		setColumnWidths();
 		this.addMouseListener(new ClickListener());
 		this.addMouseListener(popup.getMouseListener());
@@ -74,6 +75,8 @@ public class FileListTable extends JTable {
 	}
 	
 	public void refresh() throws Exception{
+		if(currentFolderName==null)
+			currentFolderName = "";
 		changeFolder(currentFolderName);
 		repaint();
 	}

@@ -104,6 +104,7 @@ public final class FunctionsHelper {
 			for (SidePanel sidePanel : sidePanels) {
 				sidePanel.getTableAndFavoritesSplitPane().getFavoritesPanel().addFavoriteForFileEntry(fileEntry);
 			}
+			MainPanel.getInstance().setMessage(Message.ADDED_FAVORITE);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

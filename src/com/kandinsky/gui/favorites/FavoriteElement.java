@@ -79,9 +79,11 @@ public class FavoriteElement extends JToolBar {
 				case "remove": {
 					listener.remove(fileEntry);
 					FunctionsHelper.refreshFavorites();
+					break;
 				}
 				case "execute": {
 					listener.execute(fileEntry);
+					break;
 				}
 			}
 
