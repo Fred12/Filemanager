@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 
 import com.kandinsky.gui.ButtonBar;
 import com.kandinsky.gui.FolderAnalyser;
-import com.kandinsky.gui.FolderDetailPanel;
 import com.kandinsky.gui.FolderNamePanel;
 import com.kandinsky.objects.SideFunctionsHelper;
 
@@ -29,9 +28,9 @@ public abstract class SidePanel extends JPanel {
 		this.setLayout(new GridBagLayout());
 		this.add(getTableAndFavoritesSplitPane(), getSplitPaneConstraints());
 		this.add(getFolderNamePanel(), getFolderNameConstraints());
-		this.add(getFolderDetailsPanel(), getFolderDetailsConstraints());
 		this.add(getFolderAnalyserPanel(), getFolderAnalyserPanelConstraints());
 		this.add(getButtonBar(), getButtonBarConstraints());
+		sideFunctionsHelper.switchFolder(new File("").getAbsolutePath());
 	}
 	
 	
@@ -76,7 +75,7 @@ public abstract class SidePanel extends JPanel {
 		gbc.gridy = 2;
 		gbc.fill = GridBagConstraints.BOTH;
 		gbc.weightx = 1.0;
-		gbc.weighty = 0.6;
+		gbc.weighty = 0.7;
 		return gbc;
 	}
 	
@@ -89,16 +88,6 @@ public abstract class SidePanel extends JPanel {
 		gbc.weighty = 0.1;
 		return gbc;
 	}
-
-	private GridBagConstraints getFolderDetailsConstraints() {
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.gridx = 0;
-		gbc.gridy = 4;
-		gbc.fill = GridBagConstraints.BOTH;
-		gbc.weightx = 1.0;
-		gbc.weighty = 0.1;
-		return gbc;
-	}
 	
 	
 	public abstract TableAndFavoritesSplitPane getTableAndFavoritesSplitPane() throws Exception;
@@ -106,12 +95,7 @@ public abstract class SidePanel extends JPanel {
 	/**
 	 * @return FolderNamePanel, welches Oberhalb der Tabelle hin soll
 	 */
-	protected abstract FolderNamePanel getFolderNamePanel();
-
-	/**
-	 * @return das Ordner-Detail-Panel
-	 */
-	protected abstract FolderDetailPanel getFolderDetailsPanel();
+	public abstract FolderNamePanel getFolderNamePanel();
 	
 	/**
 	 * @return das FolderAnalyser-Panel

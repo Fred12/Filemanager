@@ -1,5 +1,6 @@
 package com.kandinsky.gui.fileList;
 
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -26,15 +27,19 @@ public class FileListTable extends JTable {
 	private FileListTableModel model;
 	private SideFunctionsHelper sideFunctionsHelper;
 	private String currentFolderName="";
+	private FileListPopUpMenu popup;
+	private FileEntry entryOfCurrentPopup;
 
 	public FileListTable(SideFunctionsHelper sideFunctionsHelper) throws Exception {
 		model = new FileListTableModel();
+		popup = new FileListPopUpMenu(this);
 		this.sideFunctionsHelper = sideFunctionsHelper;
 		this.setAutoCreateRowSorter(true);
 		this.setModel(model);
+		this.setFillsViewportHeight(true);
 		setColumnWidths();
 		this.addMouseListener(new ClickListener());
-		 
+		this.addMouseListener(popup.getMouseListener());
 	}
 	
 	private void setColumnWidths(){
@@ -70,6 +75,8 @@ public class FileListTable extends JTable {
 	}
 	
 	public void refresh() throws Exception{
+		if(currentFolderName==null)
+			currentFolderName = "";
 		changeFolder(currentFolderName);
 		repaint();
 	}
@@ -83,7 +90,8 @@ public class FileListTable extends JTable {
 		private static final int DOUBLE_CLICK = 2;
 		private static final int NOTHING_SELECTED = -1;
 
-		public void mouseClicked(MouseEvent event) {
+		@Override
+		public void mouseReleased(MouseEvent event) {
 			FileListTable target = (FileListTable) event.getSource();
 			if (getSelectedRow() != NOTHING_SELECTED) {
 				if (event.getClickCount() == DOUBLE_CLICK) {
@@ -115,5 +123,13 @@ public class FileListTable extends JTable {
 		}
 		return files;
 	}
+
+	public void showPopup(Point point) {
+		popup.show(this, (int)point.getX(), (int)point.getY());
+		entryOfCurrentPopup = model.getValueAtRow(rowAtPoint(point));
+	}
 	
+	public FileEntry getEntryOfCurrentPopup(){
+		return entryOfCurrentPopup;
+	}
 }

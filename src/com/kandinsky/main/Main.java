@@ -9,8 +9,11 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import org.pmw.tinylog.Logger;
+
 import com.kandinsky.gui.KandinskyMenuBar;
 import com.kandinsky.gui.MainPanel;
+import com.kandinsky.objects.Favorites;
 
 public class Main {
 
@@ -32,6 +35,8 @@ public class Main {
 	
 	public Main() throws Exception {
 		
+		Logger.info("Anwendung wird gestartet!");
+		
 		frame = new JFrame();
 		frame.setLayout(new BorderLayout());
 		frame.setMinimumSize(new Dimension(400,400));
@@ -40,8 +45,10 @@ public class Main {
 		KandinskyMenuBar menuBar = KandinskyMenuBar.getInstance();
 		frame.add(menuBar, BorderLayout.NORTH);
 		
-		MainPanel main = new MainPanel();
+		MainPanel main = MainPanel.createInstance();
 		frame.add(main, BorderLayout.CENTER);
+		
+		Favorites.loadAllFavorites();
 		
 		WindowAdapter windowAdapter = new WindowAdapter() {
 	        // WINDOW_CLOSING event handler
@@ -60,6 +67,7 @@ public class Main {
 	        @Override
 	        public void windowClosed(WindowEvent e) {
 	            super.windowClosed(e);
+	            Logger.info("Anwendung wird beendet...");
 	            // Close application if you want to with System.exit(0)
 	            // but don't forget to dispose of all resources 
 	            // like child frames, threads, ...

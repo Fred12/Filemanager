@@ -2,11 +2,16 @@ package com.kandinsky.objects;
 
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.util.List;
 
+import org.pmw.tinylog.Logger;
+
+import com.kandinsky.gui.MainPanel;
 import com.kandinsky.gui.dialogs.AboutDialog;
 import com.kandinsky.gui.dialogs.HelpPages;
 import com.kandinsky.gui.dialogs.OptionsDialog;
 import com.kandinsky.gui.dialogs.OptionsPages;
+import com.kandinsky.gui.splitPane.SidePanel;
 import com.kandinsky.main.Main;
 
 /**
@@ -71,7 +76,57 @@ public final class FunctionsHelper {
 		
 		AboutDialog about = new AboutDialog();
 		about.setVisible(true);
-		
 	}
 	
+	/**
+	 * Refresht auf beiden Seiten die Favorites und gleicht sie mit dem aktuellen Stand ab, nachdem diese komplett neu geladen wurden
+	 */
+	public static void refreshFavorites(){
+		try {
+			Favorites.loadAllFavorites();
+			List<SidePanel> sidePanels = MainPanel.getInstance().getMainSplitPane().getSidePanels();
+			for (SidePanel sidePanel : sidePanels) {
+				sidePanel.getTableAndFavoritesSplitPane().getFavoritesPanel().refresh();
+			}
+		} catch (Exception e) {
+			Logger.error(e, "Favoriten konnten nicht aktualisiert werden!");
+			FunctionsHelper.setMessage(Message.FAVORITES_NOT_LOADED);
+		}
+	}
+	
+	/**
+	 * added einen Favoriten auf beiden Seiten
+	 * @param fileEntry
+	 */
+	public static void addFavorite(FileEntry fileEntry){
+		Favorites.getInstance().addToFavorites(fileEntry);
+		try {
+			List<SidePanel> sidePanels = MainPanel.getInstance().getMainSplitPane().getSidePanels();
+			for (SidePanel sidePanel : sidePanels) {
+				sidePanel.getTableAndFavoritesSplitPane().getFavoritesPanel().addFavoriteForFileEntry(fileEntry);
+			}
+			FunctionsHelper.setMessage(Message.ADDED_FAVORITE);
+		} catch (Exception e) {
+			Logger.error(e, "Favorit {0} konnte nicht hinzugefuegt werden!", fileEntry.getName());
+			FunctionsHelper.setMessage(Message.FAVORITE_NOT_ADDED);
+		}
+	}
+	
+	/**
+	 * @param message zu setzende Nachricht
+	 */
+	public static void setMessage(Message message){
+		try {
+			MainPanel.getInstance().setMessage(message);
+		} catch(Exception e){
+			// gotta catch 'em all? nah!
+		}
+	}
+	
+	/**
+	 * Leert die Nachricht
+	 */
+	public static void clearMessage(){
+		FunctionsHelper.setMessage(Message.EMPTY);
+	}
 }

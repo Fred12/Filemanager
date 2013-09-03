@@ -19,9 +19,6 @@ import javax.swing.JProgressBar;
 
 public class FolderAnalyser extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3207380278696253272L;
 	
 	private static final File fileSystem = new File("C:\\");

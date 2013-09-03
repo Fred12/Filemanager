@@ -21,7 +21,7 @@ public class MainFrameTest extends JFrame {
 		this.setMinimumSize(new Dimension(1600,1024));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		this.add(new MainPanel());
+		this.add(MainPanel.createInstance());
 		this.setJMenuBar(KandinskyMenuBar.createInstance());
 	}
 	

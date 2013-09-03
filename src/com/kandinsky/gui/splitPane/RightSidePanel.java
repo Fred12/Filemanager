@@ -2,7 +2,6 @@ package com.kandinsky.gui.splitPane;
 
 import com.kandinsky.gui.ButtonBar;
 import com.kandinsky.gui.FolderAnalyser;
-import com.kandinsky.gui.FolderDetailPanel;
 import com.kandinsky.gui.FolderNamePanel;
 import com.kandinsky.gui.favorites.FavoritesPanel;
 import com.kandinsky.gui.fileList.FileListTable;
@@ -16,7 +15,6 @@ public class RightSidePanel extends SidePanel {
 	private static final long serialVersionUID = 744794461134800726L;
 	
 	private FolderNamePanel folderNamePanel;
-	private FolderDetailPanel folderDetailPanel;
 	private TableAndFavoritesSplitPane splitPane;
 	private FolderAnalyser folderAnalyserPanel;
 	private ButtonBar buttonBar;
@@ -26,23 +24,16 @@ public class RightSidePanel extends SidePanel {
 	}
 
 	@Override
-	protected FolderNamePanel getFolderNamePanel() {
+	public FolderNamePanel getFolderNamePanel() {
 		if (folderNamePanel == null)
-			folderNamePanel = new FolderNamePanel();
+			folderNamePanel = FolderNamePanel.onRightSide(sideFunctionsHelper);
 		return folderNamePanel;
-	}
-
-	@Override
-	protected FolderDetailPanel getFolderDetailsPanel() {
-		if (folderDetailPanel == null)
-			folderDetailPanel = new FolderDetailPanel();
-		return folderDetailPanel;
 	}
 
 	@Override
 	public TableAndFavoritesSplitPane getTableAndFavoritesSplitPane() throws Exception {
 		if (splitPane == null)
-			splitPane = TableAndFavoritesSplitPane.onRightSide(new FavoritesPanel(), new FileListTable(sideFunctionsHelper));
+			splitPane = TableAndFavoritesSplitPane.onRightSide(new FavoritesPanel(sideFunctionsHelper), new FileListTable(sideFunctionsHelper));
 		return splitPane;
 	}
 

@@ -2,7 +2,8 @@
 *.class
 
 # Package Files #
-*.jar
 *.war
 *.ear
 /bin
+/Favorites.dat
+/log.txt
