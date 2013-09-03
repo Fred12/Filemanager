@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
+import com.kandinsky.gui.fileList.FileListTable;
 import com.kandinsky.gui.splitPane.SidePanel;
 import com.kandinsky.objects.FunctionsHelper;
 import com.kandinsky.objects.SideFunctionsHelper;
@@ -250,6 +251,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 			}
 			
 			if (quelle == home) {
+				
 			}
 			
 			if (quelle == aktualisieren) {
@@ -276,6 +278,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 			}
 			
 			if (quelle == hilfe) {
+				FunctionsHelper.showAbout();
 			}
 			
 			if (quelle == einstellungen) {
