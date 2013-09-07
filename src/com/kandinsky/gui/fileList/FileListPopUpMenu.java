@@ -13,6 +13,11 @@ import com.kandinsky.objects.FunctionsHelper;
 
 public class FileListPopUpMenu extends JPopupMenu {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3674741050693322059L;
+	
 	private static final String ADD_TO_FAVORITES = "Add to Favorites";
 	private static final String COPY_SELECTED_FILES = "Copy selected files";
 	private static final String MOVE_SELECTED_FILES = "Move selected files";
