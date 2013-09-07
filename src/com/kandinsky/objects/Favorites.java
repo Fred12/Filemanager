@@ -10,6 +10,8 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.pmw.tinylog.Logger;
+
 /**
  * Singleton, welches ALLE Favoriten als Datei-Namens-Liste beinhaltet. Diese kann weggespeichert und wieder geladen werden. Das Laden geschieht dabei initial,
  * weggespeichert wird bei jeder Änderung.
@@ -83,9 +85,9 @@ public class Favorites implements Serializable {
 				oos.close();
 			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			Logger.error(e, "Datei wurde nicht gefunden, Favorites konnten nicht weggespeichert werden!");
 		} catch (IOException e) {
-			e.printStackTrace();
+			Logger.error(e, "Favorites konnten nicht weggespeichert werden!");
 		}
 	}
 
@@ -102,7 +104,8 @@ public class Favorites implements Serializable {
 		} catch (ClassNotFoundException e) {
 			throw new IOException("No class found. HELP!!");
 		} catch (FileNotFoundException e) {
-			// TODO: mach irgendwas, was nix kaputt macht, immerhin heisst das nur, dass es noch keine Favorites gibt
+			Logger.info("Es wurden keine Favoriten gefunden!");
+			FunctionsHelper.setMessage(Message.NO_FAVORITES_FOUND);
 		}
 	}
 

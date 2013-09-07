@@ -7,12 +7,7 @@ import com.kandinsky.gui.favorites.FavoritesPanel;
 import com.kandinsky.gui.fileList.FileListTable;
 
 /**
- * Linke Panel-Seite. Bisher noch nicht gefüllt. Unter Umständen könnte man hier noch ein Interface drüber setzen,
- * welches vorgibt, welche Elemente vorhanden sein müssten:
- * - Favoriten
- * - FileListe
- * - FolderDetail
- * - FolderName
+ * Linke Panel-Seite.
  * @author schmidtb
  */
 public class LeftSidePanel extends SidePanel {

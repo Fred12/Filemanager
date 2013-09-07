@@ -42,13 +42,14 @@ public class Main {
 		frame.setMinimumSize(new Dimension(400,400));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		Favorites.loadAllFavorites();
+		
 		KandinskyMenuBar menuBar = KandinskyMenuBar.getInstance();
 		frame.add(menuBar, BorderLayout.NORTH);
 		
 		MainPanel main = MainPanel.createInstance();
 		frame.add(main, BorderLayout.CENTER);
 		
-		Favorites.loadAllFavorites();
 		
 		WindowAdapter windowAdapter = new WindowAdapter() {
 	        // WINDOW_CLOSING event handler

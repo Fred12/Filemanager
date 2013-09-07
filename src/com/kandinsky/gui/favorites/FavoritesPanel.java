@@ -3,13 +3,14 @@ package com.kandinsky.gui.favorites;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.io.IOException;
 import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
+
+import org.pmw.tinylog.Logger;
 
 import com.kandinsky.objects.Favorites;
 import com.kandinsky.objects.FileEntry;
@@ -47,8 +48,6 @@ public class FavoritesPanel extends JPanel {
 		this.add(headerLabel, BorderLayout.NORTH);
 		this.add(listScroller, BorderLayout.CENTER);
 		
-		testFunction();
-
 		loadFavoritesIntoList();
 	}
 
@@ -64,11 +63,21 @@ public class FavoritesPanel extends JPanel {
 		headerLabel.setOpaque(true);
 	}
 
+	/**
+	 * Fuegt einen Favoriten hinzu
+	 * @param favorite
+	 * @return eigenes Objekt (fluent interface)
+	 */
 	public FavoritesPanel addFavorite(FavoriteElement favorite) {
 		favoritesList.add(favorite);
 		return this;
 	}
 
+	/**
+	 * Fuegt einen Favoriten hinzu
+	 * @param fileEntry
+	 * @return eigenes Objekt (fluent interface)
+	 */
 	public FavoritesPanel addFavoriteForFileEntry(FileEntry fileEntry) {
 		addFavorite(new FavoriteElement(fileEntry, sideFunctionsHelper));
 		return this;
@@ -89,19 +98,9 @@ public class FavoritesPanel extends JPanel {
 	 */
 	private void loadFavoritesIntoList() {
 		List<FileEntry> favorites = Favorites.getInstance().getFavoritesAsFileEntries();
+		Logger.debug("Gefundene Favoriten: "+favorites.size());
 		for (FileEntry entry : favorites) {
 			addFavoriteForFileEntry(entry);
 		}
 	}
-	
-	private void testFunction(){
-		try {
-			Favorites.loadAllFavorites();
-			if(Favorites.getInstance().getFavoritesAsFileEntries().size()==0)
-				Favorites.getInstance().addToFavorites(new FileEntry(""));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
 }

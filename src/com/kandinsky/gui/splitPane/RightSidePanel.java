@@ -7,7 +7,7 @@ import com.kandinsky.gui.favorites.FavoritesPanel;
 import com.kandinsky.gui.fileList.FileListTable;
 
 /**
- * Rechte Panel-Seite. Bisher noch nicht gefüllt.
+ * Rechte Panel-Seite.
  * @author schmidtb
  */
 public class RightSidePanel extends SidePanel {

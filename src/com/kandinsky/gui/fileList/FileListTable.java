@@ -1,6 +1,7 @@
 package com.kandinsky.gui.fileList;
 
 import java.awt.Point;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -8,8 +9,11 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.List;
 
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.KeyStroke;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
@@ -29,14 +33,14 @@ public class FileListTable extends JTable {
 
 	private static final long serialVersionUID = -8348644017646168541L;
 	private FileListTableModel model;
-	private SideFunctionsHelper sideFunctionsHelper;
+	private final SideFunctionsHelper sideFunctionsHelper;
 	private String currentFolderName = "";
 	private FileListPopUpMenu popup;
 	private FileEntry entryOfCurrentPopup;
 
-	public FileListTable(SideFunctionsHelper sideFunctionsHelper) {
+	public FileListTable(final SideFunctionsHelper sideFunctionsHelper) {
 		model = new FileListTableModel();
-		popup = new FileListPopUpMenu(this);
+		popup = new FileListPopUpMenu(this, sideFunctionsHelper);
 		this.sideFunctionsHelper = sideFunctionsHelper;
 		this.setAutoCreateRowSorter(true);
 		this.setModel(model);
@@ -45,6 +49,8 @@ public class FileListTable extends JTable {
 		this.addMouseListener(new ClickListener());
 		this.addMouseListener(popup.getMouseListener());
 		this.addKeyListener(new TableKeyListener());
+		this.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "Enter");
+		this.getActionMap().put("Enter", new EnterAction());
 	}
 
 	private void setColumnWidths() {
@@ -106,21 +112,13 @@ public class FileListTable extends JTable {
 		return files;
 	}
 
-	public void copySelectedFiles() {
-		sideFunctionsHelper.copySelectedFilesToOtherSide();
-	}
-
-	public void moveSelectedFiles() {
-		sideFunctionsHelper.moveSelectedFilesToOtherSide();
-	}
-
-	public void deleteSelectedFiles() {
-		sideFunctionsHelper.deleteSelectedFiles();
-	}
-
 	public void showPopup(Point point) {
 		popup.show(this, (int) point.getX(), (int) point.getY());
-		entryOfCurrentPopup = model.getValueAtRow(rowAtPoint(point));
+		try {
+			entryOfCurrentPopup = model.getValueAtRow(rowAtPoint(point));
+		} catch (Exception e) {
+			entryOfCurrentPopup = null;
+		}
 	}
 
 	public FileEntry getEntryOfCurrentPopup() {
@@ -138,22 +136,25 @@ public class FileListTable extends JTable {
 
 		@Override
 		public void mouseReleased(MouseEvent event) {
-			FileListTable target = (FileListTable) event.getSource();
 			if (getSelectedRow() != NOTHING_SELECTED) {
 				if (event.getClickCount() == DOUBLE_CLICK) {
-					int row = target.getSelectedRow();
-					// ummappen, falls sortiert
-					row = convertRowIndexToModel(row);
-					FileEntry valueAtRow = model.getValueAtRow(row);
-					if (valueAtRow.getType() == FileType.DIRECTORY) {
-						sideFunctionsHelper.switchFolder(valueAtRow.getAbsoluteFileName());
-						repaint();
-					}
+					jumpIntoSelectedFolder();
 				} else {
-					File[] files = target.getSelectedFiles();
+					File[] files = getSelectedFiles();
 					sideFunctionsHelper.setSelectedFiles(files);
 				}
 			}
+		}
+	}
+
+	private void jumpIntoSelectedFolder() {
+		int row = getSelectedRow();
+		// ummappen, falls sortiert
+		row = convertRowIndexToModel(row);
+		FileEntry valueAtRow = model.getValueAtRow(row);
+		if (valueAtRow.getType() == FileType.DIRECTORY) {
+			sideFunctionsHelper.switchFolder(valueAtRow.getAbsoluteFileName());
+			repaint();
 		}
 	}
 
@@ -164,13 +165,26 @@ public class FileListTable extends JTable {
 	private class TableKeyListener extends KeyAdapter {
 		@Override
 		public void keyTyped(KeyEvent event) {
-			Logger.debug("Key pressed: " + event.getKeyChar());
+			Logger.info("Key pressed: " + (int) event.getKeyChar());
 			switch (event.getKeyChar()) {
-				case '\u007F': {
-					deleteSelectedFiles();
+				case KeyEvent.VK_DELETE: {
+					sideFunctionsHelper.deleteSelectedFiles();
 					break;
 				}
 			}
 		}
+	}
+
+	/**
+	 * Bringt eine Action fuer den Enter-Button mit sich, um die JTable-Enter-Aktion zu ueberschreiben
+	 * @author Benne
+	 *
+	 */
+	private class EnterAction extends AbstractAction {
+		@Override
+		public void actionPerformed(ActionEvent ae) {
+			jumpIntoSelectedFolder();
+		}
+
 	}
 }

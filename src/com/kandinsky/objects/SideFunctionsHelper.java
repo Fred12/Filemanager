@@ -1,6 +1,7 @@
 package com.kandinsky.objects;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.pmw.tinylog.Logger;
 
@@ -62,9 +63,9 @@ public class SideFunctionsHelper implements FavoriteListener{
 			Favorites favorites = Favorites.getInstance();
 			favorites.removeFavorite(fileEntry);
 			sidePanel.getTableAndFavoritesSplitPane().getFavoritesPanel().refresh();
+			FunctionsHelper.setMessage(Message.FAVORITE_REMOVED);
 		} catch (Exception e) {
-			// TODO: ordentliches Fehlerhandling, zB Fehlermeldung in der Info setzen
-			e.printStackTrace();
+			Logger.error(e, "Konnte Favorit nicht entfernen fuer fileEntry {0}!", fileEntry);
 		}
 	}
 
@@ -85,9 +86,34 @@ public class SideFunctionsHelper implements FavoriteListener{
 		FileOperator operator = new MoveOperator(files, sidePanel);
 		operator.execute();
 	}
+	
 	public void deleteSelectedFiles(){
 		File[] files = sidePanel.getTableAndFavoritesSplitPane().getTable().getSelectedFiles();
 		FileOperator operator = new DeleteOperator(files, sidePanel);
 		operator.execute();
+	}
+	
+	public void createNewFile(){
+		// TODO: Popup fuer Dateinamen
+		File file = new File(sidePanel.getCurrentFolderName()+"NewFile");
+		try {
+			file.createNewFile();
+			refresh();
+		} catch (IOException e) {
+			Logger.error(e, "Anlegen einer neuen Datei war leider nicht moeglich");
+			FunctionsHelper.setMessage(Message.CREATE_FILE_FAILED);
+		}
+	}
+	
+	public void createNewFolder() {
+		// TODO: Popup fuer Dateinamen
+		File file = new File(sidePanel.getCurrentFolderName()+"NewFolder");
+		boolean created = file.mkdir();
+		if (created) {
+			refresh();
+		} else {
+			Logger.error("Anlegen eines neuen Ordners war leider nicht moeglich");
+			FunctionsHelper.setMessage(Message.CREATE_FILE_FAILED);
+		}
 	}
 }

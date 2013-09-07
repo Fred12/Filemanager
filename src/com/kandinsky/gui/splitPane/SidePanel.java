@@ -132,7 +132,7 @@ public abstract class SidePanel extends JPanel implements Comparable<SidePanel> 
 		getFolderAnalyserPanel().setAllListedFilesCount(fileCount);
 	}
 	
-	public String getCurrentFolderName() throws Exception{
+	public String getCurrentFolderName() {
 		return getTableAndFavoritesSplitPane().getCurrentFolderName();
 	}
 	

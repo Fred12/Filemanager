@@ -105,7 +105,7 @@ public final class FunctionsHelper {
 			for (SidePanel sidePanel : sidePanels) {
 				sidePanel.getTableAndFavoritesSplitPane().getFavoritesPanel().addFavoriteForFileEntry(fileEntry);
 			}
-			FunctionsHelper.setMessage(Message.ADDED_FAVORITE);
+			FunctionsHelper.setMessage(Message.FAVORITE_ADDED);
 		} catch (Exception e) {
 			Logger.error(e, "Favorit {0} konnte nicht hinzugefuegt werden!", fileEntry.getName());
 			FunctionsHelper.setMessage(Message.FAVORITE_NOT_ADDED);

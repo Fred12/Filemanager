@@ -1,11 +1,8 @@
 package com.kandinsky.objects.fileOperation;
 
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
-
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
+import org.apache.commons.io.FileUtils;
 import org.pmw.tinylog.Logger;
 
 import com.kandinsky.gui.splitPane.SidePanel;
@@ -24,7 +21,10 @@ public class CopyOperator extends FileOperator {
 	@Override
 	protected void executeOperation(File nextEntry) throws Exception {
 		Logger.info("Kopiere von {0} nach {1}!", nextEntry.getAbsolutePath(), otherSidePanel.getCurrentFolderName() + nextEntry.getName());
-		Files.copy(Paths.get(nextEntry.getAbsolutePath()), Paths.get(otherSidePanel.getCurrentFolderName() + nextEntry.getName()), REPLACE_EXISTING);
+		if(nextEntry.isDirectory())
+			FileUtils.copyDirectoryToDirectory(nextEntry.getAbsoluteFile(), new File(otherSidePanel.getCurrentFolderName()));
+		else
+			FileUtils.copyFileToDirectory(nextEntry.getAbsoluteFile(), new File(otherSidePanel.getCurrentFolderName()));
 	}
 
 	@Override
