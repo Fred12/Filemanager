@@ -3,6 +3,9 @@ package com.kandinsky.objects;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
+import org.apache.commons.io.FileUtils;
 import org.pmw.tinylog.Logger;
 
 import com.kandinsky.gui.favorites.FavoriteListener;
@@ -93,27 +96,60 @@ public class SideFunctionsHelper implements FavoriteListener{
 		operator.execute();
 	}
 	
+	/**
+	 * Fragt nach einem Datei-Namen und legt diesen dann an.
+	 */
 	public void createNewFile(){
-		// TODO: Popup fuer Dateinamen
-		File file = new File(sidePanel.getCurrentFolderName()+"NewFile");
-		try {
-			file.createNewFile();
-			refresh();
-		} catch (IOException e) {
-			Logger.error(e, "Anlegen einer neuen Datei war leider nicht moeglich");
-			FunctionsHelper.setMessage(Message.CREATE_FILE_FAILED);
+		String name = JOptionPane.showInputDialog(sidePanel, "Dateiname", null);
+		if (name != null) {
+			File file = new File(sidePanel.getCurrentFolderName() + name);
+			try {
+				file.createNewFile();
+				refresh();
+			} catch (IOException e) {
+				Logger.error(e, "Anlegen einer neuen Datei war leider nicht moeglich");
+				FunctionsHelper.setMessage(Message.CREATE_FILE_FAILED);
+			}
 		}
 	}
 	
+	/**
+	 * Fragt nach einem Ordner-Namen und legt diesen dann an.
+	 */
 	public void createNewFolder() {
-		// TODO: Popup fuer Dateinamen
-		File file = new File(sidePanel.getCurrentFolderName()+"NewFolder");
-		boolean created = file.mkdir();
-		if (created) {
-			refresh();
-		} else {
-			Logger.error("Anlegen eines neuen Ordners war leider nicht moeglich");
-			FunctionsHelper.setMessage(Message.CREATE_FILE_FAILED);
+		String name = JOptionPane.showInputDialog(sidePanel, "Ordnername", null);
+		if (name != null) {
+			File file = new File(sidePanel.getCurrentFolderName() + name);
+			boolean created = file.mkdir();
+			if (created) {
+				refresh();
+			} else {
+				Logger.error("Anlegen eines neuen Ordners war leider nicht moeglich");
+				FunctionsHelper.setMessage(Message.CREATE_FILE_FAILED);
+			}
+		}
+	}
+
+	/**
+	 * Fragt nach einem neuen Namen fuer eine Datei/Ordner und versucht dann ein Rename durchzufuehren. Falls die Datei/Ordner bereits vorhanden ist, wird 
+	 * entsprechend eine Fehlermeldung angezeigt.
+	 * @param fileEntry umzubenennende Datei
+	 */
+	public void rename(FileEntry fileEntry) {
+		String name = JOptionPane.showInputDialog(sidePanel, "Neuer Name", fileEntry.getName());
+		if (name != null) {
+			try {
+				File newFile = new File(sidePanel.getTableAndFavoritesSplitPane().getTable().getCurrentFolderName() + name);
+				if (fileEntry.getType() == FileType.DIRECTORY) {
+					FileUtils.moveDirectory(fileEntry.getFile(), newFile);
+				} else {
+					FileUtils.moveFile(fileEntry.getFile(), newFile);
+				}
+				refresh();
+			} catch (IOException e) {
+				Logger.error(e, "Datei umbenennen nicht moeglich. Neuer Name: {0}", name);
+				FunctionsHelper.setMessage(Message.RENAME_FOLDER_FAILED);
+			}
 		}
 	}
 }

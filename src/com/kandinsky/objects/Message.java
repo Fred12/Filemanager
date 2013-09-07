@@ -22,6 +22,7 @@ public enum Message {
 	DELETE_FAILED("Die Datei(en) konnten leider nicht vollständig geloescht werden!", Color.RED),
 	CREATE_FILE_FAILED("Es konnte leider keine neue Datei angelegt werden!", Color.RED),
 	CREATE_FOLDER_FAILED("Es konnte leider kein neuer Ordner angelegt werden!", Color.RED),
+	RENAME_FOLDER_FAILED("Der Ordner konnte nicht umbenannt werden!", Color.RED),
 	NO_FAVORITES_FOUND("Keine Favoriten gefunden.", Color.LIGHT_GRAY),
 	EMPTY("-", Color.LIGHT_GRAY);
 	

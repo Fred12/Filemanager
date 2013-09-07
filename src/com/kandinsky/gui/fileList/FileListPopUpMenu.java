@@ -9,22 +9,22 @@ import java.awt.event.MouseListener;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
+import com.kandinsky.objects.FileEntry;
 import com.kandinsky.objects.FunctionsHelper;
 import com.kandinsky.objects.SideFunctionsHelper;
 
 public class FileListPopUpMenu extends JPopupMenu {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3674741050693322059L;
-	
-	private static final String ADD_TO_FAVORITES = "Add to Favorites";
-	private static final String COPY_SELECTED_FILES = "Copy selected files";
-	private static final String MOVE_SELECTED_FILES = "Move selected files";
-	private static final String REMOVE_SELECTED_FILES = "Remove selected files";
+
+	private static final String ADD_TO_FAVORITES = "Zu Favoriten hinzufuegen";
+	private static final String ADD_CURRENT_FOLDER_TO_FAVORITES = "Aktuellen Ordner zu Favoriten hinzufuegen";
+	private static final String COPY_SELECTED_FILES = "Selektierte Datein kopieren";
+	private static final String MOVE_SELECTED_FILES = "Selektierte Dateien verschieben";
+	private static final String REMOVE_SELECTED_FILES = "Selektierte Dateien entfernen";
 	private static final String NEW_FILE = "Neue Datei anlegen";
 	private static final String NEW_FOLDER = "Neuen Ordner anlegen";
+	private static final String RENAME = "Umbenennen";
 	private FileListPopUpMouseListener mouseListener;
 	private FileListTable table;
 	private PopUpActionListener actionListener;
@@ -41,6 +41,8 @@ public class FileListPopUpMenu extends JPopupMenu {
 		createAndAddMenuItem(REMOVE_SELECTED_FILES);
 		createAndAddMenuItem(NEW_FILE);
 		createAndAddMenuItem(NEW_FOLDER);
+		createAndAddMenuItem(RENAME);
+		createAndAddMenuItem(ADD_CURRENT_FOLDER_TO_FAVORITES);
 	}
 
 	private void createAndAddMenuItem(String titel) {
@@ -50,34 +52,34 @@ public class FileListPopUpMenu extends JPopupMenu {
 		newMenuItem.addActionListener(actionListener);
 	}
 
-	public MouseListener getMouseListener(){
+	public MouseListener getMouseListener() {
 		return mouseListener;
 	}
 
 	private class FileListPopUpMouseListener extends MouseAdapter {
 
 		@Override
-		public void mouseReleased(MouseEvent event){
+		public void mouseReleased(MouseEvent event) {
 			contextMenuAction(event);
 		}
-		
+
 		@Override
 		public void mousePressed(MouseEvent event) {
 			contextMenuAction(event);
 		}
-		
+
 		private void contextMenuAction(MouseEvent event) {
 			if (event.isPopupTrigger()) {
 				table.showPopup(event.getPoint());
 			}
 		}
 	}
-	
+
 	private class PopUpActionListener implements ActionListener {
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
-			switch(e.getActionCommand()){
+		public void actionPerformed(ActionEvent event) {
+			switch (event.getActionCommand()) {
 				case ADD_TO_FAVORITES: {
 					FunctionsHelper.addFavorite(table.getEntryOfCurrentPopup());
 					break;
@@ -102,9 +104,18 @@ public class FileListPopUpMenu extends JPopupMenu {
 					sideFunctionsHelper.createNewFolder();
 					break;
 				}
+				case RENAME: {
+					sideFunctionsHelper.rename(table.getEntryOfCurrentPopup());
+					break;
+				}
+				case ADD_CURRENT_FOLDER_TO_FAVORITES: {
+					FileEntry folderFileEntry = new FileEntry(table.getCurrentFolderName());
+					FunctionsHelper.addFavorite(folderFileEntry);
+					break;
+				}
 			}
-			
+
 		}
-		
+
 	}
 }
