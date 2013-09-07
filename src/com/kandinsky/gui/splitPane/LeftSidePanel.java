@@ -36,7 +36,7 @@ public class LeftSidePanel extends SidePanel {
 	}
 
 	@Override
-	public TableAndFavoritesSplitPane getTableAndFavoritesSplitPane() throws Exception {
+	public TableAndFavoritesSplitPane getTableAndFavoritesSplitPane() {
 		if (splitPane == null){
 			splitPane = TableAndFavoritesSplitPane.onLeftSide(new FavoritesPanel(sideFunctionsHelper), new FileListTable(sideFunctionsHelper));
 		}

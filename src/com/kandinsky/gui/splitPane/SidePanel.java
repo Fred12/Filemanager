@@ -99,7 +99,7 @@ public abstract class SidePanel extends JPanel implements Comparable<SidePanel> 
 	 * @return SplitPane, die die Tabelle und die Favoritenleiste beinhaltet
 	 * @throws Exception
 	 */
-	public abstract TableAndFavoritesSplitPane getTableAndFavoritesSplitPane() throws Exception;
+	public abstract TableAndFavoritesSplitPane getTableAndFavoritesSplitPane();
 
 	/**
 	 * @return FolderNamePanel, welches Oberhalb der Tabelle hin soll

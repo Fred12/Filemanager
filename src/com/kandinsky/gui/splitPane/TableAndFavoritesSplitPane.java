@@ -22,7 +22,7 @@ public class TableAndFavoritesSplitPane extends JSplitPane {
 	 * @param table
 	 * @throws Exception 
 	 */
-	private TableAndFavoritesSplitPane(FavoritesPanel favoritesPanel, FileListTable table) throws Exception {
+	private TableAndFavoritesSplitPane(FavoritesPanel favoritesPanel, FileListTable table) {
 		super(JSplitPane.HORIZONTAL_SPLIT, favoritesPanel, table.surroundedWithPane());
 		this.setResizeWeight(0.2); 
 		initSplitPane(favoritesPanel, table);
@@ -34,24 +34,24 @@ public class TableAndFavoritesSplitPane extends JSplitPane {
 	 * @param table
 	 * @throws Exception 
 	 */
-	private TableAndFavoritesSplitPane(FileListTable table, FavoritesPanel favoritesPanel) throws Exception {
+	private TableAndFavoritesSplitPane(FileListTable table, FavoritesPanel favoritesPanel) {
 		super(JSplitPane.HORIZONTAL_SPLIT, table.surroundedWithPane(), favoritesPanel);
 		this.setResizeWeight(0.8); 
 		this.setContinuousLayout(true);
 		initSplitPane(favoritesPanel, table);
 	}
 
-	private void initSplitPane(FavoritesPanel favoritesPanel, FileListTable table) throws Exception {
+	private void initSplitPane(FavoritesPanel favoritesPanel, FileListTable table) {
 		this.setOneTouchExpandable(true);
 		this.favoritesPanel = favoritesPanel;
 		this.table = table;
 	}
 
-	public static TableAndFavoritesSplitPane onLeftSide(FavoritesPanel favoritesPanel, FileListTable table) throws Exception {
+	public static TableAndFavoritesSplitPane onLeftSide(FavoritesPanel favoritesPanel, FileListTable table) {
 		return new TableAndFavoritesSplitPane(favoritesPanel, table);
 	}
 
-	public static TableAndFavoritesSplitPane onRightSide(FavoritesPanel favoritesPanel, FileListTable table) throws Exception {
+	public static TableAndFavoritesSplitPane onRightSide(FavoritesPanel favoritesPanel, FileListTable table) {
 		return new TableAndFavoritesSplitPane(table, favoritesPanel);
 	}
 

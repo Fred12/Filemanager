@@ -8,6 +8,7 @@ import com.kandinsky.gui.favorites.FavoriteListener;
 import com.kandinsky.gui.splitPane.SidePanel;
 import com.kandinsky.objects.fileOperation.CopyOperator;
 import com.kandinsky.objects.fileOperation.DeleteOperator;
+import com.kandinsky.objects.fileOperation.FileOperator;
 import com.kandinsky.objects.fileOperation.MoveOperator;
 
 /**
@@ -56,7 +57,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 	}
 
 	@Override
-	public void remove(FileEntry fileEntry) {
+	public void removeFavorite(FileEntry fileEntry) {
 		try {
 			Favorites favorites = Favorites.getInstance();
 			favorites.removeFavorite(fileEntry);
@@ -69,32 +70,24 @@ public class SideFunctionsHelper implements FavoriteListener{
 
 	@Override
 	public void execute(FileEntry fileEntry) {
-		this.switchFolder(fileEntry.getAbsoluteFileName());
+		if(fileEntry.getType()==FileType.DIRECTORY)
+			this.switchFolder(fileEntry.getAbsoluteFileName());
 	}
 	
-	public void copyFilesToOtherSide(File[] fileEntries){
-		CopyOperator operator = new CopyOperator(fileEntries, sidePanel);
+	public void copySelectedFilesToOtherSide(){
+		File[] files = sidePanel.getTableAndFavoritesSplitPane().getTable().getSelectedFiles();
+		FileOperator operator = new CopyOperator(files, sidePanel);
 		operator.execute();
-//		Logger.info("Kopiere nun Dateien, Anzahl {0}", fileEntries.length);
-//		SidePanel otherSide = FunctionsHelper.getOtherSidePanel(sidePanel);
-//		try {
-//			for(File nextEntry : fileEntries){
-//				Logger.info("Kopiere von {0} nach {1}!", nextEntry.getAbsolutePath(), otherSide.getCurrentFolderName()+nextEntry.getName());
-//				Files.copy(Paths.get(nextEntry.getAbsolutePath()), Paths.get(otherSide.getCurrentFolderName()+nextEntry.getName()), REPLACE_EXISTING);	
-//			}
-//			otherSide.refresh();
-//		} catch (Exception e){
-//			Logger.error("Copy hat nicht funktioniert!", e);
-//			FunctionsHelper.setMessage(Message.COPY_FAILED);
-//		}
 	}
 	
-	public void moveFilesToOtherSide(File[] fileEntries){
-		MoveOperator operator = new MoveOperator(fileEntries, sidePanel);
+	public void moveSelectedFilesToOtherSide(){
+		File[] files = sidePanel.getTableAndFavoritesSplitPane().getTable().getSelectedFiles();
+		FileOperator operator = new MoveOperator(files, sidePanel);
 		operator.execute();
 	}
-	public void deleteFiles(File[] fileEntries){
-		DeleteOperator operator = new DeleteOperator(fileEntries, sidePanel);
+	public void deleteSelectedFiles(){
+		File[] files = sidePanel.getTableAndFavoritesSplitPane().getTable().getSelectedFiles();
+		FileOperator operator = new DeleteOperator(files, sidePanel);
 		operator.execute();
 	}
 }

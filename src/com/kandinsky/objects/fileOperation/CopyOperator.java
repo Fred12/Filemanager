@@ -11,6 +11,10 @@ import org.pmw.tinylog.Logger;
 import com.kandinsky.gui.splitPane.SidePanel;
 import com.kandinsky.objects.Message;
 
+/**
+ * Zum kopieren von Dateien von einer Seite auf die andere
+ * @author Benne
+ */
 public class CopyOperator extends FileOperator {
 
 	public CopyOperator(File[] files, SidePanel sidePanel) {
@@ -30,6 +34,11 @@ public class CopyOperator extends FileOperator {
 
 	@Override
 	protected Message getMessage() {
+		return Message.COPY_COMPLETE;
+	}
+
+	@Override
+	protected Message getErrorMessage() {
 		return Message.COPY_FAILED;
 	}
 

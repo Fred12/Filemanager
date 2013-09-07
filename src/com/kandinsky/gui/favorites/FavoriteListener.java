@@ -8,7 +8,7 @@ import com.kandinsky.objects.FileEntry;
  */
 public interface FavoriteListener {
 
-	public void remove(FileEntry fileEntry);
+	public void removeFavorite(FileEntry fileEntry);
 	
 	public void execute(FileEntry fileEntry);
 }

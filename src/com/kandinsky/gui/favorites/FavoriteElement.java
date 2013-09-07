@@ -77,7 +77,7 @@ public class FavoriteElement extends JToolBar {
 		public void actionPerformed(ActionEvent event) {
 			switch (event.getActionCommand()) {
 				case "remove": {
-					listener.remove(fileEntry);
+					listener.removeFavorite(fileEntry);
 					FunctionsHelper.refreshFavorites();
 					break;
 				}

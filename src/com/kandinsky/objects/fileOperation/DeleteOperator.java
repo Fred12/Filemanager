@@ -10,6 +10,10 @@ import org.pmw.tinylog.Logger;
 import com.kandinsky.gui.splitPane.SidePanel;
 import com.kandinsky.objects.Message;
 
+/**
+ * Zum Loeschen von Dateien und Ordnern (rekursiv)
+ * @author Benne
+ */
 public class DeleteOperator extends FileOperator {
 
 	public DeleteOperator(File[] files, SidePanel sidePanel) {
@@ -29,12 +33,17 @@ public class DeleteOperator extends FileOperator {
 
 	@Override
 	protected Message getMessage() {
-		return Message.DELETE_FAILED;
+		return Message.DELETE_COMPLETE;
 	}
 
 	@Override
 	protected String getFunctionCall() {
 		return "DELETE";
+	}
+
+	@Override
+	protected Message getErrorMessage() {
+		return Message.DELETE_FAILED;
 	}
 
 }
