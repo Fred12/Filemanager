@@ -1,6 +1,13 @@
 package com.kandinsky.objects;
 
-public class FTPEntry {
+import java.io.Serializable;
+
+public class FTPEntry implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8213344594828361628L;
 	
 	private String name;
 	private String server;
