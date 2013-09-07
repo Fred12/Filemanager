@@ -16,9 +16,14 @@ import com.kandinsky.objects.SideFunctionsHelper;
  * der Rest passiert von alleine.
  * @author Benne
  */
-public abstract class SidePanel extends JPanel {
+public abstract class SidePanel extends JPanel implements Comparable<SidePanel> {
 
 	private static final long serialVersionUID = -7091223933460827761L;
+	
+
+	public enum Side {
+		LEFT, RIGHT
+	}
 	
 	/** jede Seite erhaelt ihren eigenen Seitenfunktionshelper */
 	protected SideFunctionsHelper sideFunctionsHelper;
@@ -33,7 +38,9 @@ public abstract class SidePanel extends JPanel {
 		sideFunctionsHelper.switchFolder(new File("").getAbsolutePath());
 	}
 	
-	
+	public void refresh(){
+		sideFunctionsHelper.refresh();
+	}
 
 	/**
 	 * Versucht einen neuen Ordner zu setzen
@@ -48,7 +55,6 @@ public abstract class SidePanel extends JPanel {
 		}
 	}
 	
-
 	private Object getButtonBarConstraints() {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
@@ -89,7 +95,10 @@ public abstract class SidePanel extends JPanel {
 		return gbc;
 	}
 	
-	
+	/**
+	 * @return SplitPane, die die Tabelle und die Favoritenleiste beinhaltet
+	 * @throws Exception
+	 */
 	public abstract TableAndFavoritesSplitPane getTableAndFavoritesSplitPane() throws Exception;
 
 	/**
@@ -107,12 +116,33 @@ public abstract class SidePanel extends JPanel {
 	 */
 	protected abstract ButtonBar getButtonBar();
 
+	/**
+	 * Setzt selektierte Dateien auf einer Seite
+	 * @param files
+	 */
 	public void setSelectedFiles(File[] files) {
 		getFolderAnalyserPanel().setSelectedFiles(files);
 	}
 
+	/**
+	 * Setzt die Gesamtanzahl vorhandener Dateien in der Liste auf einer Seite
+	 * @param fileCount
+	 */
 	public void setFileCountInFolder(int fileCount) {
 		getFolderAnalyserPanel().setAllListedFilesCount(fileCount);
 	}
-
+	
+	public String getCurrentFolderName() throws Exception{
+		return getTableAndFavoritesSplitPane().getCurrentFolderName();
+	}
+	
+	/**
+	 * @return die Seitenbezeichnung
+	 */
+	public abstract Side getSide();
+	
+	@Override
+	public int compareTo(SidePanel o) {
+		return getSide().compareTo(o.getSide());
+	}
 }

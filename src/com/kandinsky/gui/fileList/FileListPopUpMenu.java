@@ -14,6 +14,9 @@ import com.kandinsky.objects.FunctionsHelper;
 public class FileListPopUpMenu extends JPopupMenu {
 
 	private static final String ADD_TO_FAVORITES = "Add to Favorites";
+	private static final String COPY_SELECTED_FILES = "Copy selected files";
+	private static final String MOVE_SELECTED_FILES = "Move selected files";
+	private static final String REMOVE_SELECTED_FILES = "Remove selected files";
 	private FileListPopUpMouseListener mouseListener;
 	private FileListTable table;
 	private PopUpActionListener actionListener;
@@ -23,6 +26,9 @@ public class FileListPopUpMenu extends JPopupMenu {
 		mouseListener = new FileListPopUpMouseListener();
 		actionListener = new PopUpActionListener();
 		createAndAddMenuItem(ADD_TO_FAVORITES);
+		createAndAddMenuItem(COPY_SELECTED_FILES);
+		createAndAddMenuItem(MOVE_SELECTED_FILES);
+		createAndAddMenuItem(REMOVE_SELECTED_FILES);
 	}
 
 	private void createAndAddMenuItem(String titel) {
@@ -62,6 +68,19 @@ public class FileListPopUpMenu extends JPopupMenu {
 			switch(e.getActionCommand()){
 				case ADD_TO_FAVORITES: {
 					FunctionsHelper.addFavorite(table.getEntryOfCurrentPopup());
+					break;
+				}
+				case COPY_SELECTED_FILES: {
+					table.copySelectedFiles();
+					break;
+				}
+				case MOVE_SELECTED_FILES: {
+					table.moveSelectedFiles();
+					break;
+				}
+				case REMOVE_SELECTED_FILES: {
+					table.deleteSelectedFiles();
+					break;
 				}
 			}
 			

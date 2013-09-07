@@ -50,4 +50,9 @@ public class RightSidePanel extends SidePanel {
 			buttonBar = new ButtonBar(sideFunctionsHelper);
 		return buttonBar;
 	}
+	
+	@Override
+	public Side getSide() {
+		return Side.RIGHT;
+	}
 }

@@ -81,6 +81,13 @@ public class FileListTable extends JTable {
 		repaint();
 	}
 	
+	public String getCurrentFolderName(){
+		if(currentFolderName.endsWith("/")|| currentFolderName.endsWith("\\"))
+			return currentFolderName;
+		else
+			return currentFolderName+"/";
+	}
+	
 	/**
 	 * Fängt Auswahl und DoubleClicks in der Tabelle ab.
 	 * @author Benne
@@ -122,6 +129,18 @@ public class FileListTable extends JTable {
 			i++;
 		}
 		return files;
+	}
+	
+	public void copySelectedFiles(){
+		sideFunctionsHelper.copyFilesToOtherSide(getSelectedFiles());
+	}
+	
+	public void moveSelectedFiles(){
+		sideFunctionsHelper.moveFilesToOtherSide(getSelectedFiles());
+	}
+	
+	public void deleteSelectedFiles(){
+		sideFunctionsHelper.deleteFiles(getSelectedFiles());
 	}
 
 	public void showPopup(Point point) {

@@ -129,4 +129,14 @@ public final class FunctionsHelper {
 	public static void clearMessage(){
 		FunctionsHelper.setMessage(Message.EMPTY);
 	}
+	
+	public static SidePanel getOtherSidePanel(SidePanel sourcePanel){
+		List<SidePanel> sidePanels = MainPanel.getInstance().getMainSplitPane().getSidePanels();
+		for (SidePanel nextPanel : sidePanels) {
+			if(sourcePanel.compareTo(nextPanel)!=0)
+				return nextPanel;
+		}
+		
+		throw new RuntimeException("Geht irgendwie doch nicht!");
+	}
 }

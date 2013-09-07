@@ -62,4 +62,8 @@ public class TableAndFavoritesSplitPane extends JSplitPane {
 	public FileListTable getTable() {
 		return table;
 	}
+	
+	public String getCurrentFolderName(){
+		return table.getCurrentFolderName();
+	}
 }

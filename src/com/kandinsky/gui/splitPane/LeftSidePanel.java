@@ -57,4 +57,9 @@ public class LeftSidePanel extends SidePanel {
 		return buttonBar;
 	}
 
+	@Override
+	public Side getSide() {
+		return Side.LEFT;
+	}
+
 }
