@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
@@ -34,6 +35,8 @@ public class ButtonBar extends JPanel implements ActionListener {
 	private static final String TODO = "Needs to be implemented";
 
 	private static final Insets margins = new Insets(0, 0, 0, 0);
+	
+	private JList folderList;
 
 	JToolBar buttonBar;
 
@@ -248,6 +251,8 @@ public class ButtonBar extends JPanel implements ActionListener {
 		 */
 
 		if (quelle == zurueck) {
+			folderList.setSelectedIndex(folderList.getSelectedIndex()-1);
+			//sideFunctionsHelper.getFolder();
 		}
 
 		if (quelle == weiter) {
@@ -257,6 +262,8 @@ public class ButtonBar extends JPanel implements ActionListener {
 		}
 
 		if (quelle == home) {
+			sideFunctionsHelper.switchFolder(System.getProperty("user.home"));
+			//sideFunctionsHelper.getFolder();
 		}
 
 		if (quelle == aktualisieren) {

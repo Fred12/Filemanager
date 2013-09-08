@@ -25,6 +25,10 @@ public class SideFunctionsHelper implements FavoriteListener{
 
 	/** Uebergebenes SidePanel, auf welches sich die Funktionen bezieht */
 	private SidePanel sidePanel;
+	
+	
+	
+	
 
 	public SideFunctionsHelper(SidePanel sidePanel){
 		this.sidePanel = sidePanel;
@@ -156,4 +160,11 @@ public class SideFunctionsHelper implements FavoriteListener{
 			}
 		}
 	}
+	
+	/**
+	 * This method will return the users home-path if it's set.
+	 * 
+	 * @return
+	 */
+	
 }
