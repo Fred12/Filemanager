@@ -3,8 +3,9 @@ package com.kandinsky.main;
 import java.io.IOException;
 import java.net.SocketException;
 
-import org.apache.commons.net.ftp.FTPClient;
-import org.apache.commons.net.ftp.FTPFile;
+import com.kandinsky.conn.FTPConnectionHandler;
+import com.kandinsky.objects.FTPEntry;
+import com.kandinsky.objects.FileEntry;
 
 /**
  * Zum Testen der FTP-Verbindung
@@ -14,15 +15,20 @@ import org.apache.commons.net.ftp.FTPFile;
 public class FTPTest {
 
 	public static void main(String[] args) throws SocketException, IOException {
-		FTPClient f = new FTPClient();
-		f.setConnectTimeout(30000);
-		f.connect("speedtest.qsc.de", 21);
+		FTPConnectionHandler handler = FTPConnectionHandler.getInstance();
 		
-		boolean login = f.login("anonymous", "test@mail.de");
-		System.out.println(login);
-		FTPFile[] files = f.listFiles("/");
-		for(FTPFile file : files){
-			System.out.println(file.getType()+", "+file.getName());
+		FTPEntry ftpConfig = new FTPEntry("Testentry", "ftp.halifax.rwth-aachen.de", "anonymous", "mail@mail.de");
+		ftpConfig.setPort(21);
+		try {
+			handler.connect(ftpConfig);
+			handler.connect(ftpConfig);
+			for(FileEntry fileEntry : handler.getFilesInFolder("apache")){
+				System.out.println(fileEntry);
+			}
+			handler.disconnect();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

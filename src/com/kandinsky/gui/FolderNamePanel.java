@@ -153,7 +153,6 @@ public class FolderNamePanel extends JPanel {
 
 		@Override
 		public void itemStateChanged(ItemEvent ie) {
-			System.out.println("fired");
 			if(ie.getStateChange() == 1)
 			{
 				// Wechsel des Items auf ausgewählt führt zu Ordnerwechsel
@@ -185,14 +184,10 @@ public class FolderNamePanel extends JPanel {
 
 		@Override
 		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
 		}
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
 		}
 
 		@Override
@@ -200,9 +195,7 @@ public class FolderNamePanel extends JPanel {
 			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 				changeFolder();
 			}
-
 		}
-		
 	}
 
 }

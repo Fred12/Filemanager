@@ -178,9 +178,11 @@ public class FileListTable extends JTable {
 	/**
 	 * Bringt eine Action fuer den Enter-Button mit sich, um die JTable-Enter-Aktion zu ueberschreiben
 	 * @author Benne
-	 *
 	 */
 	private class EnterAction extends AbstractAction {
+		
+		private static final long serialVersionUID = 7447863551768598886L;
+
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			jumpIntoSelectedFolder();
