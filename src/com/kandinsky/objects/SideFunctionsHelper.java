@@ -42,6 +42,10 @@ public class SideFunctionsHelper implements FavoriteListener{
 		}
 	}
 	
+	public String getFolder()  {
+		return sidePanel.getFolderNamePanel().getFolderText();
+	}
+	
 	public void refresh(){
 		try {
 			sidePanel.getTableAndFavoritesSplitPane().getTable().refresh();
