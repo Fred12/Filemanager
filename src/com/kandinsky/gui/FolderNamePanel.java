@@ -122,6 +122,15 @@ public class FolderNamePanel extends JPanel {
 		this.currentFolderTextField.setText(text);
 		
 	}
+	
+	/**
+	 * Get the folder path content
+	 * 
+	 * @return
+	 */
+	public String getFolderText() {
+		return this.currentFolderTextField.getText();
+	}
 
 	private void changeFolder() {
 		Logger.info("Ordner wird gewechselt: "+currentFolderTextField.getText());
