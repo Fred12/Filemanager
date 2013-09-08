@@ -5,11 +5,9 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileSystemView;
 
 import org.pmw.tinylog.Logger;
 
@@ -89,21 +87,6 @@ public class Main {
 	    frame.pack();
 	   
 	    frame.setLocation(30, 20);
-	    
-	    File[] paths;
-	    FileSystemView fsv = FileSystemView.getFileSystemView();
-
-	    // returns pathnames for files and directory
-	    paths = File.listRoots();
-
-	    // for each pathname in pathname array
-	    for(File path:paths)
-	    {
-	        // prints file and directory paths
-	        System.out.println("Drive Name: "+path);
-	        System.out.println("Description: "+fsv.getSystemTypeDescription(path));
-	    }
-				
 		
 	}
 	

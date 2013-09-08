@@ -288,12 +288,7 @@ public class OptionsFTP implements ActionListener, ListSelectionListener {
 		if(_new) {
 			
 			// Resulting configuration object
-			FTPEntry newEntry = new FTPEntry();
-			newEntry.setName(name);
-			newEntry.setServer(server);
-			newEntry.setUsername(username);
-			newEntry.setPort(portNum);
-			newEntry.setPassword(password);
+			FTPEntry newEntry = new FTPEntry(name, server, portNum, username, password);
 			ftpList.add(newEntry);
 			
 		}

@@ -3,29 +3,21 @@ package com.kandinsky.objects;
 import java.io.Serializable;
 
 public class FTPEntry implements Serializable {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -8213344594828361628L;
-	
+
 	private String name;
 	private String server;
 	private int port;
 	private String username;
 	private String password;
-	
-	
-	public FTPEntry(){
-		
-	}
-	
-	public FTPEntry(String _name, String _server, String _username, String _password){
-		
-		this.setName(_username);
-		this.setServer(_server);
-		this.setUsername(_username);
-		this.setPassword(_password);
+
+	public FTPEntry(String name, String server, int port, String username, String password) {
+		this.name = name;
+		this.server = server;
+		setPort(port);
+		this.username = username;
+		this.password = password;
 	}
 
 	/**
@@ -55,7 +47,7 @@ public class FTPEntry implements Serializable {
 	public void setServer(String server) {
 		this.server = server;
 	}
-	
+
 	/**
 	 * @return the port
 	 */
@@ -67,13 +59,13 @@ public class FTPEntry implements Serializable {
 	 * @param port the port to set
 	 */
 	public void setPort(int port) {
-		
-		if(port < 0 || port > 65535) {
-			throw new IllegalArgumentException("Port number out of Range (0-65533). Is: "+port);
+
+		if (port < 0 || port > 65535) {
+			throw new IllegalArgumentException("Port number out of Range (0-65533). Is: " + port);
 		}
 		this.port = port;
 	}
-	
+
 	/**
 	 * @return the username
 	 */
