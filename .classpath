@@ -4,5 +4,8 @@
 	<classpathentry kind="src" path="srctest"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="lib/org.pmw.tinylog_0.8.jar" sourcepath="lib/sources/org.pmw.tinylog.source_0.8.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.4.jar" sourcepath="lib/sources/commons-io-2.4-sources.jar"/>
+	<classpathentry kind="lib" path="lib/commons-net-3.3.jar" sourcepath="lib/sources/commons-net-3.3-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

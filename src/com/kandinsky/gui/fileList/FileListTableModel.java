@@ -1,7 +1,5 @@
 package com.kandinsky.gui.fileList;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,8 +10,12 @@ import com.kandinsky.objects.FileEntry;
 
 public class FileListTableModel extends AbstractTableModel {
 
+	private static final long serialVersionUID = 3612169454389635317L;
+
 	/** Ueberschriften */
-	private String[] columnNames = {"", "Name", "Größe", "Datum", "Typ", "Endung", "Rechte" };
+	private static final String[] columnNames = {"", "Name", "Größe", "Datum", "Typ", "Endung", "Rechte" };
+	/** die Spaltenbreiten in Prozent */
+	private static final double[] columnWidths = {0.05, 0.45, 0.15, 0.15, 0.1, 0.1, 0.1 };
 
 	/** Daten */
 	private List<FileEntry> data;
@@ -36,28 +38,40 @@ public class FileListTableModel extends AbstractTableModel {
 	public String getColumnName(int col) {
 		return columnNames[col];
 	}
+	
+	public double getColumnWidthAt(int i){
+		return columnWidths[i];
+	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		FileEntry s = data.get(rowIndex);
-		switch (columnIndex) {
-			case 0:
-				return s.getIcon();
-			case 1:
-				return s.getName();
-			case 2:
-				return s.getSize();
-			case 3:
-				return s.getDate();
-			case 4:
-				return s.getType();
-			case 5:
-				return s.getEnding();
-			case 6:
-				return s.getRights();
-			default:
-				throw new RuntimeException("Spaltenindex existiert nicht!");
+		if (rowIndex < data.size()) {
+			FileEntry entry = data.get(rowIndex);
+			switch (columnIndex) {
+				case 0:
+					return entry.getIcon();
+				case 1:
+					return entry.getName();
+				case 2:
+					return entry.getSize();
+				case 3:
+					return entry.getDate();
+				case 4:
+					return entry.getType();
+				case 5:
+					return entry.getEnding();
+				case 6:
+					return entry.getRights();
+				default:
+					throw new RuntimeException("Spaltenindex existiert nicht!");
+			}
 		}
+		
+		return null;
+	}
+	
+	public FileEntry getValueAtRow(int rowIndex){
+		return data.get(rowIndex);
 	}
 
 	/**
@@ -77,5 +91,4 @@ public class FileListTableModel extends AbstractTableModel {
 				return String.class;
 		}
 	}
-
 }

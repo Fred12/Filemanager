@@ -14,15 +14,17 @@ import javax.swing.ImageIcon;
  */
 public class FileEntry implements Comparable<FileEntry> {
 
-	private static final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
+	protected static final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
 	/** Wunderhübsch */
-	private static final ImageIcon FOLDER_ICON = new ImageIcon(new ImageIcon("resources\\folder-7-icon.png").getImage().getScaledInstance(16, 16,
+	
+	private static final ImageIcon FOLDER_ICON = new ImageIcon(new ImageIcon(FileEntry.class.getResource("/com/kandinsky/resources/folder-7-icon.png")).getImage().getScaledInstance(16, 16,
 			java.awt.Image.SCALE_SMOOTH));
-	private static final ImageIcon TEXT_FILE_ICON = new ImageIcon(new ImageIcon("resources\\text-file-4-icon.png").getImage().getScaledInstance(16, 16,
+	private static final ImageIcon TEXT_FILE_ICON = new ImageIcon(new ImageIcon(FileEntry.class.getResource("/com/kandinsky/resources/text-file-4-icon.png")).getImage().getScaledInstance(16, 16,
 			java.awt.Image.SCALE_SMOOTH));
 
 	/** gekapselte Datei */
 	private File file;
+	protected FileType fileType;
 
 	/**
 	 * @param files Dateiliste
@@ -49,9 +51,32 @@ public class FileEntry implements Comparable<FileEntry> {
 
 	public FileEntry(File file) {
 		this.file = file;
+		if(file.isDirectory())
+			fileType = FileType.DIRECTORY;
+		else if(file.isFile())
+			fileType = FileType.FILE;
+		else
+			fileType = FileType.UNKNOWN;
+	}
+	
+	public FileEntry(String fileName){
+		this(new File(fileName));
+	}
+	
+	public FileEntry(){
+		
+	}
+	
+	public File getFile(){
+		return file;
 	}
 
+	/**
+	 * @return den Namen, bzw. den Namen der absoluten Datei
+	 */
 	public String getName() {
+		if(file.getName().isEmpty())
+			return file.getAbsoluteFile().getName();
 		return file.getName();
 	}
 
@@ -63,11 +88,11 @@ public class FileEntry implements Comparable<FileEntry> {
 	}
 
 	public String getSize() {
-		return ByteToStringHelper.convertToString(file.length());
+		return ByteToStringHelper.convertToString(getFullSizeAsLong());
 	}
 
 	public String getDate() {
-		return FORMATTER.format(file.lastModified());
+		return FORMATTER.format(getFullDateAsLong());
 	}
 
 	public Long getFullDateAsLong() {
@@ -78,15 +103,18 @@ public class FileEntry implements Comparable<FileEntry> {
 		return file.length();
 	}
 
-	public String getType() {
-		if (file.isDirectory())
-			return "Ordner";
-		else if (file.isFile())
-			return "Datei";
-		else
-			return "Unbekannt";
+	public FileType getType(){
+		return fileType;
 	}
 
+	/**
+	 * Rechte in der Formatierung "rwx" - dreistellig<p>
+	 * für vorhandene Rechte wird der Buchstabe an diese Stelle geschrieben, ansonsten ein Minus. Folgende Rechte sind möglich:<br>
+	 * - r = Lesen (read)<br>
+	 * - w = Schreiben (write)<br>
+	 * - x = Ausführen (execute)
+	 * @return Rechte in "rwx"-Struktur
+	 */
 	public String getRights() {
 		String rwx = "";
 		rwx += file.canRead() ? "r" : "-";
@@ -99,14 +127,27 @@ public class FileEntry implements Comparable<FileEntry> {
 	 * @return ein passendes Icon
 	 */
 	public ImageIcon getIcon() {
-		if (file.isDirectory())
+		if (getType()==FileType.DIRECTORY)
 			return FOLDER_ICON;
 		else
 			return TEXT_FILE_ICON;
+	}
+	
+	public String getAbsoluteFileName(){
+		return file.getAbsolutePath();
+	}
+	
+	public boolean exists(){
+		return file.exists();
 	}
 
 	@Override
 	public int compareTo(FileEntry o) {
 		return getName().compareTo(o.getName());
+	}
+	
+	@Override
+	public String toString() {
+		return getAbsoluteFileName();
 	}
 }

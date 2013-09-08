@@ -14,6 +14,10 @@ public class Shortcut implements Serializable {
 	private String name;
 	private String shortcutCombi;
 
+	public Shortcut() {
+		super();
+	}
+	
 	public Shortcut(String key, String name, String shortcutCombi) {
 		super();
 		this.key = key;
