@@ -11,19 +11,14 @@ public class OptionsPages extends PageCategory {
 		switch(_topicIndex) {
 		
 			case 0:
-				OptionsFTP optionsFTP = new OptionsFTP();
-				optionsFTP.buildPage(this.page);
+				OptionsShortcuts optionsShortcuts = new OptionsShortcuts();
+				optionsShortcuts.buildPage(this.page);
 				break;
 			case 1:
 				
 				
-				OptionsFTP optionsFTP2 = new OptionsFTP();
-				optionsFTP2.buildPage(this.page);
-				
-	
-				
-				
-				
+				OptionsFTP optionsFTP = new OptionsFTP();
+				optionsFTP.buildPage(this.page);
 				break;
 				
 			default:
@@ -40,7 +35,7 @@ public class OptionsPages extends PageCategory {
 	@Override
 	public String[] getTopics() {
 
-		String[] ret = {"Allgemein","FTP"};
+		String[] ret = {"Shortcuts","FTP"};
 		
 		return ret;
 	}

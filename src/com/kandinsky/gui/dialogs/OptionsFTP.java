@@ -118,7 +118,7 @@ public class OptionsFTP implements ActionListener, ListSelectionListener {
 		textFieldPort.setColumns(10);
 		
 		JLabel labelPassword = new JLabel("Passwort:");
-		labelPassword.setBounds(12, 332, 56, 16);
+		labelPassword.setBounds(12, 332, 70, 16);
 		page.add(labelPassword);
 		
 		passwordField = new JPasswordField();
