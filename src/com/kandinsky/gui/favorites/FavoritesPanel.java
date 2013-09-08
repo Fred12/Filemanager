@@ -70,6 +70,7 @@ public class FavoritesPanel extends JPanel {
 	 */
 	public FavoritesPanel addFavorite(FavoriteElement favorite) {
 		favoritesList.add(favorite);
+		revalidate();
 		return this;
 	}
 
