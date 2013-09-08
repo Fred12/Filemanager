@@ -14,7 +14,7 @@ import javax.swing.ImageIcon;
  */
 public class FileEntry implements Comparable<FileEntry> {
 
-	private static final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
+	protected static final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
 	/** Wunderhübsch */
 	
 	private static final ImageIcon FOLDER_ICON = new ImageIcon(new ImageIcon(FileEntry.class.getResource("/com/kandinsky/resources/folder-7-icon.png")).getImage().getScaledInstance(16, 16,
@@ -24,7 +24,7 @@ public class FileEntry implements Comparable<FileEntry> {
 
 	/** gekapselte Datei */
 	private File file;
-	private FileType fileType;
+	protected FileType fileType;
 
 	/**
 	 * @param files Dateiliste
@@ -63,6 +63,10 @@ public class FileEntry implements Comparable<FileEntry> {
 		this(new File(fileName));
 	}
 	
+	public FileEntry(){
+		
+	}
+	
 	public File getFile(){
 		return file;
 	}
@@ -84,11 +88,11 @@ public class FileEntry implements Comparable<FileEntry> {
 	}
 
 	public String getSize() {
-		return ByteToStringHelper.convertToString(file.length());
+		return ByteToStringHelper.convertToString(getFullSizeAsLong());
 	}
 
 	public String getDate() {
-		return FORMATTER.format(file.lastModified());
+		return FORMATTER.format(getFullDateAsLong());
 	}
 
 	public Long getFullDateAsLong() {
@@ -123,7 +127,7 @@ public class FileEntry implements Comparable<FileEntry> {
 	 * @return ein passendes Icon
 	 */
 	public ImageIcon getIcon() {
-		if (file.isDirectory())
+		if (getType()==FileType.DIRECTORY)
 			return FOLDER_ICON;
 		else
 			return TEXT_FILE_ICON;
