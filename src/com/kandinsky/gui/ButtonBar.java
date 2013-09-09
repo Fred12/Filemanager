@@ -40,25 +40,25 @@ public class ButtonBar extends JPanel implements ActionListener {
 	
 	private JList folderList;
 	private String actualPath;
-	static ArrayList<String> pathList = new ArrayList<String>();
-	String nowTempPath;
+	private static ArrayList<String> pathList = new ArrayList<String>();
+	private String nowTempPath;
 	
-	JToolBar buttonBar;
-	JButton neuesFenster;
-	JButton zurueck;
-	JButton weiter;
-	JButton hoch;
-	JButton home;
-	JButton aktualisieren;
-	JButton vertauschen;
-	JButton favoritenAnlegen;
-	JButton favoritenAnzeigen;
-	JButton benutzer;
-	JButton ftpVerwalten;
-	JButton ftpAnzeigen;
-	JButton shellOeffnen;
-	JButton hilfe;
-	JButton einstellungen;
+	private JToolBar buttonBar;
+	private JButton neuesFenster;
+	private JButton zurueck;
+	private JButton weiter;
+	private JButton hoch;
+	private JButton home;
+	private JButton aktualisieren;
+	private JButton vertauschen;
+	private JButton favoritenAnlegen;
+	private JButton favoritenAnzeigen;
+	private JButton benutzer;
+	private JButton ftpVerwalten;
+	private JButton ftpAnzeigen;
+	private JButton shellOeffnen;
+	private JButton hilfe;
+	private JButton einstellungen;
 
 	/**
 	 * der Funktionshelfer, ueber den verschiedene Funktionen aufgerufen werden
