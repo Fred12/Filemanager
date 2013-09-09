@@ -2,6 +2,7 @@ package com.kandinsky.objects;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -27,25 +28,29 @@ public class SideFunctionsHelper implements FavoriteListener{
 
 	/** Uebergebenes SidePanel, auf welches sich die Funktionen bezieht */
 	private SidePanel sidePanel;
+	private String currentFolderName;
 	
-	
-	
-	
-
 	public SideFunctionsHelper(SidePanel sidePanel){
 		this.sidePanel = sidePanel;
 	}
 	
+	/**
+	 * Aendert einen Ordner-Pfad. Zentrale Anlaufstelle zum Aendern des Pfades, sonst sollte nirgendwo ein switchFolder aufgerufen werden.
+	 * @param folderName
+	 */
 	public void switchFolder(String folderName){
-		try {
-			sidePanel.getTableAndFavoritesSplitPane().getTable().changeFolder(folderName);
+		File folder = new File(folderName);
+		if (!folder.isDirectory()){
+			Logger.warn("Konnte den Ordner {0} nicht finden!", folderName);
+			FunctionsHelper.setMessage(Message.FOLDER_NOT_FOUND);
+		} else {
+			currentFolderName=folderName;
+			List<FileEntry> newEntries = FileEntry.getFileEntryList(folder);
+			sidePanel.getTableAndFavoritesSplitPane().getTable().setFileEntries(newEntries);
+			this.setFileCountInFolder(newEntries.size());
 			sidePanel.getFolderNamePanel().setFolderText(folderName);
-			sidePanel.getTableAndFavoritesSplitPane().repaint();
 			ButtonBar.addPath(folderName);
 			FunctionsHelper.clearMessage();
-		} catch (Exception e) {
-			Logger.warn(e, "Der angegebene Ordner konnte nicht gefunden werden: "+folderName);
-			FunctionsHelper.setMessage(Message.FOLDER_NOT_FOUND);
 		}
 	}
 	
@@ -55,7 +60,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 	
 	public void refresh(){
 		try {
-			sidePanel.getTableAndFavoritesSplitPane().getTable().refresh();
+			sidePanel.getTableAndFavoritesSplitPane().getTable().repaint();
 			sidePanel.getTableAndFavoritesSplitPane().repaint();
 		} catch (Exception e) {
 			// TODO: ordentliches Fehlerhandling, zB Fehlermeldung in der Info setzen
@@ -152,7 +157,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 		String name = JOptionPane.showInputDialog(sidePanel, "Neuer Name", fileEntry.getName());
 		if (name != null) {
 			try {
-				File newFile = new File(sidePanel.getTableAndFavoritesSplitPane().getTable().getCurrentFolderName() + name);
+				File newFile = new File(currentFolderName + name);
 				if (fileEntry.getType() == FileType.DIRECTORY) {
 					FileUtils.moveDirectory(fileEntry.getFile(), newFile);
 				} else {
@@ -187,6 +192,10 @@ public class SideFunctionsHelper implements FavoriteListener{
 	public void disconnectFromFtp(){
 		FTPConnectionHandler.getInstance().disconnect();
 		FunctionsHelper.setMessage(Message.FTP_DISCONNECTED);
+	}
+
+	public String getCurrentFolderName() {
+		return currentFolderName;
 	}
 	
 	/**

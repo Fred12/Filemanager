@@ -34,7 +34,6 @@ public class FileListTable extends JTable {
 	private static final long serialVersionUID = -8348644017646168541L;
 	private FileListTableModel model;
 	private final SideFunctionsHelper sideFunctionsHelper;
-	private String currentFolderName = "";
 	private FileListPopUpMenu popup;
 	private FileEntry entryOfCurrentPopup;
 
@@ -45,7 +44,7 @@ public class FileListTable extends JTable {
 		this.setAutoCreateRowSorter(true);
 		this.setModel(model);
 		this.setFillsViewportHeight(true);
-		setColumnWidths();
+		this.setColumnWidths();
 		this.addMouseListener(new ClickListener());
 		this.addMouseListener(popup.getMouseListener());
 		this.addKeyListener(new TableKeyListener());
@@ -70,35 +69,20 @@ public class FileListTable extends JTable {
 		return new JScrollPane(this);
 	}
 
-	public void changeFolder(String folderName) throws Exception {
-		File folder = new File(folderName);
-		if (!folder.isDirectory())
-			throw new Exception("Kein Verzeichnis angegeben");
-		else {
-			currentFolderName = folderName;
-			List<FileEntry> newEntries = FileEntry.getFileEntryList(folder);
-			model.setValues(newEntries);
-			getSelectionModel().clearSelection();
-			sideFunctionsHelper.setFileCountInFolder(newEntries.size());
-			sideFunctionsHelper.setSelectedFiles(getSelectedFiles());
-			repaint();
-		}
-	}
-
-	public void refresh() throws Exception {
-		if (currentFolderName == null)
-			currentFolderName = "";
-		changeFolder(currentFolderName);
+	/**
+	 * Setzt neue FileEntries in die Maske
+	 * @param newEntries
+	 */
+	public void setFileEntries(List<FileEntry> newEntries) {
+		model.setValues(newEntries);
+		getSelectionModel().clearSelection();
+		sideFunctionsHelper.setSelectedFiles(getSelectedFiles());
 		repaint();
 	}
 
-	public String getCurrentFolderName() {
-		if (currentFolderName.endsWith("/") || currentFolderName.endsWith("\\"))
-			return currentFolderName;
-		else
-			return currentFolderName + "/";
-	}
-
+	/**
+	 * @return die selektierten Dateien
+	 */
 	public File[] getSelectedFiles() {
 		File[] files = new File[getSelectedRowCount()];
 		int i = 0;
@@ -112,6 +96,10 @@ public class FileListTable extends JTable {
 		return files;
 	}
 
+	/**
+	 * Zeigt ein Popup-Menu mit Kontext-Inhalten
+	 * @param point der Punkt an dem das Menue angezeigt werden soll
+	 */
 	public void showPopup(Point point) {
 		popup = new FileListPopUpMenu(this, sideFunctionsHelper);
 		popup.show(this, (int) point.getX(), (int) point.getY());
@@ -127,7 +115,7 @@ public class FileListTable extends JTable {
 	}
 
 	/**
-	 * F�ngt Auswahl und DoubleClicks in der Tabelle ab.
+	 * Faengt Auswahl und DoubleClicks in der Tabelle ab
 	 * @author Benne
 	 */
 	private class ClickListener extends MouseAdapter {
@@ -172,16 +160,16 @@ public class FileListTable extends JTable {
 					sideFunctionsHelper.deleteSelectedFiles();
 					break;
 				}
-//				case "F2": {
-//					if (getSelectedRowCount() == 1) {
-//						int row = getSelectedRow();
-//						// ummappen, falls sortiert
-//						row = convertRowIndexToModel(row);
-//						FileEntry valueAtRow = model.getValueAtRow(row);
-//						sideFunctionsHelper.rename(valueAtRow);
-//					}
-//					break;
-//				}
+				//				case "F2": {
+				//					if (getSelectedRowCount() == 1) {
+				//						int row = getSelectedRow();
+				//						// ummappen, falls sortiert
+				//						row = convertRowIndexToModel(row);
+				//						FileEntry valueAtRow = model.getValueAtRow(row);
+				//						sideFunctionsHelper.rename(valueAtRow);
+				//					}
+				//					break;
+				//				}
 			}
 		}
 	}

@@ -29,9 +29,6 @@ public class FTPList extends ArrayList<FTPEntry> implements Serializable {
 	
 	private static String FTP_LIST_FILE = "FTPList.dat";
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5565796337543758338L;
 
 	private FTPList() {
@@ -136,14 +133,17 @@ public class FTPList extends ArrayList<FTPEntry> implements Serializable {
 		}
 	}
 
-	public FTPEntry getConfigByName(String ftpName) {
+	/**
+	 * 
+	 * @param ftpName
+	 * @return FTPEntry
+	 * @throws FTPConfigNotExistingException, falls Konfiguration nicht gefunden
+	 */
+	public FTPEntry getConfigByName(String ftpName) throws FTPConfigNotExistingException {
 		for(FTPEntry nextEntry : this){
 			if(nextEntry.getName().equals(ftpName))
 				return nextEntry;
 		}
-		return null;
+		throw new FTPConfigNotExistingException(ftpName);
 	}
-	
-	
-	
 }

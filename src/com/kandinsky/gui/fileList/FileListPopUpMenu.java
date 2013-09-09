@@ -137,7 +137,7 @@ public class FileListPopUpMenu extends JPopupMenu {
 					break;
 				}
 				case ADD_CURRENT_FOLDER_TO_FAVORITES: {
-					FileEntry folderFileEntry = new FileEntry(table.getCurrentFolderName());
+					FileEntry folderFileEntry = new FileEntry(sideFunctionsHelper.getCurrentFolderName());
 					FunctionsHelper.addFavorite(folderFileEntry);
 					break;
 				}

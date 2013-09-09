@@ -12,7 +12,7 @@ import com.kandinsky.gui.FolderNamePanel;
 import com.kandinsky.objects.SideFunctionsHelper;
 
 /**
- * Handelt den Panel-Aufbau innerhalb der Splitpane. Sollte so dynamisch sein, dass von den abgeleiteten Klassen nur noch versch. Funktionen aufgerufen werden müssen,
+ * Handelt den Panel-Aufbau innerhalb der Splitpane. Sollte so dynamisch sein, dass von den abgeleiteten Klassen nur noch versch. Funktionen aufgerufen werden mï¿½ssen,
  * der Rest passiert von alleine.
  * @author Benne
  */
@@ -42,18 +42,18 @@ public abstract class SidePanel extends JPanel implements Comparable<SidePanel> 
 		sideFunctionsHelper.refresh();
 	}
 
-	/**
-	 * Versucht einen neuen Ordner zu setzen
-	 * @param folderName
-	 */
-	public void setSelectedFolder(String folderName){
-		try {
-			getTableAndFavoritesSplitPane().getTable().changeFolder(folderName);
-		} catch (Exception e) {
-			// TODO: Fehlerhandling
-			e.printStackTrace();
-		}
-	}
+//	/**
+//	 * Versucht einen neuen Ordner zu setzen
+//	 * @param folderName
+//	 */
+//	public void setSelectedFolder(String folderName){
+//		try {
+//			getTableAndFavoritesSplitPane().getTable().changeFolder(folderName);
+//		} catch (Exception e) {
+//			// TODO: Fehlerhandling
+//			e.printStackTrace();
+//		}
+//	}
 	
 	private Object getButtonBarConstraints() {
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -133,7 +133,7 @@ public abstract class SidePanel extends JPanel implements Comparable<SidePanel> 
 	}
 	
 	public String getCurrentFolderName() {
-		return getTableAndFavoritesSplitPane().getCurrentFolderName();
+		return sideFunctionsHelper.getCurrentFolderName();
 	}
 	
 	/**
