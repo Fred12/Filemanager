@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 import org.pmw.tinylog.Logger;
 
+import com.kandinsky.gui.ButtonBar;
 import com.kandinsky.gui.favorites.FavoriteListener;
 import com.kandinsky.gui.splitPane.SidePanel;
 import com.kandinsky.objects.fileOperation.CopyOperator;
@@ -39,6 +40,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 			sidePanel.getTableAndFavoritesSplitPane().getTable().changeFolder(folderName);
 			sidePanel.getFolderNamePanel().setFolderText(folderName);
 			sidePanel.getTableAndFavoritesSplitPane().repaint();
+			ButtonBar.addPath(folderName);
 			FunctionsHelper.clearMessage();
 		} catch (Exception e) {
 			Logger.warn(e, "Der angegebene Ordner konnte nicht gefunden werden: "+folderName);

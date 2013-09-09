@@ -7,6 +7,8 @@ import java.awt.FlowLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -21,8 +23,8 @@ import com.kandinsky.objects.FunctionsHelper;
 import com.kandinsky.objects.SideFunctionsHelper;
 
 /**
- * PUNKT 3 - ButtonBar. Zeigt eine Liste mit Buttons. Hier ist zu überlegen, ob
- * die Buttons für beide Seiten angezeigt werden sollen, oder nur fuer eine
+ * PUNKT 3 - ButtonBar. Zeigt eine Liste mit Buttons. Hier ist zu ï¿½berlegen, ob
+ * die Buttons fï¿½r beide Seiten angezeigt werden sollen, oder nur fuer eine
  * Seite.
  * 
  * @author Marc L., Mamoudou B.
@@ -37,9 +39,11 @@ public class ButtonBar extends JPanel implements ActionListener {
 	private static final Insets margins = new Insets(0, 0, 0, 0);
 	
 	private JList folderList;
-
+	private String actualPath;
+	static ArrayList<String> pathList = new ArrayList<String>();
+	String nowTempPath;
+	
 	JToolBar buttonBar;
-
 	JButton neuesFenster;
 	JButton zurueck;
 	JButton weiter;
@@ -65,7 +69,9 @@ public class ButtonBar extends JPanel implements ActionListener {
 
 	public ButtonBar(SideFunctionsHelper sideFunctionsHelper) {
 		this.sideFunctionsHelper = sideFunctionsHelper;
-
+		
+		actualPath = sideFunctionsHelper.getFolder();
+		
 		// buttonBar = new JToolBar("Button Bar",0);
 		buttonBar = new JToolBar();
 		this.add(buttonBar, BorderLayout.NORTH);
@@ -135,7 +141,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		hilfe = new JButton(n);
 		einstellungen = new JButton(o);
 
-		// Größe der Buttons anpassen
+		// Grï¿½ï¿½e der Buttons anpassen
 		neuesFenster.setMargin(margins);
 		zurueck.setMargin(margins);
 		weiter.setMargin(margins);
@@ -155,13 +161,13 @@ public class ButtonBar extends JPanel implements ActionListener {
 		// ToolTips fuer die Buttons
 		neuesFenster.setBackground(Color.WHITE);
 		// neuesFenster.setFont(new Font("Arial", Font.PLAIN, 12));
-		neuesFenster.setToolTipText("Öffnet eine neues Hauptfenster");
+		neuesFenster.setToolTipText("ï¿½ffnet eine neues Hauptfenster");
 		zurueck.setBackground(Color.WHITE);
-		zurueck.setToolTipText("Zum Ordner zurück navigieren");
+		zurueck.setToolTipText("Zum Ordner zurï¿½ck navigieren");
 		weiter.setBackground(Color.WHITE);
-		weiter.setToolTipText("Zum Ordner vorwärts navigieren");
+		weiter.setToolTipText("Zum Ordner vorwï¿½rts navigieren");
 		hoch.setBackground(Color.WHITE);
-		hoch.setToolTipText("Zum Übergeordneten Ordner wechseln");
+		hoch.setToolTipText("Zum ï¿½bergeordneten Ordner wechseln");
 
 		home.setBackground(Color.WHITE);
 		// home.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -181,11 +187,11 @@ public class ButtonBar extends JPanel implements ActionListener {
 		ftpAnzeigen.setBackground(Color.WHITE);
 		ftpAnzeigen.setToolTipText("FTP Verbindungen anzeigen");
 		shellOeffnen.setBackground(Color.WHITE);
-		shellOeffnen.setToolTipText("Shell im aktuellen Ordner öffnen");
+		shellOeffnen.setToolTipText("Shell im aktuellen Ordner ï¿½ffnen");
 		hilfe.setBackground(Color.WHITE);
 		hilfe.setToolTipText("Hilfe und Infos");
 		einstellungen.setBackground(Color.WHITE);
-		einstellungen.setToolTipText("Einstellungen öffnen");
+		einstellungen.setToolTipText("Einstellungen ï¿½ffnen");
 
 		// Buttons der buttonBar Anlegen
 		// buttonBar.add(neuesFenster);
@@ -251,11 +257,14 @@ public class ButtonBar extends JPanel implements ActionListener {
 		 */
 
 		if (quelle == zurueck) {
-			folderList.setSelectedIndex(folderList.getSelectedIndex()-1);
-			//sideFunctionsHelper.getFolder();
+			//folderList.setSelectedIndex(folderList.getSelectedIndex()-1);			
+			nowTempPath = ButtonBar.getPreviousListElement(ButtonBar.getLastListElement());
+			sideFunctionsHelper.switchFolder(nowTempPath);			
+			//sideFunctionsHelper.getFolder();			
 		}
 
 		if (quelle == weiter) {
+			sideFunctionsHelper.switchFolder(ButtonBar.getNextListElement(nowTempPath));
 		}
 
 		if (quelle == hoch) {
@@ -295,8 +304,60 @@ public class ButtonBar extends JPanel implements ActionListener {
 		}
 
 		if (quelle == einstellungen) {
-		}
+		}		
+				
+	}
+	
+	
+	//*****************************************************************************************************************
+			//Funktionen fÃ¼r die ButtonNavigation , erstmal noch nicht in eigener Klasse
+			
+			//actualPath = sideFunctionsHelper.getFolder();
+			//pathList = new ArrayList<String>();	
+			
+			//System.out.println(ButtonBar.getPreviousListElement(actualPath));
+	
+	
 
+	public static void addPath(String folderName) {		 
+		 pathList.add(folderName);
+			for (String name : pathList) {
+				//System.out.println(name);
+		}		
+	}
+	
+	public static String getPreviousListElement(String actualPath) {
+		if (!pathList.isEmpty()) {
+			int index = pathList.indexOf(actualPath);
+			String previousElement = pathList.get(index -1);
+			//System.out.println(previousElement);
+			return previousElement;
+		}
+		return null;
+	}
+	
+	public static String getLastListElement() {
+		if (!pathList.isEmpty()) {
+			  String lastElement = pathList.get(pathList.size()-1);			  	
+			  return lastElement;			 
+			}
+		return null;			
+	}
+	
+	public static String getNextListElement(String actualPath) {
+		if (!pathList.isEmpty()) {
+			int index = pathList.indexOf(actualPath);
+			/*if (index == pathList.size() -1) {
+				return null;
+			}*/
+			
+			String nextElement = pathList.get(index+1);				
+			return nextElement;			
+		}
+		return null;				
 	}
 
+	
+
 }
+
