@@ -26,7 +26,7 @@ import com.kandinsky.objects.SideFunctionsHelper;
 /**
  * PUNKT 6 - Fileliste
  * Zeigt die Dateien des aktuellen Verzeichnisses als Tabelle an.
- * ACHTUNG: muss für beide Seiten der SplitPane funktionieren!
+ * ACHTUNG: muss fï¿½r beide Seiten der SplitPane funktionieren!
  * @author schmidtb
  */
 public class FileListTable extends JTable {
@@ -64,7 +64,7 @@ public class FileListTable extends JTable {
 
 	/**
 	 * Umgibt die Tabelle mit einer ScrollPane. Das ist wichtig, damit die Tabelle eine Scrollbar bekommt UND auch die Kopfdaten anzeigt.
-	 * @return umschließende ScrollPane
+	 * @return umschlieï¿½ende ScrollPane
 	 */
 	public JScrollPane surroundedWithPane() {
 		return new JScrollPane(this);
@@ -113,6 +113,7 @@ public class FileListTable extends JTable {
 	}
 
 	public void showPopup(Point point) {
+		popup = new FileListPopUpMenu(this, sideFunctionsHelper);
 		popup.show(this, (int) point.getX(), (int) point.getY());
 		try {
 			entryOfCurrentPopup = model.getValueAtRow(rowAtPoint(point));
@@ -126,7 +127,7 @@ public class FileListTable extends JTable {
 	}
 
 	/**
-	 * Fängt Auswahl und DoubleClicks in der Tabelle ab.
+	 * Fï¿½ngt Auswahl und DoubleClicks in der Tabelle ab.
 	 * @author Benne
 	 */
 	private class ClickListener extends MouseAdapter {

@@ -16,12 +16,12 @@ import com.kandinsky.objects.FileEntry;
 public class FTPConnectionHandler {
 
 	private static FTPConnectionHandler instance;
-	private FTPClient f;
+	private FTPClient ftpConnection;
 	private FTPEntry currentConfig;
 
 	private FTPConnectionHandler() {
-		f = new FTPClient();
-		f.setConnectTimeout(15000);
+		ftpConnection = new FTPClient();
+		ftpConnection.setConnectTimeout(15000);
 	}
 
 	public static FTPConnectionHandler getInstance() {
@@ -30,6 +30,10 @@ public class FTPConnectionHandler {
 
 		return instance;
 	}
+	
+	public boolean isConnected(){
+		return ftpConnection.isConnected();
+	}
 
 	/**
 	 * Versucht eine Verbindung mit angegebener Config herzustellen
@@ -37,32 +41,32 @@ public class FTPConnectionHandler {
 	 * @return Verbindung hergestellt oder nicht
 	 * @throws Exception
 	 */
-	public boolean connect(FTPEntry ftpConfig) throws Exception {
-		if (f.isConnected()) {
+	public void connect(FTPEntry ftpConfig) throws Exception {
+		if (ftpConnection.isConnected()) {
 			throw new FTPAlreadyConnectedException();
 		} else {
 			Logger.info("FTP-Verbindung fuer {0} wird hergestellt!", ftpConfig.getName());
 			currentConfig = ftpConfig;
 			try {
-				f.connect(ftpConfig.getServer(), ftpConfig.getPort());
-				if (!f.isConnected())
-					return false;
+				ftpConnection.connect(ftpConfig.getServer(), ftpConfig.getPort());
+				if (!ftpConnection.isConnected())
+					throw new FTPConnectionFailedException(ftpConfig);
 
-				boolean login = f.login(ftpConfig.getUsername(), ftpConfig.getPassword());
+				boolean login = ftpConnection.login(ftpConfig.getUsername(), ftpConfig.getPassword());
 				if (!login) {
 					Logger.error("Benutzername und Passwort stimmen nicht!");
-					f.disconnect();
+					ftpConnection.disconnect();
 					throw new FTPLoginFailedException();
-				} else {
-					return true;
 				}
 			} catch (SocketException e) {
 				Logger.error(e, "Irgendwas hat da nicht geklappt! {0}", e.getMessage());
+				throw new FTPConnectionFailedException(ftpConfig, e);
 			} catch (IOException e) {
 				Logger.error(e, "Irgendwas hat da nicht geklappt! {0}", e.getMessage());
+				throw new FTPConnectionFailedException(ftpConfig, e);
 			}
-			return false;
 		}
+		Logger.info("FTP-Verbindung hergestellt!");
 	}
 
 	/**
@@ -71,7 +75,7 @@ public class FTPConnectionHandler {
 	public void disconnect() {
 		Logger.info("FTP-Verbindung fuer {0} wird geschlossen!", currentConfig.getName());
 		try {
-			f.disconnect();
+			ftpConnection.disconnect();
 		} catch (IOException e) {
 			Logger.warn("Schliessen der FTP-Verbindung war leider nicht mehr moeglich! {0}", e.getMessage());
 		}
@@ -84,7 +88,7 @@ public class FTPConnectionHandler {
 	 */
 	public List<FileEntry> getFilesInFolder(String pathName) {
 		try {
-			FTPFile[] files = f.listFiles(pathName);
+			FTPFile[] files = ftpConnection.listFiles(pathName);
 			List<FileEntry> fileEntries = new LinkedList<>();
 			for (FTPFile nextFile : files) {
 				fileEntries.add(new FTPFileEntry(nextFile));

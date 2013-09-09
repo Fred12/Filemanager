@@ -36,6 +36,15 @@ public class FTPList extends ArrayList<FTPEntry> implements Serializable {
 		
 	}
 	
+	@Override
+	public boolean add(FTPEntry e) {
+		boolean added =  super.add(e);
+		if(added){
+			this.saveListToFile();
+		} 
+		return added;
+	}
+	
 	public static FTPList getInstance(){
 		
 		if(FTPList.self == null){
