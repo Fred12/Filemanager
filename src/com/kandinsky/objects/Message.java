@@ -15,6 +15,7 @@ public enum Message {
 	MOVE_COMPLETE("Datei(en) wurde(n) erfolgreich verschoben.", Color.GREEN),
 	FTP_CONNECTED("Erfolgreich mit FTP verbunden.", Color.GREEN),
 	FTP_DISCONNECTED("FTP-Verbindung wurde geschlossen.", Color.GREEN),
+	
 	FAVORITE_NOT_ADDED("Favorit konnte nicht hinzugefuegt werden!", Color.RED),
 	FAVORITES_NOT_LOADED("Favoriten konnten nicht aktualisiert werden!", Color.RED),
 	FAVORITES_NOT_SAVED("Favoriten konnten nicht gespeichert werden!", Color.RED),
@@ -26,6 +27,7 @@ public enum Message {
 	CREATE_FOLDER_FAILED("Es konnte leider kein neuer Ordner angelegt werden!", Color.RED),
 	RENAME_FOLDER_FAILED("Der Ordner konnte nicht umbenannt werden!", Color.RED),
 	FTP_CONNECT_FAILED("FTP-Verbindung konnte nicht hergestellt werden!", Color.RED),
+	
 	NO_FAVORITES_FOUND("Keine Favoriten gefunden.", Color.LIGHT_GRAY),
 	EMPTY("-", Color.LIGHT_GRAY);
 	

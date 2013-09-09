@@ -116,6 +116,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 			File file = new File(sidePanel.getCurrentFolderName() + name);
 			try {
 				file.createNewFile();
+				Logger.info("Neue Datei {0} wurde erstellt.", name);
 				refresh();
 			} catch (IOException e) {
 				Logger.error(e, "Anlegen einer neuen Datei war leider nicht moeglich");
@@ -133,6 +134,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 			File file = new File(sidePanel.getCurrentFolderName() + name);
 			boolean created = file.mkdir();
 			if (created) {
+				Logger.info("Neuer Ordner {0} wurde erstellt.", name);
 				refresh();
 			} else {
 				Logger.error("Anlegen eines neuen Ordners war leider nicht moeglich");

@@ -43,6 +43,7 @@ public abstract class FileOperator {
 			}
 			otherSidePanel.refresh();
 			sidePanel.refresh();
+			Logger.info("{0} wurde fuer die gewaehlten Elemente durchgefuehrt!", getFunctionCall());
 			FunctionsHelper.setMessage(getMessage());
 		} catch (Exception e) {
 			Logger.error(e, "{0} hat nicht funktioniert!", getFunctionCall());

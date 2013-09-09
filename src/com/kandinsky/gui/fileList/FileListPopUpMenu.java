@@ -44,13 +44,13 @@ public class FileListPopUpMenu extends JPopupMenu {
 		mouseListener = new FileListPopUpMouseListener();
 		actionListener = new PopUpActionListener();
 		createAndAddSubMenuItem(this, ADD_TO_FAVORITES);
+		createAndAddSubMenuItem(this, ADD_CURRENT_FOLDER_TO_FAVORITES);
 		createAndAddSubMenuItem(this, COPY_SELECTED_FILES);
 		createAndAddSubMenuItem(this, MOVE_SELECTED_FILES);
 		createAndAddSubMenuItem(this, REMOVE_SELECTED_FILES);
 		createAndAddSubMenuItem(this, NEW_FILE);
 		createAndAddSubMenuItem(this, NEW_FOLDER);
 		createAndAddSubMenuItem(this, RENAME);
-		createAndAddSubMenuItem(this, ADD_CURRENT_FOLDER_TO_FAVORITES);
 		createAndAddFTPMenu();
 	}
 

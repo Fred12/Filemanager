@@ -172,6 +172,16 @@ public class FileListTable extends JTable {
 					sideFunctionsHelper.deleteSelectedFiles();
 					break;
 				}
+//				case "F2": {
+//					if (getSelectedRowCount() == 1) {
+//						int row = getSelectedRow();
+//						// ummappen, falls sortiert
+//						row = convertRowIndexToModel(row);
+//						FileEntry valueAtRow = model.getValueAtRow(row);
+//						sideFunctionsHelper.rename(valueAtRow);
+//					}
+//					break;
+//				}
 			}
 		}
 	}
@@ -181,13 +191,12 @@ public class FileListTable extends JTable {
 	 * @author Benne
 	 */
 	private class EnterAction extends AbstractAction {
-		
+
 		private static final long serialVersionUID = 7447863551768598886L;
 
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			jumpIntoSelectedFolder();
 		}
-
 	}
 }
