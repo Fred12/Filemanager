@@ -8,6 +8,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -72,7 +74,14 @@ public class FTPList extends ArrayList<FTPEntry> implements Serializable {
 		}
 		
 		return names;
-		
+	}
+	
+	public List<String> getNamesAsList() {
+		List<String> names = new LinkedList<String>();
+		for (FTPEntry currentEntry : FTPList.self) {
+			names.add(currentEntry.getName());
+		}
+		return names;
 	}
 	
 	public void swapEntries(int first, int second) {
@@ -125,6 +134,14 @@ public class FTPList extends ArrayList<FTPEntry> implements Serializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public FTPEntry getConfigByName(String ftpName) {
+		for(FTPEntry nextEntry : this){
+			if(nextEntry.getName().equals(ftpName))
+				return nextEntry;
+		}
+		return null;
 	}
 	
 	

@@ -5,16 +5,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
-import org.pmw.tinylog.Logger;
-
 import com.kandinsky.conn.FTPConnectionHandler;
-import com.kandinsky.objects.FTPEntry;
 import com.kandinsky.objects.FTPList;
 import com.kandinsky.objects.FileEntry;
 import com.kandinsky.objects.FunctionsHelper;
@@ -63,15 +61,15 @@ public class FileListPopUpMenu extends JPopupMenu {
 		newMenuItem.addActionListener(actionListener);
 	}
 	
-	private void createAndAddSubMenuItems(JComponent menu, String[] items){
+	private void createAndAddSubMenuItems(JComponent menu, List<String> items){
 		for(String entry : items){
 			createAndAddSubMenuItem(menu, entry);
 		}
 	}
 	
 	private void createAndAddFTPMenu(){
-		String[] ftpNameList = FTPList.getInstance().getNames();
-		if(ftpNameList.length!=0){
+		List<String> ftpNameList = FTPList.getInstance().getNamesAsList();
+		if(!ftpNameList.isEmpty()){
 			if(FTPConnectionHandler.getInstance().isConnected()){
 				createAndAddSubMenuItem(this, CLOSE_FTP_CONNECTION);
 			} else {
@@ -144,23 +142,17 @@ public class FileListPopUpMenu extends JPopupMenu {
 					break;
 				}
 				case CLOSE_FTP_CONNECTION: {
-					FTPConnectionHandler.getInstance().disconnect();
+					sideFunctionsHelper.disconnectFromFtp();
 					break;
 				}
 				default: {
 					// Hier muessen die FTPs ueberprueft werden
 					// geht wahrscheinlich auch anders, aber wir sind ja Fummler
-					FTPList list = FTPList.getInstance();
-					for(FTPEntry nextEntry :list){
-						if(event.getActionCommand().equals(nextEntry.getName())){
-							try {
-								FTPConnectionHandler.getInstance().connect(nextEntry);
-							} catch (Exception e) {
-								Logger.info("Connection versuch mislungen!", e);
-							}
-							break;
-						}
-					}
+					List<String> ftpNames= FTPList.getInstance().getNamesAsList();
+					if(ftpNames.contains(event.getActionCommand()))
+						sideFunctionsHelper.connectToFtp(event.getActionCommand());
+					
+					break;
 				}
 			}
 		}

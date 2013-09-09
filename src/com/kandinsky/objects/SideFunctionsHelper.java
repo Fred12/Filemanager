@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 import org.pmw.tinylog.Logger;
 
+import com.kandinsky.conn.FTPConnectionHandler;
 import com.kandinsky.gui.ButtonBar;
 import com.kandinsky.gui.favorites.FavoriteListener;
 import com.kandinsky.gui.splitPane.SidePanel;
@@ -161,6 +162,29 @@ public class SideFunctionsHelper implements FavoriteListener{
 				FunctionsHelper.setMessage(Message.RENAME_FOLDER_FAILED);
 			}
 		}
+	}
+	
+	/**
+	 * Versucht eine Verbindung mithilfe eines FTP-Namens herzustellen
+	 * @param ftpName Konfigurationsname
+	 */
+	public void connectToFtp(String ftpName){
+		try {
+			FTPEntry entry = FTPList.getInstance().getConfigByName(ftpName);
+			FTPConnectionHandler.getInstance().connect(entry);
+			FunctionsHelper.setMessage(Message.FTP_CONNECTED);
+		} catch (Exception e) {
+			Logger.error("Connection versuch misslungen!", e);
+			FunctionsHelper.setMessage(Message.FTP_CONNECT_FAILED);
+		}
+	}
+	
+	/**
+	 * Schliesst eine FTP-Verbindung falls vorhanden und gibt eine Nachricht aus.
+	 */
+	public void disconnectFromFtp(){
+		FTPConnectionHandler.getInstance().disconnect();
+		FunctionsHelper.setMessage(Message.FTP_DISCONNECTED);
 	}
 	
 	/**

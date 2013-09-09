@@ -94,4 +94,9 @@ public class FTPEntry implements Serializable {
 		this.password = password;
 	}
 
+	@Override
+	public String toString() {
+		return "FTPEntry [name=" + name + ", server=" + server + ":" + port + ", username=" + username + "]";
+	}
+
 }
