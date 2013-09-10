@@ -68,7 +68,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 				sidePanel.getFolderNamePanel().setFolderText(currentFolderName);
 				ButtonBar.addFolder(folderName);
 				FunctionsHelper.clearMessage();
-			} catch (RuntimeException e) {
+			} catch (Exception e) {
 				Logger.warn("Konnte den Ordner {0} nicht finden!", folderName);
 				FunctionsHelper.setMessage(Message.FOLDER_NOT_FOUND);
 			}
@@ -205,7 +205,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 			sidePanel.getTableAndFavoritesSplitPane().getTable().setFtpConnected(true);
 			lastFolderBeforeFTPConnection = getCurrentFolderName();
 			currentFolderName="";
-			switchFolder("");
+			switchFolder("/");
 		} catch (Exception e) {
 			Logger.error("Connection versuch misslungen!", e);
 			FunctionsHelper.setMessage(Message.FTP_CONNECT_FAILED);
