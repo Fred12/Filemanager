@@ -8,12 +8,10 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
@@ -24,8 +22,8 @@ import com.kandinsky.objects.FunctionsHelper;
 import com.kandinsky.objects.SideFunctionsHelper;
 
 /**
- * PUNKT 3 - ButtonBar. Zeigt eine Liste mit Buttons. Hier ist zu �berlegen, ob
- * die Buttons f�r beide Seiten angezeigt werden sollen, oder nur fuer eine
+ * PUNKT 3 - ButtonBar. Zeigt eine Liste mit Buttons. Hier ist zu ueberlegen, ob
+ * die Buttons fuer beide Seiten angezeigt werden sollen, oder nur fuer eine
  * Seite.
  * 
  * @author Marc L., Mamoudou B.
@@ -39,7 +37,6 @@ public class ButtonBar extends JPanel implements ActionListener {
 
 	private static final Insets margins = new Insets(0, 0, 0, 0);
 	
-	private JList folderList;
 	private String actualPath;
 	private static ArrayList<String> pathList; 
 	private String nowTempPath;
