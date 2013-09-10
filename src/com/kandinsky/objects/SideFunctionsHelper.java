@@ -49,7 +49,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 			sidePanel.getTableAndFavoritesSplitPane().getTable().setFileEntries(newEntries);
 			this.setFileCountInFolder(newEntries.size());
 			sidePanel.getFolderNamePanel().setFolderText(folderName);
-			ButtonBar.addPath(folderName);
+			ButtonBar.addFolder(folderName);
 			FunctionsHelper.clearMessage();
 		}
 	}

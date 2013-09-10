@@ -40,8 +40,9 @@ public class ButtonBar extends JPanel implements ActionListener {
 	
 	private JList folderList;
 	private String actualPath;
-	private static ArrayList<String> pathList = new ArrayList<String>();
+	private static ArrayList<String> pathList; 
 	private String nowTempPath;
+	
 	
 	private JToolBar buttonBar;
 	private JButton neuesFenster;
@@ -70,7 +71,6 @@ public class ButtonBar extends JPanel implements ActionListener {
 	public ButtonBar(SideFunctionsHelper sideFunctionsHelper) {
 		this.sideFunctionsHelper = sideFunctionsHelper;
 		
-		actualPath = sideFunctionsHelper.getFolder();
 		
 		// buttonBar = new JToolBar("Button Bar",0);
 		buttonBar = new JToolBar();
@@ -227,6 +227,20 @@ public class ButtonBar extends JPanel implements ActionListener {
 		shellOeffnen.addActionListener(this);
 		hilfe.addActionListener(this);
 		einstellungen.addActionListener(this);
+		
+		
+		
+		
+		//************************************************************************************************
+		
+		
+		pathList = new ArrayList<String>();
+		actualPath = sideFunctionsHelper.getFolder();
+		addFolder(actualPath);
+		
+		
+		
+		
 
 	}
 
@@ -258,13 +272,14 @@ public class ButtonBar extends JPanel implements ActionListener {
 
 		if (quelle == zurueck) {
 			//folderList.setSelectedIndex(folderList.getSelectedIndex()-1);			
-			nowTempPath = ButtonBar.getPreviousListElement(ButtonBar.getLastListElement());
-			sideFunctionsHelper.switchFolder(nowTempPath);			
-			//sideFunctionsHelper.getFolder();			
+			nowTempPath = getPreviousListElement(getLastListElement(actualPath));
+			sideFunctionsHelper.switchFolder(nowTempPath);		
+			
+			//sideFunctionsHelper.getFolder();				
 		}
 
 		if (quelle == weiter) {
-			sideFunctionsHelper.switchFolder(ButtonBar.getNextListElement(nowTempPath));
+			sideFunctionsHelper.switchFolder(ButtonBar.getNextListElement(getActualElement(sideFunctionsHelper)));
 		}
 
 		if (quelle == hoch) {
@@ -311,47 +326,51 @@ public class ButtonBar extends JPanel implements ActionListener {
 	
 	//*****************************************************************************************************************
 			//Funktionen für die ButtonNavigation , erstmal noch nicht in eigener Klasse
-			
-			//actualPath = sideFunctionsHelper.getFolder();
-			//pathList = new ArrayList<String>();	
-			
-			//System.out.println(ButtonBar.getPreviousListElement(actualPath));
-	
 	
 
-	public static void addPath(String folderName) {		 
-		 pathList.add(folderName);
-			for (String name : pathList) {
-				//System.out.println(name);
-		}		
+	public static void addFolder(String folderName) {	
+//		if (pathList.contains(folderName))
+//		{			
+//		}
+//		else {
+			pathList.add(folderName);
+				for (String element : pathList) {
+					System.out.println(element);
+			}		
+		}
+//	}
+	
+	public static String getActualElement(SideFunctionsHelper sideFunctionsHelper) {
+		String actualPath = sideFunctionsHelper.getFolder();
+		return actualPath;
 	}
 	
 	public static String getPreviousListElement(String actualPath) {
-		if (!pathList.isEmpty()) {
+		if (pathList.contains(actualPath)) {
 			int index = pathList.indexOf(actualPath);
 			String previousElement = pathList.get(index -1);
-			//System.out.println(previousElement);
+			//System.out.println(previousElement);			
 			return previousElement;
 		}
-		return null;
+		return null ;
 	}
 	
-	public static String getLastListElement() {
+	public static String getLastListElement(String actualPath) {
 		if (!pathList.isEmpty()) {
-			  String lastElement = pathList.get(pathList.size()-1);			  	
+			  String lastElement = pathList.get(pathList.size()-1);				  
 			  return lastElement;			 
 			}
 		return null;			
 	}
 	
 	public static String getNextListElement(String actualPath) {
-		if (!pathList.isEmpty()) {
+		if (pathList.contains(actualPath)) {
 			int index = pathList.indexOf(actualPath);
 			/*if (index == pathList.size() -1) {
 				return null;
 			}*/
 			
-			String nextElement = pathList.get(index+1);				
+			String nextElement = pathList.get(index +1);				
 			return nextElement;			
 		}
 		return null;				
