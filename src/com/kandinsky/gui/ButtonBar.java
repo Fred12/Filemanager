@@ -168,6 +168,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		zurueck.setToolTipText("Zum Ordner zur�ck navigieren");
 		weiter.setBackground(Color.WHITE);
 		weiter.setToolTipText("Zum Ordner vorw�rts navigieren");
+		weiter.setEnabled(false);
 		hoch.setBackground(Color.WHITE);
 		hoch.setToolTipText("Zum �bergeordneten Ordner wechseln");
 
@@ -216,7 +217,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		// ActionListener fuer die einzelnen Buttons
 		neuesFenster.addActionListener(getNeuesFenster());
 		zurueck.addActionListener(this);
-		weiter.addActionListener(this);
+		weiter.addActionListener(this);		
 		hoch.addActionListener(this);
 		home.addActionListener(this);
 		aktualisieren.addActionListener(this);
@@ -372,9 +373,9 @@ public class ButtonBar extends JPanel implements ActionListener {
 	public static String getActualElement(SideFunctionsHelper sideFunctionsHelper) {
 		
 		String actualPath = sideFunctionsHelper.getFolder();
-		//if (pathList.indexOf(actualPath) == pathList.size() -1) {
-		//	return null;
-		//}
+		if (pathList.indexOf(actualPath) == pathList.size() -1) {
+			return null;
+		}
 		return actualPath;
 	}
 	
