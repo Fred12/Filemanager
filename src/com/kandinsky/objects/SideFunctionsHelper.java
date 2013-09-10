@@ -58,21 +58,20 @@ public class SideFunctionsHelper implements FavoriteListener{
 				FunctionsHelper.clearMessage();
 			}
 		} else {
-			Logger.info("Ordner gewechselt: "+currentFolderName+"/"+folderName);
-			if(folderName.contains("/") || currentFolderName.isEmpty()){
+			try {
+				currentFolderName = ftpConnectionHandler.changeWorkingDirectory(folderName);
+				Logger.info("Ordner gewechselt: " + currentFolderName + "/" + folderName);
 				// Absolut
-				currentFolderName = folderName;
-			} else {
-				/// Relativ
-				String slashIfNeeded = currentFolderName.endsWith("/")?"":"/";
-				currentFolderName += slashIfNeeded+folderName;
+				List<FileEntry> newEntries = ftpConnectionHandler.getFilesInFolder();
+				sidePanel.getTableAndFavoritesSplitPane().getTable().setFileEntries(newEntries);
+				this.setFileCountInFolder(newEntries.size());
+				sidePanel.getFolderNamePanel().setFolderText(currentFolderName);
+				ButtonBar.addFolder(folderName);
+				FunctionsHelper.clearMessage();
+			} catch (RuntimeException e) {
+				Logger.warn("Konnte den Ordner {0} nicht finden!", folderName);
+				FunctionsHelper.setMessage(Message.FOLDER_NOT_FOUND);
 			}
-			List<FileEntry> newEntries = ftpConnectionHandler.getFilesInFolder(currentFolderName);
-			sidePanel.getTableAndFavoritesSplitPane().getTable().setFileEntries(newEntries);
-			this.setFileCountInFolder(newEntries.size());
-			sidePanel.getFolderNamePanel().setFolderText(currentFolderName);
-			ButtonBar.addFolder(folderName);
-			FunctionsHelper.clearMessage();
 		}
 	}
 	
@@ -203,6 +202,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 			ftpConnectionHandler.connect(entry);
 			FunctionsHelper.setMessage(Message.FTP_CONNECTED);
 
+			sidePanel.getTableAndFavoritesSplitPane().getTable().setFtpConnected(true);
 			lastFolderBeforeFTPConnection = getCurrentFolderName();
 			currentFolderName="";
 			switchFolder("");
@@ -218,6 +218,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 	public void disconnectFromFtp(){
 		ftpConnectionHandler.disconnect();
 		FunctionsHelper.setMessage(Message.FTP_DISCONNECTED);
+		sidePanel.getTableAndFavoritesSplitPane().getTable().setFtpConnected(false);
 		switchFolder(lastFolderBeforeFTPConnection);
 	}
 

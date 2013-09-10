@@ -61,6 +61,16 @@ public class FTPConnectionHandler {
 		}
 		Logger.info("FTP-Verbindung hergestellt!");
 	}
+	
+	public String changeWorkingDirectory(String pathname){
+		try {
+			ftpConnection.changeWorkingDirectory(pathname);
+			return ftpConnection.printWorkingDirectory();
+		} catch (IOException e) {
+			Logger.error(e, "Laden der Dateien leider nicht moeglich! {0}", e.getMessage());
+			throw new RuntimeException("Laden der Dateien leider nicht moeglich! " + e.getMessage(), e);
+		}
+	}
 
 	/**
 	 * Versucht eine bestehende Verbindung zu schliessen
@@ -82,6 +92,20 @@ public class FTPConnectionHandler {
 	public List<FileEntry> getFilesInFolder(String pathName) {
 		try {
 			FTPFile[] files = ftpConnection.listFiles(pathName);
+			List<FileEntry> fileEntries = new LinkedList<>();
+			for (FTPFile nextFile : files) {
+				fileEntries.add(new FTPFileEntry(nextFile));
+			}
+			return fileEntries;
+		} catch (IOException e) {
+			Logger.error(e, "Laden der Dateien leider nicht moeglich! {0}", e.getMessage());
+			throw new RuntimeException("Laden der Dateien leider nicht moeglich! " + e.getMessage(), e);
+		}
+	}
+	
+	public List<FileEntry> getFilesInFolder() {
+		try {
+			FTPFile[] files = ftpConnection.listFiles();
 			List<FileEntry> fileEntries = new LinkedList<>();
 			for (FTPFile nextFile : files) {
 				fileEntries.add(new FTPFileEntry(nextFile));

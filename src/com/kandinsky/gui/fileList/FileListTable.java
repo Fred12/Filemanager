@@ -1,5 +1,6 @@
 package com.kandinsky.gui.fileList;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
@@ -45,6 +46,7 @@ public class FileListTable extends JTable {
 		this.setModel(model);
 		this.setFillsViewportHeight(true);
 		this.setColumnWidths();
+		this.setOpaque(true);
 		this.addMouseListener(new ClickListener());
 		this.addMouseListener(popup.getMouseListener());
 		this.addKeyListener(new TableKeyListener());
@@ -174,6 +176,17 @@ public class FileListTable extends JTable {
 		}
 	}
 
+	public void setFtpConnected(boolean connected) {
+		Color color;
+		if (connected) {
+			color = new Color(0xCEF6EC);
+		} else {
+			color = Color.white;
+		}
+		this.setBackground(color);
+		this.revalidate();
+	}
+	
 	/**
 	 * Bringt eine Action fuer den Enter-Button mit sich, um die JTable-Enter-Aktion zu ueberschreiben
 	 * @author Benne
