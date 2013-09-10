@@ -15,21 +15,14 @@ import com.kandinsky.objects.FileEntry;
 
 public class FTPConnectionHandler {
 
-	private static FTPConnectionHandler instance;
 	private FTPClient ftpConnection;
 	private FTPEntry currentConfig;
 
-	private FTPConnectionHandler() {
+	public FTPConnectionHandler() {
 		ftpConnection = new FTPClient();
 		ftpConnection.setConnectTimeout(15000);
 	}
 
-	public static FTPConnectionHandler getInstance() {
-		if (instance == null)
-			instance = new FTPConnectionHandler();
-
-		return instance;
-	}
 	
 	public boolean isConnected(){
 		return ftpConnection.isConnected();

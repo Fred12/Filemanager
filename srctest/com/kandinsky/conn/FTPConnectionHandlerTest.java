@@ -7,10 +7,15 @@ import org.junit.Test;
 public class FTPConnectionHandlerTest {
 
 	@Test
-	public void testGetInstance() {
-		FTPConnectionHandler handler1 = FTPConnectionHandler.getInstance();
-		FTPConnectionHandler handler2 = FTPConnectionHandler.getInstance();
-		assertTrue(handler1==handler2);
+	public void testConstructor() {
+		FTPConnectionHandler handler = new FTPConnectionHandler();
+		assertFalse(handler.isConnected());
+	}
+	
+	@Test (expected=RuntimeException.class)
+	public void testGetFilesInFolderWhileNotConnected() {
+		FTPConnectionHandler handler = new FTPConnectionHandler();
+		handler.getFilesInFolder("/");
 	}
 
 }

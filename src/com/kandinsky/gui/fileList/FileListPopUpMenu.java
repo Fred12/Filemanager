@@ -12,7 +12,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
-import com.kandinsky.conn.FTPConnectionHandler;
 import com.kandinsky.objects.FTPList;
 import com.kandinsky.objects.FileEntry;
 import com.kandinsky.objects.FunctionsHelper;
@@ -70,7 +69,7 @@ public class FileListPopUpMenu extends JPopupMenu {
 	private void createAndAddFTPMenu(){
 		List<String> ftpNameList = FTPList.getInstance().getNamesAsList();
 		if(!ftpNameList.isEmpty()){
-			if(FTPConnectionHandler.getInstance().isConnected()){
+			if(sideFunctionsHelper.isFtpConnected()){
 				createAndAddSubMenuItem(this, CLOSE_FTP_CONNECTION);
 			} else {
 				JMenu ftpMenu = new JMenu(CONNECT_TO_FTP);

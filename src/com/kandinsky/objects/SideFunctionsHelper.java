@@ -29,9 +29,13 @@ public class SideFunctionsHelper implements FavoriteListener{
 	/** Uebergebenes SidePanel, auf welches sich die Funktionen bezieht */
 	private SidePanel sidePanel;
 	private String currentFolderName;
+	/** speichert den letzten Ordner ab, in dem man sich vor einem FTPConnect befunden hat */
+	private String lastFolderBeforeFTPConnection;
+	private FTPConnectionHandler ftpConnectionHandler;
 	
 	public SideFunctionsHelper(SidePanel sidePanel){
 		this.sidePanel = sidePanel;
+		this.ftpConnectionHandler=new FTPConnectionHandler();
 	}
 	
 	/**
@@ -39,16 +43,34 @@ public class SideFunctionsHelper implements FavoriteListener{
 	 * @param folderName
 	 */
 	public void switchFolder(String folderName){
-		File folder = new File(folderName);
-		if (!folder.isDirectory()){
-			Logger.warn("Konnte den Ordner {0} nicht finden!", folderName);
-			FunctionsHelper.setMessage(Message.FOLDER_NOT_FOUND);
+		if(!isFtpConnected()){
+			File folder = new File(folderName);
+			if (!folder.isDirectory()){
+				Logger.warn("Konnte den Ordner {0} nicht finden!", folderName);
+				FunctionsHelper.setMessage(Message.FOLDER_NOT_FOUND);
+			} else {
+				currentFolderName=folderName;
+				List<FileEntry> newEntries = FileEntry.getFileEntryList(folder);
+				sidePanel.getTableAndFavoritesSplitPane().getTable().setFileEntries(newEntries);
+				this.setFileCountInFolder(newEntries.size());
+				sidePanel.getFolderNamePanel().setFolderText(folderName);
+				ButtonBar.addFolder(folderName);
+				FunctionsHelper.clearMessage();
+			}
 		} else {
-			currentFolderName=folderName;
-			List<FileEntry> newEntries = FileEntry.getFileEntryList(folder);
+			Logger.info("Ordner gewechselt: "+currentFolderName+"/"+folderName);
+			if(folderName.contains("/") || currentFolderName.isEmpty()){
+				// Absolut
+				currentFolderName = folderName;
+			} else {
+				/// Relativ
+				String slashIfNeeded = currentFolderName.endsWith("/")?"":"/";
+				currentFolderName += slashIfNeeded+folderName;
+			}
+			List<FileEntry> newEntries = ftpConnectionHandler.getFilesInFolder(currentFolderName);
 			sidePanel.getTableAndFavoritesSplitPane().getTable().setFileEntries(newEntries);
 			this.setFileCountInFolder(newEntries.size());
-			sidePanel.getFolderNamePanel().setFolderText(folderName);
+			sidePanel.getFolderNamePanel().setFolderText(currentFolderName);
 			ButtonBar.addFolder(folderName);
 			FunctionsHelper.clearMessage();
 		}
@@ -178,8 +200,12 @@ public class SideFunctionsHelper implements FavoriteListener{
 	public void connectToFtp(String ftpName){
 		try {
 			FTPEntry entry = FTPList.getInstance().getConfigByName(ftpName);
-			FTPConnectionHandler.getInstance().connect(entry);
+			ftpConnectionHandler.connect(entry);
 			FunctionsHelper.setMessage(Message.FTP_CONNECTED);
+
+			lastFolderBeforeFTPConnection = getCurrentFolderName();
+			currentFolderName="";
+			switchFolder("");
 		} catch (Exception e) {
 			Logger.error("Connection versuch misslungen!", e);
 			FunctionsHelper.setMessage(Message.FTP_CONNECT_FAILED);
@@ -190,12 +216,17 @@ public class SideFunctionsHelper implements FavoriteListener{
 	 * Schliesst eine FTP-Verbindung falls vorhanden und gibt eine Nachricht aus.
 	 */
 	public void disconnectFromFtp(){
-		FTPConnectionHandler.getInstance().disconnect();
+		ftpConnectionHandler.disconnect();
 		FunctionsHelper.setMessage(Message.FTP_DISCONNECTED);
+		switchFolder(lastFolderBeforeFTPConnection);
 	}
 
 	public String getCurrentFolderName() {
 		return currentFolderName;
+	}
+	
+	public boolean isFtpConnected(){
+		return ftpConnectionHandler.isConnected();
 	}
 	
 	/**
