@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
@@ -42,12 +43,13 @@ public class ButtonBar extends JPanel implements ActionListener {
 	private String actualPath;
 	private static ArrayList<String> pathList; 
 	private String nowTempPath;
+	private int len = -1;
 	
 	
 	private JToolBar buttonBar;
 	private JButton neuesFenster;
-	private JButton zurueck;
-	private JButton weiter;
+	private JToggleButton zurueck;
+	private JToggleButton weiter;
 	private JButton hoch;
 	private JButton home;
 	private JButton aktualisieren;
@@ -126,8 +128,8 @@ public class ButtonBar extends JPanel implements ActionListener {
 		neuesFenster = new JButton(a);
 		// neuesFenster.setHorizontalTextPosition(JButton.CENTER);
 		// neuesFenster.setVerticalTextPosition(JButton.CENTER);
-		zurueck = new JButton(b);
-		weiter = new JButton(c);
+		zurueck = new JToggleButton(b);
+		weiter = new JToggleButton(c);
 		hoch = new JButton(d);
 		home = new JButton(e);
 		aktualisieren = new JButton(f);
@@ -274,20 +276,47 @@ public class ButtonBar extends JPanel implements ActionListener {
 			//folderList.setSelectedIndex(folderList.getSelectedIndex()-1);			
 			nowTempPath = getPreviousListElement(getLastListElement(actualPath));
 			sideFunctionsHelper.switchFolder(nowTempPath);		
-			
+			weiter.setEnabled(true);
 			//sideFunctionsHelper.getFolder();				
 		}
 
-		if (quelle == weiter) {
-			sideFunctionsHelper.switchFolder(ButtonBar.getNextListElement(getActualElement(sideFunctionsHelper)));
+		if (quelle == weiter) {			
+			sideFunctionsHelper.switchFolder(ButtonBar.getNextListElement(getActualElement(sideFunctionsHelper)));				
+			String path = getActualElement(sideFunctionsHelper);			
+			//String lastElement = pathList.get(pathList.size()-1);	
+			
+			for (String element : pathList) {				
+				if (element != null) {
+		            len = Math.max(len, element.length());
+				}
+		            if (path.length() == len){
+		            	weiter.setEnabled(false);
+		            }
+		            	
+		            else {
+					weiter.setEnabled(true);
+		            }			
+			}
 		}
+		
+		
 
 		if (quelle == hoch) {
+			String papapapaap = (String)sideFunctionsHelper.getFolder();
+			System.out.println(papapapaap);
+			for (String element : pathList)
+				if (papapapaap.length() == element.length() ) {
+					System.out.println(true);
+				}
+					else {
+						System.out.println(false);					
+					}
 		}
+				
+		
 
 		if (quelle == home) {
-			sideFunctionsHelper.switchFolder(System.getProperty("user.home"));
-			//sideFunctionsHelper.getFolder();
+			sideFunctionsHelper.switchFolder(System.getProperty("user.home"));			
 		}
 
 		if (quelle == aktualisieren) {
@@ -341,7 +370,11 @@ public class ButtonBar extends JPanel implements ActionListener {
 //	}
 	
 	public static String getActualElement(SideFunctionsHelper sideFunctionsHelper) {
+		
 		String actualPath = sideFunctionsHelper.getFolder();
+		//if (pathList.indexOf(actualPath) == pathList.size() -1) {
+		//	return null;
+		//}
 		return actualPath;
 	}
 	
@@ -350,7 +383,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 			int index = pathList.indexOf(actualPath);
 			String previousElement = pathList.get(index -1);
 			//System.out.println(previousElement);			
-			return previousElement;
+			return previousElement;			
 		}
 		return null ;
 	}
@@ -366,12 +399,13 @@ public class ButtonBar extends JPanel implements ActionListener {
 	public static String getNextListElement(String actualPath) {
 		if (pathList.contains(actualPath)) {
 			int index = pathList.indexOf(actualPath);
-			/*if (index == pathList.size() -1) {
+			if (index == (pathList.size() -1)) {
 				return null;
-			}*/
-			
-			String nextElement = pathList.get(index +1);				
-			return nextElement;			
+			}
+			else {
+				String nextElement = pathList.get(index +1);				
+				return nextElement;		
+			}
 		}
 		return null;				
 	}
