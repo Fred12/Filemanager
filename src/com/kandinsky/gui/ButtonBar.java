@@ -260,10 +260,6 @@ public class ButtonBar extends JPanel implements ActionListener {
 				String now = stack1.pop();
 				stack2.push(now);
 				String before = stack1.peek();
-				System.out.println(before);
-				if (stack1.size() == 1) {
-					stack1.pop();
-				}
 				sideFunctionsHelper.switchFolder(before, false);	
 				//stack2.push(before);				
 				//weiter.setEnabled(true);
@@ -341,7 +337,6 @@ public class ButtonBar extends JPanel implements ActionListener {
 	
 
 	public void addFolder(String folderName) {	
-
 		stack1.push(folderName);		
 		stack2.removeAllElements();		
 	}

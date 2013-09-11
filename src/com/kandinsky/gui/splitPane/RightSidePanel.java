@@ -45,7 +45,7 @@ public class RightSidePanel extends SidePanel {
 	}
 
 	@Override
-	protected ButtonBar getButtonBar() {
+	public ButtonBar getButtonBar() {
 		if(buttonBar == null)
 			buttonBar = new ButtonBar(sideFunctionsHelper);
 		return buttonBar;

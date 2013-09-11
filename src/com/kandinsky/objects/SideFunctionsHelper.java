@@ -10,7 +10,6 @@ import org.apache.commons.io.FileUtils;
 import org.pmw.tinylog.Logger;
 
 import com.kandinsky.conn.FTPConnectionHandler;
-import com.kandinsky.gui.ButtonBar;
 import com.kandinsky.gui.favorites.FavoriteListener;
 import com.kandinsky.gui.splitPane.SidePanel;
 import com.kandinsky.objects.fileOperation.CopyOperator;
@@ -28,16 +27,16 @@ public class SideFunctionsHelper implements FavoriteListener{
 
 	/** Uebergebenes SidePanel, auf welches sich die Funktionen bezieht */
 	private SidePanel sidePanel;
+	/** aktueller Ordnername */
 	private String currentFolderName;
-	private ButtonBar buttonBar;
 	/** speichert den letzten Ordner ab, in dem man sich vor einem FTPConnect befunden hat */
 	private String lastFolderBeforeFTPConnection;
+	/** stellt FTP-Funktionalitaet bereit */
 	private FTPConnectionHandler ftpConnectionHandler;
 	
 	public SideFunctionsHelper(SidePanel sidePanel){
 		this.sidePanel = sidePanel;
 		this.ftpConnectionHandler=new FTPConnectionHandler();
-	
 	}
 	
 	/**
@@ -51,16 +50,20 @@ public class SideFunctionsHelper implements FavoriteListener{
 				Logger.warn("Konnte den Ordner {0} nicht finden!", folderName);
 				FunctionsHelper.setMessage(Message.FOLDER_NOT_FOUND);
 			} else {
-				currentFolderName=folderName;
-				List<FileEntry> newEntries = FileEntry.getFileEntryList(folder);
-				sidePanel.getTableAndFavoritesSplitPane().getTable().setFileEntries(newEntries);
-				this.setFileCountInFolder(newEntries.size());
-				sidePanel.getFolderNamePanel().setFolderText(folderName);
-				
-				if(addFolder) {
-					buttonBar.addFolder(folderName);
+				try {
+					currentFolderName=folderName;
+					List<FileEntry> newEntries = FileEntry.getFileEntryList(folder);
+					sidePanel.getTableAndFavoritesSplitPane().getTable().setFileEntries(newEntries);
+					this.setFileCountInFolder(newEntries.size());
+					sidePanel.getFolderNamePanel().setFolderText(folderName);
+					
+					if(addFolder) {
+						sidePanel.getButtonBar().addFolder(folderName);
+					}
+					FunctionsHelper.clearMessage();					
+				} catch(Exception e){
+					FunctionsHelper.setMessage(Message.FOLDER_NOT_FOUND);
 				}
-				FunctionsHelper.clearMessage();
 			}
 		} else {
 			try {
@@ -72,7 +75,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 				this.setFileCountInFolder(newEntries.size());
 				sidePanel.getFolderNamePanel().setFolderText(currentFolderName);
 				if(addFolder) {
-					buttonBar.addFolder(folderName);
+					sidePanel.getButtonBar().addFolder(folderName);
 				}
 				FunctionsHelper.clearMessage();
 			} catch (Exception e) {
@@ -237,15 +240,5 @@ public class SideFunctionsHelper implements FavoriteListener{
 	
 	public boolean isFtpConnected(){
 		return ftpConnectionHandler.isConnected();
-	}
-	
-	/**
-	 * This method will return the users home-path if it's set.
-	 * 
-	 * @return
-	 */
-	
-	public void setButtonBar (ButtonBar buttonBar) {
-		this.buttonBar = buttonBar;
 	}
 }
