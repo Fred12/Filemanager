@@ -62,10 +62,12 @@ public class FTPConnectionHandler {
 		Logger.info("FTP-Verbindung hergestellt!");
 	}
 	
-	public String changeWorkingDirectory(String pathname){
+	public String changeWorkingDirectory(String pathname) throws Exception{
 		try {
-			ftpConnection.changeWorkingDirectory(pathname);
+			if(ftpConnection.changeWorkingDirectory(pathname))
 			return ftpConnection.printWorkingDirectory();
+			else
+				throw new Exception("Konnte Ordner nicht finden!");
 		} catch (IOException e) {
 			Logger.error(e, "Laden der Dateien leider nicht moeglich! {0}", e.getMessage());
 			throw new RuntimeException("Laden der Dateien leider nicht moeglich! " + e.getMessage(), e);
