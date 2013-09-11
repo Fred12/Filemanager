@@ -37,9 +37,6 @@ public class ButtonBar extends JPanel implements ActionListener {
 
 	private static final Insets margins = new Insets(0, 0, 0, 0);
 	
-	
-	public static boolean isSet = false;
-	
 	private Stack<String> stack1;
 	private Stack<String> stack2;
 	private JToolBar buttonBar;
@@ -259,7 +256,6 @@ public class ButtonBar extends JPanel implements ActionListener {
 		Object quelle = ae.getSource();	
 
 		if (quelle == zurueck) {
-			isSet= true;
 			if (!stack1.isEmpty()) {
 				String now = stack1.pop();
 				stack2.push(now);
@@ -280,7 +276,6 @@ public class ButtonBar extends JPanel implements ActionListener {
 		}
 
 		if (quelle == weiter) {		
-			isSet = true;
 			if (!stack2.isEmpty()) {
 				String now = stack2.pop();
 				stack1.push(now);
@@ -346,7 +341,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 	
 
 	public void addFolder(String folderName) {	
-		ButtonBar.getMarker();
+
 		stack1.push(folderName);		
 		stack2.removeAllElements();		
 	}
@@ -362,11 +357,6 @@ public class ButtonBar extends JPanel implements ActionListener {
 //					System.out.println(element);
 //			}		
 //		}
-	
-		public static boolean getMarker() {
-			System.out.println(isSet);
-			return isSet;
-		}
 		
 	}
 	/*
