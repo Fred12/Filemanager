@@ -3,15 +3,11 @@ package com.kandinsky.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Stack;
-import java.util.StringTokenizer;
-import java.util.Vector; 
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -44,12 +40,12 @@ public class ButtonBar extends JPanel implements ActionListener {
 	
 	public static boolean isSet = false;
 	
-	private static Stack<String> stack1;
-	private static Stack<String> stack2;
+	private Stack<String> stack1;
+	private Stack<String> stack2;
 	private JToolBar buttonBar;
 	private JButton neuesFenster;
-	private static JToggleButton zurueck;
-	private static JToggleButton weiter;
+	private JToggleButton zurueck;
+	private JToggleButton weiter;
 	private JButton hoch;
 	private JButton home;
 	private JButton aktualisieren;
@@ -268,10 +264,11 @@ public class ButtonBar extends JPanel implements ActionListener {
 				String now = stack1.pop();
 				stack2.push(now);
 				String before = stack1.peek();
+				System.out.println(before);
 				if (stack1.size() == 1) {
 					stack1.pop();
 				}
-				sideFunctionsHelper.switchFolder(before);	
+				sideFunctionsHelper.switchFolder(before, false);	
 				//stack2.push(before);				
 				//weiter.setEnabled(true);
 //				if (stack1.isEmpty()) {
@@ -288,7 +285,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 				String now = stack2.pop();
 				stack1.push(now);
 				//String before = stack2.peek();
-				sideFunctionsHelper.switchFolder(now);
+				sideFunctionsHelper.switchFolder(now, false);
 				//stack1.push(before);
 				
 //				if (stack2.isEmpty()) {
@@ -307,7 +304,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		
 
 		if (quelle == home) {
-			sideFunctionsHelper.switchFolder(System.getProperty("user.home"));			
+			sideFunctionsHelper.switchFolder(System.getProperty("user.home"), true);			
 		}
 
 		if (quelle == aktualisieren) {
@@ -348,7 +345,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 			//Funktionen für die ButtonNavigation , erstmal noch nicht in eigener Klasse
 	
 
-	public static void addFolder(String folderName) {	
+	public void addFolder(String folderName) {	
 		ButtonBar.getMarker();
 		stack1.push(folderName);		
 		stack2.removeAllElements();		

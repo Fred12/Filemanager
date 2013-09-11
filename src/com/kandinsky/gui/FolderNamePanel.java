@@ -134,12 +134,12 @@ public class FolderNamePanel extends JPanel {
 
 	private void changeFolder() {
 		Logger.info("Ordner wird gewechselt: "+currentFolderTextField.getText());
-		sideFunctionsHelper.switchFolder(currentFolderTextField.getText());
+		sideFunctionsHelper.switchFolder(currentFolderTextField.getText(), true);
 	}
 	
-	public void changeFolder(String newPath) {
+	public void changeFolder(String newPath, boolean addFolder) {
 		Logger.info("Ordner wird gewechselt: "+ newPath);
-		sideFunctionsHelper.switchFolder(newPath);
+		sideFunctionsHelper.switchFolder(newPath, true);
 	}
 	
 	/**
@@ -156,7 +156,7 @@ public class FolderNamePanel extends JPanel {
 			if(ie.getStateChange() == 1)
 			{
 				// Wechsel des Items auf ausgewählt führt zu Ordnerwechsel
-				FolderNamePanel.this.changeFolder(ie.getItem().toString());
+				FolderNamePanel.this.changeFolder(ie.getItem().toString(), true);
 				
 			}
 		}

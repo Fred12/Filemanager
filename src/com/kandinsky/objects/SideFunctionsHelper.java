@@ -29,6 +29,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 	/** Uebergebenes SidePanel, auf welches sich die Funktionen bezieht */
 	private SidePanel sidePanel;
 	private String currentFolderName;
+	private ButtonBar buttonBar;
 	/** speichert den letzten Ordner ab, in dem man sich vor einem FTPConnect befunden hat */
 	private String lastFolderBeforeFTPConnection;
 	private FTPConnectionHandler ftpConnectionHandler;
@@ -36,13 +37,14 @@ public class SideFunctionsHelper implements FavoriteListener{
 	public SideFunctionsHelper(SidePanel sidePanel){
 		this.sidePanel = sidePanel;
 		this.ftpConnectionHandler=new FTPConnectionHandler();
+	
 	}
 	
 	/**
 	 * Aendert einen Ordner-Pfad. Zentrale Anlaufstelle zum Aendern des Pfades, sonst sollte nirgendwo ein switchFolder aufgerufen werden.
 	 * @param folderName
 	 */
-	public void switchFolder(String folderName){
+	public void switchFolder(String folderName, boolean addFolder){
 		if(!isFtpConnected()){
 			File folder = new File(folderName);
 			if (!folder.isDirectory()){
@@ -54,12 +56,10 @@ public class SideFunctionsHelper implements FavoriteListener{
 				sidePanel.getTableAndFavoritesSplitPane().getTable().setFileEntries(newEntries);
 				this.setFileCountInFolder(newEntries.size());
 				sidePanel.getFolderNamePanel().setFolderText(folderName);
-				if (ButtonBar.isSet == false) {
-					ButtonBar.addFolder(folderName);
+				
+				if(addFolder) {
+					buttonBar.addFolder(folderName);
 				}
-				else if ( ButtonBar.isSet == true){	
-					ButtonBar.isSet = false;
-				}				
 				FunctionsHelper.clearMessage();
 			}
 		} else {
@@ -71,7 +71,9 @@ public class SideFunctionsHelper implements FavoriteListener{
 				sidePanel.getTableAndFavoritesSplitPane().getTable().setFileEntries(newEntries);
 				this.setFileCountInFolder(newEntries.size());
 				sidePanel.getFolderNamePanel().setFolderText(currentFolderName);
-				ButtonBar.addFolder(folderName);
+				if(addFolder) {
+					buttonBar.addFolder(folderName);
+				}
 				FunctionsHelper.clearMessage();
 			} catch (RuntimeException e) {
 				Logger.warn("Konnte den Ordner {0} nicht finden!", folderName);
@@ -117,7 +119,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 	@Override
 	public void execute(FileEntry fileEntry) {
 		if(fileEntry.getType()==FileType.DIRECTORY)
-			this.switchFolder(fileEntry.getAbsoluteFileName());
+			this.switchFolder(fileEntry.getAbsoluteFileName(), true);
 	}
 	
 	public void copySelectedFilesToOtherSide(){
@@ -210,7 +212,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 			sidePanel.getTableAndFavoritesSplitPane().getTable().setFtpConnected(true);
 			lastFolderBeforeFTPConnection = getCurrentFolderName();
 			currentFolderName="";
-			switchFolder("");
+			switchFolder("", true);
 		} catch (Exception e) {
 			Logger.error("Connection versuch misslungen!", e);
 			FunctionsHelper.setMessage(Message.FTP_CONNECT_FAILED);
@@ -224,7 +226,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 		ftpConnectionHandler.disconnect();
 		FunctionsHelper.setMessage(Message.FTP_DISCONNECTED);
 		sidePanel.getTableAndFavoritesSplitPane().getTable().setFtpConnected(false);
-		switchFolder(lastFolderBeforeFTPConnection);
+		switchFolder(lastFolderBeforeFTPConnection, true);
 	}
 
 	public String getCurrentFolderName() {
@@ -241,4 +243,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 	 * @return
 	 */
 	
+	public void setButtonBar (ButtonBar buttonBar) {
+		this.buttonBar = buttonBar;
+	}
 }

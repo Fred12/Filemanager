@@ -144,7 +144,7 @@ public class FileListTable extends JTable {
 		row = convertRowIndexToModel(row);
 		FileEntry valueAtRow = model.getValueAtRow(row);
 		if (valueAtRow.getType() == FileType.DIRECTORY) {
-			sideFunctionsHelper.switchFolder(valueAtRow.getAbsoluteFileName());
+			sideFunctionsHelper.switchFolder(valueAtRow.getAbsoluteFileName(), true);
 			repaint();
 		}
 	}
