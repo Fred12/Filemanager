@@ -3,11 +3,15 @@ package com.kandinsky.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Stack;
+import java.util.StringTokenizer;
+import java.util.Vector; 
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -37,16 +41,15 @@ public class ButtonBar extends JPanel implements ActionListener {
 
 	private static final Insets margins = new Insets(0, 0, 0, 0);
 	
-	private String actualPath;
-	private static ArrayList<String> pathList; 
-	private String nowTempPath;
-	private int len = -1;
 	
+	public static boolean isSet = false;
 	
+	private static Stack<String> stack1;
+	private static Stack<String> stack2;
 	private JToolBar buttonBar;
 	private JButton neuesFenster;
-	private JToggleButton zurueck;
-	private JToggleButton weiter;
+	private static JToggleButton zurueck;
+	private static JToggleButton weiter;
 	private JButton hoch;
 	private JButton home;
 	private JButton aktualisieren;
@@ -84,7 +87,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		buttonBar.setAlignmentY(Component.CENTER_ALIGNMENT);
 		buttonBar.setBorderPainted(true);
 		buttonBar.setRollover(true);
-		// buttonBar.addSeparator(new Dimension(0,0));
+		// buttonBar.addSeparator(new Dimension(100,100));
 		// buttonBar.setMargin(margins);
 		// buttonBar.setAlignmentX(0);
 
@@ -163,9 +166,10 @@ public class ButtonBar extends JPanel implements ActionListener {
 		neuesFenster.setToolTipText("�ffnet eine neues Hauptfenster");
 		zurueck.setBackground(Color.WHITE);
 		zurueck.setToolTipText("Zum Ordner zur�ck navigieren");
+		//zurueck.setEnabled(false);
 		weiter.setBackground(Color.WHITE);
 		weiter.setToolTipText("Zum Ordner vorw�rts navigieren");
-		weiter.setEnabled(false);
+		//weiter.setEnabled(false);
 		hoch.setBackground(Color.WHITE);
 		hoch.setToolTipText("Zum �bergeordneten Ordner wechseln");
 
@@ -234,12 +238,9 @@ public class ButtonBar extends JPanel implements ActionListener {
 		//************************************************************************************************
 		
 		
-		pathList = new ArrayList<String>();
-		actualPath = sideFunctionsHelper.getFolder();
-		addFolder(actualPath);
 		
-		
-		
+		stack1 = new Stack<String>();   //Stack für das Adden von Foldern
+		stack2 = new Stack<String>();	//Stack für die Weiter-Button Logik
 		
 
 	}
@@ -259,56 +260,48 @@ public class ButtonBar extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 
-		Object quelle = ae.getSource();
-
-		if (quelle == neuesFenster) {
-			buttonBar.add(new JButton("GEKLICKT!"));
-
-		}
-
-		/**
-		 * if (quelle == neuesFenster) { }
-		 */
+		Object quelle = ae.getSource();	
 
 		if (quelle == zurueck) {
-			//folderList.setSelectedIndex(folderList.getSelectedIndex()-1);			
-			nowTempPath = getPreviousListElement(getLastListElement(actualPath));
-			sideFunctionsHelper.switchFolder(nowTempPath);		
-			weiter.setEnabled(true);
-			//sideFunctionsHelper.getFolder();				
+			isSet= true;
+			if (!stack1.isEmpty()) {
+				String now = stack1.pop();
+				stack2.push(now);
+				String before = stack1.peek();
+				if (stack1.size() == 1) {
+					stack1.pop();
+				}
+				sideFunctionsHelper.switchFolder(before);	
+				//stack2.push(before);				
+				//weiter.setEnabled(true);
+//				if (stack1.isEmpty()) {
+//					zurueck.setEnabled(false);
+//				}
+//				weiter.setEnabled(true);
+			}
+					
 		}
 
-		if (quelle == weiter) {			
-			sideFunctionsHelper.switchFolder(ButtonBar.getNextListElement(getActualElement(sideFunctionsHelper)));				
-			String path = getActualElement(sideFunctionsHelper);			
-			//String lastElement = pathList.get(pathList.size()-1);	
-			
-			for (String element : pathList) {				
-				if (element != null) {
-		            len = Math.max(len, element.length());
-				}
-		            if (path.length() == len){
-		            	weiter.setEnabled(false);
-		            }
-		            	
-		            else {
-					weiter.setEnabled(true);
-		            }			
-			}
+		if (quelle == weiter) {		
+			isSet = true;
+			if (!stack2.isEmpty()) {
+				String now = stack2.pop();
+				stack1.push(now);
+				//String before = stack2.peek();
+				sideFunctionsHelper.switchFolder(now);
+				//stack1.push(before);
+				
+//				if (stack2.isEmpty()) {
+//					weiter.setEnabled(false);
+//				}
+//			zurueck.setEnabled(true);
+			}			
 		}
 		
 		
 
 		if (quelle == hoch) {
-			String papapapaap = (String)sideFunctionsHelper.getFolder();
-			System.out.println(papapapaap);
-			for (String element : pathList)
-				if (papapapaap.length() == element.length() ) {
-					System.out.println(true);
-				}
-					else {
-						System.out.println(false);					
-					}
+			//StringTokenizer tokenstr = new StringTokenizer(null);
 		}
 				
 		
@@ -356,17 +349,30 @@ public class ButtonBar extends JPanel implements ActionListener {
 	
 
 	public static void addFolder(String folderName) {	
-//		if (pathList.contains(folderName))
-//		{			
-//		}
+		ButtonBar.getMarker();
+		stack1.push(folderName);		
+		stack2.removeAllElements();		
+	}
+//		if (pathList.contains(folderName))	{	
+//			int test = pathList.indexOf(folderName);
+//			for (int i = test+1; i< pathList.size(); i++) {
+//				pathList.remove(i);
+//			}
+//		}		
 //		else {
-			pathList.add(folderName);
-				for (String element : pathList) {
-					System.out.println(element);
-			}		
-		}
-//	}
+//			pathList.add(folderName);
+//				for (String element : pathList) {
+//					System.out.println(element);
+//			}		
+//		}
 	
+		public static boolean getMarker() {
+			System.out.println(isSet);
+			return isSet;
+		}
+		
+	}
+	/*
 	public static String getActualElement(SideFunctionsHelper sideFunctionsHelper) {
 		
 		String actualPath = sideFunctionsHelper.getFolder();
@@ -386,7 +392,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		return null ;
 	}
 	
-	public static String getLastListElement(String actualPath) {
+	public static String getLastListElement() {
 		if (!pathList.isEmpty()) {
 			  String lastElement = pathList.get(pathList.size()-1);				  
 			  return lastElement;			 
@@ -408,7 +414,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		return null;				
 	}
 
-	
+	*/
 
-}
+
 
