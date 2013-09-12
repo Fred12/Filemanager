@@ -2,7 +2,6 @@ package com.kandinsky.objects;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -12,10 +11,10 @@ import org.pmw.tinylog.Logger;
 import com.kandinsky.conn.FTPConnectionHandler;
 import com.kandinsky.gui.favorites.FavoriteListener;
 import com.kandinsky.gui.splitPane.SidePanel;
-import com.kandinsky.objects.fileOperation.CopyOperator;
-import com.kandinsky.objects.fileOperation.DeleteOperator;
-import com.kandinsky.objects.fileOperation.FileOperator;
-import com.kandinsky.objects.fileOperation.MoveOperator;
+import com.kandinsky.objects.fileOperation.FTPOperationHandler;
+import com.kandinsky.objects.fileOperation.FileOperationHandler;
+import com.kandinsky.objects.fileOperation.FolderNotFoundException;
+import com.kandinsky.objects.fileOperation.OperationHandler;
 
 /**
  * Hier werden die einzelnen Funktionen aufgeschluesselt, die nicht statisch aufrufbar sind, da sie einer Seite zugeordnet sind, es also immer zwei
@@ -34,9 +33,14 @@ public class SideFunctionsHelper implements FavoriteListener{
 	/** stellt FTP-Funktionalitaet bereit */
 	private FTPConnectionHandler ftpConnectionHandler;
 	
+	private FTPOperationHandler ftpOperationHandler;
+	private FileOperationHandler fileOperationHandler;
+	
 	public SideFunctionsHelper(SidePanel sidePanel){
 		this.sidePanel = sidePanel;
 		this.ftpConnectionHandler=new FTPConnectionHandler();
+		ftpOperationHandler = new FTPOperationHandler(sidePanel, ftpConnectionHandler);
+		fileOperationHandler = new FileOperationHandler(sidePanel);
 	}
 	
 	/**
@@ -44,44 +48,11 @@ public class SideFunctionsHelper implements FavoriteListener{
 	 * @param folderName
 	 */
 	public void switchFolder(String folderName, boolean addFolder){
-		if(!isFtpConnected()){
-			File folder = new File(folderName);
-			if (!folder.isDirectory()){
-				Logger.warn("Konnte den Ordner {0} nicht finden!", folderName);
-				FunctionsHelper.setMessage(Message.FOLDER_NOT_FOUND);
-			} else {
-				try {
-					currentFolderName=folderName;
-					List<FileEntry> newEntries = FileEntry.getFileEntryList(folder);
-					sidePanel.getTableAndFavoritesSplitPane().getTable().setFileEntries(newEntries);
-					this.setFileCountInFolder(newEntries.size());
-					sidePanel.getFolderNamePanel().setFolderText(folderName);
-					
-					if(addFolder) {
-						sidePanel.getButtonBar().addFolder(folderName);
-					}
-					FunctionsHelper.clearMessage();					
-				} catch(Exception e){
-					FunctionsHelper.setMessage(Message.FOLDER_NOT_FOUND);
-				}
-			}
-		} else {
-			try {
-				currentFolderName = ftpConnectionHandler.changeWorkingDirectory(folderName);
-				Logger.info("Ordner gewechselt: " + currentFolderName + "/" + folderName);
-				// Absolut
-				List<FileEntry> newEntries = ftpConnectionHandler.getFilesInFolder();
-				sidePanel.getTableAndFavoritesSplitPane().getTable().setFileEntries(newEntries);
-				this.setFileCountInFolder(newEntries.size());
-				sidePanel.getFolderNamePanel().setFolderText(currentFolderName);
-				if(addFolder) {
-					sidePanel.getButtonBar().addFolder(folderName);
-				}
-				FunctionsHelper.clearMessage();
-			} catch (Exception e) {
-				Logger.warn("Konnte den Ordner {0} nicht finden!", folderName);
-				FunctionsHelper.setMessage(Message.FOLDER_NOT_FOUND);
-			}
+		try {
+			currentFolderName = getOperationHandler().switchFolder(folderName, addFolder);
+		} catch(FolderNotFoundException e){
+			Logger.warn("Konnte den Ordner {0} nicht finden!", folderName);
+			FunctionsHelper.setMessage(Message.FOLDER_NOT_FOUND);
 		}
 	}
 	
@@ -91,6 +62,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 	
 	public void refresh(){
 		try {
+			switchFolder(currentFolderName, false);
 			sidePanel.getTableAndFavoritesSplitPane().getTable().repaint();
 			sidePanel.getTableAndFavoritesSplitPane().repaint();
 		} catch (Exception e) {
@@ -126,57 +98,34 @@ public class SideFunctionsHelper implements FavoriteListener{
 	}
 	
 	public void copySelectedFilesToOtherSide(){
-		File[] files = sidePanel.getTableAndFavoritesSplitPane().getTable().getSelectedFiles();
-		FileOperator operator = new CopyOperator(files, sidePanel);
-		operator.execute();
+		getOperationHandler().copySelectedFileEntries();
+		refresh();
 	}
 	
 	public void moveSelectedFilesToOtherSide(){
-		File[] files = sidePanel.getTableAndFavoritesSplitPane().getTable().getSelectedFiles();
-		FileOperator operator = new MoveOperator(files, sidePanel);
-		operator.execute();
+		getOperationHandler().moveSelectedFileEntries();
+		refresh();
 	}
 	
 	public void deleteSelectedFiles(){
-		File[] files = sidePanel.getTableAndFavoritesSplitPane().getTable().getSelectedFiles();
-		FileOperator operator = new DeleteOperator(files, sidePanel);
-		operator.execute();
+		getOperationHandler().deleteSelectedFileEntries();
+		refresh();
 	}
 	
 	/**
 	 * Fragt nach einem Datei-Namen und legt diesen dann an.
 	 */
 	public void createNewFile(){
-		String name = JOptionPane.showInputDialog(sidePanel, "Dateiname", null);
-		if (name != null) {
-			File file = new File(sidePanel.getCurrentFolderName() + name);
-			try {
-				file.createNewFile();
-				Logger.info("Neue Datei {0} wurde erstellt.", name);
-				refresh();
-			} catch (IOException e) {
-				Logger.error(e, "Anlegen einer neuen Datei war leider nicht moeglich");
-				FunctionsHelper.setMessage(Message.CREATE_FILE_FAILED);
-			}
-		}
+		getOperationHandler().createNewFile();
+		refresh();
 	}
 	
 	/**
 	 * Fragt nach einem Ordner-Namen und legt diesen dann an.
 	 */
 	public void createNewFolder() {
-		String name = JOptionPane.showInputDialog(sidePanel, "Ordnername", null);
-		if (name != null) {
-			File file = new File(sidePanel.getCurrentFolderName() + name);
-			boolean created = file.mkdir();
-			if (created) {
-				Logger.info("Neuer Ordner {0} wurde erstellt.", name);
-				refresh();
-			} else {
-				Logger.error("Anlegen eines neuen Ordners war leider nicht moeglich");
-				FunctionsHelper.setMessage(Message.CREATE_FILE_FAILED);
-			}
-		}
+		getOperationHandler().createNewFolder();
+		refresh();
 	}
 
 	/**
@@ -238,7 +187,21 @@ public class SideFunctionsHelper implements FavoriteListener{
 		return currentFolderName;
 	}
 	
+	public String setCurrentFolderName() {
+		return currentFolderName;
+	}
+	
 	public boolean isFtpConnected(){
 		return ftpConnectionHandler.isConnected();
+	}
+	
+	/**
+	 * @return FTP- oder normalen FileOperator, je nachdem, ob FTP-Connection aufgebaut ist.
+	 */
+	private OperationHandler getOperationHandler(){
+		if(isFtpConnected())
+			return ftpOperationHandler;
+		else
+			return fileOperationHandler;
 	}
 }

@@ -20,11 +20,13 @@ public class CopyOperator extends FileOperator {
 
 	@Override
 	protected void executeOperation(File nextEntry) throws Exception {
-		Logger.info("Kopiere von {0} nach {1}!", nextEntry.getAbsolutePath(), otherSidePanel.getCurrentFolderName() + nextEntry.getName());
+		String currentOtherSideFolder =otherSidePanel.getCurrentFolderName();
+		currentOtherSideFolder+=currentOtherSideFolder.endsWith("/")?"":"/";
+		Logger.info("Kopiere von {0} nach {1}!", nextEntry.getAbsolutePath(), currentOtherSideFolder + nextEntry.getName());
 		if(nextEntry.isDirectory())
-			FileUtils.copyDirectoryToDirectory(nextEntry.getAbsoluteFile(), new File(otherSidePanel.getCurrentFolderName()));
+			FileUtils.copyDirectoryToDirectory(nextEntry.getAbsoluteFile(), new File(currentOtherSideFolder));
 		else
-			FileUtils.copyFileToDirectory(nextEntry.getAbsoluteFile(), new File(otherSidePanel.getCurrentFolderName()));
+			FileUtils.copyFileToDirectory(nextEntry.getAbsoluteFile(), new File(currentOtherSideFolder));
 	}
 
 	@Override

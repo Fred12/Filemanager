@@ -23,8 +23,10 @@ public class MoveOperator extends FileOperator {
 
 	@Override
 	protected void executeOperation(File nextEntry) throws Exception {
-		Logger.info("Verschiebe von {0} nach {1}!", nextEntry.getAbsolutePath(), otherSidePanel.getCurrentFolderName() + nextEntry.getName());
-		Files.move(Paths.get(nextEntry.getAbsolutePath()), Paths.get(otherSidePanel.getCurrentFolderName() + nextEntry.getName()), REPLACE_EXISTING);
+		String currentOtherSideFolder =otherSidePanel.getCurrentFolderName();
+		currentOtherSideFolder+=currentOtherSideFolder.endsWith("/")?"":"/";
+		Logger.info("Verschiebe von {0} nach {1}!", nextEntry.getAbsolutePath(), currentOtherSideFolder + nextEntry.getName());
+		Files.move(Paths.get(nextEntry.getAbsolutePath()), Paths.get(currentOtherSideFolder + nextEntry.getName()), REPLACE_EXISTING);
 	}
 
 	@Override
