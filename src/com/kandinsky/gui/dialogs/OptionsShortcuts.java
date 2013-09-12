@@ -13,12 +13,12 @@ import javax.swing.border.BevelBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import com.kandinsky.objects.Shortcut;
-import com.kandinsky.objects.Shortcuts;
+import com.kandinsky.objects.Hotkey;
+import com.kandinsky.objects.Hotkeys;
 
 public class OptionsShortcuts implements ActionListener, ListSelectionListener {
 	
-	private Shortcuts shortcutList;
+	private Hotkeys shortcutList;
 	private JList<String> shortcutDisplayList;
 	
 	private JTextField textFieldName;
@@ -31,7 +31,7 @@ public class OptionsShortcuts implements ActionListener, ListSelectionListener {
 	 */
 	public OptionsShortcuts() {
 		
-		shortcutList = Shortcuts.getInstance();
+		shortcutList = Hotkeys.getInstance();
 	}
 	
 	/**
@@ -133,8 +133,8 @@ public class OptionsShortcuts implements ActionListener, ListSelectionListener {
 		
 		String key = OptionsShortcuts.this.shortcutDisplayList.getModel().getElementAt(index);
 		
-		Shortcuts shortcutList = Shortcuts.getInstance();
-		Shortcut entry = shortcutList.getShortcutByKey(key);
+		Hotkeys shortcutList = Hotkeys.getInstance();
+		Hotkey entry = shortcutList.getHotkeyByKey(key);
 		
 		this.textFieldName.setText(entry.getName());
 		this.textFieldKey.setText(entry.getKey());
@@ -172,7 +172,7 @@ public class OptionsShortcuts implements ActionListener, ListSelectionListener {
 		int index = shortcutDisplayList.getSelectedIndex();
 		String displayKey = OptionsShortcuts.this.shortcutDisplayList.getModel().getElementAt(index);
 	
-		Shortcut storeEntry = shortcutList.get(displayKey);
+		Hotkey storeEntry = shortcutList.get(displayKey);
 		storeEntry.setName(name);
 		storeEntry.setKey(key);
 		storeEntry.setShortcutCombi(combination);

@@ -17,39 +17,33 @@ import javax.swing.JOptionPane;
  * Liste alle im System existierenden Shortcuts.
  * @author schmidtb
  */
-public class Shortcuts extends HashMap<String, Shortcut> implements Serializable {
+public class Hotkeys extends HashMap<String, Hotkey> implements Serializable {
 
 	private static final long serialVersionUID = 4430773610590354542L;
 	
-	private static final String SHORTCUT_LIST_FILE = "shortcuts.dat";
+	private static final String HOTKEY_LIST_FILE = "shortcuts.dat";
 	
-	private static Shortcuts self;
+	private static Hotkeys instance;
 	
-	private Shortcuts() {
-		
+	private Hotkeys() {
 	}
 	
-	public static Shortcuts getInstance(){
+	public static Hotkeys getInstance(){
 		
-		if(Shortcuts.self == null){
-			
+		if(instance == null){
 			try {
-				Shortcuts.self = Shortcuts.readListFromFile();
+				instance = Hotkeys.readListFromFile();
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, "Konnte Shortcuts-Datei nicht lesen!");
-				Shortcuts.self = new Shortcuts();
+				instance = new Hotkeys();
 				e.printStackTrace();
 			}
 		}
-		return Shortcuts.self;
-		
+		return instance;
 	}
 
-
-	
-	public Shortcut getShortcutByKey(String key){
-		
-		Shortcut toReturn = Shortcuts.self.get(key);
+	public Hotkey getHotkeyByKey(String key){
+		Hotkey toReturn = get(key);
 		if(toReturn!=null){
 			return toReturn;
 		} else {
@@ -57,12 +51,9 @@ public class Shortcuts extends HashMap<String, Shortcut> implements Serializable
 		}
 	}
 
-	
 	public String[] getKeys(){
-		
-		Set<String> keySet = Shortcuts.self.keySet();
+		Set<String> keySet = keySet();
 		return keySet.toArray(new String[keySet.size()]);
-		
 	}
 	
 	/**
@@ -70,10 +61,10 @@ public class Shortcuts extends HashMap<String, Shortcut> implements Serializable
 	 * @param ois
 	 * @throws IOException
 	 */
-	private static Shortcuts readListFromFile() throws IOException {
+	private static Hotkeys readListFromFile() throws IOException {
 		try {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SHORTCUT_LIST_FILE));
-			Shortcuts shortcuts = (Shortcuts) ois.readObject();
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(HOTKEY_LIST_FILE));
+			Hotkeys shortcuts = (Hotkeys) ois.readObject();
 			ois.close();
 			return shortcuts;
 		} catch (ClassNotFoundException e) {
@@ -81,11 +72,9 @@ public class Shortcuts extends HashMap<String, Shortcut> implements Serializable
 		} catch (FileNotFoundException e) {
 			// Das ist ok, wenn die Datei nicht existiert, wurde sie noch nicht angelegt oder gelöscht
 			// Dann ist die Liste eben an dieser Stelle leer
-			Shortcuts ret = new Shortcuts();
+			Hotkeys ret = new Hotkeys();
 			ret.createTemplate();
 			return ret;
-			
-			
 		}
 	}
 	
@@ -98,7 +87,7 @@ public class Shortcuts extends HashMap<String, Shortcut> implements Serializable
 		try {
 			ObjectOutputStream oos = null;
 			try {
-				oos = new ObjectOutputStream(new FileOutputStream(SHORTCUT_LIST_FILE));
+				oos = new ObjectOutputStream(new FileOutputStream(HOTKEY_LIST_FILE));
 				//oos.writeObject(Shortcuts.self);
 				oos.flush();
 			} finally {
@@ -115,8 +104,7 @@ public class Shortcuts extends HashMap<String, Shortcut> implements Serializable
 	 * 
 	 */
 	private void createTemplate(){
-		
-		this.put("temp1", new Shortcut("temp1","Temporärer Shortcut1", "STRG-C"));
+		this.put("temp1", new Hotkey("temp1","Temporärer Shortcut1", "STRG-C"));
 	}
 	
 }

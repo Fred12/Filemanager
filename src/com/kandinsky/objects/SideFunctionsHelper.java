@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 import org.pmw.tinylog.Logger;
 
 import com.kandinsky.conn.FTPConnectionHandler;
-import com.kandinsky.gui.ButtonBar;
 import com.kandinsky.gui.favorites.FavoriteListener;
 import com.kandinsky.gui.splitPane.SidePanel;
 import com.kandinsky.objects.fileOperation.FTPOperationHandler;

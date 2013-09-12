@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Shortcut-Klasse, repräsentiert einen einzigen Shortcut.
  * @author schmidtb
  */
-public class Shortcut implements Serializable {
+public class Hotkey implements Serializable {
 
 	private static final long serialVersionUID = 8510478971200260430L;
 
@@ -14,11 +14,11 @@ public class Shortcut implements Serializable {
 	private String name;
 	private String shortcutCombi;
 
-	public Shortcut() {
+	public Hotkey() {
 		super();
 	}
 	
-	public Shortcut(String key, String name, String shortcutCombi) {
+	public Hotkey(String key, String name, String shortcutCombi) {
 		super();
 		this.key = key;
 		this.name = name;

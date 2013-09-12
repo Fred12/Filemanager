@@ -17,8 +17,8 @@ public class AllActionsListener extends AbstractAction {
 		// TODO weise e.getActionCommand entsprechend zu
 
 		try {
-			Shortcuts sc = Shortcuts.getInstance();
-			Shortcut selectedShortCut = sc.getShortcutByKey(event
+			Hotkeys sc = Hotkeys.getInstance();
+			Hotkey selectedShortCut = sc.getHotkeyByKey(event
 					.getActionCommand());
 
 			switch (selectedShortCut.getName()) {
