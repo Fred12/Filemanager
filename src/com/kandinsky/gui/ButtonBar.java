@@ -233,7 +233,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		
 		
 		stack1 = new Stack<String>();   //Stack für das Adden von Foldern
-		stack2 = new Stack<String>();	//Stack für die Weiter-Button Logik
+		stack2 = new Stack<String>();	//Stack für den Weiter - Button 
 		
 
 	}
@@ -255,41 +255,32 @@ public class ButtonBar extends JPanel implements ActionListener {
 
 		Object quelle = ae.getSource();	
 
-		if (quelle == zurueck) {
-			if (!stack1.isEmpty()) {
+		if (quelle == zurueck) {			
+			if (stack1.size() == 1) {
+				
+		}
+			else if (!stack1.isEmpty()) {
 				String now = stack1.pop();
 				stack2.push(now);
 				String before = stack1.peek();
+				System.out.println(before);
 				sideFunctionsHelper.switchFolder(before, false);	
-				//stack2.push(before);				
-				//weiter.setEnabled(true);
-//				if (stack1.isEmpty()) {
-//					zurueck.setEnabled(false);
-//				}
-//				weiter.setEnabled(true);
 			}
-					
-		}
+		}		
 
 		if (quelle == weiter) {		
 			if (!stack2.isEmpty()) {
 				String now = stack2.pop();
 				stack1.push(now);
-				//String before = stack2.peek();
+				System.out.println(now);				
 				sideFunctionsHelper.switchFolder(now, false);
-				//stack1.push(before);
-				
-//				if (stack2.isEmpty()) {
-//					weiter.setEnabled(false);
-//				}
-//			zurueck.setEnabled(true);
 			}			
 		}
-		
+	
 		
 
 		if (quelle == hoch) {
-			//StringTokenizer tokenstr = new StringTokenizer(null);
+			
 		}
 				
 		
@@ -313,7 +304,6 @@ public class ButtonBar extends JPanel implements ActionListener {
 
 		if (quelle == ftpVerwalten) {
 			FunctionsHelper.showOptions(1);
-
 		}
 
 		if (quelle == ftpAnzeigen) {
@@ -334,70 +324,12 @@ public class ButtonBar extends JPanel implements ActionListener {
 	
 	
 	//*****************************************************************************************************************
-			//Funktionen für die ButtonNavigation , erstmal noch nicht in eigener Klasse
-	
+		//Funktionen für die ButtonNavigation Vor/Zurueck - Ordner in die Liste einfügen	
 
-	public void addFolder(String folderName) {	
+		public void addFolder(String folderName) {	
 		stack1.push(folderName);		
-		stack2.removeAllElements();		
-	}
-//		if (pathList.contains(folderName))	{	
-//			int test = pathList.indexOf(folderName);
-//			for (int i = test+1; i< pathList.size(); i++) {
-//				pathList.remove(i);
-//			}
-//		}		
-//		else {
-//			pathList.add(folderName);
-//				for (String element : pathList) {
-//					System.out.println(element);
-//			}		
-//		}
-		
-	}
-	/*
-	public static String getActualElement(SideFunctionsHelper sideFunctionsHelper) {
-		
-		String actualPath = sideFunctionsHelper.getFolder();
-		if (pathList.indexOf(actualPath) == pathList.size() -1) {
-			return null;
+		stack2.clear();		
 		}
-		return actualPath;
-	}
-	
-	public static String getPreviousListElement(String actualPath) {
-		if (pathList.contains(actualPath)) {
-			int index = pathList.indexOf(actualPath);
-			String previousElement = pathList.get(index -1);
-			//System.out.println(previousElement);			
-			return previousElement;			
-		}
-		return null ;
-	}
-	
-	public static String getLastListElement() {
-		if (!pathList.isEmpty()) {
-			  String lastElement = pathList.get(pathList.size()-1);				  
-			  return lastElement;			 
-			}
-		return null;			
-	}
-	
-	public static String getNextListElement(String actualPath) {
-		if (pathList.contains(actualPath)) {
-			int index = pathList.indexOf(actualPath);
-			if (index == (pathList.size() -1)) {
-				return null;
-			}
-			else {
-				String nextElement = pathList.get(index +1);				
-				return nextElement;		
-			}
-		}
-		return null;				
-	}
 
-	*/
-
-
+	}
 
