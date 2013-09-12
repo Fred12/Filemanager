@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import org.pmw.tinylog.Logger;
 
 import com.kandinsky.conn.FTPConnectionHandler;
+import com.kandinsky.gui.ButtonBar;
 import com.kandinsky.gui.favorites.FavoriteListener;
 import com.kandinsky.gui.splitPane.SidePanel;
 import com.kandinsky.objects.fileOperation.FTPOperationHandler;
@@ -55,8 +56,18 @@ public class SideFunctionsHelper implements FavoriteListener{
 		}
 	}
 	
+	public void getRootFolder() {
+		File actualPath = new File(getCurrentFolderName().toString());
+		String parentFolder = actualPath.getParent();
+		if (parentFolder == null) {			
+		}
+		else {		
+			switchFolder(parentFolder, false);
+		}		
+	}
+	
 	public String getFolder()  {
-		return sidePanel.getFolderNamePanel().getFolderText();
+		return sidePanel.getFolderNamePanel().getFolderText();		
 	}
 	
 	public void refresh(){

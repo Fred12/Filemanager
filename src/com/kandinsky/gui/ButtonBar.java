@@ -297,7 +297,8 @@ public class ButtonBar extends JPanel implements ActionListener {
 //			else {		
 //				sideFunctionsHelper.switchFolder(parentFolder, false);
 //			}		
-			folderUp();
+			//folderUp();
+			sideFunctionsHelper.getRootFolder();
 		}		
 
 		if (quelle == home) {
