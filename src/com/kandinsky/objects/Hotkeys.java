@@ -12,6 +12,8 @@ import java.util.Set;
 
 import javax.swing.JOptionPane;
 
+import org.pmw.tinylog.Logger;
+
 
 /**
  * Liste alle im System existierenden Shortcuts.
@@ -20,23 +22,45 @@ import javax.swing.JOptionPane;
 public class Hotkeys extends HashMap<String, Hotkey> implements Serializable {
 
 	private static final long serialVersionUID = 4430773610590354542L;
+
+	public static final String REFRESH = "REFRESH";
+	public static final String LEFT_PARENT = "LEFT_PARENT";
+	public static final String RIGHT_PARENT = "RIGHT_PARENT";
+	public static final String LEFT_BACK = "LEFT_BACK";
+	public static final String RIGHT_BACK = "RIGHT_BACK";
+	public static final String COPY_LEFT_TO_RIGHT = "COPY_LEFT_TO_RIGHT";
 	
 	private static final String HOTKEY_LIST_FILE = "shortcuts.dat";
 	
 	private static Hotkeys instance;
 	
 	private Hotkeys() {
+		initAllFunctions();
+	}
+
+	private void initAllFunctions() {
+		addIfNotExisting(REFRESH, "Aktualisieren");
+		addIfNotExisting(LEFT_PARENT, "Ordner hoch - links");
+		addIfNotExisting(RIGHT_PARENT, "Ordner hoch - rechts");
+		addIfNotExisting(LEFT_BACK, "Ordner zurueck - links");
+		addIfNotExisting(RIGHT_BACK, "Ordner zurueck - rechts");
+		addIfNotExisting(COPY_LEFT_TO_RIGHT, "Von links nach rechts kopieren");
 	}
 	
+	private void addIfNotExisting(String key, String name) {
+		if(!containsKey(key)){
+			put(new Hotkey(key, name, ""));
+		}
+	}
+
 	public static Hotkeys getInstance(){
-		
 		if(instance == null){
 			try {
-				instance = Hotkeys.readListFromFile();
+				Hotkeys.readListFromFile();
 			} catch (IOException e) {
+				Logger.error(e);
 				JOptionPane.showMessageDialog(null, "Konnte Shortcuts-Datei nicht lesen!");
 				instance = new Hotkeys();
-				e.printStackTrace();
 			}
 		}
 		return instance;
@@ -61,20 +85,21 @@ public class Hotkeys extends HashMap<String, Hotkey> implements Serializable {
 	 * @param ois
 	 * @throws IOException
 	 */
-	private static Hotkeys readListFromFile() throws IOException {
+	private static void readListFromFile() throws IOException {
+		ObjectInputStream ois = null;
 		try {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(HOTKEY_LIST_FILE));
-			Hotkeys shortcuts = (Hotkeys) ois.readObject();
-			ois.close();
-			return shortcuts;
+			ois = new ObjectInputStream(new FileInputStream(HOTKEY_LIST_FILE));
+			instance = (Hotkeys) ois.readObject();
+			instance.initAllFunctions();
 		} catch (ClassNotFoundException e) {
 			throw new IOException("No class found. HELP!!");
 		} catch (FileNotFoundException e) {
 			// Das ist ok, wenn die Datei nicht existiert, wurde sie noch nicht angelegt oder gelöscht
 			// Dann ist die Liste eben an dieser Stelle leer
-			Hotkeys ret = new Hotkeys();
-			ret.createTemplate();
-			return ret;
+			instance= new Hotkeys();
+		} finally {
+			if(ois!=null)
+				ois.close();
 		}
 	}
 	
@@ -88,7 +113,7 @@ public class Hotkeys extends HashMap<String, Hotkey> implements Serializable {
 			ObjectOutputStream oos = null;
 			try {
 				oos = new ObjectOutputStream(new FileOutputStream(HOTKEY_LIST_FILE));
-				//oos.writeObject(Shortcuts.self);
+				oos.writeObject(this);
 				oos.flush();
 			} finally {
 				oos.close();
@@ -100,11 +125,15 @@ public class Hotkeys extends HashMap<String, Hotkey> implements Serializable {
 		}
 	}
 	
-	/**
-	 * 
-	 */
-	private void createTemplate(){
-		this.put("temp1", new Hotkey("temp1","Temporärer Shortcut1", "STRG-C"));
+	@Override
+	public Hotkey put(String internalKey, Hotkey value) {
+		Hotkey hotkey = super.put(internalKey, value);
+		saveListToFile();
+		return hotkey;
+	}
+	
+	public Hotkey put(Hotkey hotkey){
+		return put(hotkey.getInternalKey(), hotkey);
 	}
 	
 }

@@ -45,7 +45,7 @@ public class Main {
 		
 		Favorites.loadAllFavorites();
 		
-		new GlobalHotkeyManager();
+		GlobalHotkeyManager.getInstance();
 		
 		KandinskyMenuBar menuBar = KandinskyMenuBar.getInstance();
 		frame.add(menuBar, BorderLayout.NORTH);

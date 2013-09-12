@@ -10,7 +10,7 @@ public class Hotkey implements Serializable {
 
 	private static final long serialVersionUID = 8510478971200260430L;
 
-	private String key;
+	private String internalKey;
 	private String name;
 	private String shortcutCombi;
 
@@ -18,19 +18,18 @@ public class Hotkey implements Serializable {
 		super();
 	}
 	
-	public Hotkey(String key, String name, String shortcutCombi) {
-		super();
-		this.key = key;
+	public Hotkey(String internalKey, String name, String shortcutCombi) {
+		this.internalKey = internalKey;
 		this.name = name;
 		this.shortcutCombi = shortcutCombi;
 	}
 
-	public String getKey() {
-		return key;
+	public String getInternalKey() {
+		return internalKey;
 	}
 
-	public void setKey(String key) {
-		this.key = key;
+	public void setInternalKey(String key) {
+		this.internalKey = key;
 	}
 
 	public String getName() {
@@ -51,8 +50,7 @@ public class Hotkey implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Shortcut [key=" + key + ", name=" + name + ", shortcutCombi="
-				+ shortcutCombi + "]";
+		return name;
 	}
 
 }

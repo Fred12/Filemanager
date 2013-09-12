@@ -80,7 +80,6 @@ public class OptionsShortcuts implements ActionListener, ListSelectionListener {
 		textFieldCombination.setBounds(110, 297, 205, 22);
 		textFieldCombination.setColumns(10);
 		page.add(textFieldCombination);
-
 	}
 
 	/**
@@ -137,7 +136,7 @@ public class OptionsShortcuts implements ActionListener, ListSelectionListener {
 		Hotkey entry = shortcutList.getHotkeyByKey(key);
 		
 		this.textFieldName.setText(entry.getName());
-		this.textFieldKey.setText(entry.getKey());
+		this.textFieldKey.setText(entry.getInternalKey());
 		this.textFieldCombination.setText(entry.getShortcutCombi());
 	
 	}
@@ -174,7 +173,7 @@ public class OptionsShortcuts implements ActionListener, ListSelectionListener {
 	
 		Hotkey storeEntry = shortcutList.get(displayKey);
 		storeEntry.setName(name);
-		storeEntry.setKey(key);
+		storeEntry.setInternalKey(key);
 		storeEntry.setShortcutCombi(combination);
 			
 		// No backstore to arraylist as this is no "copy", we got the reference which is still in the list

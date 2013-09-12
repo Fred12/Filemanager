@@ -1,30 +1,21 @@
 package com.kandinsky.objects;
 
-import java.awt.event.ActionEvent;
-
-import javax.swing.AbstractAction;
-
-public class AllActionsListener extends AbstractAction {
-
-	private static final long serialVersionUID = 7862912883759702399L;
+public class AllActionsListener {
 
 	public AllActionsListener() {
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent event) {
-		System.out.println("Action wurde erkannt: " + event.getActionCommand());
-		// TODO weise e.getActionCommand entsprechend zu
+	public void performHotKeyAction(String hotkey) {
+		System.out.println("Action wurde erkannt: " + hotkey);
 
 		try {
 			Hotkeys sc = Hotkeys.getInstance();
-			Hotkey selectedShortCut = sc.getHotkeyByKey(event
-					.getActionCommand());
+			Hotkey selectedShortCut = sc.getHotkeyByKey(hotkey);
 
 			switch (selectedShortCut.getName()) {
-			case "REFRESH": {
-				FunctionsHelper.refreshFavorites();
-			}
+				case "REFRESH": {
+					FunctionsHelper.refreshFavorites();
+				}
 			}
 		} catch (Exception e) {
 

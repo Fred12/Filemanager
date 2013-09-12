@@ -27,8 +27,8 @@ public class HotkeyTest {
 
 	@Test
 	public void testKey() {
-		hotkey.setKey(STRG_C);
-		assertEquals(STRG_C, hotkey.getKey());
+		hotkey.setInternalKey(STRG_C);
+		assertEquals(STRG_C, hotkey.getInternalKey());
 	}
 
 	@Test
@@ -40,7 +40,7 @@ public class HotkeyTest {
 	@Test
 	public void testConstructor() {
 		hotkey = new Hotkey(KEY, NAME, COMBI);
-		assertEquals(KEY, hotkey.getKey());
+		assertEquals(KEY, hotkey.getInternalKey());
 		assertEquals(NAME, hotkey.getName());
 		assertEquals(COMBI, hotkey.getShortcutCombi());
 	}
