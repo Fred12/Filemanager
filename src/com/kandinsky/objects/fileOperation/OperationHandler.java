@@ -1,6 +1,9 @@
 package com.kandinsky.objects.fileOperation;
 
+import java.io.IOException;
+
 import com.kandinsky.gui.splitPane.SidePanel;
+import com.kandinsky.objects.FileEntry;
 
 public abstract class OperationHandler {
 
@@ -28,5 +31,7 @@ public abstract class OperationHandler {
 	public abstract void moveSelectedFileEntries();
 
 	public abstract void deleteSelectedFileEntries();
+	
+	public abstract void rename(FileEntry fileEntry, String newFileName) throws IOException ;
 	
 }

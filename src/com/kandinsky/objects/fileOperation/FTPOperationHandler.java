@@ -1,6 +1,9 @@
 package com.kandinsky.objects.fileOperation;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.swing.JOptionPane;
 
 import org.pmw.tinylog.Logger;
 
@@ -8,6 +11,7 @@ import com.kandinsky.conn.FTPConnectionHandler;
 import com.kandinsky.gui.splitPane.SidePanel;
 import com.kandinsky.objects.FileEntry;
 import com.kandinsky.objects.FunctionsHelper;
+import com.kandinsky.objects.Message;
 
 /**
  * Kuemmert sich um Funktionalitaet auf einem FTP-Server
@@ -51,8 +55,18 @@ public class FTPOperationHandler extends OperationHandler {
 
 	@Override
 	public void createNewFolder() {
-		// TODO: gibts noch nicht, muss noch rein
-		throw new UnsupportedOperationException();
+		String name = JOptionPane.showInputDialog(sidePanel, "Ordnername", null);
+		if (name != null) {
+			String currentFolderName = sidePanel.getCurrentFolderName();
+			currentFolderName+=currentFolderName.endsWith("/")?"":"/";
+			try {
+				ftpConnectionHandler.makeDirectory(currentFolderName + name);
+				Logger.info("Neuer Ordner {0} wurde erstellt.", currentFolderName + name);
+			} catch (IOException e) {
+				Logger.error("Anlegen eines neuen Ordners war leider nicht moeglich");
+				FunctionsHelper.setMessage(Message.CREATE_FILE_FAILED);
+			}
+		}
 	}
 
 	@Override
@@ -73,4 +87,9 @@ public class FTPOperationHandler extends OperationHandler {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public void rename(FileEntry fileEntry, String newFileName) throws IOException {
+		// TODO: gibts noch nicht, muss noch rein
+		throw new UnsupportedOperationException();
+	}
 }

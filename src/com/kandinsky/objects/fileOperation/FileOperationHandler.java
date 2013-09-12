@@ -6,10 +6,12 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import org.apache.commons.io.FileUtils;
 import org.pmw.tinylog.Logger;
 
 import com.kandinsky.gui.splitPane.SidePanel;
 import com.kandinsky.objects.FileEntry;
+import com.kandinsky.objects.FileType;
 import com.kandinsky.objects.FunctionsHelper;
 import com.kandinsky.objects.Message;
 
@@ -99,6 +101,17 @@ public class FileOperationHandler extends OperationHandler {
 		File[] files = sidePanel.getTableAndFavoritesSplitPane().getTable().getSelectedFiles();
 		FileOperator operator = new DeleteOperator(files, sidePanel);
 		operator.execute();
+	}
+
+	@Override
+	public void rename(FileEntry fileEntry, String newFileName) throws IOException {
+		File newFile = new File(newFileName);
+		if (fileEntry.getType() == FileType.DIRECTORY) {
+			FileUtils.moveDirectory(fileEntry.getFile(), newFile);
+		} else {
+			FileUtils.moveFile(fileEntry.getFile(), newFile);
+		}
+		
 	}
 
 }

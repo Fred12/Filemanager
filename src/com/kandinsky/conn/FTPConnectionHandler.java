@@ -73,6 +73,10 @@ public class FTPConnectionHandler {
 			throw new RuntimeException("Laden der Dateien leider nicht moeglich! " + e.getMessage(), e);
 		}
 	}
+	
+	public void makeDirectory(String pathName) throws IOException{
+		ftpConnection.makeDirectory(pathName);
+	}
 
 	/**
 	 * Versucht eine bestehende Verbindung zu schliessen

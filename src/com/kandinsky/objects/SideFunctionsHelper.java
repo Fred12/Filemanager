@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
-import org.apache.commons.io.FileUtils;
 import org.pmw.tinylog.Logger;
 
 import com.kandinsky.conn.FTPConnectionHandler;
@@ -137,12 +136,8 @@ public class SideFunctionsHelper implements FavoriteListener{
 		String name = JOptionPane.showInputDialog(sidePanel, "Neuer Name", fileEntry.getName());
 		if (name != null) {
 			try {
-				File newFile = new File(currentFolderName + name);
-				if (fileEntry.getType() == FileType.DIRECTORY) {
-					FileUtils.moveDirectory(fileEntry.getFile(), newFile);
-				} else {
-					FileUtils.moveFile(fileEntry.getFile(), newFile);
-				}
+				String folderName = currentFolderName.endsWith("/")?currentFolderName:currentFolderName+"/";
+				getOperationHandler().rename(fileEntry, folderName+name);
 				refresh();
 			} catch (IOException e) {
 				Logger.error(e, "Datei umbenennen nicht moeglich. Neuer Name: {0}", name);
