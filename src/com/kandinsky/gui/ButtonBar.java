@@ -8,6 +8,8 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Stack;
 
 import javax.swing.Icon;
@@ -318,7 +320,34 @@ public class ButtonBar extends JPanel implements ActionListener {
 		}
 
 		if (quelle == shellOeffnen) {
+			try {
+				//Runtime.getRuntime().exec("notepad");
+				String path = sideFunctionsHelper.getCurrentFolderName().toString();
+				ProcessBuilder b = new ProcessBuilder();
+				
+				//b.environment().put("PATH", path);
+				//b.command("cmd", "/c", "start" , path );
+				b.command("cmd /c start cmd.exe /K \"cd " + path+ " && dir" ); 						//c:/ && dir\"");
+				
+				b.start();	
+				
+				
+				//String befehl = "cmd /c start cmd.exe";
+				
+			    //Process child = Runtime.getRuntime().exec(befehl);		
+			    //b.command(Runtime.getRuntime().exec(command));
+			    
+			}
+			    catch (IOException e) {
+			    	System.err.println(e.toString());
+			    } 
 		}
+		
+			
+				
+				
+				
+		
 
 		if (quelle == hilfe) {
 			FunctionsHelper.showAbout();
