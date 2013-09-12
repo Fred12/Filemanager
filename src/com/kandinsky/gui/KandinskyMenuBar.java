@@ -33,7 +33,7 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 	public static final String FTP_DISCONNECT			= "ftp_disconnect";
 		
 	// Menu "Settings" Items
-	public static final String OPTIONS					= "menuItemGeneralOptions";
+	public static final String OPTIONS_SHORTCUTS		= "menuItemShortcutOptions";
 	public static final String OPTIONS_FTP				= "menuItemFTPOptions";
 	public static final String TOGGLE_HIDDEN_FOLDERS	= "toggle_show_hidden_files";
 	public static final String TOGGLE_SHOW_FAVORITES	= "toggle_show_favorites";
@@ -54,7 +54,7 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 	
 	// Options Menu
 	public JMenu		menuOptions = null;
-	public JMenuItem	menuItemGeneralOptions = null;
+	public JMenuItem	menuItemShortcutOptions = null;
 	public JMenuItem	menuItemFTPOptions = null;
 	
 	// Help Menu
@@ -105,10 +105,10 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 		JMenu menuSettings = new JMenu("Einstellungen");
 		this.add(menuSettings);
 		
-		menuItemGeneralOptions = new JMenuItem("Allgemeine Optionen");
-		menuSettings.add(menuItemGeneralOptions);
-		menuItemGeneralOptions.setActionCommand(KandinskyMenuBar.OPTIONS);
-		menuItemGeneralOptions.addActionListener(this);
+		menuItemShortcutOptions = new JMenuItem("Shortcuts");
+		menuSettings.add(menuItemShortcutOptions);
+		menuItemShortcutOptions.setActionCommand(KandinskyMenuBar.OPTIONS_SHORTCUTS);
+		menuItemShortcutOptions.addActionListener(this);
 		
 		menuItemFTPOptions = new JMenuItem("FTP Optionen");
 		menuSettings.add(menuItemFTPOptions);
@@ -189,7 +189,7 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 					
 		// Menu "FTP" Actions
 		case FTP_SHOW_EDIT_SERVERS:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
+			FunctionsHelper.showOptions(1);
 			break;
 			
 		case FTP_CONNECT_MOST_RECENT:
@@ -201,7 +201,7 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 			break;
 			
 		// Menu "Options" Actions
-		case OPTIONS:
+		case OPTIONS_SHORTCUTS:
 			FunctionsHelper.showOptions(0);
 			break;
 		
