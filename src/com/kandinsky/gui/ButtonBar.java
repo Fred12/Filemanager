@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.Stack;
 
 import javax.swing.Icon;
@@ -248,7 +249,6 @@ public class ButtonBar extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, TODO, "Neues Fenster",
 						JOptionPane.OK_OPTION);
-
 			}
 		};
 	}
@@ -261,9 +261,8 @@ public class ButtonBar extends JPanel implements ActionListener {
 		Object quelle = ae.getSource();	
 
 		if (quelle == zurueck) {			
-			if (stack1.size() == 1) {
-				
-		}
+			if (stack1.size() == 1) {				
+			}
 			else if (!stack1.isEmpty()) {
 				String now = stack1.pop();
 				stack2.push(now);
@@ -273,7 +272,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 				weiter.setEnabled(true);
 				if (stack1.size() == 1) {
 					zurueck.setEnabled(false);
-			}
+				}
 			}
 		}		
 
@@ -287,17 +286,16 @@ public class ButtonBar extends JPanel implements ActionListener {
 				if (stack2.isEmpty()) {
 					weiter.setEnabled(false);
 				}
-			}	
-			
-		}
-	
-		
+			}			
+		}		
 
 		if (quelle == hoch) {
-			
-		}
-				
-		
+			//sideFunctionsHelper.switchFolder("..\\", false);
+			File actualPath = new File(sideFunctionsHelper.getCurrentFolderName());
+			//System.out.println(actualPath.toString());
+			//System.out.println(actualPath.getParent().toString());
+			sideFunctionsHelper.switchFolder(actualPath.getParent(), false);
+		}		
 
 		if (quelle == home) {
 			sideFunctionsHelper.switchFolder(System.getProperty("user.home"), true);			
@@ -332,8 +330,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 
 		if (quelle == einstellungen) {
 			FunctionsHelper.showOptions(0);
-		}		
-				
+		}						
 	}
 	
 	
