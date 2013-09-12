@@ -75,7 +75,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 
 		buttonBar.setBackground(Color.WHITE);
 		buttonBar.setOrientation(SwingConstants.HORIZONTAL);
-		buttonBar.setFloatable(true);
+		buttonBar.setFloatable(false);
 		buttonBar.setBorderPainted(false);
 		buttonBar.setAlignmentY(Component.CENTER_ALIGNMENT);
 		buttonBar.setBorderPainted(true);
