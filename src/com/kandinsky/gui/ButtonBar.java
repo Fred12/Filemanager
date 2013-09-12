@@ -327,6 +327,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		}
 
 		if (quelle == einstellungen) {
+			FunctionsHelper.showOptions(0);
 		}		
 				
 	}
