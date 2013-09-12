@@ -90,7 +90,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		// Icon Quellen fuer die Buttons, am besten png
 
 		Icon a = new ImageIcon(getClass().getResource(
-				"/com/kandinsky/resources/window-icon.png"));
+				"/com/kandinsky/resources/folder-open.png"));
 		Icon b = new ImageIcon(getClass().getResource(
 				"/com/kandinsky/resources/zurueck-icon.png"));
 		Icon c = new ImageIcon(getClass().getResource(
@@ -159,7 +159,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		// ToolTips fuer die Buttons
 		neuesFenster.setBackground(Color.WHITE);
 		// neuesFenster.setFont(new Font("Arial", Font.PLAIN, 12));
-		neuesFenster.setToolTipText("oeffnet eine neues Hauptfenster");
+		neuesFenster.setToolTipText("Ordner in Windows oeffnen");
 		zurueck.setBackground(Color.WHITE);
 		zurueck.setToolTipText("Zum Ordner zurueck navigieren");
 		//zurueck.setEnabled(false);
@@ -194,7 +194,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		einstellungen.setToolTipText("Einstellungen oeffnen");
 
 		// Buttons der buttonBar Anlegen
-		// buttonBar.add(neuesFenster);
+		buttonBar.add(neuesFenster);
 		buttonBar.add(zurueck);
 		buttonBar.add(weiter);
 		buttonBar.add(hoch);
@@ -212,7 +212,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		buttonBar.add(einstellungen);
 
 		// ActionListener fuer die einzelnen Buttons
-		neuesFenster.addActionListener(getNeuesFenster());
+		neuesFenster.addActionListener(this);
 		zurueck.addActionListener(this);
 		weiter.addActionListener(this);		
 		hoch.addActionListener(this);
@@ -261,6 +261,18 @@ public class ButtonBar extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 
 		Object quelle = ae.getSource();	
+		
+		if (quelle == neuesFenster) {
+			String path = sideFunctionsHelper.getCurrentFolderName().toString();
+			ProcessBuilder b = new ProcessBuilder();			
+			b.command("cmd", "/c", "start" , path );
+			try {
+				b.start();
+			} catch (IOException e) {
+				System.out.println(e);
+				e.printStackTrace();
+			}
+		}
 
 		if (quelle == zurueck) {			
 			if (stack1.size() == 1) {				
