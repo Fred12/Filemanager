@@ -139,4 +139,11 @@ public final class FunctionsHelper {
 		
 		throw new RuntimeException("Geht irgendwie doch nicht!");
 	}
+	
+	public static void refresh(){
+		List<SidePanel> sidePanels = MainPanel.getInstance().getMainSplitPane().getSidePanels();
+		for (SidePanel nextPanel : sidePanels) {
+			nextPanel.refresh();
+		}
+	}
 }

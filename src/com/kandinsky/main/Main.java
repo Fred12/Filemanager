@@ -14,6 +14,7 @@ import org.pmw.tinylog.Logger;
 import com.kandinsky.gui.KandinskyMenuBar;
 import com.kandinsky.gui.MainPanel;
 import com.kandinsky.objects.Favorites;
+import com.kandinsky.objects.GlobalHotkeyManager;
 
 public class Main {
 
