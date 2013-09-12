@@ -57,7 +57,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 	}
 	
 	public void getRootFolder() {
-		File actualPath = new File(getCurrentFolderName().toString());
+		File actualPath = new File(getCurrentFolderName());
 		String parentFolder = actualPath.getParent();
 		if (parentFolder == null) {			
 		}

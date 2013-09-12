@@ -289,15 +289,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 			}			
 		}		
 
-		if (quelle == hoch) {			
-//			File actualPath = new File(sideFunctionsHelper.getCurrentFolderName());
-//			String parentFolder = actualPath.getParent();
-//			if (parentFolder == null) {			
-//			}
-//			else {		
-//				sideFunctionsHelper.switchFolder(parentFolder, false);
-//			}		
-			//folderUp();
+		if (quelle == hoch) {		
 			sideFunctionsHelper.getRootFolder();
 		}		
 
@@ -348,17 +340,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		}		
 		stack2.clear();	
 		weiter.setEnabled(false);
-		}
-		
-		public void folderUp() {
-			File actualPath = new File(sideFunctionsHelper.getCurrentFolderName());
-			String parentFolder = actualPath.getParent();
-			if (parentFolder == null) {			
-			}
-			else {		
-				sideFunctionsHelper.switchFolder(parentFolder, false);
-			}					
-		}
+		}	
 
 	}
 
