@@ -11,10 +11,10 @@ import javax.swing.JOptionPane;
 
 import org.pmw.tinylog.Logger;
 
+import com.kandinsky.gui.GlobalHotkeyManager;
 import com.kandinsky.gui.KandinskyMenuBar;
 import com.kandinsky.gui.MainPanel;
 import com.kandinsky.objects.Favorites;
-import com.kandinsky.objects.GlobalHotkeyManager;
 
 public class Main {
 
@@ -44,6 +44,8 @@ public class Main {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		Favorites.loadAllFavorites();
+		
+		new GlobalHotkeyManager();
 		
 		KandinskyMenuBar menuBar = KandinskyMenuBar.getInstance();
 		frame.add(menuBar, BorderLayout.NORTH);

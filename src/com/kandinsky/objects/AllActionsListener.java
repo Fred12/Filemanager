@@ -4,27 +4,30 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-public class AllActions extends AbstractAction {
+public class AllActionsListener extends AbstractAction {
 
 	private static final long serialVersionUID = 7862912883759702399L;
 
-	public AllActions() {
+	public AllActionsListener() {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent event) {
+		System.out.println("Action wurde erkannt: " + event.getActionCommand());
 		// TODO weise e.getActionCommand entsprechend zu
 
-		Shortcuts sc = Shortcuts.getInstance();
-		Shortcut selectedShortCut = sc.getShortcutByKey(e.getActionCommand());
+		try {
+			Shortcuts sc = Shortcuts.getInstance();
+			Shortcut selectedShortCut = sc.getShortcutByKey(event
+					.getActionCommand());
 
-		if (selectedShortCut == null) {
-		} else {
 			switch (selectedShortCut.getName()) {
 			case "REFRESH": {
 				FunctionsHelper.refreshFavorites();
 			}
 			}
+		} catch (Exception e) {
+
 		}
 	}
 

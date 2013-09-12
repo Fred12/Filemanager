@@ -10,7 +10,7 @@ import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.KeyStroke;
 
-import com.kandinsky.objects.AllActions;
+import com.kandinsky.objects.AllActionsListener;
 
 public class GlobalHotkeyManager extends EventQueue {
 	private static final boolean DEBUG = false;
@@ -19,11 +19,12 @@ public class GlobalHotkeyManager extends EventQueue {
 
 
 	public GlobalHotkeyManager() {
-		AllActions allActions = new AllActions();
+		AllActionsListener allActions = new AllActionsListener();
 		Toolkit.getDefaultToolkit().getSystemEventQueue().push(this);
 		
 		// TODO: hotkeys belegen
-		KeyStroke refresh = KeyStroke.getKeyStroke((char)KeyEvent.VK_F5);
+		KeyStroke refresh = KeyStroke.getKeyStroke((char)KeyEvent.VK_F5,0);
+		System.out.println("Event hinzugefuegt: "+refresh.toString());
 		keyStrokes.put(refresh, "REFRESH");
 		actions.put("REFRESH", allActions);
 	} // One is enough - singleton
