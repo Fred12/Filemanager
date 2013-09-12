@@ -226,18 +226,23 @@ public class ButtonBar extends JPanel implements ActionListener {
 		einstellungen.addActionListener(this);
 		
 		
+		zurueck.setEnabled(false);
+		weiter.setEnabled(false);
 		
 		
-		//************************************************************************************************
 		
 		
+		//************************************************************************************************	
+		//Stacks anlegen für Pfadlisten der Buttons Zurueck/Weiter
 		
 		stack1 = new Stack<String>();   //Stack für das Adden von Foldern
 		stack2 = new Stack<String>();	//Stack für den Weiter - Button 
 		
 
-	}
+	}   //************************************************************************************************ Ende der Klasse ButtonBar()
 
+	
+	
 	private ActionListener getNeuesFenster() {
 		return new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -265,6 +270,10 @@ public class ButtonBar extends JPanel implements ActionListener {
 				String before = stack1.peek();
 				System.out.println(before);
 				sideFunctionsHelper.switchFolder(before, false);	
+				weiter.setEnabled(true);
+				if (stack1.size() == 1) {
+					zurueck.setEnabled(false);
+			}
 			}
 		}		
 
@@ -274,7 +283,12 @@ public class ButtonBar extends JPanel implements ActionListener {
 				stack1.push(now);
 				System.out.println(now);				
 				sideFunctionsHelper.switchFolder(now, false);
-			}			
+				zurueck.setEnabled(true);
+				if (stack2.isEmpty()) {
+					weiter.setEnabled(false);
+				}
+			}	
+			
 		}
 	
 		
@@ -327,8 +341,12 @@ public class ButtonBar extends JPanel implements ActionListener {
 		//Funktionen für die ButtonNavigation Vor/Zurueck - Ordner in die Liste einfügen	
 
 		public void addFolder(String folderName) {	
-		stack1.push(folderName);		
-		stack2.clear();		
+		stack1.push(folderName);
+		if (stack1.size() > 1) {
+			zurueck.setEnabled(true);
+		}		
+		stack2.clear();	
+		weiter.setEnabled(false);
 		}
 
 	}
