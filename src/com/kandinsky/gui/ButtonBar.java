@@ -157,15 +157,15 @@ public class ButtonBar extends JPanel implements ActionListener {
 		// ToolTips fuer die Buttons
 		neuesFenster.setBackground(Color.WHITE);
 		// neuesFenster.setFont(new Font("Arial", Font.PLAIN, 12));
-		neuesFenster.setToolTipText("�ffnet eine neues Hauptfenster");
+		neuesFenster.setToolTipText("oeffnet eine neues Hauptfenster");
 		zurueck.setBackground(Color.WHITE);
-		zurueck.setToolTipText("Zum Ordner zur�ck navigieren");
+		zurueck.setToolTipText("Zum Ordner zurueck navigieren");
 		//zurueck.setEnabled(false);
 		weiter.setBackground(Color.WHITE);
-		weiter.setToolTipText("Zum Ordner vorw�rts navigieren");
+		weiter.setToolTipText("Zum Ordner vorwaerts navigieren");
 		//weiter.setEnabled(false);
 		hoch.setBackground(Color.WHITE);
-		hoch.setToolTipText("Zum �bergeordneten Ordner wechseln");
+		hoch.setToolTipText("Zum uebergeordneten Ordner wechseln");
 
 		home.setBackground(Color.WHITE);
 		// home.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -185,11 +185,11 @@ public class ButtonBar extends JPanel implements ActionListener {
 		ftpAnzeigen.setBackground(Color.WHITE);
 		ftpAnzeigen.setToolTipText("FTP Verbindungen anzeigen");
 		shellOeffnen.setBackground(Color.WHITE);
-		shellOeffnen.setToolTipText("Shell im aktuellen Ordner �ffnen");
+		shellOeffnen.setToolTipText("Shell im aktuellen Ordner oeffnen");
 		hilfe.setBackground(Color.WHITE);
 		hilfe.setToolTipText("Hilfe und Infos");
 		einstellungen.setBackground(Color.WHITE);
-		einstellungen.setToolTipText("Einstellungen �ffnen");
+		einstellungen.setToolTipText("Einstellungen oeffnen");
 
 		// Buttons der buttonBar Anlegen
 		// buttonBar.add(neuesFenster);
@@ -289,12 +289,14 @@ public class ButtonBar extends JPanel implements ActionListener {
 			}			
 		}		
 
-		if (quelle == hoch) {
-			//sideFunctionsHelper.switchFolder("..\\", false);
+		if (quelle == hoch) {			
 			File actualPath = new File(sideFunctionsHelper.getCurrentFolderName());
-			//System.out.println(actualPath.toString());
-			//System.out.println(actualPath.getParent().toString());
-			sideFunctionsHelper.switchFolder(actualPath.getParent(), false);
+			String parentFolder = actualPath.getParent();
+			if (parentFolder == null) {			
+			}
+			else {		
+				sideFunctionsHelper.switchFolder(parentFolder, false);
+			}							
 		}		
 
 		if (quelle == home) {
