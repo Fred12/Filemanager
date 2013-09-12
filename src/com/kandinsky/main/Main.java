@@ -37,7 +37,7 @@ public class Main {
 		
 		Logger.info("Anwendung wird gestartet!");
 		
-		frame = new JFrame();
+		frame = new JFrame("Kandinsky Explorer");
 		frame.setLayout(new BorderLayout());
 		frame.setMinimumSize(new Dimension(400,400));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
