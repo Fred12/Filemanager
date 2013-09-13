@@ -7,15 +7,12 @@ import java.awt.FlowLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Stack;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
@@ -35,9 +32,6 @@ import com.kandinsky.objects.SideFunctionsHelper;
 public class ButtonBar extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = -7230543120102084314L;
-
-	private static final String TODO = "Needs to be implemented";
-
 	private static final Insets margins = new Insets(0, 0, 0, 0);
 	
 	private Stack<String> stack1;
@@ -84,8 +78,8 @@ public class ButtonBar extends JPanel implements ActionListener {
 		buttonBar.setBorderPainted(true);
 		buttonBar.setRollover(true);
 		// buttonBar.addSeparator(new Dimension(100,100));
-		// buttonBar.setMargin(margins);
-		// buttonBar.setAlignmentX(0);
+		//buttonBar.setMargin(margins);
+		//buttonBar.setAlignmentX(0);
 
 		// Icon Quellen fuer die Buttons, am besten png
 
@@ -122,8 +116,6 @@ public class ButtonBar extends JPanel implements ActionListener {
 
 		// Buttons erstellen mit Icons
 		neuesFenster = new JButton(a);
-		// neuesFenster.setHorizontalTextPosition(JButton.CENTER);
-		// neuesFenster.setVerticalTextPosition(JButton.CENTER);
 		zurueck = new JToggleButton(b);
 		weiter = new JToggleButton(c);
 		hoch = new JButton(d);
@@ -139,7 +131,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		hilfe = new JButton(n);
 		einstellungen = new JButton(o);
 
-		// Groesse der Buttons anpassen
+		// Abstaende / Raender der Buttons anpassen
 		neuesFenster.setMargin(margins);
 		zurueck.setMargin(margins);
 		weiter.setMargin(margins);
@@ -159,7 +151,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		// ToolTips fuer die Buttons
 		neuesFenster.setBackground(Color.WHITE);
 		// neuesFenster.setFont(new Font("Arial", Font.PLAIN, 12));
-		neuesFenster.setToolTipText("Ordner in Windows oeffnen");
+		neuesFenster.setToolTipText("Ordner oeffnen");
 		zurueck.setBackground(Color.WHITE);
 		zurueck.setToolTipText("Zum Ordner zurueck navigieren");
 		//zurueck.setEnabled(false);
@@ -245,15 +237,6 @@ public class ButtonBar extends JPanel implements ActionListener {
 	}   //************************************************************************************************ Ende der Klasse ButtonBar()
 
 	
-	
-	private ActionListener getNeuesFenster() {
-		return new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, TODO, "Neues Fenster",
-						JOptionPane.OK_OPTION);
-			}
-		};
-	}
 
 	// public class ButtonListener implements ActionListener {
 
@@ -263,15 +246,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		Object quelle = ae.getSource();	
 		
 		if (quelle == neuesFenster) {
-			String path = sideFunctionsHelper.getCurrentFolderName().toString();
-			ProcessBuilder b = new ProcessBuilder();			
-			b.command("cmd", "/c", "start" , path );
-			try {
-				b.start();
-			} catch (IOException e) {
-				System.out.println(e);
-				e.printStackTrace();
-			}
+			sideFunctionsHelper.openFolder();
 		}
 
 		if (quelle == zurueck) {			
@@ -332,34 +307,8 @@ public class ButtonBar extends JPanel implements ActionListener {
 		}
 
 		if (quelle == shellOeffnen) {
-			try {
-				//Runtime.getRuntime().exec("notepad");
-				String path = sideFunctionsHelper.getCurrentFolderName().toString();
-				ProcessBuilder b = new ProcessBuilder();
-				
-				//b.environment().put("PATH", path);
-				//b.command("cmd", "/c", "start" , path );
-				b.command("cmd /c start cmd.exe /K \"cd " + path+ " && dir" ); 						//c:/ && dir\"");
-				
-				b.start();	
-				
-				
-				//String befehl = "cmd /c start cmd.exe";
-				
-			    //Process child = Runtime.getRuntime().exec(befehl);		
-			    //b.command(Runtime.getRuntime().exec(command));
-			    
-			}
-			    catch (IOException e) {
-			    	System.err.println(e.toString());
-			    } 
-		}
-		
-			
-				
-				
-				
-		
+			sideFunctionsHelper.openCMDShell();
+		}		
 
 		if (quelle == hilfe) {
 			FunctionsHelper.showAbout();

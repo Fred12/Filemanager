@@ -55,6 +55,31 @@ public class SideFunctionsHelper implements FavoriteListener{
 		}
 	}
 	
+	public void openCMDShell() {
+		try {
+			//Runtime.getRuntime().exec("notepad");
+			String path = getCurrentFolderName().toString();
+			ProcessBuilder b = new ProcessBuilder();				
+			b.command("cmd /c start cmd.exe /K \"cd " + path+ " && dir" ); 					
+			b.start();				    
+		}
+		    catch (IOException e) {
+		    	System.err.println(e.toString());
+		    } 
+	}
+	
+	public void openFolder() {
+		try {
+			String path = getCurrentFolderName().toString();
+			ProcessBuilder b = new ProcessBuilder();			
+			b.command("cmd", "/c", "start" , path );			
+			b.start();
+			} catch (IOException e) {
+				System.err.println(e);
+				e.printStackTrace();
+			}
+		}
+	
 	public void getRootFolder() {
 		File actualPath = new File(getCurrentFolderName());
 		String parentFolder = actualPath.getParent();
@@ -64,6 +89,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 			switchFolder(parentFolder, false);
 		}		
 	}
+	
 	
 	public String getFolder()  {
 		return sidePanel.getFolderNamePanel().getFolderText();		
