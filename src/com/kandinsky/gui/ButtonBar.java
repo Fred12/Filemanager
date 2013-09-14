@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Insets;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -18,6 +19,8 @@ import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
+import com.kandinsky.gui.splitPane.MainSplitPane;
+import com.kandinsky.gui.splitPane.SidePanel;
 import com.kandinsky.objects.FunctionsHelper;
 import com.kandinsky.objects.SideFunctionsHelper;
 
@@ -289,8 +292,13 @@ public class ButtonBar extends JPanel implements ActionListener {
 		if (quelle == aktualisieren) {
 			sideFunctionsHelper.refresh();
 		}
+		
+		if (quelle == vertauschen)  {
+			sideFunctionsHelper.exChangePanelsFolder();
+		}
 
 		if (quelle == favoritenAnlegen) {
+			
 		}
 
 		if (quelle == favoritenAnzeigen) {
@@ -329,8 +337,41 @@ public class ButtonBar extends JPanel implements ActionListener {
 			zurueck.setEnabled(true);
 		}		
 		stack2.clear();	
-		weiter.setEnabled(false);
+		weiter.setEnabled(false);		
 		}	
+		
+		public Stack<String> getStack1() {
+			return stack1;
+		}
+		
+		public Stack<String>getStack2() {
+			return stack2;
+		}
+		
+		public void setStack1(Stack<String> otherStack) {
+			this.stack1 = otherStack;
+		}
+		
+		public void setStack2(Stack<String> otherStack) {
+			this.stack2 = otherStack;
+		}
+		
+		public void checkStacks() {
+			if (stack1.size() > 1) {
+				zurueck.setEnabled(true);				
+			}
+			else {
+				zurueck.setEnabled(false);
+			}
+			
+			if (stack2.size() >= 1) {
+				weiter.setEnabled(true);
+			}
+			else {
+				weiter.setEnabled(false);
+			}
+		}
+		
 
 	}
 

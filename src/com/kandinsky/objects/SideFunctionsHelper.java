@@ -2,12 +2,14 @@ package com.kandinsky.objects;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Stack;
 
 import javax.swing.JOptionPane;
 
 import org.pmw.tinylog.Logger;
 
 import com.kandinsky.conn.FTPConnectionHandler;
+import com.kandinsky.gui.ButtonBar;
 import com.kandinsky.gui.favorites.FavoriteListener;
 import com.kandinsky.gui.splitPane.SidePanel;
 import com.kandinsky.objects.fileOperation.FTPOperationHandler;
@@ -35,6 +37,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 	private FTPOperationHandler ftpOperationHandler;
 	private FileOperationHandler fileOperationHandler;
 	
+	
 	public SideFunctionsHelper(SidePanel sidePanel){
 		this.sidePanel = sidePanel;
 		this.ftpConnectionHandler=new FTPConnectionHandler();
@@ -55,16 +58,44 @@ public class SideFunctionsHelper implements FavoriteListener{
 		}
 	}
 	
+	public ButtonBar getButtonBar() {
+		ButtonBar buttonBar = sidePanel.getButtonBar();
+		return buttonBar;
+	}
+	
+	public void exChangePanelsFolder() {
+		//Vertausche die Ordnerpfade
+		String thisFolder = getCurrentFolderName();
+		SidePanel otherSidePanel = FunctionsHelper.getOtherSidePanel(this.sidePanel);		
+		String otherFolder = otherSidePanel.getCurrentFolderName();	
+		otherSidePanel.getSideFunctionsHelper().switchFolder(thisFolder, false);
+		switchFolder(otherFolder,false);
+		//Vertausche die 2 Stacks der jeweiligen ButtonBar
+		ButtonBar otherButtonBar = otherSidePanel.getButtonBar();
+		Stack<String> otherStack1 = otherButtonBar.getStack1();
+		Stack<String> otherStack2 = otherButtonBar.getStack2();
+		ButtonBar thisButtonBar = getButtonBar();
+		Stack<String> thisStack1 = thisButtonBar.getStack1();
+		Stack<String> thisStack2 = thisButtonBar.getStack2();
+		otherButtonBar.setStack1(thisStack1);
+		otherButtonBar.setStack2(thisStack2);
+		thisButtonBar.setStack1(otherStack1);
+		thisButtonBar.setStack2(otherStack2);
+		thisButtonBar.checkStacks();
+		otherButtonBar.checkStacks();
+	}
+	
+	
 	public void openCMDShell() {
-		try {
-			//Runtime.getRuntime().exec("notepad");
+		try {			
 			String path = getCurrentFolderName().toString();
 			ProcessBuilder b = new ProcessBuilder();				
-			b.command("cmd /c start cmd.exe /K \"cd " + path+ " && dir" ); 					
+			b.command("cmd /c start cmd.exe /K \"cd " + path); 					
 			b.start();				    
 		}
 		    catch (IOException e) {
 		    	System.err.println(e.toString());
+		    	e.printStackTrace();
 		    } 
 	}
 	
@@ -197,7 +228,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 			switchFolder("/", true);
 
 		} catch (Exception e) {
-			Logger.error("Connection versuch misslungen!", e);
+			Logger.error("Connection Versuch misslungen!", e);
 			FunctionsHelper.setMessage(Message.FTP_CONNECT_FAILED);
 		}
 	}
