@@ -48,7 +48,7 @@ public class OptionsShortcuts implements ActionListener, ListSelectionListener {
 		page.add(shortcutDisplayList);
 			
 		JButton buttonStore = new JButton("Speichern");
-		buttonStore.setBounds(216, 147, 97, 25);
+		buttonStore.setBounds(216, 147, 110, 25);
 		buttonStore.setActionCommand("store");
 		buttonStore.addActionListener(this);
 		page.add(buttonStore);
@@ -66,18 +66,18 @@ public class OptionsShortcuts implements ActionListener, ListSelectionListener {
 		page.add(labelUser);
 		
 		textFieldName = new JTextField();
-		textFieldName.setBounds(110, 227, 205, 22);
+		textFieldName.setBounds(110, 227, 218, 22);
 		textFieldName.setColumns(10);
 		page.add(textFieldName);
 		
 		textFieldKey = new JTextField();
-		textFieldKey.setBounds(110, 262, 205, 22);
+		textFieldKey.setBounds(110, 262, 218, 22);
 		textFieldKey.setColumns(10);
 		textFieldKey.setEnabled(false);
 		page.add(textFieldKey);
 		
 		textFieldCombination = new JTextField();
-		textFieldCombination.setBounds(110, 297, 205, 22);
+		textFieldCombination.setBounds(110, 297, 218, 22);
 		textFieldCombination.setColumns(10);
 		page.add(textFieldCombination);
 	}

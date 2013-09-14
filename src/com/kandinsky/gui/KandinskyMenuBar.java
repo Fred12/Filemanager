@@ -26,17 +26,11 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 	
 	// Menu "File" Items
 	public static final String CLOSE_PROGRAM			= "menuItemCloseProgram";
-	
-	// Menu "FTP" Items
-	public static final String FTP_SHOW_EDIT_SERVERS	= "menuItemEditServerList";
-	public static final String FTP_CONNECT_MOST_RECENT	= "ftp_connect_most_recent";
-	public static final String FTP_DISCONNECT			= "ftp_disconnect";
 		
 	// Menu "Settings" Items
 	public static final String OPTIONS_SHORTCUTS		= "menuItemShortcutOptions";
 	public static final String OPTIONS_FTP				= "menuItemFTPOptions";
 	public static final String TOGGLE_HIDDEN_FOLDERS	= "toggle_show_hidden_files";
-	public static final String TOGGLE_SHOW_FAVORITES	= "toggle_show_favorites";
 		
 	// Menu "Help" Items
 	public static final String HELP						= "menuItemHelp";
@@ -74,32 +68,7 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 		menuFile.add(menuItemCloseProgram);
 		menuItemCloseProgram.setActionCommand(KandinskyMenuBar.CLOSE_PROGRAM);
 		menuItemCloseProgram.addActionListener(this);
-			
-		// FTP Menu Section
-		
-		JMenu menuFTP = new JMenu("FTP");
-		this.add(menuFTP);
-		
-		menuItemEditServerList = new JMenuItem("Server verwalten");
-		menuFTP.add(menuItemEditServerList);
-		menuItemEditServerList.setActionCommand(KandinskyMenuBar.FTP_SHOW_EDIT_SERVERS);
-		menuItemEditServerList.addActionListener(this);
-		
-		JSeparator separator_2 = new JSeparator();
-		menuFTP.add(separator_2);
-		
-		JMenu menuFTPConnect = new JMenu("Verbinden");
-		menuFTP.add(menuFTPConnect);
-		menuFTPConnect.addActionListener(this);
-		
-		JMenuItem menuItemFTPServerEntryDummy = new JMenuItem("Serverliste hier erzeugen");
-		menuFTPConnect.add(menuItemFTPServerEntryDummy);
 				
-		JMenuItem menuItemFTPCloseConnection = new JMenuItem("Verbindung trennen");
-		menuFTP.add(menuItemFTPCloseConnection);
-		menuItemFTPCloseConnection.setActionCommand(KandinskyMenuBar.FTP_DISCONNECT);
-		menuItemFTPCloseConnection.addActionListener(this);
-		
 		// Settings menu section
 		
 		JMenu menuSettings = new JMenu("Einstellungen");
@@ -122,11 +91,6 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 		menuSettings.add(menuCheckboxToggleShowHiddenFiles);
 		menuCheckboxToggleShowHiddenFiles.setActionCommand(KandinskyMenuBar.TOGGLE_HIDDEN_FOLDERS);
 		menuCheckboxToggleShowHiddenFiles.addActionListener(this);
-		
-		JCheckBoxMenuItem menuCheckboxToggleShowFavorites = new JCheckBoxMenuItem("Favoritenliste anzeigen");
-		menuSettings.add(menuCheckboxToggleShowFavorites);
-		menuCheckboxToggleShowFavorites.setActionCommand(KandinskyMenuBar.TOGGLE_SHOW_FAVORITES);
-		menuCheckboxToggleShowFavorites.addActionListener(this);
 		
 		// Help Menu section
 		
@@ -186,20 +150,7 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 		case CLOSE_PROGRAM:
 			FunctionsHelper.closeProgram();
 			break;
-					
-		// Menu "FTP" Actions
-		case FTP_SHOW_EDIT_SERVERS:
-			FunctionsHelper.showOptions(1);
-			break;
-			
-		case FTP_CONNECT_MOST_RECENT:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
-			break;
-			
-		case FTP_DISCONNECT:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
-			break;
-			
+				
 		// Menu "Options" Actions
 		case OPTIONS_SHORTCUTS:
 			FunctionsHelper.showOptions(0);
@@ -208,11 +159,7 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 		case OPTIONS_FTP:
 			FunctionsHelper.showOptions(1);
 			break;
-			
-		case TOGGLE_SHOW_FAVORITES:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
-			break;
-		
+
 		case TOGGLE_HIDDEN_FOLDERS:
 			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
 			break;

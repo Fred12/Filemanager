@@ -55,7 +55,7 @@ public class OptionsDialog extends JDialog {
 		
 		topics = new JList();
 		topics.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		topics.setBounds(10, 11, 128, 400);
+		topics.setBounds(10, 11, 128, 370);
 		topics.setListData(_pages.getTopics());
 		topics.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		createListener();
@@ -65,7 +65,7 @@ public class OptionsDialog extends JDialog {
 		pageCategory.changePage(_topicIndex);
 		getContentPane().add(content);
 
-		this.setMinimumSize(new Dimension(675, 460));
+		this.setMinimumSize(new Dimension(525, 435));
 		
 	}
 	

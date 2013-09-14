@@ -42,7 +42,7 @@ public abstract class PageCategory {
 		
 		page = new JPanel();
 		page.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		page.setBounds(148, 11, 500, 400);
+		page.setBounds(148, 11, 350, 370);
 		return page;
 	}
 	

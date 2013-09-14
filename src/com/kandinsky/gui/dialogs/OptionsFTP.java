@@ -52,31 +52,31 @@ public class OptionsFTP implements ActionListener, ListSelectionListener {
 		page.add(serverList);
 			
 		JButton buttonUp = new JButton("Nach oben");
-		buttonUp.setBounds(216, 12, 97, 25);
+		buttonUp.setBounds(216, 12, 110, 25);
 		buttonUp.setActionCommand("up");
 		buttonUp.addActionListener(this);
 		page.add(buttonUp);
 		
 		JButton buttonDown = new JButton("Nach unten");
-		buttonDown.setBounds(216, 57, 97, 25);
+		buttonDown.setBounds(216, 57, 110, 25);
 		buttonDown.setActionCommand("down");
 		buttonDown.addActionListener(this);
 		page.add(buttonDown);
 		
 		JButton buttonNew = new JButton("Neu");
-		buttonNew.setBounds(216, 102, 97, 25);
+		buttonNew.setBounds(216, 102, 110, 25);
 		buttonNew.setActionCommand("new");
 		buttonNew.addActionListener(this);
 		page.add(buttonNew);
 		
 		JButton buttonStore = new JButton("Speichern");
-		buttonStore.setBounds(216, 147, 97, 25);
+		buttonStore.setBounds(216, 147, 110, 25);
 		buttonStore.setActionCommand("store");
 		buttonStore.addActionListener(this);
 		page.add(buttonStore);
 		
 		JButton buttonDelete = new JButton("Löschen");
-		buttonDelete.setBounds(216, 192, 97, 25);
+		buttonDelete.setBounds(216, 192, 110, 25);
 		buttonDelete.setActionCommand("delete");
 		buttonDelete.addActionListener(this);
 		page.add(buttonDelete);
@@ -90,12 +90,12 @@ public class OptionsFTP implements ActionListener, ListSelectionListener {
 		page.add(labelServer);
 		
 		textFieldName = new JTextField();
-		textFieldName.setBounds(88, 227, 225, 22);
+		textFieldName.setBounds(88, 227, 238, 22);
 		textFieldName.setColumns(10);
 		page.add(textFieldName);
 		
 		textFieldServer = new JTextField();
-		textFieldServer.setBounds(88, 262, 225, 22);
+		textFieldServer.setBounds(88, 262, 238, 22);
 		textFieldServer.setColumns(10);
 		page.add(textFieldServer);
 		
@@ -113,7 +113,7 @@ public class OptionsFTP implements ActionListener, ListSelectionListener {
 		textFieldUsername.setColumns(10);
 		
 		textFieldPort = new JTextField();
-		textFieldPort.setBounds(245, 297, 68, 22);
+		textFieldPort.setBounds(245, 297, 81, 22);
 		page.add(textFieldPort);
 		textFieldPort.setColumns(10);
 		
@@ -122,7 +122,7 @@ public class OptionsFTP implements ActionListener, ListSelectionListener {
 		page.add(labelPassword);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(88, 332, 225, 22);
+		passwordField.setBounds(88, 332, 238, 22);
 		page.add(passwordField);
 
 	}
