@@ -40,6 +40,22 @@ public class AllActionsListener {
 					FunctionsHelper.getSideFunctionsHelperOnSide(Side.RIGHT).copySelectedFilesToOtherSide();
 					break;
 				}
+				case Hotkeys.RIGHT_BACK: {
+//					FunctionsHelper.getSideFunctionsHelperOnSide(Side.RIGHT).
+					// TODO: fehlt noch die Button-Funktionalitaet im SideFunctionsHelper
+				}
+				case Hotkeys.LEFT_BACK: {
+//					FunctionsHelper.getSideFunctionsHelperOnSide(Side.RIGHT).
+					// TODO: fehlt noch die Button-Funktionalitaet im SideFunctionsHelper
+				}
+				case Hotkeys.LEFT_PARENT: {
+					FunctionsHelper.getSideFunctionsHelperOnSide(Side.LEFT).getRootFolder();
+					// TODO: fehlt noch die Button-Funktionalitaet im SideFunctionsHelper
+				}
+				case Hotkeys.RIGHT_PARENT: {
+					FunctionsHelper.getSideFunctionsHelperOnSide(Side.RIGHT).getRootFolder();
+					// TODO: fehlt noch die Button-Funktionalitaet im SideFunctionsHelper
+				}
 				case "REFRESH": {
 					FunctionsHelper.refresh();
 					break;

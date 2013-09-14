@@ -30,30 +30,36 @@ public class GlobalHotkeyManager extends EventQueue {
 		keyStrokes = new LinkedList<>();
 		Toolkit.getDefaultToolkit().getSystemEventQueue().push(this);
 
-		// F-Tasten
-		for(int i = KeyEvent.VK_F1; i <= KeyEvent.VK_F12; i++){
+		addFromKeyToKey(KeyEvent.VK_F1, KeyEvent.VK_F12);
+		addFromKeyToKey(KeyEvent.VK_A, KeyEvent.VK_Z);
+	}
+
+	private void addFromKeyToKey(int start, int end) {
+		// normal
+		for (int i = start; i <= end; i++) {
 			keyStrokes.add(KeyStroke.getKeyStroke((char) i, 0));
 		}
 		
-		// CTRL+F-Tasten
-		for(int i = KeyEvent.VK_F1; i <= KeyEvent.VK_F12; i++){
+		// Ctrl
+		for (int i = start; i <= end; i++) {
 			keyStrokes.add(KeyStroke.getKeyStroke(i, KeyEvent.CTRL_MASK));
 		}
-
-		// CTRL+ALT+F-Tasten
-		for(int i = KeyEvent.VK_F1; i <= KeyEvent.VK_F12; i++){
+		
+		// Alt
+		for (int i = start; i <= end; i++) {
+			keyStrokes.add(KeyStroke.getKeyStroke(i, KeyEvent.ALT_MASK));
+		}
+		
+		// Ctrl+Alt
+		for (int i = start; i <= end; i++) {
 			keyStrokes.add(KeyStroke.getKeyStroke(i, KeyEvent.CTRL_MASK+KeyEvent.ALT_MASK));
 		}
 	}
 
-	public List<KeyStroke> getKeyStrokes() {
-		return keyStrokes;
-	}
-	
 	public Vector<String> getKeyStrokesAsString() {
 		Vector<String> stringKeyStrokes = new Vector<>();
 		stringKeyStrokes.add("");
-		for(KeyStroke nextStroke : getKeyStrokes()){
+		for(KeyStroke nextStroke : keyStrokes){
 			stringKeyStrokes.add(nextStroke.toString());
 		}
 		return stringKeyStrokes;
