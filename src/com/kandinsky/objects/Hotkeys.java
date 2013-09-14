@@ -37,6 +37,10 @@ public class Hotkeys implements Serializable {
 	public static final String NEW_FOLDER_RIGHT = "NEW_FOLDER_RIGHT";
 	public static final String NEW_FILE_LEFT = "NEW_FILE_LEFT";
 	public static final String NEW_FILE_RIGHT = "NEW_FILE_RIGHT";
+	public static final String SHELL_LEFT = "SHELL_LEFT";
+	public static final String SHELL_RIGHT = "SHELL_RIGHT";
+	public static final String OPEN_FOLDER_LEFT = "OPEN_FOLDER_LEFT";
+	public static final String OPEN_FOLDER_RIGHT = "OPEN_FOLDER_RIGHT";
 	
 	private static final String HOTKEY_LIST_FILE = "shortcuts.dat";
 	
@@ -58,8 +62,12 @@ public class Hotkeys implements Serializable {
 		add(COPY_RIGHT_TO_LEFT, "Von rechts nach links kopieren");
 		add(NEW_FOLDER_LEFT, "Neuer Ordner - links");
 		add(NEW_FOLDER_RIGHT, "Neuer Ordner - rechts");
-		add(NEW_FILE_LEFT, "Neue Datei links");
-		add(NEW_FILE_RIGHT, "Neue Datei rechts");
+		add(NEW_FILE_LEFT, "Neue Datei - links");
+		add(NEW_FILE_RIGHT, "Neue Datei - rechts");
+		add(SHELL_LEFT, "Shell oeffnen - links");
+		add(SHELL_RIGHT, "Shell oeffnen - rechts");
+		add(OPEN_FOLDER_LEFT, "Ordner oeffnen - links");
+		add(OPEN_FOLDER_RIGHT, "Ordner oeffnen - rechts");
 	}
 	
 	private void add(String key, String name) {

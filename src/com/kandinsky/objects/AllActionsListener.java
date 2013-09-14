@@ -50,11 +50,21 @@ public class AllActionsListener {
 				}
 				case Hotkeys.LEFT_PARENT: {
 					FunctionsHelper.getSideFunctionsHelperOnSide(Side.LEFT).getRootFolder();
-					// TODO: fehlt noch die Button-Funktionalitaet im SideFunctionsHelper
 				}
 				case Hotkeys.RIGHT_PARENT: {
 					FunctionsHelper.getSideFunctionsHelperOnSide(Side.RIGHT).getRootFolder();
-					// TODO: fehlt noch die Button-Funktionalitaet im SideFunctionsHelper
+				}
+				case Hotkeys.OPEN_FOLDER_LEFT: {
+					FunctionsHelper.getSideFunctionsHelperOnSide(Side.LEFT).openFolderInWindows();
+				}
+				case Hotkeys.OPEN_FOLDER_RIGHT: {
+					FunctionsHelper.getSideFunctionsHelperOnSide(Side.RIGHT).openFolderInWindows();
+				}
+				case Hotkeys.SHELL_LEFT: {
+					FunctionsHelper.getSideFunctionsHelperOnSide(Side.LEFT).openCMDShell();
+				}
+				case Hotkeys.SHELL_RIGHT: {
+					FunctionsHelper.getSideFunctionsHelperOnSide(Side.RIGHT).openCMDShell();
 				}
 				case "REFRESH": {
 					FunctionsHelper.refresh();

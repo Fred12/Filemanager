@@ -233,4 +233,11 @@ public class SideFunctionsHelper implements FavoriteListener{
 		else
 			return fileOperationHandler;
 	}
+	
+	/**
+	 * oeffnet (zumindest unter Windows) den aktuell gewaehlten Ordner in einem eigenen Fenster
+	 */
+	public void openFolderInWindows(){
+		switchFolder(System.getProperty("user.home"), true);
+	}
 }
