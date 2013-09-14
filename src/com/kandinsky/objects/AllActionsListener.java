@@ -50,21 +50,27 @@ public class AllActionsListener {
 				}
 				case Hotkeys.LEFT_PARENT: {
 					FunctionsHelper.getSideFunctionsHelperOnSide(Side.LEFT).getRootFolder();
+					break;
 				}
 				case Hotkeys.RIGHT_PARENT: {
 					FunctionsHelper.getSideFunctionsHelperOnSide(Side.RIGHT).getRootFolder();
+					break;
 				}
 				case Hotkeys.OPEN_FOLDER_LEFT: {
 					FunctionsHelper.getSideFunctionsHelperOnSide(Side.LEFT).openFolderInWindows();
+					break;
 				}
 				case Hotkeys.OPEN_FOLDER_RIGHT: {
 					FunctionsHelper.getSideFunctionsHelperOnSide(Side.RIGHT).openFolderInWindows();
+					break;
 				}
 				case Hotkeys.SHELL_LEFT: {
 					FunctionsHelper.getSideFunctionsHelperOnSide(Side.LEFT).openCMDShell();
+					break;
 				}
 				case Hotkeys.SHELL_RIGHT: {
 					FunctionsHelper.getSideFunctionsHelperOnSide(Side.RIGHT).openCMDShell();
+					break;
 				}
 				case "REFRESH": {
 					FunctionsHelper.refresh();
@@ -72,6 +78,7 @@ public class AllActionsListener {
 				}
 				default: {
 					Logger.error(hotkey+" hat keine Funktion!");
+					break;
 				}
 			}
 		} catch (NoSuchElementException e) {
