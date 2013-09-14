@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.KeyStroke;
 
@@ -29,14 +30,33 @@ public class GlobalHotkeyManager extends EventQueue {
 		keyStrokes = new LinkedList<>();
 		Toolkit.getDefaultToolkit().getSystemEventQueue().push(this);
 
-		// TODO: hotkeys belegen
-		KeyStroke f5 = KeyStroke.getKeyStroke((char) KeyEvent.VK_F5, 0);
-		System.out.println("Event hinzugefuegt: " + f5.toString());
-		keyStrokes.add(f5);
+		// F-Tasten
+		for(int i = KeyEvent.VK_F1; i <= KeyEvent.VK_F12; i++){
+			keyStrokes.add(KeyStroke.getKeyStroke((char) i, 0));
+		}
+		
+		// CTRL+F-Tasten
+		for(int i = KeyEvent.VK_F1; i <= KeyEvent.VK_F12; i++){
+			keyStrokes.add(KeyStroke.getKeyStroke(i, KeyEvent.CTRL_MASK));
+		}
+
+		// CTRL+ALT+F-Tasten
+		for(int i = KeyEvent.VK_F1; i <= KeyEvent.VK_F12; i++){
+			keyStrokes.add(KeyStroke.getKeyStroke(i, KeyEvent.CTRL_MASK+KeyEvent.ALT_MASK));
+		}
 	}
 
-	public List<KeyStroke> getInputMap() {
+	public List<KeyStroke> getKeyStrokes() {
 		return keyStrokes;
+	}
+	
+	public Vector<String> getKeyStrokesAsString() {
+		Vector<String> stringKeyStrokes = new Vector<>();
+		stringKeyStrokes.add("");
+		for(KeyStroke nextStroke : getKeyStrokes()){
+			stringKeyStrokes.add(nextStroke.toString());
+		}
+		return stringKeyStrokes;
 	}
 
 	protected void dispatchEvent(AWTEvent event) {

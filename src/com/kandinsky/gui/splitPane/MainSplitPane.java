@@ -6,6 +6,8 @@ import java.util.List;
 import javax.swing.JSplitPane;
 
 import com.kandinsky.gui.fileList.FileListTable;
+import com.kandinsky.gui.splitPane.SidePanel.Side;
+import com.kandinsky.objects.SideFunctionsHelper;
 
 /**
  * PUNKT 4 - SplitPane.
@@ -58,6 +60,13 @@ public class MainSplitPane extends JSplitPane {
 		sidePanels.add(leftPanel);
 		sidePanels.add(rightPanel);
 		return sidePanels;
+	}
+	
+	public SideFunctionsHelper getSideFunctionsHelperForSide(Side side){
+		if(leftPanel.getSide()==side)
+			return leftPanel.getSideFunctionsHelper();
+		else
+			return rightPanel.getSideFunctionsHelper();
 	}
 
 }

@@ -146,4 +146,8 @@ public final class FunctionsHelper {
 			nextPanel.refresh();
 		}
 	}
+
+	public static SideFunctionsHelper getSideFunctionsHelperOnSide(SidePanel.Side side) {
+		return MainPanel.getInstance().getMainSplitPane().getSideFunctionsHelperForSide(side);
+	}
 }

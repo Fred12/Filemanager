@@ -21,8 +21,8 @@ public class HotkeyTest {
 
 	@Test
 	public void testName() {
-		hotkey.setName(TEST_NAME);
-		assertEquals(TEST_NAME, hotkey.getName());
+		hotkey.setFunctionName(TEST_NAME);
+		assertEquals(TEST_NAME, hotkey.getFunctionName());
 	}
 
 	@Test
@@ -33,16 +33,16 @@ public class HotkeyTest {
 
 	@Test
 	public void testHotkeyCombi() {
-		hotkey.setShortcutCombi(STRG_C);
-		assertEquals(STRG_C, hotkey.getShortcutCombi());
+		hotkey.setHotkeyCombination(STRG_C);
+		assertEquals(STRG_C, hotkey.getHotkeyCombination());
 	}
 	
 	@Test
 	public void testConstructor() {
 		hotkey = new Hotkey(KEY, NAME, COMBI);
 		assertEquals(KEY, hotkey.getInternalKey());
-		assertEquals(NAME, hotkey.getName());
-		assertEquals(COMBI, hotkey.getShortcutCombi());
+		assertEquals(NAME, hotkey.getFunctionName());
+		assertEquals(COMBI, hotkey.getHotkeyCombination());
 	}
 
 }

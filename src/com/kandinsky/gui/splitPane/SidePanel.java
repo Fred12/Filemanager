@@ -141,6 +141,10 @@ public abstract class SidePanel extends JPanel implements Comparable<SidePanel> 
 	 */
 	public abstract Side getSide();
 	
+	public SideFunctionsHelper getSideFunctionsHelper(){
+		return sideFunctionsHelper;
+	}
+	
 	@Override
 	public int compareTo(SidePanel o) {
 		return getSide().compareTo(o.getSide());
