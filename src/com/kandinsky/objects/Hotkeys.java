@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 import org.pmw.tinylog.Logger;
 
 /**
- * Liste alle im System existierenden Shortcuts.
+ * Liste alle im System existierenden Shortcuts. Singleton.
  * @author schmidtb
  */
 public class Hotkeys implements Serializable {
@@ -56,6 +56,22 @@ public class Hotkeys implements Serializable {
 		initAllFunctions();
 	}
 
+	public static Hotkeys getInstance() {
+		if (instance == null) {
+			try {
+				Hotkeys.readListFromFile();
+			} catch (IOException e) {
+				Logger.error(e);
+				JOptionPane.showMessageDialog(null, "Konnte Shortcuts-Datei nicht lesen!");
+				instance = new Hotkeys();
+			}
+		}
+		return instance;
+	}
+
+	/**
+	 * Hier werden alle Hotkey-Funktionen mit Label initialisiert.
+	 */
 	private void initAllFunctions() {
 		add(REFRESH, "Aktualisieren");
 		add(LEFT_PARENT, "Ordner hoch - links");
@@ -80,33 +96,33 @@ public class Hotkeys implements Serializable {
 		add(ADD_RIGHT_FOLDER_TO_FAVORITES, "Aktuellen Ordner zu Favoriten hinzufügen - rechts");
 	}
 
-	private void add(String key, String name) {
-		Hotkey e = new Hotkey(key, name, "");
+	/**
+	 * Fügt einen neuen Hotkey zur Liste der Hotkeys hinzu. Da es sich um ein Set handelt, können keine doppelten Einträge vorkommen.
+	 * @param internalKey
+	 * @param functionsName
+	 */
+	private void add(String internalKey, String functionsName) {
+		Hotkey e = new Hotkey(internalKey, functionsName, "");
 		hotkeys.add(e);
 	}
 
-	public static Hotkeys getInstance() {
-		if (instance == null) {
-			try {
-				Hotkeys.readListFromFile();
-			} catch (IOException e) {
-				Logger.error(e);
-				JOptionPane.showMessageDialog(null, "Konnte Shortcuts-Datei nicht lesen!");
-				instance = new Hotkeys();
-			}
-		}
-		return instance;
-	}
 
-	public Hotkey getHotkeyByKey(String key) {
+	/**
+	 * @param hotkeyCombination
+	 * @return den passenden Hotkey zu einem Hotkey-Kombinations-String, falls vorhanden. Sonst wird eine NoSuchElementException geworfen
+	 */
+	public Hotkey getHotkeyByCombination(String hotkeyCombination) {
 		for (Hotkey hotkey : hotkeys) {
-			if (hotkey.getHotkeyCombination().equals(key))
+			if (hotkey.getHotkeyCombination().equals(hotkeyCombination))
 				return hotkey;
 		}
 		throw new NoSuchElementException();
 	}
 
-	public Vector<String> getFunctions() {
+	/**
+	 * @return Vector mit allen Funktionsnamen
+	 */
+	public Vector<String> getFunctionNames() {
 		Vector<String> functionNames = new Vector<>();
 		for (Hotkey hotkey : hotkeys) {
 			functionNames.add(hotkey.getFunctionName());
@@ -115,6 +131,9 @@ public class Hotkeys implements Serializable {
 		return functionNames;
 	}
 
+	/**
+	 * @return Vektor mit allen Hotkeys
+	 */
 	public Vector<Hotkey> getHotkeys() {
 		Vector<Hotkey> hotkeyVec = new Vector<>();
 		for (Hotkey hotkey : hotkeys) {

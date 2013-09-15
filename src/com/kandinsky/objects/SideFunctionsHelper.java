@@ -37,7 +37,6 @@ public class SideFunctionsHelper implements FavoriteListener{
 	private FTPOperationHandler ftpOperationHandler;
 	private FileOperationHandler fileOperationHandler;
 	
-	
 	public SideFunctionsHelper(SidePanel sidePanel){
 		this.sidePanel = sidePanel;
 		this.ftpConnectionHandler=new FTPConnectionHandler();
@@ -85,7 +84,9 @@ public class SideFunctionsHelper implements FavoriteListener{
 		otherButtonBar.checkStacks();
 	}
 	
-	
+	/**
+	 * Öffnet eine CMD-Shell (unter windows)
+	 */
 	public void openCMDShell() {
 		try {			
 			String path = getCurrentFolderName().toString();

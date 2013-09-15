@@ -10,14 +10,18 @@ public class Hotkey implements Serializable, Comparable<Hotkey>{
 
 	private static final long serialVersionUID = 8510478971200260430L;
 
+	/** Interner Key zur Eindeutigen Referenzierung der Funktion */
 	private String internalKey;
+	/** Funktionsname der zugeordneten Funktion */
 	private String functionName;
+	/** Hotkey-Kombination als String */
 	private String hotkeyCombination;
 
-	public Hotkey() {
-		super();
-	}
-
+	/**
+	 * @param internalKey
+	 * @param name
+	 * @param hotkeyCombination
+	 */
 	public Hotkey(String internalKey, String name, String hotkeyCombination) {
 		this.internalKey = internalKey;
 		this.functionName = name;
@@ -60,12 +64,11 @@ public class Hotkey implements Serializable, Comparable<Hotkey>{
 		return functionName;
 	}
 
+	/**
+	 * natural ordering nach Funktionsname
+	 */
 	@Override
 	public int compareTo(Hotkey o) {
-		if(o!=null)
-			return functionName.compareTo(o.getFunctionName());
-		else
-			return 1;
+		return functionName.compareTo(o.getFunctionName());
 	}
-
 }

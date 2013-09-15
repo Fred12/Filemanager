@@ -20,19 +20,19 @@ public class HotkeyTest {
 	}
 
 	@Test
-	public void testName() {
+	public void testFunctionName() {
 		hotkey.setFunctionName(TEST_NAME);
 		assertEquals(TEST_NAME, hotkey.getFunctionName());
 	}
 
 	@Test
-	public void testKey() {
+	public void testInternalKey() {
 		hotkey.setInternalKey(STRG_C);
 		assertEquals(STRG_C, hotkey.getInternalKey());
 	}
 
 	@Test
-	public void testHotkeyCombi() {
+	public void testHotkeyCombination() {
 		hotkey.setHotkeyCombination(STRG_C);
 		assertEquals(STRG_C, hotkey.getHotkeyCombination());
 	}
@@ -43,6 +43,30 @@ public class HotkeyTest {
 		assertEquals(KEY, hotkey.getInternalKey());
 		assertEquals(NAME, hotkey.getFunctionName());
 		assertEquals(COMBI, hotkey.getHotkeyCombination());
+	}
+	
+	@Test
+	public void testNaturalOrderWithFirstLowerThanSecond() {
+		Hotkey hotkeyA = new Hotkey(null, "ABC", null);
+		Hotkey hotkeyB = new Hotkey(null, "DEF", null);
+		
+		assertTrue(hotkeyA.compareTo(hotkeyB) < 0);
+	}
+	
+	@Test
+	public void testNaturalOrderWithSecondLowerThanFirst() {
+		Hotkey hotkeyA = new Hotkey(null, "DEF", null);
+		Hotkey hotkeyB = new Hotkey(null, "ABC", null);
+		
+		assertTrue(hotkeyA.compareTo(hotkeyB) > 0);
+	}
+	
+	@Test
+	public void testNaturalOrderWithEqualHotkeyFunctionNames() {
+		Hotkey hotkeyA = new Hotkey(null, "ABC", null);
+		Hotkey hotkeySameAsA = new Hotkey(null, "ABC", null);
+		
+		assertTrue(hotkeyA.compareTo(hotkeySameAsA) == 0);
 	}
 
 }

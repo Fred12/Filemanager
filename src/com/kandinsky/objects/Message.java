@@ -36,7 +36,9 @@ public enum Message {
 		this.color = color;
 	}
 
+	/** anzuzeigende Nachricht */
 	private final String message;
+	/** Hintergrundfarbe des Textes */
 	private final Color color;
 
 	public String getMessage() {

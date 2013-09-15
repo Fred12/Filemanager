@@ -8,12 +8,17 @@ import com.kandinsky.gui.splitPane.SidePanel.Side;
 
 public class AllActionsListener {
 
+	/**
+	 * Zentrale Funktion zum Durchführen einer Hotkey-Aktion. Dabei wird überprüft, ob der Hotkey einer Funktion zugeordnet ist. Diese Funktion wird im Anschluss
+	 * dann ausgeführt.
+	 * @param hotkey
+	 */
 	public void performHotKeyAction(String hotkey) {
 		Logger.debug("Hotkey wurde erkannt: " + hotkey);
 
 		try {
 			Hotkeys hotkeys = Hotkeys.getInstance();
-			Hotkey selectedShortCut = hotkeys.getHotkeyByKey(hotkey);
+			Hotkey selectedShortCut = hotkeys.getHotkeyByCombination(hotkey);
 
 			switch (selectedShortCut.getInternalKey()) {
 				case Hotkeys.NEW_FILE_LEFT: {
@@ -105,5 +110,4 @@ public class AllActionsListener {
 			Logger.debug(hotkey + " wurde bisher nicht zugewiesen");
 		}
 	}
-
 }
