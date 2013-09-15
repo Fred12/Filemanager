@@ -34,7 +34,7 @@ public class MainSplitPane extends JSplitPane {
 		this.setOneTouchExpandable(true);
 		this.setResizeWeight(DIVIDER_RATIO);
 		this.leftPanel = leftPanel;
-		this.rightPanel = rightPanel;
+		this.rightPanel = rightPanel;		
 	}
 
 	/**
