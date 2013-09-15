@@ -81,7 +81,7 @@ public abstract class SidePanel extends JPanel implements Comparable<SidePanel> 
 		gbc.gridy = 2;
 		gbc.fill = GridBagConstraints.BOTH;
 		gbc.weightx = 1.0;
-		gbc.weighty = 0.7;
+		gbc.weighty = 100;		
 		return gbc;
 	}
 	

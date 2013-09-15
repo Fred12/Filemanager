@@ -47,7 +47,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 	private JButton home;
 	private JButton aktualisieren;
 	private JButton vertauschen;
-	private JButton favoritenAnlegen;
+	private JButton favoritenHinzufuegen;
 	private JButton favoritenAnzeigen;
 	private JButton benutzer;
 	private JButton ftpVerwalten;
@@ -125,7 +125,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		home = new JButton(e);
 		aktualisieren = new JButton(f);
 		vertauschen = new JButton(g);
-		favoritenAnlegen = new JButton(h);
+		favoritenHinzufuegen = new JButton(h);
 		favoritenAnzeigen = new JButton(i);
 		benutzer = new JButton(j);
 		ftpVerwalten = new JButton(k);
@@ -142,7 +142,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		home.setMargin(margins);
 		aktualisieren.setMargin(margins);
 		vertauschen.setMargin(margins);
-		favoritenAnlegen.setMargin(margins);
+		favoritenHinzufuegen.setMargin(margins);
 		favoritenAnzeigen.setMargin(margins);
 		benutzer.setMargin(margins);
 		ftpVerwalten.setMargin(margins);
@@ -171,8 +171,8 @@ public class ButtonBar extends JPanel implements ActionListener {
 		aktualisieren.setToolTipText("Fenster aktualisieren");
 		vertauschen.setBackground(Color.WHITE);
 		vertauschen.setToolTipText("Split-Fenster vertauschen");
-		favoritenAnlegen.setBackground(Color.WHITE);
-		favoritenAnlegen.setToolTipText("Neue Favoriten anlegen");
+		favoritenHinzufuegen.setBackground(Color.WHITE);
+		favoritenHinzufuegen.setToolTipText("aktuellen Ordner zu Favoriten hinzufuegen");
 		favoritenAnzeigen.setBackground(Color.WHITE);
 		favoritenAnzeigen.setToolTipText("Favoriten anzeigen");
 		benutzer.setBackground(Color.WHITE);
@@ -197,8 +197,8 @@ public class ButtonBar extends JPanel implements ActionListener {
 		buttonBar.add(home);
 		buttonBar.add(aktualisieren);
 		buttonBar.add(vertauschen);
-		buttonBar.add(favoritenAnlegen);
-		buttonBar.add(favoritenAnzeigen);
+		buttonBar.add(favoritenHinzufuegen);
+		//buttonBar.add(favoritenAnzeigen);
 		// buttonBar.add(benutzer);
 		buttonBar.add(ftpVerwalten);
 		// buttonBar.add(ftpAnzeigen);
@@ -214,7 +214,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 		home.addActionListener(this);
 		aktualisieren.addActionListener(this);
 		vertauschen.addActionListener(this);
-		favoritenAnlegen.addActionListener(this);
+		favoritenHinzufuegen.addActionListener(this);
 		favoritenAnzeigen.addActionListener(this);
 		benutzer.addActionListener(this);
 		ftpVerwalten.addActionListener(this);
@@ -297,23 +297,14 @@ public class ButtonBar extends JPanel implements ActionListener {
 			sideFunctionsHelper.exChangePanelsFolder();
 		}
 
-		if (quelle == favoritenAnlegen) {
+		if (quelle == favoritenHinzufuegen) {
 			
-		}
-
-		if (quelle == favoritenAnzeigen) {
-		}
-
-		if (quelle == benutzer) {
-		}
+		}		
 
 		if (quelle == ftpVerwalten) {
 			FunctionsHelper.showOptions(1);
 		}
-
-		if (quelle == ftpAnzeigen) {
-		}
-
+		
 		if (quelle == shellOeffnen) {
 			sideFunctionsHelper.openCMDShell();
 		}		
