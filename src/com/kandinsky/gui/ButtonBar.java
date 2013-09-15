@@ -19,8 +19,11 @@ import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
+import com.kandinsky.gui.favorites.FavoriteElement;
+import com.kandinsky.gui.favorites.FavoritesPanel;
 import com.kandinsky.gui.splitPane.MainSplitPane;
 import com.kandinsky.gui.splitPane.SidePanel;
+import com.kandinsky.objects.FileEntry;
 import com.kandinsky.objects.FunctionsHelper;
 import com.kandinsky.objects.SideFunctionsHelper;
 
@@ -56,6 +59,7 @@ public class ButtonBar extends JPanel implements ActionListener {
 	private JButton hilfe;
 	private JButton einstellungen;
 
+	
 	/**
 	 * der Funktionshelfer, ueber den verschiedene Funktionen aufgerufen werden
 	 * koennen
@@ -298,7 +302,8 @@ public class ButtonBar extends JPanel implements ActionListener {
 		}
 
 		if (quelle == favoritenHinzufuegen) {
-			
+			FileEntry folderFileEntry = new FileEntry(sideFunctionsHelper.getCurrentFolderName());
+			FunctionsHelper.addFavorite(folderFileEntry);
 		}		
 
 		if (quelle == ftpVerwalten) {
