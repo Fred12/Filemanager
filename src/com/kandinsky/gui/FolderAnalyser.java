@@ -92,7 +92,7 @@ public class FolderAnalyser extends JPanel {
 	}
 
 	/**
-	 * berechnet den freien- und gesamt Speicher und gibt ein Text zurück
+	 * berechnet den freien- und gesamt Speicher und gibt ein Text zurÃ¼ck
 	 * welcher in der Progressbar angezeigt wird "x GB / y GB"
 	 * 
 	 * @return Text der in hardDiskSpace angezeigt wird
@@ -109,7 +109,7 @@ public class FolderAnalyser extends JPanel {
 	 * refreshProgressbar() aufgerufen werden damit FreeSpace / TotalSpace
 	 * gesetzt wird.
 	 * 
-	 * @return gibt die Prozentzahl vom freien Speicher zurück
+	 * @return gibt die Prozentzahl vom freien Speicher zurÃ¼ck
 	 */
 	public int getProgressbarProcent() {
 		return Math.round(100 - ((FreeSpace / TotalSpace) * 100));
@@ -133,8 +133,8 @@ public class FolderAnalyser extends JPanel {
 	}
 	
 	/**
-	 * bei jedem klick auf eine oder mehrere Datei (Dateien auswählen) muss
-	 * diese Methode ausgeführt werden
+	 * bei jedem klick auf eine oder mehrere Datei (Dateien auswÃ¤hlen) muss
+	 * diese Methode ausgefÃ¼hrt werden
 	 * 
 	 * @param selectedFiles
 	 */

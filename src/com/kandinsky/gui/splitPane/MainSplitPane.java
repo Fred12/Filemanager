@@ -11,8 +11,8 @@ import com.kandinsky.objects.SideFunctionsHelper;
 
 /**
  * PUNKT 4 - SplitPane.
- * Große Hauptsplitpane, in dem die Hautpdetails liegen. Dabei werden der Splitpane ein linkes und
- * ein rechtes Panel mitübergeben, welche dann 50:50 geteilt angezeigt werden.
+ * GroÃ¶e Hauptsplitpane, in dem die Hautpdetails liegen. Dabei werden der Splitpane ein linkes und
+ * ein rechtes Panel mitÃ¼bergeben, welche dann 50:50 geteilt angezeigt werden.
  * @author schmidtb
  */
 public class MainSplitPane extends JSplitPane {
@@ -25,7 +25,7 @@ public class MainSplitPane extends JSplitPane {
 	private static final double DIVIDER_RATIO = 0.5;
 
 	/**
-	 * Die Splitpane wird in einen linken und rechten Teil unterteil. Hierfür wird ein linkes und ein rechtes Panel übergeben.
+	 * Die Splitpane wird in einen linken und rechten Teil unterteil. HierfÃ¼r wird ein linkes und ein rechtes Panel Ã¼bergeben.
 	 * @param leftPanel
 	 * @param rightPanel
 	 */
@@ -38,7 +38,7 @@ public class MainSplitPane extends JSplitPane {
 	}
 
 	/**
-	 * Die Splitpane wird in einen linken und rechten Teil unterteil. Hierfür wird ein linkes und ein rechtes Panel komplett neu angelegt.
+	 * Die Splitpane wird in einen linken und rechten Teil unterteil. HierfÃ¼r wird ein linkes und ein rechtes Panel komplett neu angelegt.
 	 * @param leftPanel
 	 * @param rightPanel
 	 * @throws Exception 

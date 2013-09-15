@@ -33,6 +33,8 @@ public class Hotkeys implements Serializable {
 	public static final String RIGHT_BACK = "RIGHT_BACK";
 	public static final String COPY_LEFT_TO_RIGHT = "COPY_LEFT_TO_RIGHT";
 	public static final String COPY_RIGHT_TO_LEFT = "COPY_RIGHT_TO_LEFT";
+	public static final String MOVE_LEFT_TO_RIGHT = "MOVE_LEFT_TO_RIGHT";
+	public static final String MOVE_RIGHT_TO_LEFT = "MOVE_RIGHT_TO_LEFT";
 	public static final String NEW_FOLDER_LEFT = "NEW_FOLDER_LEFT";
 	public static final String NEW_FOLDER_RIGHT = "NEW_FOLDER_RIGHT";
 	public static final String NEW_FILE_LEFT = "NEW_FILE_LEFT";
@@ -60,6 +62,8 @@ public class Hotkeys implements Serializable {
 		add(RIGHT_BACK, "Ordner zurueck - rechts");
 		add(COPY_LEFT_TO_RIGHT, "Von links nach rechts kopieren");
 		add(COPY_RIGHT_TO_LEFT, "Von rechts nach links kopieren");
+		add(MOVE_LEFT_TO_RIGHT, "Von links nach rechts verschieben");
+		add(MOVE_RIGHT_TO_LEFT, "Von rechts nach links verschieben");
 		add(NEW_FOLDER_LEFT, "Neuer Ordner - links");
 		add(NEW_FOLDER_RIGHT, "Neuer Ordner - rechts");
 		add(NEW_FILE_LEFT, "Neue Datei - links");
@@ -115,7 +119,7 @@ public class Hotkeys implements Serializable {
 	}
 	
 	/**
-	 * Lädt alle Favorites aus einer vorhandenen Datei und initialisiert diese im Favorites-Singleton.
+	 * LÃ¤dt alle Favorites aus einer vorhandenen Datei und initialisiert diese im Favorites-Singleton.
 	 * @param ois
 	 * @throws IOException
 	 */
@@ -128,7 +132,7 @@ public class Hotkeys implements Serializable {
 		} catch (ClassNotFoundException e) {
 			throw new IOException("No class found. HELP!!");
 		} catch (FileNotFoundException e) {
-			// Das ist ok, wenn die Datei nicht existiert, wurde sie noch nicht angelegt oder gelöscht
+			// Das ist ok, wenn die Datei nicht existiert, wurde sie noch nicht angelegt oder gelÃ¶scht
 			// Dann ist die Liste eben an dieser Stelle leer
 			instance= new Hotkeys();
 		} finally {
@@ -140,7 +144,7 @@ public class Hotkeys implements Serializable {
 	/**
 	 * Speichert die Favorites weg. Kann nur von intern aufgerufen werden.
 	 * 
-	 * Temporär unwirksam, solange die Shortcuts Liste nicht feststeht
+	 * TemporÃ¤r unwirksam, solange die Shortcuts Liste nicht feststeht
 	 */
 	public void saveListToFile() {
 		try {

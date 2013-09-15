@@ -19,7 +19,7 @@ import com.kandinsky.objects.SideFunctionsHelper;
 /**
  * PUNKT 7 - Favoriten
  * Favoritenliste zum Anzeigen der Favoriten.
- * ACHTUNG: Die Favoriten müssen auf beiden Seiten der SplitPane angezeigt werden! Daher müssen später zwei Instanzen davon
+ * ACHTUNG: Die Favoriten mÃ¼ssen auf beiden Seiten der SplitPane angezeigt werden! Daher mÃ¼ssen spÃ¤ter zwei Instanzen davon
  * exisitieren!
  * @author schmidtb
  */

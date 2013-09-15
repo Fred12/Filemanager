@@ -60,7 +60,7 @@ public class Main {
 	        public void windowClosing(WindowEvent e) {
 	            super.windowClosing(e);
 	            // You can still stop closing if you want to
-	            int res = JOptionPane.showConfirmDialog(frame, "Sicher? Noch laufende Operationen\nkönnen Datenverlust verursachen!", "Close?", JOptionPane.YES_NO_OPTION);
+	            int res = JOptionPane.showConfirmDialog(frame, "Sicher? Noch laufende Operationen\nkÃ¶nnen Datenverlust verursachen!", "Close?", JOptionPane.YES_NO_OPTION);
 	            if ( res == 0 ) {
 	                // dispose method issues the WINDOW_CLOSED event
 	                frame.dispose();

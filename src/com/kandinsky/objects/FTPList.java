@@ -14,10 +14,10 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
- * Hilfsklasse zur Verwaltung der FTP Server Einträge und zur Verfügungstellung
- * über das gesamte Programm hinweg. Da die Arrayfunktionen nicht erneut implementiert
- * werden sollen, wird auf die gegebene ArrayList zurückgegriffen. Diese ist 
- * nicht statisch implementiert, deshalb wird hier ein Singleton darübergebaut,
+ * Hilfsklasse zur Verwaltung der FTP Server EintrÃ¤ge und zur VerfÃ¼gungstellung
+ * Ã¼ber das gesamte Programm hinweg. Da die Arrayfunktionen nicht erneut implementiert
+ * werden sollen, wird auf die gegebene ArrayList zurÃ¼ckgegriffen. Diese ist 
+ * nicht statisch implementiert, deshalb wird hier ein Singleton darÃ¼bergebaut,
  * damit die Informationen konsistent bleiben.
  * 
  * @author Stefan
@@ -94,7 +94,7 @@ public class FTPList extends ArrayList<FTPEntry> implements Serializable {
 	}
 	
 	/**
-	 * Lädt alle Favorites aus einer vorhandenen Datei und initialisiert diese im Favorites-Singleton.
+	 * LÃ¤dt alle Favorites aus einer vorhandenen Datei und initialisiert diese im Favorites-Singleton.
 	 * @param ois
 	 * @throws IOException
 	 */
@@ -107,7 +107,7 @@ public class FTPList extends ArrayList<FTPEntry> implements Serializable {
 		} catch (ClassNotFoundException e) {
 			throw new IOException("No class found. HELP!!");
 		} catch (FileNotFoundException e) {
-			// Das ist ok, wenn die Datei nicht existiert, wurde sie noch nicht angelegt oder gelöscht
+			// Das ist ok, wenn die Datei nicht existiert, wurde sie noch nicht angelegt oder gelÃ¶scht
 			// Dann ist die Liste eben an dieser Stelle leer
 			return new FTPList();
 		}

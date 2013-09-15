@@ -14,7 +14,7 @@ import org.pmw.tinylog.Logger;
 
 /**
  * Singleton, welches ALLE Favoriten als Datei-Namens-Liste beinhaltet. Diese kann weggespeichert und wieder geladen werden. Das Laden geschieht dabei initial,
- * weggespeichert wird bei jeder Änderung.
+ * weggespeichert wird bei jeder Ã„nderung.
  * @author Benne
  */
 public class Favorites implements Serializable {
@@ -54,7 +54,7 @@ public class Favorites implements Serializable {
 	}
 
 	/**
-	 * Fügt einen Favorite hinzu und speichert ihn direkt weg
+	 * FÃ¼gt einen Favorite hinzu und speichert ihn direkt weg
 	 * @param entry
 	 */
 	public void addToFavorites(FileEntry entry) {
@@ -92,8 +92,7 @@ public class Favorites implements Serializable {
 	}
 
 	/**
-	 * Lädt alle Favorites aus einer vorhandenen Datei und initialisiert diese im Favorites-Singleton.
-	 * @param ois
+	 * LÃ¤dt alle Favorites aus einer vorhandenen Datei und initialisiert diese im Favorites-Singleton.
 	 * @throws IOException
 	 */
 	public static void loadAllFavorites() throws IOException {

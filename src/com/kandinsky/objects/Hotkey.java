@@ -3,7 +3,7 @@ package com.kandinsky.objects;
 import java.io.Serializable;
 
 /**
- * Shortcut-Klasse, repr‰sentiert einen einzigen Shortcut.
+ * Shortcut-Klasse, repr√§sentiert einen einzigen Shortcut.
  * @author schmidtb
  */
 public class Hotkey implements Serializable, Comparable<Hotkey>{

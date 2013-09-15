@@ -9,7 +9,7 @@ import com.kandinsky.gui.KandinskyMenuBar;
 import com.kandinsky.gui.MainPanel;
 
 /**
- * Testklasse für die komplette Ansicht
+ * Testklasse fÃ¼r die komplette Ansicht
  * @author schmidtb
  */
 public class MainFrameTest extends JFrame {

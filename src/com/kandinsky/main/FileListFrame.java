@@ -10,7 +10,7 @@ import com.kandinsky.gui.splitPane.MainSplitPane;
 import com.kandinsky.gui.splitPane.RightSidePanel;
 
 /**
- * Testklasse für die FileListe
+ * Testklasse fÃ¼r die FileListe
  * @author schmidtb
  */
 public class FileListFrame extends JFrame {

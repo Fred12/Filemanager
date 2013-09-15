@@ -22,7 +22,7 @@ import com.kandinsky.objects.SideFunctionsHelper;
 /**
  * PUNKT 5 - Verzeichnis Name anzeigen.
  * Dient zum Anzeigen des aktuellen Verzeichnisses.
- * ACHTUNG: Das Panel muss für beide Seiten der SplitPane angezeigt werden. Daher wird es später zwei Instanzen davon geben.
+ * ACHTUNG: Das Panel muss fÃ¼r beide Seiten der SplitPane angezeigt werden. Daher wird es spÃ¤ter zwei Instanzen davon geben.
  * 
  * @author schmidtb
  */
@@ -143,7 +143,7 @@ public class FolderNamePanel extends JPanel {
 	}
 	
 	/**
-	 * Fängt Auswahl des Laufwerks in der Laufwerksauswahl ab 
+	 * FÃ¤ngt Auswahl des Laufwerks in der Laufwerksauswahl ab 
 	 * und wechselt den Ordner
 	 * 
 	 * @author Stefan
@@ -155,7 +155,7 @@ public class FolderNamePanel extends JPanel {
 		public void itemStateChanged(ItemEvent ie) {
 			if(ie.getStateChange() == 1)
 			{
-				// Wechsel des Items auf ausgewählt führt zu Ordnerwechsel
+				// Wechsel des Items auf ausgewÃ¤hlt fÃ¼hrt zu Ordnerwechsel
 				FolderNamePanel.this.changeFolder(ie.getItem().toString(), true);
 				
 			}

@@ -8,14 +8,14 @@ import java.util.List;
 import javax.swing.ImageIcon;
 
 /**
- * Repraesentiert einen anzuzeigenden Eintrag und kapselt dabei die Funktionalität die später
- * auf der Oberfläche angezeigt werden soll.
+ * Repraesentiert einen anzuzeigenden Eintrag und kapselt dabei die FunktionalitÃ¤t die spÃ¤ter
+ * auf der OberflÃ¤che angezeigt werden soll.
  * @author schmidtb
  */
 public class FileEntry implements Comparable<FileEntry> {
 
 	protected static final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
-	/** Wunderhübsch */
+	/** WunderhÃ¼bsch */
 	
 	private static final ImageIcon FOLDER_ICON = new ImageIcon(new ImageIcon(FileEntry.class.getResource("/com/kandinsky/resources/folder-7-icon.png")).getImage().getScaledInstance(16, 16,
 			java.awt.Image.SCALE_SMOOTH));
@@ -39,7 +39,7 @@ public class FileEntry implements Comparable<FileEntry> {
 	}
 
 	/**
-	 * @param files Dateiliste
+	 * @param folder Ordner
 	 * @return eine passende FileEntry-Liste, wobei dort in jedem Eintrag eine Datei gekapselt ist.
 	 */
 	public static List<FileEntry> getFileEntryList(File folder) {
@@ -109,10 +109,10 @@ public class FileEntry implements Comparable<FileEntry> {
 
 	/**
 	 * Rechte in der Formatierung "rwx" - dreistellig<p>
-	 * für vorhandene Rechte wird der Buchstabe an diese Stelle geschrieben, ansonsten ein Minus. Folgende Rechte sind möglich:<br>
+	 * fÃ¼r vorhandene Rechte wird der Buchstabe an diese Stelle geschrieben, ansonsten ein Minus. Folgende Rechte sind mÃ¶glich:<br>
 	 * - r = Lesen (read)<br>
 	 * - w = Schreiben (write)<br>
-	 * - x = Ausführen (execute)
+	 * - x = AusfÃ¼hren (execute)
 	 * @return Rechte in "rwx"-Struktur
 	 */
 	public String getRights() {

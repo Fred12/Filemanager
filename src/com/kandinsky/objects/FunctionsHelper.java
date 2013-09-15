@@ -26,7 +26,7 @@ import com.kandinsky.main.Main;
 public final class FunctionsHelper {
 
 	/**
-	 * Initialisierung der Klasse verhindern, da für statische Hilfsfunktionen
+	 * Initialisierung der Klasse verhindern, da fÃ¼r statische Hilfsfunktionen
 	 */
 	private FunctionsHelper(){}
 	

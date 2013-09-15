@@ -33,7 +33,7 @@ public abstract class PageCategory {
 	}
 	
 	/**
-	 * Gibt ein JPanel mit dem Inhalt der Seite zurück
+	 * Gibt ein JPanel mit dem Inhalt der Seite zurÃ¼ck
 	 * 
 	 * @param _topic
 	 * @return
@@ -50,7 +50,7 @@ public abstract class PageCategory {
 	
 	
 	/**
-	 * Liefert eine Liste der vorhandenen Seiten  zurück
+	 * Liefert eine Liste der vorhandenen Seiten  zurÃ¼ck
 	 * 
 	 * @return
 	 */

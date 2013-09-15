@@ -11,7 +11,7 @@ import com.kandinsky.objects.FileEntry;
 import com.kandinsky.objects.FunctionsHelper;
 
 /**
- * Repräsentiert genau einen Favorite-Eintrag und stellt ihn als einen Button mit passendem Icon dar.
+ * ReprÃ¤sentiert genau einen Favorite-Eintrag und stellt ihn als einen Button mit passendem Icon dar.
  * @author Benne
  */
 public class FavoriteElement extends JToolBar {
@@ -32,7 +32,7 @@ public class FavoriteElement extends JToolBar {
 	private JButton executeButton;
 
 	/**
-	 * Erstellt den Button und setzt sowohl Text als auch Item dafür
+	 * Erstellt den Button und setzt sowohl Text als auch Item dafÃ¼r
 	 * @param fileEntry
 	 */
 	public FavoriteElement(FileEntry fileEntry, FavoriteListener listener) {

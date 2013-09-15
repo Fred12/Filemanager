@@ -3,12 +3,12 @@ package com.kandinsky.objects;
 import java.text.DecimalFormat;
 
 /**
- * Hilfsklasse zum Umformen eines Byte-Werts in einen aussagekr‰ftigen String.
+ * Hilfsklasse zum Umformen eines Byte-Werts in einen aussagekr√§ftigen String.
  * @author Benne
  */
 public class ByteToStringHelper {
 
-	/** Namensrepr‰sentationen */
+	/** Namensrepr√§sentationen */
 	private static final String[] NAMES = { "B", "KB", "MB", "GB", "TB" };
 	/** Byte-Factor */
 	private static final double FACTOR = 1024.0;
@@ -17,9 +17,9 @@ public class ByteToStringHelper {
 
 	/**
 	 * Konvertiert einen Byte-Wert in einen String, der nicht wie normal nur die Bytes angibt, sondern
-	 * so rechnet, dass Bytes, KiloBytes, MegaByte, GigaBytes oder TeraBytes angezeigt werden. Das h‰lt der String relativ kurz.
+	 * so rechnet, dass Bytes, KiloBytes, MegaByte, GigaBytes oder TeraBytes angezeigt werden. Das h√§lt der String relativ kurz.
 	 * @param byteValue
-	 * @return aussagekr‰ftiger String f¸r den Byte-Wert
+	 * @return aussagekr√§ftiger String f√ºr den Byte-Wert
 	 */
 	public static String convertToString(long byteValue) {
 

@@ -75,7 +75,7 @@ public class OptionsFTP implements ActionListener, ListSelectionListener {
 		buttonStore.addActionListener(this);
 		page.add(buttonStore);
 		
-		JButton buttonDelete = new JButton("Löschen");
+		JButton buttonDelete = new JButton("LÃ¶schen");
 		buttonDelete.setBounds(216, 192, 110, 25);
 		buttonDelete.setActionCommand("delete");
 		buttonDelete.addActionListener(this);
@@ -135,7 +135,7 @@ public class OptionsFTP implements ActionListener, ListSelectionListener {
 
 		int index = serverList.getSelectedIndex();
 		
-		// Bedeutungen der Aktionen selbsterklärend aus Action-Name
+		// Bedeutungen der Aktionen selbsterklï¿½rend aus Action-Name
 		switch(e.getActionCommand()){
 			
 			case "up":

@@ -90,7 +90,7 @@ public class OptionsShortcuts implements ActionListener, ListSelectionListener {
 
 		int index = shortcutDisplayList.getSelectedIndex();
 
-		// Bedeutungen der Aktionen selbsterklärend aus Action-Name
+		// Bedeutungen der Aktionen selbsterklÃ¤rend aus Action-Name
 		switch (e.getActionCommand()) {
 
 			case "store":
@@ -152,7 +152,7 @@ public class OptionsShortcuts implements ActionListener, ListSelectionListener {
 			return;
 		}
 
-		// Interner Schlüssel
+		// Interner Schlï¿½ssel
 		String key = textFieldKey.getText().trim();
 		if (key.length() < 1) {
 			JOptionPane.showMessageDialog(null, "Identifikation muss vorhanden sein");
