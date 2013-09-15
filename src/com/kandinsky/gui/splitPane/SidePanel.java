@@ -35,7 +35,7 @@ public abstract class SidePanel extends JPanel implements Comparable<SidePanel> 
 		this.add(getFolderNamePanel(), getFolderNameConstraints());
 		this.add(getFolderAnalyserPanel(), getFolderAnalyserPanelConstraints());
 		this.add(getButtonBar(), getButtonBarConstraints());
-		sideFunctionsHelper.switchFolder("C:\\", true);
+		sideFunctionsHelper.switchFolder(File.listRoots()[0].toString(), true);
 	}
 	
 	public void refresh(){
