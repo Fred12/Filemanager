@@ -38,7 +38,7 @@ public class RightSidePanel extends SidePanel {
 	}
 
 	@Override
-	protected FolderAnalyser getFolderAnalyserPanel() {
+	public FolderAnalyser getFolderAnalyserPanel() {
 		if(folderAnalyserPanel == null)
 			folderAnalyserPanel = FolderAnalyser.onRightSide();
 		return folderAnalyserPanel;

@@ -21,7 +21,7 @@ public class FolderAnalyser extends JPanel {
 
 	private static final long serialVersionUID = 3207380278696253272L;
 	
-	private static final File fileSystem = new File("C:\\");
+	private File fileSystem;
 	File file;
 	File[] selectedFiles=new File[0];
 	private int allListetFilesCount;
@@ -43,6 +43,7 @@ public class FolderAnalyser extends JPanel {
 	 */
 	private FolderAnalyser(int filesCountGridX, int hardDiskSpaceGridX) {
 		
+		fileSystem = new File(File.listRoots()[0].toString());
 		filesCount = new JLabel("");
 		filesCount.setHorizontalAlignment(JLabel.CENTER);
 		hardDiskSpace = new JProgressBar();
@@ -141,6 +142,11 @@ public class FolderAnalyser extends JPanel {
 
 	public void setSelectedFiles(File[] selectedFiles) {
 		this.selectedFiles = selectedFiles;
+		refreshAll();
+	}
+	
+	public void switchFolder(String folderName){
+		fileSystem = new File(folderName);
 		refreshAll();
 	}
 }

@@ -40,6 +40,7 @@ public class FileOperationHandler extends OperationHandler {
 				if (addFolder) {
 					sidePanel.getButtonBar().addFolder(folderName);
 				}
+				sidePanel.getFolderAnalyserPanel().switchFolder(folderName);
 				FunctionsHelper.clearMessage();
 				return folderName;
 			} catch (Exception e) {

@@ -109,7 +109,7 @@ public abstract class SidePanel extends JPanel implements Comparable<SidePanel> 
 	/**
 	 * @return das FolderAnalyser-Panel
 	 */
-	protected abstract FolderAnalyser getFolderAnalyserPanel();
+	public abstract FolderAnalyser getFolderAnalyserPanel();
 	
 	/**
 	 * @return die ButtonBar

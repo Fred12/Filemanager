@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -115,12 +116,18 @@ public class FolderNamePanel extends JPanel {
 	}
 
 	/**
-	 * Setzt den Text von ausserhalb und wechsle
+	 * Setzt den Text und das gewaehlte Laufwerk von ausserhalb. 
 	 * @param text
 	 */
 	public void setFolderText(String text) {
 		this.currentFolderTextField.setText(text);
 		
+		ComboBoxModel<String> model = driveSelector.getModel();
+		for (int i = 0; i < model.getSize(); i++) {
+			String element = model.getElementAt(i);
+			if(currentFolderTextField.getText().startsWith(element))
+				driveSelector.setSelectedItem(element);
+		}
 	}
 	
 	/**
@@ -136,16 +143,6 @@ public class FolderNamePanel extends JPanel {
 	}
 	
 	/**
-	 * Ändert den Ordnernamen
-	 * @param newPath
-	 * @param addFolder
-	 */
-	public void changeFolder(String newPath, boolean addFolder) {
-		Logger.info("Ordner wird gewechselt: "+ newPath);
-		sideFunctionsHelper.switchFolder(newPath, true);
-	}
-	
-	/**
 	 * Fängt Auswahl des Laufwerks in der Laufwerksauswahl ab 
 	 * und wechselt den Ordner
 	 * 
@@ -155,11 +152,10 @@ public class FolderNamePanel extends JPanel {
 
 		@Override
 		public void itemStateChanged(ItemEvent ie) {
-			if(ie.getStateChange() == 1)
-			{
+			if(ie.getStateChange() == 1) {
 				// Wechsel des Items auf ausgewählt führt zu Ordnerwechsel
-				FolderNamePanel.this.changeFolder(ie.getItem().toString(), true);
-				
+				Logger.info("Ordner wird gewechselt: "+ ie.getItem().toString());
+				sideFunctionsHelper.switchFolder(ie.getItem().toString(), true);
 			}
 		}
 	
