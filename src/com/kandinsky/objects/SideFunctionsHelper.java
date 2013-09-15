@@ -89,8 +89,10 @@ public class SideFunctionsHelper implements FavoriteListener{
 	public void openCMDShell() {
 		try {			
 			String path = getCurrentFolderName().toString();
-			ProcessBuilder b = new ProcessBuilder();				
-			b.command("cmd /c start cmd.exe /K \"cd " + path); 					
+			ProcessBuilder b = new ProcessBuilder();
+			b.directory(new File(path));
+			b.command("cmd", "/k", "start"); 
+			//b.command("cmd /c start cmd.exe  /K \"cd " + path + " && dir\""); 					
 			b.start();				    
 		}
 		    catch (IOException e) {
