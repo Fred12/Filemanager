@@ -14,9 +14,8 @@ import com.kandinsky.objects.FunctionsHelper;
 import com.kandinsky.objects.Message;
 
 /**
- * Kuemmert sich um Funktionalitaet auf einem FTP-Server
+ * Kuemmert sich um die verschiedenen Datei-Funktionalitaeten auf einem FTP-Server
  * @author Benne
- *
  */
 public class FTPOperationHandler extends OperationHandler {
 

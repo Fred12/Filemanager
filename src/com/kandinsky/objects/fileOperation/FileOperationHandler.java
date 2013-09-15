@@ -111,7 +111,6 @@ public class FileOperationHandler extends OperationHandler {
 		} else {
 			FileUtils.moveFile(fileEntry.getFile(), newFile);
 		}
-		
 	}
 
 }

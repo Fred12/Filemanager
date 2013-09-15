@@ -273,4 +273,18 @@ public class SideFunctionsHelper implements FavoriteListener{
 	public void openFolderInWindows(){
 		switchFolder(System.getProperty("user.home"), true);
 	}
+	
+	/**
+	 * Springt im Verlauf eins zurück.
+	 */
+	public void back(){
+		sidePanel.getButtonBar().back();
+	}
+	
+	/**
+	 * Springt im Verlauf eins nach vorne.
+	 */
+	public void forward(){
+		sidePanel.getButtonBar().forward();
+	}
 }

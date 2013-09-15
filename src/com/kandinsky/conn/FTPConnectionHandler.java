@@ -18,20 +18,22 @@ public class FTPConnectionHandler {
 	private FTPClient ftpConnection;
 	private FTPEntry currentConfig;
 
+	/**
+	 * Legt einen neue FTP-Verbindung an. Dabei wird noch nicht connected.
+	 * Timeout wird hier auf 15 Sekunden gesetzt
+	 */
 	public FTPConnectionHandler() {
 		ftpConnection = new FTPClient();
 		ftpConnection.setConnectTimeout(15000);
 	}
 
-	
-	public boolean isConnected(){
+	public boolean isConnected() {
 		return ftpConnection.isConnected();
 	}
 
 	/**
 	 * Versucht eine Verbindung mit angegebener Config herzustellen
 	 * @param ftpConfig
-	 * @return Verbindung hergestellt oder nicht
 	 * @throws Exception
 	 */
 	public void connect(FTPEntry ftpConfig) throws Exception {
@@ -61,11 +63,11 @@ public class FTPConnectionHandler {
 		}
 		Logger.info("FTP-Verbindung hergestellt!");
 	}
-	
-	public String changeWorkingDirectory(String pathname) throws Exception{
+
+	public String changeWorkingDirectory(String pathname) throws Exception {
 		try {
-			if(ftpConnection.changeWorkingDirectory(pathname))
-			return ftpConnection.printWorkingDirectory();
+			if (ftpConnection.changeWorkingDirectory(pathname))
+				return ftpConnection.printWorkingDirectory();
 			else
 				throw new Exception("Konnte Ordner nicht finden!");
 		} catch (IOException e) {
@@ -73,13 +75,13 @@ public class FTPConnectionHandler {
 			throw new RuntimeException("Laden der Dateien leider nicht moeglich! " + e.getMessage(), e);
 		}
 	}
-	
-	public void makeDirectory(String pathName) throws IOException{
+
+	public void makeDirectory(String pathName) throws IOException {
 		ftpConnection.makeDirectory(pathName);
 	}
 
 	/**
-	 * Versucht eine bestehende Verbindung zu schliessen
+	 * Versucht eine bestehende Verbindung zu schliessen.
 	 */
 	public void disconnect() {
 		Logger.info("FTP-Verbindung fuer {0} wird geschlossen!", currentConfig.getName());
@@ -108,7 +110,10 @@ public class FTPConnectionHandler {
 			throw new RuntimeException("Laden der Dateien leider nicht moeglich! " + e.getMessage(), e);
 		}
 	}
-	
+
+	/**
+	 * @return Liste mit FileEntries des aktuellen WorkingDirectories
+	 */
 	public List<FileEntry> getFilesInFolder() {
 		try {
 			FTPFile[] files = ftpConnection.listFiles();
@@ -122,5 +127,4 @@ public class FTPConnectionHandler {
 			throw new RuntimeException("Laden der Dateien leider nicht moeglich! " + e.getMessage(), e);
 		}
 	}
-
 }

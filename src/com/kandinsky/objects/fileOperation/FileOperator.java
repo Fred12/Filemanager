@@ -8,6 +8,10 @@ import com.kandinsky.gui.splitPane.SidePanel;
 import com.kandinsky.objects.FunctionsHelper;
 import com.kandinsky.objects.Message;
 
+/**
+ * Datei-Operator-Klasse die die einzelnen Datei-Funktionen auf lokaler Dateiebene bereit stellt.
+ * @author Benne
+ */
 public abstract class FileOperator {
 
 	protected File[] files;

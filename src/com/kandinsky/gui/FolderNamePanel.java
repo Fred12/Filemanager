@@ -39,6 +39,7 @@ public class FolderNamePanel extends JPanel {
 
 	/**
 	 * @param sideFunctionsHelper
+	 * @param driveSelectorGridx X-Stelle an der der DriveSelektor sein soll
 	 * @param buttonGridx X-Stelle an der der Button sein soll
 	 * @param textFieldGridx X-Stelle an der das Textfeld sein soll
 	 */
@@ -79,7 +80,6 @@ public class FolderNamePanel extends JPanel {
 	}
 
 	/**
-	 * 
 	 * @param sideFunctionsHelper
 	 * @return FolderNamePanel fuer die rechte Seite, d. h. rechts das Textfeld und links der Button
 	 */
@@ -124,9 +124,7 @@ public class FolderNamePanel extends JPanel {
 	}
 	
 	/**
-	 * Get the folder path content
-	 * 
-	 * @return
+	 * @return the folder path content
 	 */
 	public String getFolderText() {
 		return this.currentFolderTextField.getText();
@@ -137,6 +135,11 @@ public class FolderNamePanel extends JPanel {
 		sideFunctionsHelper.switchFolder(currentFolderTextField.getText(), true);
 	}
 	
+	/**
+	 * Ändert den Ordnernamen
+	 * @param newPath
+	 * @param addFolder
+	 */
 	public void changeFolder(String newPath, boolean addFolder) {
 		Logger.info("Ordner wird gewechselt: "+ newPath);
 		sideFunctionsHelper.switchFolder(newPath, true);
@@ -147,7 +150,6 @@ public class FolderNamePanel extends JPanel {
 	 * und wechselt den Ordner
 	 * 
 	 * @author Stefan
-	 *
 	 */
 	private class DriveSelectorListener implements ItemListener {
 

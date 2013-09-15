@@ -12,7 +12,7 @@ import com.kandinsky.gui.splitPane.SidePanel;
 import com.kandinsky.objects.Message;
 
 /**
- * Zum Verschieben von Dateien von einer auf die andere Seite
+ * Zum Verschieben von Dateien von einer auf die andere Seite.
  * @author Benne
  */
 public class MoveOperator extends FileOperator {

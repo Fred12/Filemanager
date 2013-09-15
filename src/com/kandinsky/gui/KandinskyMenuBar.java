@@ -17,9 +17,6 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 	// Singleton instance
 	private static KandinskyMenuBar instance = null;
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4388114126509784209L;
 	
 	////////////////////////////////// Menu Item identifier Strings ////////////////////////////
@@ -112,8 +109,8 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 	}
 	
 	/**
-	 * Create the instance 
-	 * @return 
+	 * crates the instance
+	 * @return instance
 	 */
 	public static KandinskyMenuBar createInstance(){
 		
@@ -122,8 +119,7 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 	}
 	
 	/**
-	 * Get the instance
-	 * @return 
+	 * @return instance
 	 */
 	public static KandinskyMenuBar getInstance(){
 		

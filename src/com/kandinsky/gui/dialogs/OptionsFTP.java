@@ -40,7 +40,8 @@ public class OptionsFTP implements ActionListener, ListSelectionListener {
 	/**
 	 * Add the ftp list controls to the given page.
 	 * The page is expected to be emptied before passing it.
-	 * @wbp.parser.entryPoint
+	 * wbp.parser.entryPoint
+	 * @param page
 	 */
 	public void buildPage(JPanel page) {
 		

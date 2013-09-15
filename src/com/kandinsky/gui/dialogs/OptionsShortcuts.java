@@ -39,9 +39,10 @@ public class OptionsShortcuts implements ActionListener, ListSelectionListener {
 	/**
 	 * Add the shortcut list controls to the given page.
 	 * The page is expected to be emptied before passing it.
-	 * @wbp.parser.entryPoint
+	 * wbp.parser.entryPoint
+	 * @param page
 	 */
-	public void buildPage(final JPanel page) {
+	public void buildPage(JPanel page) {
 		shortcutDisplayList = new JList<Hotkey>(shortcutList.getHotkeys());
 		JScrollPane scrollPane = new JScrollPane(shortcutDisplayList);
 		shortcutDisplayList.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));

@@ -5,10 +5,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Insets;
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.Stack;
 
 import javax.swing.Icon;
@@ -19,10 +17,6 @@ import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
-import com.kandinsky.gui.favorites.FavoriteElement;
-import com.kandinsky.gui.favorites.FavoritesPanel;
-import com.kandinsky.gui.splitPane.MainSplitPane;
-import com.kandinsky.gui.splitPane.SidePanel;
 import com.kandinsky.objects.FileEntry;
 import com.kandinsky.objects.FunctionsHelper;
 import com.kandinsky.objects.SideFunctionsHelper;
@@ -257,32 +251,11 @@ public class ButtonBar extends JPanel implements ActionListener {
 		}
 
 		if (quelle == zurueck) {			
-			if (stack1.size() == 1) {				
-			}
-			else if (!stack1.isEmpty()) {
-				String now = stack1.pop();
-				stack2.push(now);
-				String before = stack1.peek();
-				System.out.println(before);
-				sideFunctionsHelper.switchFolder(before, false);	
-				weiter.setEnabled(true);
-				if (stack1.size() == 1) {
-					zurueck.setEnabled(false);
-				}
-			}
+			back();
 		}		
 
 		if (quelle == weiter) {		
-			if (!stack2.isEmpty()) {
-				String now = stack2.pop();
-				stack1.push(now);
-				System.out.println(now);				
-				sideFunctionsHelper.switchFolder(now, false);
-				zurueck.setEnabled(true);
-				if (stack2.isEmpty()) {
-					weiter.setEnabled(false);
-				}
-			}			
+			forward();			
 		}		
 
 		if (quelle == hoch) {		
@@ -321,6 +294,31 @@ public class ButtonBar extends JPanel implements ActionListener {
 		if (quelle == einstellungen) {
 			FunctionsHelper.showOptions(0);
 		}						
+	}
+
+	public void forward() {
+		if (!stack2.isEmpty()) {
+			String now = stack2.pop();
+			stack1.push(now);
+			sideFunctionsHelper.switchFolder(now, false);
+			zurueck.setEnabled(true);
+			if (stack2.isEmpty()) {
+				weiter.setEnabled(false);
+			}
+		}
+	}
+
+	public void back() {
+		if (stack1.size() > 1) {
+			String now = stack1.pop();
+			stack2.push(now);
+			String before = stack1.peek();
+			sideFunctionsHelper.switchFolder(before, false);	
+			weiter.setEnabled(true);
+			if (stack1.size() == 1) {
+				zurueck.setEnabled(false);
+			}
+		}
 	}
 	
 	

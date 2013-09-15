@@ -16,13 +16,11 @@ import javax.swing.JOptionPane;
 
 import org.pmw.tinylog.Logger;
 
-
 /**
  * Liste alle im System existierenden Shortcuts.
  * @author schmidtb
  */
 public class Hotkeys implements Serializable {
-
 
 	private static final long serialVersionUID = 4430773610590354542L;
 
@@ -31,6 +29,8 @@ public class Hotkeys implements Serializable {
 	public static final String RIGHT_PARENT = "RIGHT_PARENT";
 	public static final String LEFT_BACK = "LEFT_BACK";
 	public static final String RIGHT_BACK = "RIGHT_BACK";
+	public static final String LEFT_FORWARD = "LEFT_FORWARD";
+	public static final String RIGHT_FORWARD = "RIGHT_FORWARD";
 	public static final String COPY_LEFT_TO_RIGHT = "COPY_LEFT_TO_RIGHT";
 	public static final String COPY_RIGHT_TO_LEFT = "COPY_RIGHT_TO_LEFT";
 	public static final String MOVE_LEFT_TO_RIGHT = "MOVE_LEFT_TO_RIGHT";
@@ -43,12 +43,14 @@ public class Hotkeys implements Serializable {
 	public static final String SHELL_RIGHT = "SHELL_RIGHT";
 	public static final String OPEN_FOLDER_LEFT = "OPEN_FOLDER_LEFT";
 	public static final String OPEN_FOLDER_RIGHT = "OPEN_FOLDER_RIGHT";
-	
+	public static final String ADD_LEFT_FOLDER_TO_FAVORITES = "ADD_LEFT_FOLDER_TO_FAVORITES";
+	public static final String ADD_RIGHT_FOLDER_TO_FAVORITES = "ADD_RIGHT_FOLDER_TO_FAVORITES";
+
 	private static final String HOTKEY_LIST_FILE = "shortcuts.dat";
-	
+
 	private static Hotkeys instance;
 	private SortedSet<Hotkey> hotkeys;
-	
+
 	private Hotkeys() {
 		hotkeys = new TreeSet<>();
 		initAllFunctions();
@@ -60,6 +62,8 @@ public class Hotkeys implements Serializable {
 		add(RIGHT_PARENT, "Ordner hoch - rechts");
 		add(LEFT_BACK, "Ordner zurueck - links");
 		add(RIGHT_BACK, "Ordner zurueck - rechts");
+		add(LEFT_FORWARD, "Ordner vor - links");
+		add(RIGHT_FORWARD, "Ordner vor - rechts");
 		add(COPY_LEFT_TO_RIGHT, "Von links nach rechts kopieren");
 		add(COPY_RIGHT_TO_LEFT, "Von rechts nach links kopieren");
 		add(MOVE_LEFT_TO_RIGHT, "Von links nach rechts verschieben");
@@ -72,15 +76,17 @@ public class Hotkeys implements Serializable {
 		add(SHELL_RIGHT, "Shell oeffnen - rechts");
 		add(OPEN_FOLDER_LEFT, "Ordner oeffnen - links");
 		add(OPEN_FOLDER_RIGHT, "Ordner oeffnen - rechts");
+		add(ADD_LEFT_FOLDER_TO_FAVORITES, "Aktuellen Ordner zu Favoriten hinzufügen - links");
+		add(ADD_RIGHT_FOLDER_TO_FAVORITES, "Aktuellen Ordner zu Favoriten hinzufügen - rechts");
 	}
-	
+
 	private void add(String key, String name) {
 		Hotkey e = new Hotkey(key, name, "");
 		hotkeys.add(e);
 	}
 
-	public static Hotkeys getInstance(){
-		if(instance == null){
+	public static Hotkeys getInstance() {
+		if (instance == null) {
 			try {
 				Hotkeys.readListFromFile();
 			} catch (IOException e) {
@@ -92,32 +98,32 @@ public class Hotkeys implements Serializable {
 		return instance;
 	}
 
-	public Hotkey getHotkeyByKey(String key){
-		for(Hotkey hotkey : hotkeys){
-			if(hotkey.getHotkeyCombination().equals(key))
+	public Hotkey getHotkeyByKey(String key) {
+		for (Hotkey hotkey : hotkeys) {
+			if (hotkey.getHotkeyCombination().equals(key))
 				return hotkey;
 		}
 		throw new NoSuchElementException();
 	}
 
-	public Vector<String> getFunctions(){
-		Vector<String>functionNames = new Vector<>();
-		for(Hotkey hotkey : hotkeys){
+	public Vector<String> getFunctions() {
+		Vector<String> functionNames = new Vector<>();
+		for (Hotkey hotkey : hotkeys) {
 			functionNames.add(hotkey.getFunctionName());
 		}
-		
+
 		return functionNames;
 	}
-	
+
 	public Vector<Hotkey> getHotkeys() {
 		Vector<Hotkey> hotkeyVec = new Vector<>();
-		for(Hotkey hotkey : hotkeys){
+		for (Hotkey hotkey : hotkeys) {
 			hotkeyVec.add(hotkey);
 		}
-		
+
 		return hotkeyVec;
 	}
-	
+
 	/**
 	 * Lädt alle Favorites aus einer vorhandenen Datei und initialisiert diese im Favorites-Singleton.
 	 * @param ois
@@ -134,13 +140,13 @@ public class Hotkeys implements Serializable {
 		} catch (FileNotFoundException e) {
 			// Das ist ok, wenn die Datei nicht existiert, wurde sie noch nicht angelegt oder gelöscht
 			// Dann ist die Liste eben an dieser Stelle leer
-			instance= new Hotkeys();
+			instance = new Hotkeys();
 		} finally {
-			if(ois!=null)
+			if (ois != null)
 				ois.close();
 		}
 	}
-	
+
 	/**
 	 * Speichert die Favorites weg. Kann nur von intern aufgerufen werden.
 	 * 
@@ -157,9 +163,9 @@ public class Hotkeys implements Serializable {
 				oos.close();
 			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			Logger.error(e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Logger.error(e);
 		}
 	}
 }

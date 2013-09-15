@@ -33,10 +33,7 @@ public abstract class PageCategory {
 	}
 	
 	/**
-	 * Gibt ein JPanel mit dem Inhalt der Seite zurück
-	 * 
-	 * @param _topic
-	 * @return
+	 * @return ein JPanel mit dem Inhalt der Seite
 	 */
 	public JPanel getPage(){
 		
@@ -50,9 +47,7 @@ public abstract class PageCategory {
 	
 	
 	/**
-	 * Liefert eine Liste der vorhandenen Seiten  zurück
-	 * 
-	 * @return
+	 * @return eine Liste der vorhandenen Seiten
 	 */
 	public abstract String[] getTopics();
 

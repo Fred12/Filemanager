@@ -39,8 +39,6 @@ public class MainSplitPane extends JSplitPane {
 
 	/**
 	 * Die Splitpane wird in einen linken und rechten Teil unterteil. Hierfür wird ein linkes und ein rechtes Panel komplett neu angelegt.
-	 * @param leftPanel
-	 * @param rightPanel
 	 * @throws Exception 
 	 */
 	public MainSplitPane() throws Exception {

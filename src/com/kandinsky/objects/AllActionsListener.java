@@ -9,7 +9,7 @@ import com.kandinsky.gui.splitPane.SidePanel.Side;
 public class AllActionsListener {
 
 	public void performHotKeyAction(String hotkey) {
-		Logger.debug("Hotkey wurde erkannt: "+hotkey);
+		Logger.debug("Hotkey wurde erkannt: " + hotkey);
 
 		try {
 			Hotkeys hotkeys = Hotkeys.getInstance();
@@ -40,13 +40,21 @@ public class AllActionsListener {
 					FunctionsHelper.getSideFunctionsHelperOnSide(Side.RIGHT).copySelectedFilesToOtherSide();
 					break;
 				}
-				case Hotkeys.RIGHT_BACK: {
-//					FunctionsHelper.getSideFunctionsHelperOnSide(Side.RIGHT).
-					// TODO: fehlt noch die Button-Funktionalitaet im SideFunctionsHelper
-				}
 				case Hotkeys.LEFT_BACK: {
-//					FunctionsHelper.getSideFunctionsHelperOnSide(Side.RIGHT).
-					// TODO: fehlt noch die Button-Funktionalitaet im SideFunctionsHelper
+					FunctionsHelper.getSideFunctionsHelperOnSide(Side.LEFT).back();
+					break;
+				}
+				case Hotkeys.RIGHT_BACK: {
+					FunctionsHelper.getSideFunctionsHelperOnSide(Side.RIGHT).back();
+					break;
+				}
+				case Hotkeys.LEFT_FORWARD: {
+					FunctionsHelper.getSideFunctionsHelperOnSide(Side.LEFT).forward();
+					break;
+				}
+				case Hotkeys.RIGHT_FORWARD: {
+					FunctionsHelper.getSideFunctionsHelperOnSide(Side.RIGHT).forward();
+					break;
 				}
 				case Hotkeys.LEFT_PARENT: {
 					FunctionsHelper.getSideFunctionsHelperOnSide(Side.LEFT).getRootFolder();
@@ -72,17 +80,29 @@ public class AllActionsListener {
 					FunctionsHelper.getSideFunctionsHelperOnSide(Side.RIGHT).openCMDShell();
 					break;
 				}
-				case "REFRESH": {
+				case Hotkeys.REFRESH: {
 					FunctionsHelper.refresh();
 					break;
 				}
+				case Hotkeys.ADD_LEFT_FOLDER_TO_FAVORITES: {
+					String folderName = FunctionsHelper.getSideFunctionsHelperOnSide(Side.LEFT).getCurrentFolderName();
+					FileEntry selectedFolder = new FileEntry(folderName);
+					FunctionsHelper.addFavorite(selectedFolder);
+					break;
+				}
+				case Hotkeys.ADD_RIGHT_FOLDER_TO_FAVORITES: {
+					String folderName = FunctionsHelper.getSideFunctionsHelperOnSide(Side.RIGHT).getCurrentFolderName();
+					FileEntry selectedFolder = new FileEntry(folderName);
+					FunctionsHelper.addFavorite(selectedFolder);
+					break;
+				}
 				default: {
-					Logger.error(hotkey+" hat keine Funktion!");
+					Logger.error(hotkey + " hat keine Funktion!");
 					break;
 				}
 			}
 		} catch (NoSuchElementException e) {
-			Logger.debug(hotkey+" wurde bisher nicht zugewiesen");
+			Logger.debug(hotkey + " wurde bisher nicht zugewiesen");
 		}
 	}
 
