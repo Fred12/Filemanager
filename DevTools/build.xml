@@ -138,12 +138,13 @@
 
 	<!-- JUNIT-Tests ausfuehren -->
 	<target name="junit" depends="compile.test">
-		<junit haltonfailure="true">
+		<mkdir dir="${testresults}" />
+		<junit haltonfailure="true" >
 			<classpath>
 				<path refid="test-classpath" />
 			</classpath>
-			<formatter type="brief" usefile="false" />
-			<test name="${junittest}" />
+			<formatter type="xml" usefile="true" />
+			<test name="${junittest}" todir="${testresults}" />
 		</junit>
 	</target>
 
