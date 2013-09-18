@@ -101,7 +101,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 			else  {//(System.getProperty("os.name").contains("nux") || (System.getProperty("os.name").contains("nix")))
 				
 				String path = getCurrentFolderName().toString();								
-				String[] commands = new String[]{"/bin/sh","-c", "ls " + path};			
+				String[] commands = new String[]{"/bin/sh","-k" /*"ls " + path*/};			
 		        Process proc = new ProcessBuilder(commands).start();
 //				String command= "/usr/bin/xterm";				
 //				ProcessBuilder b = new ProcessBuilder();
