@@ -89,7 +89,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 	 */
 	public void openCMDShell() {
 		try {	      
-			if (System.getProperty("os.name").contains("indows")) {
+			if (System.getProperty("os.name").toLowerCase().contains("win")) {
 			String path = getCurrentFolderName().toString();
 			ProcessBuilder b = new ProcessBuilder();
 			b.directory(new File(path));
@@ -101,8 +101,9 @@ public class SideFunctionsHelper implements FavoriteListener{
 			else  {//(System.getProperty("os.name").contains("nux") || (System.getProperty("os.name").contains("nix")))
 				
 				String path = getCurrentFolderName().toString();								
-				String[] commands = new String[]{"/bin/sh","-k" /*"ls " + path*/};			
-		        Process proc = new ProcessBuilder(commands).start();
+				//String[] commands = new String[]{"/bin/sh","-k" /*"ls " + path*/};			
+		        //Process proc = new ProcessBuilder(commands).start();
+		        Runtime.getRuntime().exec("/bin/sh -k \"cd " + path);
 //				String command= "/usr/bin/xterm";				
 //				ProcessBuilder b = new ProcessBuilder();
 //				b.directory(new File(path));
