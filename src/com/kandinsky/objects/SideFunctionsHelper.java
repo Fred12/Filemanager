@@ -97,12 +97,19 @@ public class SideFunctionsHelper implements FavoriteListener{
 			//b.command("cmd /c start cmd.exe  /K \"cd " + path + " && dir\""); 					
 			b.start();		
 			}
-			else if (System.getProperty("os.name").contains("nux") || (System.getProperty("os.name").contains("nix"))){
-				String command= "/usr/bin/xterm";
-				Runtime rt = Runtime.getRuntime();
-				Process pr = rt.exec(command);				
-			}
-		}
+			
+			else  {//(System.getProperty("os.name").contains("nux") || (System.getProperty("os.name").contains("nix")))
+				
+				String path = getCurrentFolderName().toString();								
+				String[] commands = new String[]{"/bin/sh","-c", "ls " + path};			
+		        Process proc = new ProcessBuilder(commands).start();
+//				String command= "/usr/bin/xterm";				
+//				ProcessBuilder b = new ProcessBuilder();
+//				b.directory(new File(path));
+//				Runtime rt = Runtime.getRuntime();
+//				Process pr = rt.exec(command);				
+			    }
+		    }
 		    catch (IOException e) {
 		    	System.err.println(e.toString());
 		    	e.printStackTrace();
@@ -113,12 +120,13 @@ public class SideFunctionsHelper implements FavoriteListener{
 		try {
 			
 			File path = new File(getCurrentFolderName().toString());
-			java.awt.Desktop.getDesktop().open(path);			
+			java.awt.Desktop.getDesktop().browse((path).toURI());			
 			} catch (IOException e) {
 				System.err.println(e);
 				e.printStackTrace();
 			}
 		}
+	
 	
 	public void getRootFolder() {
 		File actualPath = new File(getCurrentFolderName());
