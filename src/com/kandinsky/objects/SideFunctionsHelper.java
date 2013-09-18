@@ -88,13 +88,20 @@ public class SideFunctionsHelper implements FavoriteListener{
 	 * Öffnet eine CMD-Shell (unter windows)
 	 */
 	public void openCMDShell() {
-		try {			
+		try {	      
+			if (System.getProperty("os.name").contains("indows")) {
 			String path = getCurrentFolderName().toString();
 			ProcessBuilder b = new ProcessBuilder();
 			b.directory(new File(path));
 			b.command("cmd", "/k", "start"); 
 			//b.command("cmd /c start cmd.exe  /K \"cd " + path + " && dir\""); 					
-			b.start();				    
+			b.start();		
+			}
+			else if (System.getProperty("os.name").contains("nux") || (System.getProperty("os.name").contains("nix"))){
+				String command= "/usr/bin/xterm";
+				Runtime rt = Runtime.getRuntime();
+				Process pr = rt.exec(command);				
+			}
 		}
 		    catch (IOException e) {
 		    	System.err.println(e.toString());
@@ -104,10 +111,9 @@ public class SideFunctionsHelper implements FavoriteListener{
 	
 	public void openFolder() {
 		try {
-			String path = getCurrentFolderName().toString();
-			ProcessBuilder b = new ProcessBuilder();			
-			b.command("cmd", "/c", "start" , path );			
-			b.start();
+			
+			File path = new File(getCurrentFolderName().toString());
+			java.awt.Desktop.getDesktop().open(path);			
 			} catch (IOException e) {
 				System.err.println(e);
 				e.printStackTrace();
