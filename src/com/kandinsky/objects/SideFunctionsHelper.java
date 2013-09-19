@@ -102,11 +102,13 @@ public class SideFunctionsHelper implements FavoriteListener{
 			
 			else  {
 				String path = getCurrentFolderName().toString();
-				 final ProcessBuilder pb = new ProcessBuilder(getTerminalEmulator());
-			        pb.directory(new File(path)); 			
-			        final Process p = pb.start();			       
-			    }
-		    }
+				String[] shellcom = {"konsole", "--workdir", path};
+				Process p;
+				ProcessBuilder builder;				
+				builder = new ProcessBuilder(shellcom);
+				p = builder.start();	    
+		          }
+		}
 		    catch (IOException e) {
 		    	System.err.println(e.toString());
 		    	e.printStackTrace();
@@ -114,30 +116,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 	}
 	
 	
-	 private static String getTerminalEmulator() throws IOException {
-         String[] emulators = new String[]{"xterm", "gnome-terminal"};
-         for (String emulator : emulators) {
-             final ProcessBuilder pb = new ProcessBuilder("whereis", emulator);
-  
-             final Process p = pb.start();
-  
-             BufferedReader st = new BufferedReader(new InputStreamReader(new BufferedInputStream(p.getInputStream())));
-  
-             try {
-                 p.waitFor();
-             } catch (InterruptedException e) {
-  
-             }
-  
-             String path =  st.readLine();
-             System.out.println(path);
-  
-             if (!path.trim().endsWith(":")){
-                 return emulator;
-             }
-         }
-         return "";
-     }
+
 	 
 	
 	public void openFolder() {
