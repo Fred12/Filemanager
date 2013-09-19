@@ -1,7 +1,10 @@
 package com.kandinsky.objects;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Stack;
 
 import javax.swing.JOptionPane;
@@ -93,22 +96,15 @@ public class SideFunctionsHelper implements FavoriteListener{
 			String path = getCurrentFolderName().toString();
 			ProcessBuilder b = new ProcessBuilder();
 			b.directory(new File(path));
-			b.command("cmd", "/k", "start"); 
-			//b.command("cmd /c start cmd.exe  /K \"cd " + path + " && dir\""); 					
+			b.command("cmd", "/k", "start"); 								
 			b.start();		
 			}
 			
-			else  {//(System.getProperty("os.name").contains("nux") || (System.getProperty("os.name").contains("nix")))
-				
-				String path = getCurrentFolderName().toString();								
-				//String[] commands = new String[]{"/bin/sh","-k" /*"ls " + path*/};			
-		        //Process proc = new ProcessBuilder(commands).start();
-		        Runtime.getRuntime().exec("/bin/sh -k \"cd " + path);
-//				String command= "/usr/bin/xterm";				
-//				ProcessBuilder b = new ProcessBuilder();
-//				b.directory(new File(path));
-//				Runtime rt = Runtime.getRuntime();
-//				Process pr = rt.exec(command);				
+			else  {
+				String path = getCurrentFolderName().toString();
+				 final ProcessBuilder pb = new ProcessBuilder(getTerminalEmulator());
+			        pb.directory(new File(path)); 			
+			        final Process p = pb.start();			       
 			    }
 		    }
 		    catch (IOException e) {
@@ -116,6 +112,33 @@ public class SideFunctionsHelper implements FavoriteListener{
 		    	e.printStackTrace();
 		    } 
 	}
+	
+	
+	 private static String getTerminalEmulator() throws IOException {
+         String[] emulators = new String[]{"xterm", "gnome-terminal"};
+         for (String emulator : emulators) {
+             final ProcessBuilder pb = new ProcessBuilder("whereis", emulator);
+  
+             final Process p = pb.start();
+  
+             BufferedReader st = new BufferedReader(new InputStreamReader(new BufferedInputStream(p.getInputStream())));
+  
+             try {
+                 p.waitFor();
+             } catch (InterruptedException e) {
+  
+             }
+  
+             String path =  st.readLine();
+             System.out.println(path);
+  
+             if (!path.trim().endsWith(":")){
+                 return emulator;
+             }
+         }
+         return "";
+     }
+	 
 	
 	public void openFolder() {
 		try {
