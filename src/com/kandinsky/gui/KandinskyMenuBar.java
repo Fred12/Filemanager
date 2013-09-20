@@ -3,12 +3,9 @@ package com.kandinsky.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JSeparator;
 
 import com.kandinsky.objects.FunctionsHelper;
 
@@ -27,7 +24,6 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 	// Menu "Settings" Items
 	public static final String OPTIONS_SHORTCUTS		= "menuItemShortcutOptions";
 	public static final String OPTIONS_FTP				= "menuItemFTPOptions";
-	public static final String TOGGLE_HIDDEN_FOLDERS	= "toggle_show_hidden_files";
 		
 	// Menu "Help" Items
 	public static final String HELP						= "menuItemHelp";
@@ -80,14 +76,6 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 		menuSettings.add(menuItemFTPOptions);
 		menuItemFTPOptions.setActionCommand(KandinskyMenuBar.OPTIONS_FTP);
 		menuItemFTPOptions.addActionListener(this);
-		
-		JSeparator separator_4 = new JSeparator();
-		menuSettings.add(separator_4);
-		
-		JCheckBoxMenuItem menuCheckboxToggleShowHiddenFiles = new JCheckBoxMenuItem("Versteckte Dateien anzeigen");
-		menuSettings.add(menuCheckboxToggleShowHiddenFiles);
-		menuCheckboxToggleShowHiddenFiles.setActionCommand(KandinskyMenuBar.TOGGLE_HIDDEN_FOLDERS);
-		menuCheckboxToggleShowHiddenFiles.addActionListener(this);
 		
 		// Help Menu section
 		
@@ -154,10 +142,6 @@ public class KandinskyMenuBar extends JMenuBar implements ActionListener {
 		
 		case OPTIONS_FTP:
 			FunctionsHelper.showOptions(1);
-			break;
-
-		case TOGGLE_HIDDEN_FOLDERS:
-			JOptionPane.showMessageDialog(null, "Selected Item: " + e.getActionCommand());
 			break;
 			
 		// Menu "Help" Actions
