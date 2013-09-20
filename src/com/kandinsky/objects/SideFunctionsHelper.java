@@ -100,16 +100,22 @@ public class SideFunctionsHelper implements FavoriteListener{
 			b.command("cmd", "/k", "start"); 								
 			b.start();		
 			}
+			else if (System.getProperty("os.name").toLowerCase().contains("mac")) {
+				String path = getCurrentFolderName().toString();
+				String[] shellcom = {"Terminal.app"};
+		        Process p ;		             
+		        ProcessBuilder builder = new ProcessBuilder(shellcom);                
+		        builder.directory(new File(path));
+		        p = builder.start(); 
+			}
 			
 			else  {
 				String path = getCurrentFolderName().toString();
-		        String[] shellcom = {"xterm"};
+		        String[] shellcom = {"xterm","gnome-terminal" };
 		        Process p ;		             
 		        ProcessBuilder builder = new ProcessBuilder(shellcom);                
-		        builder.directory(new File(path));          // here.
-		        p = builder.start();
-		        
-		        
+		        builder.directory(new File(path));          
+		        p = builder.start(); 
 				
 		          }
 		}
