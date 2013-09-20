@@ -1,7 +1,10 @@
 package com.kandinsky.objects;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Stack;
 
 import javax.swing.JOptionPane;
@@ -88,31 +91,52 @@ public class SideFunctionsHelper implements FavoriteListener{
 	 * Öffnet eine CMD-Shell (unter windows)
 	 */
 	public void openCMDShell() {
-		try {			
+		try {	   
+			
+			if (System.getProperty("os.name").toLowerCase().contains("win")) {
 			String path = getCurrentFolderName().toString();
 			ProcessBuilder b = new ProcessBuilder();
 			b.directory(new File(path));
-			b.command("cmd", "/k", "start"); 
-			//b.command("cmd /c start cmd.exe  /K \"cd " + path + " && dir\""); 					
-			b.start();				    
+			b.command("cmd", "/k", "start"); 								
+			b.start();		
+			}
+			
+			else  {
+				String path = getCurrentFolderName().toString();
+		        String[] shellcom = {"xterm"};
+		        Process p ;		             
+		        ProcessBuilder builder = new ProcessBuilder(shellcom);                
+		        builder.directory(new File(path));          // here.
+		        p = builder.start();
+		        
+		        
+				
+		          }
 		}
 		    catch (IOException e) {
 		    	System.err.println(e.toString());
 		    	e.printStackTrace();
-		    } 
+		    } catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
 	}
+	
+	
+
+	 
 	
 	public void openFolder() {
 		try {
-			String path = getCurrentFolderName().toString();
-			ProcessBuilder b = new ProcessBuilder();			
-			b.command("cmd", "/c", "start" , path );			
-			b.start();
+			
+			File path = new File(getCurrentFolderName().toString());
+			java.awt.Desktop.getDesktop().browse((path).toURI());			
 			} catch (IOException e) {
 				System.err.println(e);
 				e.printStackTrace();
 			}
 		}
+	
 	
 	public void getRootFolder() {
 		File actualPath = new File(getCurrentFolderName());
