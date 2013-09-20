@@ -111,7 +111,7 @@ public class SideFunctionsHelper implements FavoriteListener{
 			
 			else  {
 				String path = getCurrentFolderName().toString();
-		        String[] shellcom = {"xterm","gnome-terminal" };
+		        String[] shellcom = {"gnome-terminal", " || xterm"};
 		        Process p ;		             
 		        ProcessBuilder builder = new ProcessBuilder(shellcom);                
 		        builder.directory(new File(path));          
