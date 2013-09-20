@@ -91,7 +91,8 @@ public class SideFunctionsHelper implements FavoriteListener{
 	 * Öffnet eine CMD-Shell (unter windows)
 	 */
 	public void openCMDShell() {
-		try {	      
+		try {	   
+			
 			if (System.getProperty("os.name").toLowerCase().contains("win")) {
 			String path = getCurrentFolderName().toString();
 			ProcessBuilder b = new ProcessBuilder();
@@ -102,17 +103,25 @@ public class SideFunctionsHelper implements FavoriteListener{
 			
 			else  {
 				String path = getCurrentFolderName().toString();
-				String[] shellcom = {"konsole", "--workdir", path};
-				Process p;
-				ProcessBuilder builder;				
-				builder = new ProcessBuilder(shellcom);
-				p = builder.start();	    
+				//Runtime r = Runtime.getRuntime();
+				
+				String[] shellcom = {"xterm",  path };
+				//r.exec(shellcom).waitFor();
+				Process p ;
+				ProcessBuilder builder = new ProcessBuilder();
+				//builder.directory(new File(path));
+				builder = new ProcessBuilder(shellcom);				
+				p = builder.start();
+				
 		          }
 		}
 		    catch (IOException e) {
 		    	System.err.println(e.toString());
 		    	e.printStackTrace();
-		    } 
+		    } catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
 	}
 	
 	
