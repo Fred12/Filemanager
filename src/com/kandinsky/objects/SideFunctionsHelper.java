@@ -103,15 +103,13 @@ public class SideFunctionsHelper implements FavoriteListener{
 			
 			else  {
 				String path = getCurrentFolderName().toString();
-				//Runtime r = Runtime.getRuntime();
-				
-				String[] shellcom = {"xterm",  path };
-				//r.exec(shellcom).waitFor();
-				Process p ;
-				ProcessBuilder builder = new ProcessBuilder();
-				//builder.directory(new File(path));
-				builder = new ProcessBuilder(shellcom);				
-				p = builder.start();
+		        String[] shellcom = {"xterm"};
+		        Process p ;		             
+		        ProcessBuilder builder = new ProcessBuilder(shellcom);                
+		        builder.directory(new File(path));          // here.
+		        p = builder.start();
+		        
+		        
 				
 		          }
 		}
