@@ -129,7 +129,7 @@ public class FileListTable extends JTable {
 		public void mouseReleased(MouseEvent event) {
 			if (getSelectedRow() != NOTHING_SELECTED) {
 				if (event.getClickCount() == DOUBLE_CLICK) {
-					jumpIntoSelectedFolder();
+					executeFileOrFolder();
 				} else {
 					File[] files = getSelectedFiles();
 					sideFunctionsHelper.setSelectedFiles(files);
@@ -138,7 +138,7 @@ public class FileListTable extends JTable {
 		}
 	}
 
-	private void jumpIntoSelectedFolder() {
+	private void executeFileOrFolder() {
 		int row = getSelectedRow();
 		// ummappen, falls sortiert
 		row = convertRowIndexToModel(row);
@@ -146,6 +146,8 @@ public class FileListTable extends JTable {
 		if (valueAtRow.getType() == FileType.DIRECTORY) {
 			sideFunctionsHelper.switchFolder(valueAtRow.getAbsoluteFileName(), true);
 			repaint();
+		} else if(valueAtRow.getType() == FileType.FILE){
+			sideFunctionsHelper.openFile(valueAtRow);
 		}
 	}
 
@@ -162,16 +164,6 @@ public class FileListTable extends JTable {
 					sideFunctionsHelper.deleteSelectedFiles();
 					break;
 				}
-				//				case "F2": {
-				//					if (getSelectedRowCount() == 1) {
-				//						int row = getSelectedRow();
-				//						// ummappen, falls sortiert
-				//						row = convertRowIndexToModel(row);
-				//						FileEntry valueAtRow = model.getValueAtRow(row);
-				//						sideFunctionsHelper.rename(valueAtRow);
-				//					}
-				//					break;
-				//				}
 			}
 		}
 	}
@@ -197,7 +189,7 @@ public class FileListTable extends JTable {
 
 		@Override
 		public void actionPerformed(ActionEvent ae) {
-			jumpIntoSelectedFolder();
+			executeFileOrFolder();
 		}
 	}
 }

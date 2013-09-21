@@ -1,10 +1,9 @@
 package com.kandinsky.objects;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Stack;
 
 import javax.swing.JOptionPane;
@@ -91,58 +90,53 @@ public class SideFunctionsHelper implements FavoriteListener{
 	 * Öffnet eine CMD-Shell (unter windows)
 	 */
 	public void openCMDShell() {
-		try {	   
-			
-			if (System.getProperty("os.name").toLowerCase().contains("win")) {
-			String path = getCurrentFolderName().toString();
-			ProcessBuilder b = new ProcessBuilder();
-			b.directory(new File(path));
-			b.command("cmd", "/k", "start"); 								
-			b.start();		
-			}
-			else if (System.getProperty("os.name").toLowerCase().contains("mac")) {
-				String path = getCurrentFolderName().toString();
-				String[] shellcom = {"Terminal.app"};
-		        Process p ;		             
-		        ProcessBuilder builder = new ProcessBuilder(shellcom);                
-		        builder.directory(new File(path));
-		        p = builder.start(); 
-			}
-			
-			else  {
-				String path = getCurrentFolderName().toString();
-		        String[] shellcom = {"gnome-terminal", " || xterm"};
-		        Process p ;		             
-		        ProcessBuilder builder = new ProcessBuilder(shellcom);                
-		        builder.directory(new File(path));          
-		        p = builder.start(); 
-				
-		          }
-		}
-		    catch (IOException e) {
-		    	System.err.println(e.toString());
-		    	e.printStackTrace();
-		    } catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
+		openShell("start");
 	}
 	
+	public void openShell(String...furtherCommands){
+		try {
+			List<String> commands = new LinkedList<>();
+			if (System.getProperty("os.name").toLowerCase().contains("win")) {
+				commands.add("cmd");
+				commands.add("/k");
+			} else if (System.getProperty("os.name").toLowerCase().contains("mac")) {
+				commands.add("/usr/bin/open");
+				commands.add("-a");
+				commands.add("Terminal");
+			} else {
+				commands.add("gnome-terminal");
+				commands.add(" || xterm");
+			}
+			
+			// zusaetzliche Parameter auslesen
+			for(String nextCommand : furtherCommands){
+				System.out.println(nextCommand);
+				commands.add(nextCommand);
+			}
+			ProcessBuilder builder = new ProcessBuilder(commands);
+			String path = getCurrentFolderName();
+		    builder.directory(new File(path));
+			builder.start();
+		} catch (IOException e) {
+			Logger.error(e, "Konnte datei nicht ausfuehren!");
+		} catch (Exception e) {
+			Logger.error(e, "Konnte datei nicht ausfuehren!");
+		}
+	}
 	
-
-	 
+	 public void openFile(FileEntry file){
+		 openShell(file.getAbsoluteFileName());
+	 }
 	
 	public void openFolder() {
 		try {
-			
 			File path = new File(getCurrentFolderName().toString());
-			java.awt.Desktop.getDesktop().browse((path).toURI());			
-			} catch (IOException e) {
-				System.err.println(e);
-				e.printStackTrace();
-			}
+			java.awt.Desktop.getDesktop().browse((path).toURI());
+		} catch (IOException e) {
+			System.err.println(e);
+			e.printStackTrace();
 		}
-	
+	}
 	
 	public void getRootFolder() {
 		File actualPath = new File(getCurrentFolderName());
@@ -151,7 +145,6 @@ public class SideFunctionsHelper implements FavoriteListener{
 			switchFolder(parentFolder, false);
 		}
 	}
-	
 	
 	public String getFolder()  {
 		return sidePanel.getFolderNamePanel().getFolderText();		
@@ -192,6 +185,8 @@ public class SideFunctionsHelper implements FavoriteListener{
 	public void execute(FileEntry fileEntry) {
 		if(fileEntry.getType()==FileType.DIRECTORY)
 			this.switchFolder(fileEntry.getAbsoluteFileName(), true);
+		else
+			this.openFile(fileEntry);
 	}
 	
 	public void copySelectedFilesToOtherSide(){
