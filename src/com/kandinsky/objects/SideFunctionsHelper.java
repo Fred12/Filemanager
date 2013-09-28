@@ -104,8 +104,9 @@ public class SideFunctionsHelper implements FavoriteListener{
 				commands.add("-a");
 				commands.add("Terminal");
 			} else {
-				commands.add("gnome-terminal");
-				commands.add(" || xterm");
+				commands.add("bash");
+				commands.add("-c");
+				commands.add("x-terminal-emulator || gnome-terminal || xterm");
 			}
 			
 			// zusaetzliche Parameter auslesen
